@@ -1,0 +1,32 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/command-set-extension-manifest.schema.json",
+  "id": "8b1f0c80-6e2a-4f44-9b9a-archive-push-100",
+  "alias": "AtomArchivePushCommandSet",
+  "componentType": "Extension",
+  "extensionType": "ListViewCommandSet",
+  "version": "*",
+  "manifestVersion": 2,
+  "loaderConfig": {
+    "internalModuleBaseUrls": ["HTTPS://SPCLIENTSIDEASSETLIBRARY/"],
+    "entryModuleId": "atom-archive-push",
+    "scriptResources": {
+      "atom-archive-push": {
+        "type": "path",
+        "path": "atom-archive-push.js"
+      },
+      "AtomArchivePushCommandSetStrings": {
+        "type": "localizedString",
+        "paths": {
+          "default": "loc/en-us.js"
+        }
+      }
+    }
+  },
+  "items": {
+    "ATOM_PUSH": {
+      "title": { "default": "Send to Archive" },
+      "iconImageUrl": "icons/cloud-upload.png",
+      "type": "command"
+    }
+  }
+}

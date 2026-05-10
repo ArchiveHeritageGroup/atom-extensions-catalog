@@ -1,0 +1,44 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "AtoM Archive Push",
+    "id": "8b1f0c80-6e2a-4f44-9b9a-archive-push-001",
+    "version": "0.1.0.0",
+    "includeClientSideAssets": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "The Archive and Heritage Group (Pty) Ltd",
+      "websiteUrl": "https://theahg.co.za",
+      "privacyUrl": "https://theahg.co.za/privacy",
+      "termsOfUseUrl": "https://theahg.co.za/terms",
+      "mpnId": ""
+    },
+    "metadata": {
+      "shortDescription": { "default": "Send selected SharePoint documents to the AtoM/Heratio archive." },
+      "longDescription":  { "default": "Adds a 'Send to Archive' button to SharePoint document libraries. Validates user via AAD, lets the user pick repository + parent IO + edit metadata, then submits to the AtoM/Heratio push endpoint." },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": ["Records Management", "Archive"]
+    },
+    "webApiPermissionRequests": [
+      {
+        "resource": "Microsoft Graph",
+        "scope": "Files.Read.All"
+      }
+    ],
+    "features": [
+      {
+        "title": "AtoM Archive Push",
+        "description": "Adds a 'Send to Archive' command to all SP document libraries.",
+        "id": "8b1f0c80-6e2a-4f44-9b9a-archive-push-002",
+        "version": "0.1.0.0",
+        "assets": {
+          "elementManifests": ["elements.xml"]
+        }
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/atom-archive-push.sppkg"
+  }
+}

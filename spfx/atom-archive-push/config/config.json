@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "atom-archive-push": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/atomArchivePush/AtomArchivePushCommandSet.js",
+          "manifest": "./src/extensions/atomArchivePush/AtomArchivePushCommandSet.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "AtomArchivePushCommandSetStrings": "lib/extensions/atomArchivePush/loc/{locale}.js"
+  }
+}
