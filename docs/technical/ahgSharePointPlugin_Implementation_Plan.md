@@ -279,7 +279,48 @@ Append a row for `ahgSharePointPlugin` to `registry_erd.tables_json` describing 
 
 ---
 
-## 6. Use Case A — Records Handoff (Phase 2)
+## 6.0 Two-mode ingest (Phase 2 architecture)
+
+Phase 2 ships **two complementary ingest modes**, both using the same backend pipeline (`SharePointIngestAdapter` → `IngestCommitService`):
+
+| | Mode A — Manual push | Mode B — Auto/declare |
+|---|---------------------|------------------------|
+| Trigger | User clicks "Send to Archive" on a SP doc / folder | Retention label change fires Graph webhook |
+| Surface | SPFx command set in the SP doc library command bar | Webhook receiver at `/sharepoint/webhook` |
+| Selection | One or more user-selected items | Items with `_ComplianceTag` in the configured allowlist |
+| Targeting | User picks repo + parent IO + edits metadata in a dialog | Drive default repo / parent / sector |
+| Auth boundary | User's AAD bearer token (AAD JWT validated by AtoM) | App-only client-credentials |
+| Audit actor | Mapped AtoM user (via `sharepoint_user_mapping`) | "SharePoint Auto-Ingest" service identity |
+| Failure surface | SPFx dialog shows error inline | `sharepoint_event` log + retry queue |
+
+**Both modes share:**
+- Mapping rules (`sharepoint_mapping` per drive)
+- Retention mapper (`SharePointRetentionMapper` reads `_ComplianceTag` regardless of trigger)
+- Backend pipeline (`IngestCommitService` via synthetic `ingest_session`)
+- File fetch path (Graph) with user-perm validation (see §6.5.4)
+
+**Phasing within Phase 2:**
+- **Phase 2.A** ships Mode B (auto/declare). Reuses the work already scaffolded.
+- **Phase 2.B** ships Mode A (manual push). SPFx command set + push endpoint + AAD SSO bridge.
+- Both can ship together at end of Phase 2; ordering is implementation convenience.
+
+**Schema additions for two-mode (additive, both targets):**
+
+1. `sharepoint_drive.auto_ingest_labels TEXT NULL COMMENT 'JSON array of compliance tag names that trigger auto-ingest in mode B'` — empty/null = no auto ingest (drive is manual-push only).
+2. New table `sharepoint_user_mapping`:
+   ```
+   id INT AI PK
+   aad_object_id VARCHAR(64) NOT NULL UNIQUE  -- AAD oid claim
+   aad_upn VARCHAR(255) NULL                  -- audit-only readable id
+   atom_user_id INT NOT NULL                  -- FK to user.id (AtoM user)
+   created_at, last_seen_at DATETIME
+   created_by VARCHAR(20) DEFAULT 'auto'      -- auto, manual
+   ```
+3. Extend `sharepoint_event.source` (the column we add to `ingest_session`) values: `wizard, sharepoint_auto, sharepoint_push, api`.
+
+---
+
+## 6. Mode B — Auto/Declare Ingest (Phase 2.A)
 
 ### 6.1 Subscription lifecycle
 
@@ -320,16 +361,153 @@ Queue handler `sharepoint:ingest-event` registered via `QueueJobRegistry::regist
 8. On success: `sharepoint_event.status='completed'`, link `information_object_id`, audit-log via `AuditService::log('sharepoint.ingest', ...)`.
 9. On failure: `failed`, increment `attempts`, schedule retry via `QueueService` exponential backoff. Cap `MAX_RETRIES=5`.
 
-### 6.4 Purview spike (Phase 2 prerequisite)
+### 6.4 Purview spike outcome (research-mode, 2026-05-10)
 
-**Half-day spike** at start of Phase 2:
-- Register a test app against a tenant.
-- Attach a Purview retention label to a test document, trigger disposition.
-- Observe whether `driveItem updated` notifications fire AND whether `_ComplianceTag` field is populated.
-- Document outcome.
+Run as a docs-driven spike rather than a live tenant test (no Azure tenant available to this scaffold). Findings from Microsoft Graph change-notifications reference + Purview retention-label documentation:
 
-If spike confirms `driveItem updated` covers it: proceed with single Graph subscription per drive.
-If not: add Office 365 Management Activity API integration alongside (separate auth scope, separate code path). Plan as Phase 2.5 if required.
+**Confirmed:**
+- driveItem subscriptions support **only `updated` changeType** on `/drives/{id}/root` and `/users/{id}/drive/root`.
+- list subscriptions also exist under SharePoint sites: `/sites/{site-id}/lists/{list-id}` — also `updated` only.
+- driveItem `updated` notifications fire for **content-level** changes (file added/modified/deleted within the folder hierarchy).
+- `_ComplianceTag` (the retention label name) is exposed via listItem.fields and via dedicated retentionLabel methods on driveItem.
+- Graph exposes basic metadata (`complianceTag`, `isRecord`) but **NOT** `retentionEventType`, `retentionTriggerDate`, `expirationDateTime` — even in beta.
+
+**Limitations:**
+- Microsoft does NOT explicitly document whether listItem-only metadata changes (e.g., setting `_ComplianceTag` via Purview without changing file content) reliably trigger driveItem `updated` events. Field reports are mixed.
+- Purview retention-driven **disposition events** (e.g., "label triggered disposition review") are NOT in Graph webhooks at all. They surface via the **Office 365 Management Activity API** — separate auth scope, separate SDK pattern.
+
+**Architectural decision (locks the Phase 2 implementation):**
+
+1. **Subscribe to BOTH resources per ingest-enabled drive:**
+   - `/sites/{site-id}/drives/{drive-id}/root` (changeType=updated) → catches content-level changes
+   - `/sites/{site-id}/lists/{list-id}` (changeType=updated) → catches metadata-only changes (label set/changed)
+
+   Each ingest-enabled drive therefore creates 2 rows in `sharepoint_subscription`. No per-tenant quota concern (driveItem and list have no documented organizational quota cap).
+
+2. **Read retention label state from listItem.fields:** `_ComplianceTag` (label name), `_ComplianceTagWrittenTime`, `_IsRecord`. Pull listItem alongside driveItem on every ingest-event handler invocation.
+
+3. **`SharePointRetentionMapper`** does straightforward lookup: tag-name → AtoM disposition (level_of_description, parent_id, security_classification_id, embargo flag). Map is configurable per tenant in `ahg_settings` group `sharepoint`, key `retention_label_map`.
+
+4. **Defer Purview disposition events to Phase 2.5.** Office 365 Management Activity API integration is a separate effort:
+   - Different scope: `https://manage.office.com/.default`
+   - Different endpoint pattern: subscriptions on content types like `Audit.SharePoint`
+   - Separate event log table or shared `sharepoint_event` with a `source` column
+   - Will cover scenarios like "retention period expired → disposition reviewer notified" that v1 won't catch.
+
+5. **Document the gap honestly in user-facing docs:** "Phase 2 v1 catches all SharePoint content changes and label-set events that propagate as driveItem updates. Pure-metadata Purview disposition triggers may take up to one hour (the cron-driven `sharepoint:sync` delta poll fallback). Full Purview disposition event coverage is Phase 2.5."
+
+**This decision UPDATES the locked scope:** the Phase 2 plan in §17 includes dual-resource subscriptions and the listItem.fields read path. The Activity API extension is now formally Phase 2.5, not "if needed".
+
+**Sources:**
+- [Graph change-notifications overview](https://learn.microsoft.com/en-us/graph/api/resources/change-notifications-api-overview?view=graph-rest-1.0)
+- [Set up notifications for changes in resource data](https://learn.microsoft.com/en-us/graph/change-notifications-overview)
+- [Webhook delivery](https://learn.microsoft.com/en-us/graph/change-notifications-delivery-webhooks)
+- [CSOM methods for retention labels](https://learn.microsoft.com/en-us/sharepoint/dev/apis/csom-methods-for-applying-retention-labels)
+- [Auto-apply retention labels in SharePoint](https://learn.microsoft.com/en-us/purview/auto-apply-retention-labels-scenario)
+- [Reduce missing change notifications](https://learn.microsoft.com/en-us/graph/change-notifications-lifecycle-events)
+
+---
+
+## 6.5 Mode A — Manual Push via SPFx (Phase 2.B)
+
+### 6.5.1 SPFx command set
+
+Lives outside the AtoM/Heratio packages, in `atom-extensions-catalog/spfx/atom-archive-push/`. Standard SPFx scaffold:
+
+```
+atom-extensions-catalog/spfx/atom-archive-push/
+├── package.json
+├── tsconfig.json
+├── gulpfile.js
+├── config/
+│   └── package-solution.json
+└── src/extensions/atomArchivePush/
+    ├── AtomArchivePushCommandSet.ts        # SPFx command-set entry
+    ├── components/
+    │   ├── PushDialog.tsx                  # Fluent UI dialog
+    │   ├── RepositoryPicker.tsx            # autocomplete from AtoM /api/v2/repositories
+    │   ├── ParentPicker.tsx                # autocomplete from AtoM /api/v2/informationobjects?q=
+    │   └── MetadataForm.tsx                # editable ISAD(G) form, prefilled
+    └── services/
+        └── AtomClient.ts                   # AAD-authed HTTP client
+```
+
+Build: `npm install && gulp bundle --ship && gulp package-solution --ship` produces `atom-archive-push.sppkg`. SP admin uploads it once to the tenant App Catalog. The command appears as a button in every SP document library.
+
+### 6.5.2 Push flow
+
+1. User selects one or more files in a SP doc library.
+2. Clicks "Send to Archive" → `AtomArchivePushCommandSet.onExecute` opens the React dialog.
+3. SPFx obtains an AAD bearer token via `aadHttpClientFactory.getClient(<our AtoM app id URI>)`. This token is for the user's identity, scoped to AtoM's API.
+4. Dialog calls `GET /api/v2/sharepoint/push/projection` with the SP item refs to retrieve a prefilled metadata form (the same projection the auto mode does).
+5. User picks repository (autocomplete) → parent IO (autocomplete) → reviews/edits metadata fields → submits.
+6. Dialog `POST /api/v2/sharepoint/push` with bearer token + payload (item refs, repo, parent, edited metadata).
+7. AtoM validates token, resolves user, ingests, returns 201 + ingest job id.
+8. Dialog polls job status; shows success toast or error detail.
+
+### 6.5.3 AtoM-side push endpoint
+
+| Route | Method | Auth | Purpose |
+|-------|--------|------|---------|
+| `/api/v2/sharepoint/push/projection` | POST | AAD JWT | Given SP item refs, return prefilled metadata payload (uses `SharePointMappingService::project`). |
+| `/api/v2/sharepoint/push` | POST | AAD JWT | Submit a push: SP refs + edited metadata + target repo/parent. Creates synthetic `ingest_session` (source=`sharepoint_push`), returns ingest job id. |
+| `/api/v2/sharepoint/push/jobs/{id}` | GET | AAD JWT | Poll ingest job status for the dialog. |
+
+All three routes mounted under `ahgAPIPlugin` apiv2 module (AtoM target) and `ahg-api` package (Heratio target). Validated via the same `GraphTokenValidatorService` used in Phase 3 connector feed. JWT validation moves from Phase 3 to Phase 2.B as a result.
+
+### 6.5.4 File fetch — user permission preservation
+
+Issue: app-only Graph token would let any SP user push any file in the tenant. Fix:
+
+**Use OBO (On-Behalf-Of) flow** for manual-push file reads:
+
+1. AtoM receives the user's AAD bearer token (audience = AtoM API).
+2. AtoM calls AAD token endpoint with `grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer`, `requested_token_use=on_behalf_of`, `assertion=<user_token>`, `scope=https://graph.microsoft.com/Files.Read`.
+3. AAD returns a Graph token impersonating the user (subject to their consent + the AAD app's delegated permissions).
+4. AtoM fetches the file via Graph using the OBO token. If the user lacks SP read access, Graph returns 403 — AtoM rejects the push.
+5. The OBO token is short-lived; re-acquired per push.
+
+**AAD app registration changes for OBO:**
+- Add **delegated** API permission: `Microsoft Graph / Files.Read.All` (or scoped down)
+- Configure the AtoM API as an "Expose an API" with a scope (e.g., `api://<our-app-id>/SharePointPush.Submit`)
+- The SPFx code requests THAT scope when getting the bearer token
+- The user (or admin on their behalf) consents to both the AtoM scope and the Graph delegated permission
+
+**Fallback (simpler, weaker):**
+- Skip OBO. Have SPFx fetch the file blob client-side using its own Graph token (in the user's session) and POST it directly in the request body. AtoM never calls Graph for manual push.
+- Drawback: large files (>50 MB) become problematic for browser POSTs; SPFx aadHttpClientFactory has practical body-size limits.
+
+**Recommendation:** OBO for v1. Document the AAD app registration setup carefully. Keep client-side blob fallback as a Phase 2.B.1 follow-on if file-size friction shows up.
+
+### 6.5.5 User mapping
+
+`sharepoint_user_mapping` table (defined in §6.0) maps AAD `oid` → AtoM `user.id`. Three lookup behaviors, configurable per tenant in `ahg_settings`:
+
+1. **Strict** — only pre-existing mappings work. New AAD users get 403. Admins must pre-provision via the user mapping admin UI.
+2. **Auto-create** (default) — first push from an unmapped AAD user creates an AtoM user (username = UPN, email = email claim, role = configurable default e.g. `editor`), inserts the mapping, proceeds with the push.
+3. **Match by email** — if an AtoM user already exists with the AAD email, link to it; else fall back to strict or auto-create.
+
+Auto-create is gated by setting `sharepoint_push_user_create_enabled` (default `false` in production, `true` for dev). Admin UI at `/sharepoint/user-mappings` lists, edits, removes mappings.
+
+### 6.5.6 Audit trail
+
+Every push records via `AuditService::log`:
+- action: `sharepoint.push`
+- entity: `informationobject`
+- entity_id: the created IO id
+- actor: the resolved AtoM user (NOT the service identity)
+- metadata: `{aad_oid, aad_upn, sp_drive_id, sp_item_id, sp_etag, push_dialog_session_id}`
+
+Audit row is the source of truth for "who pushed what from SP, when".
+
+### 6.5.7 Dependencies summary (added in Phase 2.B)
+
+- AAD app registration: delegated `Files.Read.All` permission, "Expose an API" scope for AtoM, redirect/reply URLs for SPFx
+- composer dep `firebase/php-jwt` (already locked) — moves from Phase 3 to Phase 2.B
+- New schema: `sharepoint_user_mapping` table
+- New routes under apiv2 / ahg-api: `push`, `push/projection`, `push/jobs/{id}`
+- New SPFx project: `atom-extensions-catalog/spfx/atom-archive-push/`
+- Settings additions: `sharepoint_push_*` flags
 
 ---
 
@@ -573,21 +751,47 @@ Each phase is independently shippable.
 
 **Shippable** as "manual SharePoint ingest." Institutions get value without webhook infra.
 
-### Phase 2 — Webhooks / Records Handoff (~2 weeks, gated on Purview spike)
+### Phase 2 — Two-mode ingest (~3 weeks, split into 2.A and 2.B)
 
-- Half-day Purview verification spike (precondition)
-- `sharepoint_subscription` + `sharepoint_event` tables
+#### Phase 2.A — Mode B: Auto/Declare (~1.5 weeks)
+
+- Purview verification spike (DONE 2026-05-10, see §6.4)
+- `sharepoint_subscription` + `sharepoint_event` tables (DONE in Phase 1 install.sql)
+- `sharepoint_drive.auto_ingest_labels` schema addition (additive migration)
 - `sharepoint:subscribe`, `sharepoint:renew-subscriptions` (cron), `sharepoint:ingest-event` (queue handler) tasks
-- Webhook receiver action (public, no CSRF)
-- `clientState` validation, idempotency, retry/backoff
-- `SharePointRetentionMapper` (Purview labels → AtoM disposition)
+- Webhook receiver action (public, no CSRF) with clientState validation
+- Dual-resource subscriptions (driveItem + list per drive)
+- `SharePointWebhookHandler`, `SharePointMappingService`, `SharePointRetentionMapper`, `SharePointSubscriptionService` services
+- Label-allowlist filter (only ingest items whose `_ComplianceTag` is in the configured list)
+- Idempotency, retry/backoff
 - Subscription dashboard + event log UI
 - Cron entries for renewal added to `ahgSettingsPlugin`
 - Reporting view `v_report_sharepoint_events`
-- Phase 2 docs (User Manual, Technical Manual)
 - Playwright: event-log
+- **Shippable** as "real-time records handoff via Graph webhooks."
 
-**Shippable** as "real-time records handoff."
+#### Phase 2.B — Mode A: Manual Push (~1.5 weeks)
+
+- New schema: `sharepoint_user_mapping` table
+- AAD app registration changes documented (delegated Files.Read.All, "Expose an API" scope)
+- `firebase/php-jwt` composer dep added to `atom-framework` (and `ahg/sharepoint` for Heratio)
+- `GraphTokenValidatorService` — validates inbound AAD JWTs against AAD JWKS (also serves Phase 3)
+- OBO flow client method on `GraphClientService` (`acquireOboToken`)
+- AtoM-side push endpoints in apiv2 module (and `ahg-api` package for Heratio):
+  - `POST /api/v2/sharepoint/push/projection`
+  - `POST /api/v2/sharepoint/push`
+  - `GET /api/v2/sharepoint/push/jobs/{id}`
+- User mapping admin UI at `/sharepoint/user-mappings`
+- New SPFx project `atom-extensions-catalog/spfx/atom-archive-push/`:
+  - SPFx command set (TypeScript, Fluent UI React)
+  - PushDialog with repository/parent pickers + editable metadata form
+  - AAD-authed AtoM API client
+  - Build via `gulp bundle --ship && gulp package-solution --ship` → `.sppkg`
+- Documentation: SP admin SPFx install guide, AAD app registration guide
+- Playwright: push-dialog spec (mocked SPFx context)
+- **Shippable** as "manual push with per-user accountability."
+
+**Phase 2 retro:** confirm both modes share backend; verify no duplicate audit rows when a manual push and auto-ingest race on the same item (idempotency check in `SharePointEventRepository::isDuplicate` covers this).
 
 ### Phase 3 — Discovery Surfaces (~2 weeks)
 
@@ -672,6 +876,10 @@ Every feature in §6, §7, §8, §9, §11 must exist in BOTH targets. Drift betw
 ### 19.4 Optional shared core library — DEFERRED
 
 A shared `ahg/sharepoint-core` PHP package (containing pure-PHP Graph client, mapping logic, retention mapper, DTOs) would reduce drift, but no existing plugin uses this pattern. Defer until both targets are built and a real drift problem appears. Document as a future refactor opportunity in the Phase 1 retro.
+
+### 19.4.1 SPFx project — single-source
+
+The SPFx command set lives ONCE at `atom-extensions-catalog/spfx/atom-archive-push/`. It is platform-independent — it talks to whichever AtoM/Heratio API is configured at install time via the SPFx solution's tenant property. The same `.sppkg` works against either target. This is the only Phase 2 component that does not have a dual-target implementation.
 
 ### 19.5 Portability rules for code (both targets)
 
