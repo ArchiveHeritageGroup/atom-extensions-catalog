@@ -4964,9 +4964,74 @@ Vendors, Instances, ERD Documentation, Discussions, Blog, Newsletter, User Group
 
 ---
 
-## 33. Table Relationships Summary
+## 33. Time-Limited Share Links (ahgTimeLimitedShareLinkPlugin)
 
-### 33.1 Information Object Links (object_id / information_object_id)
+Two tables. Both fully CASCADE-delete with the parent record so removing an information_object cleanly removes every share link and its access log.
+
+```
+  ════════════════════════════════════════════════════════════════════════════════════════
+  TIME-LIMITED SHARE LINK ERD
+  ════════════════════════════════════════════════════════════════════════════════════════
+  ┌──────────────────────────────────────────────┐
+  │ information_object_share_token               │
+  ├──────────────────────────────────────────────┤
+  │ id (PK)                                       │
+  │ information_object_id (FK→information_object)│
+  │ token VARCHAR(64) UNIQUE  (HMAC-SHA256 b64url)│
+  │ issued_by (FK→user)                           │
+  │ recipient_email VARCHAR(320) NULL            │
+  │ recipient_note TEXT NULL                      │
+  │ expires_at DATETIME                           │
+  │ max_access INT NULL                           │
+  │ access_count INT DEFAULT 0                    │
+  │ revoked_at DATETIME NULL                      │
+  │ classification_level_at_issuance INT NULL    │
+  │ issuer_download_at_issuance TINYINT(1)        │
+  │ created_at / updated_at                       │
+  └────────────┬─────────────────────────────────┘
+               │ 1
+               │
+               │ N  (ON DELETE CASCADE)
+               ▼
+  ┌──────────────────────────────────────────────┐
+  │ information_object_share_access              │
+  ├──────────────────────────────────────────────┤
+  │ id (PK)                                       │
+  │ token_id (FK→information_object_share_token) │
+  │ accessed_at DATETIME                          │
+  │ ip_address VARCHAR(45) NULL                   │
+  │ user_agent VARCHAR(500) NULL                  │
+  │ action VARCHAR(20)                            │
+  │   COMMENT 'view, denied_expired,              │
+  │            denied_revoked, denied_quota,      │
+  │            denied_unknown'                    │
+  └──────────────────────────────────────────────┘
+
+  GLAM/DAM & INFORMATION OBJECT LINKS
+  ─────────────────────────────────────────────────────────────────────────────────────
+  • information_object_share_token.information_object_id  → information_object.id      (ON DELETE CASCADE)
+  • information_object_share_token.issued_by              → user.id                    (ON DELETE CASCADE)
+  • information_object_share_access.token_id              → information_object_share_token.id (ON DELETE CASCADE)
+  • Audit fan-out: every issue/access/revoke/prune writes to ahg_audit_log
+                   (module='share_link', entity_type='information_object_share_token')
+  ════════════════════════════════════════════════════════════════════════════════════════
+```
+
+Indexes:
+- `idx_share_token_expires` on `expires_at`         — prune sweep, expiry filter on admin list
+- `idx_share_token_revoked` on `revoked_at`         — prune sweep, revoked filter
+- `idx_share_token_io`      on `information_object_id` — find all links for a record
+- UNIQUE on `token`                                  — recipient route lookup
+- `idx_share_access_token`  on `token_id`           — per-token access log on detail page
+- `idx_share_access_when`   on `accessed_at`        — prune sweep
+
+ACL grants are stored in the existing `acl_permission` table (action prefix `share_link.*`). Settings are stored in `ahg_settings` (setting_group `share_link`). Both leverage existing infra — no schema additions.
+
+---
+
+## 34. Table Relationships Summary
+
+### 34.1 Information Object Links (object_id / information_object_id)
 
 All plugin tables that reference `information_object.id` — the central archival record in AtoM.
 
@@ -5046,7 +5111,7 @@ All plugin tables that reference `information_object.id` — the central archiva
 └──────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 33.2 Repository Links (repository_id)
+### 34.2 Repository Links (repository_id)
 
 Tables that link to `repository.id` — the archival institution in AtoM.
 
@@ -5064,7 +5129,7 @@ Tables that link to `repository.id` — the archival institution in AtoM.
 | ahgReportBuilderPlugin | `report_template` | `repository_id` |
 | ahgIngestPlugin | `ingest_session` | `repository_id` |
 
-### 33.3 Actor Links (actor_id)
+### 34.3 Actor Links (actor_id)
 
 Tables that link to `actor.id` — persons, organizations, families in AtoM.
 
@@ -5078,7 +5143,7 @@ Tables that link to `actor.id` — persons, organizations, families in AtoM.
 | ahgAIPlugin | `ahg_ner_authority_stub` | `actor_id` |
 | ahgAIPlugin | `ahg_ner_entity_link` | `actor_id` |
 
-### 33.4 User Links (user_id)
+### 34.4 User Links (user_id)
 
 Tables that link to `user.id` (user extends actor in AtoM).
 
@@ -5099,7 +5164,7 @@ Tables that link to `user.id` (user extends actor in AtoM).
 | ahgCDPAPlugin | `cdpa_audit_log` |
 | ahgNAZPlugin | `naz_audit_log`, `naz_researcher` |
 
-### 33.5 GLAM Sector Dispatch
+### 34.5 GLAM Sector Dispatch
 
 The loan system uses `sector ENUM(museum, gallery, archive, library, dam)` to drive sector-specific behavior. Cross-plugin links:
 
@@ -5133,7 +5198,7 @@ The loan system uses `sector ENUM(museum, gallery, archive, library, dam)` to dr
 └──────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 33.6 Audit Trail Coverage
+### 34.6 Audit Trail Coverage
 
 The audit system tracks changes across ALL plugins via polymorphic entity references:
 
