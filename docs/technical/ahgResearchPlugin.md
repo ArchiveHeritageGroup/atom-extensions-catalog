@@ -1,8 +1,9 @@
 # ahgResearchPlugin - Technical Documentation
 
-**Version:** 2.0.0
+**Version:** 3.1.0
 **Category:** Public Services
-**Dependencies:** atom-framework, ahgSecurityClearancePlugin
+**Dependencies:** atom-framework, ahgSecurityClearancePlugin, ahgAIPlugin (LlmService used by Studio)
+**Optional:** ahgSemanticSearchPlugin (cross-fonds thesaurus expansion), arOpenSearchPlugin (cross-fonds ES backend)
 
 ---
 
@@ -591,5 +592,158 @@ This migration:
 
 ---
 
-*Last updated: February 2026*
-*Part of the AtoM AHG Framework v2.0*
+## v3.1.0 — Research Enhancements (May 2026)
+
+This release ports thirteen features from the Laravel Heratio reference
+implementation. Spec: `docs/atom-heratio-research-enhancements-spec.md`.
+Migration file: `database/migrations/2026_05_16_research_enhancements.sql`.
+
+### New database tables (8)
+
+| Table | Section | Purpose |
+|---|---|---|
+| `research_studio_artefact` | §1.1–1.3 | LLM artefacts: body, citations JSON, model+tokens+timing, xlsx_path, audio fields |
+| `research_notebook` | §1.5 | Researcher scratchpad metadata + promote-to-project tracking |
+| `research_notebook_item` | §1.5 | Notebook items (`saved_query`, `ai_output`, `source_pin`, `note`) |
+| `research_cross_fonds_query` | §1.6 | Cross-fonds query history with elapsed ms + result count |
+| `research_collaboration_session` | §2.3 | Live-session start/end bookkeeping |
+| `research_collaboration_presence` | §2.3 | Per-researcher heartbeat (cursor target, colour, last_seen_at) |
+| `research_orcid_link` | §2.4 | AES-256-CBC-encrypted ORCID tokens + scope + sync metadata |
+| `research_offline_sync_log` | §2.7 | Sync-run audit (queued/applied/conflict counts, payload hash) |
+
+Two existing tables were re-used rather than duplicated:
+
+- `research_comment` (polymorphic `entity_type`/`entity_id`) for §2.3 project comments — entity_type='project'
+- `research_annotation` (already has `project_id`+`visibility`) for §2.3 shared annotations
+
+### New services (7)
+
+All in `lib/Services/`:
+
+| Service | Public methods | Notes |
+|---|---|---|
+| `CitationService` | `export(int objectId, string format): array` | RIS / BibTeX / EndNote XML / APA / MLA / Chicago. Loads record via `information_object`+`information_object_i18n`+`actor_i18n` (Repository extends Actor)+`event`+`event_i18n`+`slug`. |
+| `ResearchStudioService` | `generate()`, `sourcePool()`, `listForProject()`, `get()`, `delete()` | 8 output types with per-type prompt templates. Spreadsheet via PhpSpreadsheet. Audio via configurable TTS endpoint. |
+| `NotebookService` | CRUD + `promoteToProject()` | Transactional promote: project + collaborator + collection + items; idempotent. |
+| `CrossFondsQueryService` | `availableFonds()`, `query()` | OpenSearch fan-out scoped by `lft`/`rgt`; per-fonds K=10; final K=30. Optional `SemanticSearchService::expandQuery()`. |
+| `ResearchAnalyticsService` | `dashboard(from, to): array` | 8 KPI tiles + top-N lists from existing `research_activity_log` + `research_citation_log`. |
+| `CollaborationRealtimeService` | `join()`, `poll()`, `comment()`, `resolveComment()` | 3 s polling; 90 s presence stale-out; distinct colour per active collaborator. |
+| `OfflineSyncService` | `applyQueue(researcherId, queue): array` | Supports `kind='journal_entry'` → `research_journal_entry`, `kind='annotation'` → `research_annotation`. |
+
+`OrcidService` was **extended** (not replaced): added `linkResearcher()`,
+`unlink()`, `getLink()`, `pullWorks()`, `pushWork()`, plus AES-256-CBC
+token encryption helpers keyed off `sf_app_secret`.
+
+### New routes (21)
+
+Route registrations live in `config/ahgResearchPluginConfiguration.class.php::addRoutes()`:
+
+| Route name | Path | Action |
+|---|---|---|
+| `research_cite_export` | `/research/cite/:slug/export/:format` | `citeExport` |
+| `research_studio` | `/research/studio/:projectId` | `studio` |
+| `research_studio_generate` | `/research/studio/:projectId/generate` | `studioGenerate` |
+| `research_studio_show` | `/research/studio/:projectId/artefact/:artefactId` | `studioShow` |
+| `research_studio_download` | `/research/studio/:projectId/artefact/:artefactId/download` | `studioDownload` |
+| `research_studio_delete` | `/research/studio/:projectId/artefact/:artefactId/delete` | `studioDelete` |
+| `research_notebooks` | `/research/notebooks` | `notebooks` |
+| `research_notebook_show` | `/research/notebooks/:id` | `notebookShow` |
+| `research_notebook_delete` | `/research/notebooks/:id/delete` | `notebookDelete` |
+| `research_notebook_promote` | `/research/notebooks/:id/promote` | `notebookPromote` |
+| `research_cross_fonds_query` | `/research/cross-fonds-query` | `crossFondsQuery` |
+| `research_analytics` | `/research/analytics` | `analytics` |
+| `research_collab_panel` | `/research/projects/:projectId/realtime/panel` | `collabPanel` |
+| `research_collab_join` | `/research/projects/:projectId/realtime/join` | `collabJoin` (JSON) |
+| `research_collab_poll` | `/research/projects/:projectId/realtime/poll` | `collabPoll` (JSON) |
+| `research_collab_comment` | `/research/projects/:projectId/realtime/comment` | `collabComment` (JSON) |
+| `research_collab_comment_resolve` | `/research/projects/:projectId/realtime/comment/:commentId/resolve` | `collabCommentResolve` (JSON) |
+| `research_orcid_works` | `/research/orcid/works` | `orcidWorks` |
+| `research_researcher_view` | `/research/researcher-view/:researcherId` | `researcherView` (JSON) |
+| `research_mobile_home` | `/research/mobile` | `mobileHome` |
+| `research_offline_sync` | `/research/sync/offline` | `offlineSync` (POST JSON) |
+
+### Configuration (`apps/qubit/config/app.yml`)
+
+New keys (all optional — when unset, surface a clean "not configured" alert):
+
+```yaml
+all:
+  # §1.3 Studio audio TTS endpoint
+  ahg_tts_endpoint: ~                          # https://your-tts-host
+  ahg_tts_key:      ~
+
+  # §2.4 ORCID Works pull/push (extends existing OAuth keys)
+  orcid_base:     'https://orcid.org'          # or https://sandbox.orcid.org
+  orcid_api_base: 'https://api.orcid.org'      # or https://api.sandbox.orcid.org
+```
+
+The existing `orcid_client_id`, `orcid_client_secret`, `orcid_redirect_uri`,
+`orcid_sandbox` keys are still authoritative for the OAuth flow.
+
+### Static files at AtoM web root
+
+Two PWA files live at `/usr/share/nginx/archive/` (the AtoM document root,
+NOT inside the plugin — they need root-scope to satisfy PWA install
+requirements):
+
+- `manifest.webmanifest` — PWA manifest with shortcuts to Mobile / Cross-fonds / Notebooks / Analytics
+- `sw.js` — service worker with network-first-with-cache-fallback for GETs
+
+**Fresh-install caveat:** these files are NOT in the plugin's git repo
+because they live above the plugin root. On a new instance, copy them
+from a working instance or add a step to `bin/install` that materialises
+them from a template under `atom-ahg-plugins/ahgResearchPlugin/data/pwa/`.
+
+### Host-level dependency: php-fpm drop-in
+
+When `php8.3-fpm.service` is launched with `ProtectSystem=full` (the
+default on this host), the worker cannot write `cache/qubit/prod/config/`
+or `log/qubit_prod.log` unless a systemd drop-in grants `ReadWritePaths`
+for those directories.
+
+Drop-in: `/etc/systemd/system/php8.3-fpm.service.d/archive-cache.conf`
+
+```ini
+[Service]
+ReadWritePaths=/usr/share/nginx/archive/cache
+ReadWritePaths=/usr/share/nginx/archive/log
+```
+
+Apply with `systemctl daemon-reload && systemctl restart php8.3-fpm` and
+verify with `systemctl show php8.3-fpm --property=ReadWritePaths`.
+
+Without this drop-in, the site stays up only while the pre-existing cache
+remains intact; the first `rm -rf cache/*` or `php symfony cc` breaks
+the site until the cache is rebuilt via CLI.
+
+### Activity log instrumentation
+
+The dashboard depends on these new `research_activity_log.activity_type` values being
+written by their respective actions (already wired in v3.1.0):
+
+| Activity type | Written by |
+|---|---|
+| `ai_studio` | Studio generate action |
+| `search_cross_fonds` | Cross-fonds query action |
+| `notebook_item_added` | Notebook add-item action |
+| `cite_export` | Per-record citation export action |
+
+### GraphQL deferment (§2.5)
+
+The spec called for 5 new GraphQL queries
+(`researchProject`, `researchProjects`, `researchAnnotations`,
+`researchCollections`, `researcherView`). The existing
+`ahgGraphQLPlugin` is a heavyweight webonyx schema, not the
+"hand-rolled regex matcher" the spec suggested. Rather than thread
+5 new Type classes + Resolvers into webonyx, v3.1.0 ships a single
+JSON endpoint at `/research/researcher-view/:id` that returns the
+consolidated researcher view in one round-trip — which is what
+external tools (Zotero, Tropy, LMS) actually need.
+
+True GraphQL integration is deferred to a future release that
+modifies `atom-ahg-plugins/ahgGraphQLPlugin/lib/GraphQL/Schema/SchemaBuilder.php`.
+
+---
+
+*Last updated: May 2026*
+*Part of the AtoM Heratio Framework v2.8.2*

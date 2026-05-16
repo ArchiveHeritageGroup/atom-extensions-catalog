@@ -1,10 +1,10 @@
 # AtoM Heratio Research Portal — Feature Overview
 
 **Product:** AtoM Heratio Research Portal (ahgResearchPlugin)
-**Version:** 3.2.0
+**Version:** 3.3.0 (Research Enhancements release, 2026-05-16)
 **Vendor:** The Archive and Heritage Group (Pty) Ltd
 **Contact:** johan@theahg.co.za
-**Date:** April 2026
+**Date:** May 2026
 
 ---
 
@@ -197,6 +197,205 @@ End-to-end lifecycle management for material and reproduction requests:
 | Compliance dashboard | Ethics milestones, ODRL policies, security classification, trust scores per project |
 | Dropdown Manager integration | Seat types, equipment types, ID types managed via Dropdown Manager |
 | Seed data | All dropdown taxonomies included in `install.sql` for new installations |
+
+---
+
+## What's New in 3.3.0 — Research Enhancements (May 2026)
+
+This release adds thirteen new researcher-facing features under a single bundled
+update. They were ported from the Laravel Heratio reference implementation
+(`docs/research-enhancements-roadmap.md`) into the Symfony 1.4 AtoM Heratio
+fork to give cross-instance researchers the same workflow on both platforms.
+
+### Studio — grounded AI artefact generator
+
+Every research project now has a **Studio** tab. Researchers drop in items
+from their evidence sets, pick an output type, and the platform generates an
+LLM-grounded artefact with `[N]` citation markers tied to the source list.
+Eight output types are supported:
+
+| Type | Output |
+|---|---|
+| Briefing | 400–700 word markdown brief with overview, key facts, people, themes, open questions |
+| Study guide | 600–1 000 word guide for graduate students with reading guide and discussion questions |
+| FAQ | 6–10 Q&A pairs, each citing the supporting source |
+| Timeline | Chronological event list with year-precision dates and source citations |
+| Diagram | Mermaid graph showing entity relationships, plus a citation legend |
+| Video script | Two-voice (Host/Expert) script for short documentary segments |
+| Spreadsheet | Strict-JSON tabular extraction rendered to a downloadable `.xlsx` (via PhpSpreadsheet) |
+| Audio | Two-voice podcast script; posted to a configurable TTS endpoint for `.mp3` rendering |
+
+All AI calls flow through the existing AHG AI gateway via the `ahgAIPlugin`
+`LlmService` — no new provider keys, no new infrastructure. Generation status,
+token usage, model name, and elapsed time are tracked on each artefact.
+
+### Citation hover popovers
+
+Any `[N]` marker in a Studio artefact, report, or research output now renders
+as a hover popover: source title, a 220-character snippet, and an "Open
+source" link. Clicking the marker scrolls to the matching source list entry.
+Implemented as a single vanilla-JS file (`citation-popover.js`) with no build
+step; uses Bootstrap 5 popovers (already in the theme).
+
+### Researcher notebooks
+
+A new researcher-owned scratchpad. Each notebook collects:
+
+- **Saved queries** (search expressions worth re-running)
+- **AI outputs** (raw model responses worth keeping)
+- **Source pins** (information objects to revisit)
+- **Freeform notes**
+
+Items can be pinned to the top, reordered, and removed. A one-click
+**Promote to project** action turns a notebook into a public research
+project: it creates the `research_project` row, the owner-collaborator
+record, a new collection seeded with the pinned sources, and marks the
+notebook as promoted (idempotent — re-promotion returns the original
+project id).
+
+### Cross-fonds reasoning queries
+
+A single query is fanned out across N selected fonds in parallel. Each
+fonds is queried via its `lft`/`rgt` MPTT range; per-fonds top-K hits are
+merged and reranked by score; a single ranked list is returned. Optional
+thesaurus expansion via `SemanticSearchService::expandQuery()` widens
+queries when enabled.
+
+Per-fonds K is 10; final K is 30 — both configurable. Query history is
+persisted to `research_cross_fonds_query` for analytics and audit.
+
+### Research analytics dashboard
+
+A new date-filtered dashboard at `/research/analytics` aggregates the
+already-logged `research_activity_log` and `research_citation_log` tables
+into:
+
+- **Eight KPI tiles**: total events, researchers, objects, views, searches, citations, downloads, annotations
+- **Daily volume bar chart** (inline divs — no Chart.js dependency)
+- **Top researchers**, **popular descriptions**, **popular collections**
+- **Top search terms**, **citations by style/format**
+- **Day-of-week distribution**
+
+No new audit tables; the data is already being logged by existing actions.
+New activity types added: `ai_studio`, `search_cross_fonds`,
+`notebook_item_added`, `cite_export`.
+
+### Real-time collaboration (polling)
+
+Project-scoped live collaboration without a WebSocket broker:
+
+- **Presence indicators** — each active collaborator gets a distinct colour
+  and appears in the "Online now" list. Stale entries (90 s without a
+  heartbeat) are dropped automatically.
+- **Threaded project comments** with **resolve** workflow. Reuses the
+  existing `research_comment` polymorphic table (`entity_type='project'`).
+- **3 s polling cadence** with a comment-id cursor; both presence and new
+  comments come back in a single round-trip.
+- **Shared IIIF annotations** — `research_annotation` already has `project_id`
+  + `visibility` (`private` / `shared` / `public`), so collaborators on the
+  same project see each other's shared annotations on the same canvas.
+
+The polling architecture allows a Reverb/Pusher swap-in later if a broker
+becomes available.
+
+### Per-record citation manager export
+
+In addition to the existing styled citation card (Chicago / MLA / Turabian
+/ APA / Harvard / UNISA), each record now has a **Copy in citation
+manager format** card with six file-format downloads:
+
+| Format | Use case |
+|---|---|
+| RIS | Zotero, Mendeley, EndNote import |
+| BibTeX | LaTeX, JabRef |
+| EndNote XML | EndNote desktop |
+| APA 7 | Plain-text APA citation for paste-into-essay |
+| MLA 9 | Plain-text MLA citation |
+| Chicago 17 | Plain-text Chicago Notes-Bibliography |
+
+Each download is a real file with the correct MIME type
+(`application/x-research-info-systems`, `application/x-bibtex`,
+`application/xml`, `text/plain`) and a slug-derived filename.
+
+### ORCID Works push and pull
+
+The existing ORCID OAuth flow now supports two new operations:
+
+- **Pull works** — fetch the researcher's complete works list from ORCID
+  with put-codes, titles, years, journals, DOIs, types.
+- **Push work** — create a new ORCID Work record from a local citation,
+  returning the new put-code.
+
+Access tokens are persisted to `research_orcid_link` with AES-256-CBC
+encryption keyed off `sf_app_secret`. The "Connect / linked / unlinked"
+status page mirrors the Laravel side.
+
+### Mobile / PWA shell
+
+A phone-first researcher home at `/research/mobile` with:
+
+- **Reading list** — most-recent 50 collection items
+- **4-button grid** — Search, Notebooks, Bibliographies, Journal
+- **Quick journal entry** form that works offline
+- **Online / offline badge** that reacts to `navigator.onLine`
+
+A new `manifest.webmanifest` + `sw.js` at the AtoM web root let the
+researcher install the portal as a standalone app on their phone
+("Add to home screen" → standalone mode).
+
+### Offline mode and sync
+
+When the device is offline, journal entries are buffered to
+`localStorage` under the key `heratio_offline_queue_v1`. When the
+device comes back online, the queue is POSTed to
+`/research/sync/offline` and applied to either
+`research_journal_entry` or `research_annotation` depending on the
+entry's `kind`. Sync metadata (queued count, applied count,
+conflicts, payload hash) is persisted to a new
+`research_offline_sync_log` table for audit.
+
+### ResearcherView consolidated JSON endpoint
+
+A single round-trip endpoint at `/research/researcher-view/:id`
+returns a researcher's public projects, recent shared annotations,
+and ORCID-link summary in one JSON document. Designed for external
+tools (Zotero, Tropy, LMS) that need to compose a researcher
+dashboard without making 5+ separate calls.
+
+### Schema additions
+
+Eight new tables (all `IF NOT EXISTS`-idempotent in
+`database/migrations/2026_05_16_research_enhancements.sql`):
+
+| Table | Purpose |
+|---|---|
+| `research_studio_artefact` | LLM-generated artefacts with body, citations JSON, model + tokens + timing |
+| `research_notebook` | Researcher scratchpad metadata + promote-to-project tracking |
+| `research_notebook_item` | Notebook items (saved_query, ai_output, source_pin, note) |
+| `research_cross_fonds_query` | Cross-fonds query history with elapsed time + result count |
+| `research_collaboration_session` | Live session bookkeeping (start/end times per project) |
+| `research_collaboration_presence` | Per-researcher presence row with cursor target + colour + last-seen |
+| `research_orcid_link` | Encrypted ORCID tokens + scope + last-sync metadata |
+| `research_offline_sync_log` | Sync run audit (queued / applied / conflicts / payload hash) |
+
+The polymorphic `research_comment` and `research_annotation` tables
+already had the columns needed for collaboration and shared
+annotations, so no new comment or annotation tables were added.
+
+### Operational notes
+
+- **TTS endpoint** is operator-configurable via `app_ahg_tts_endpoint`
+  in `apps/qubit/config/app.yml`. When unset, audio artefacts fall
+  back to script-only with the transcript persisted for manual TTS
+  hand-off — never a 500.
+- **ORCID** is operator-configurable via `app_orcid_client_id` /
+  `app_orcid_client_secret` / `app_orcid_redirect_uri`. When unset,
+  the ORCID page shows a clean "not configured" alert listing the
+  exact ENV keys.
+- **php-fpm** must include `ReadWritePaths=/usr/share/nginx/archive/cache`
+  and `ReadWritePaths=/usr/share/nginx/archive/log` in its drop-in
+  when `ProtectSystem=full` is set (the host-level requirement is
+  documented in the project CLAUDE.md).
 
 ---
 

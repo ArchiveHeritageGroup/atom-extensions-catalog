@@ -1,9 +1,9 @@
 # AtoM Heratio Research Portal — Training Manual
 
-**Plugin:** ahgResearchPlugin v3.2.0
+**Plugin:** ahgResearchPlugin v3.3.0
 **Platform:** AtoM Heratio (AtoM 2.10 + AHG Framework v2.8.2)
 **Author:** The Archive and Heritage Group (Pty) Ltd
-**Last Updated:** April 2026
+**Last Updated:** May 2026
 
 ---
 
@@ -44,6 +44,16 @@
 33. [Administration](#33-administration)
 34. [Database Reference](#34-database-reference)
 35. [Troubleshooting](#35-troubleshooting)
+36. [Studio — Grounded AI Artefact Generator](#36-studio--grounded-ai-artefact-generator) **(NEW v3.3.0)**
+37. [Citation Hover Popovers](#37-citation-hover-popovers) **(NEW v3.3.0)**
+38. [Researcher Notebooks](#38-researcher-notebooks) **(NEW v3.3.0)**
+39. [Cross-Fonds Reasoning Queries](#39-cross-fonds-reasoning-queries) **(NEW v3.3.0)**
+40. [Research Analytics Dashboard](#40-research-analytics-dashboard) **(NEW v3.3.0)**
+41. [Live Collaboration Panel](#41-live-collaboration-panel) **(NEW v3.3.0)**
+42. [Per-Record Citation Manager Export](#42-per-record-citation-manager-export) **(NEW v3.3.0)**
+43. [ORCID Works Push & Pull](#43-orcid-works-push--pull) **(NEW v3.3.0)**
+44. [Mobile Shell (PWA)](#44-mobile-shell-pwa) **(NEW v3.3.0)**
+45. [Offline Mode & Sync](#45-offline-mode--sync) **(NEW v3.3.0)**
 
 ---
 
@@ -2105,4 +2115,303 @@ Contact your institution's archivist or system administrator for:
 
 ---
 
-*This manual covers ahgResearchPlugin v3.1.0. For the latest updates, check the plugin documentation in the AtoM Heratio repository.*
+## 36. Studio — Grounded AI Artefact Generator
+
+> Available from v3.3.0. Path: project → **Research Output → Studio (AI artefacts)**.
+
+### What it is
+
+Studio turns the source items in your project's collections into a publishable artefact: a briefing, a study guide, a timeline, a Mermaid diagram, an audio script, even a downloadable spreadsheet. The model only "sees" the sources you select, and every factual claim it makes carries a `[N]` citation marker tied to the matching source in the sidebar.
+
+### How to generate an artefact
+
+1. Open your project and click **Studio (AI artefacts)** in the Research Output card.
+2. Pick an **output type** (8 available — see below).
+3. Select **one or more sources** from the multi-select. The pool is drawn from any collection inside the current project, so add items to your collections first.
+4. Click **Generate**. Generation typically takes 10–40 seconds; you'll be redirected to the artefact's view page when it finishes.
+
+### Output types
+
+| Type | Output format | Best for |
+|---|---|---|
+| Briefing | 400–700 word markdown brief | Background documents for stakeholders |
+| Study guide | 600–1000 word markdown guide | Graduate-student reading prep |
+| FAQ | 6–10 Q&A pairs | Public-facing FAQs about a collection |
+| Timeline | Chronological markdown list | Historical narratives, project chronologies |
+| Diagram | Mermaid graph + legend | Relationship visualisations |
+| Video script | Two-voice (Host / Expert) script | Short documentary segments |
+| Spreadsheet | Downloadable `.xlsx` | Tabular extractions, comparison tables |
+| Audio | Two-voice podcast script | Audio guides (TTS endpoint required) |
+
+### Reading the artefact page
+
+The artefact page shows:
+
+- The generated body on the left (rendered as plain text, Mermaid diagram, or `.xlsx` preview depending on type)
+- A "Sources cited" sidebar listing every `[N]` marker that appears in the body, with title, reference code, snippet, and "Open source" link
+- Generation metadata under the title — model name, token count, generation time
+
+If the artefact is an `.xlsx` spreadsheet, a **Download .xlsx** button appears at the top. If it's audio and a TTS endpoint is configured, a **Listen** button appears.
+
+### What "grounded" means
+
+Studio is configured to refuse invention. The model is instructed never to introduce facts, names, or dates that don't appear in the supplied sources, and to flag the absence of evidence explicitly. Use the popovers (next section) to verify each claim.
+
+### Errors
+
+If the artefact lands in `error` status, an alert at the top of the page explains why (TTS endpoint not configured, LLM call failed, spreadsheet JSON malformed, etc.). The transcript or partial body is still kept on disk so the next attempt can re-use it.
+
+---
+
+## 37. Citation Hover Popovers
+
+> Available from v3.3.0. Active on Studio artefacts and any view that renders a `<ul id="studio-citations">` block.
+
+Every `[N]` marker on a citation-aware page becomes a hover popover when you point at it. The popover shows:
+
+- The source title
+- A 220-character snippet from the source's scope-and-content
+- An "Open source" link
+
+Clicking the marker scrolls the page to the matching source entry in the sidebar list and flashes it briefly so you can scan the full record.
+
+The popovers work on keyboard focus too — tab to a marker and it pops up.
+
+---
+
+## 38. Researcher Notebooks
+
+> Available from v3.3.0. Path: sidebar → **Notebooks**.
+
+### What it is
+
+A private scratchpad. Notebooks are owned by you, never shared, and exist outside the project structure. Use them for early-stage research before you commit to a project shape.
+
+### What goes in a notebook
+
+| Item type | Use |
+|---|---|
+| **Note** | Freeform observations, hunches, todo items |
+| **Saved query** | Search expressions you want to come back to |
+| **AI output** | Studio responses or other LLM output you want to keep |
+| **Source pin** | A specific information object worth revisiting (paste the object ID) |
+
+Items can be **pinned to the top** of the notebook for quick access.
+
+### Creating a notebook
+
+1. Click **Notebooks** in the sidebar.
+2. Enter a title and optional summary on the left.
+3. Click **Create**. You'll see it in the list on the right.
+
+### Adding items
+
+Open a notebook and use the **Add item** card on the left. Choose a type, fill in title/body, optionally tick "Pin to top".
+
+### Promote to project
+
+When a notebook outgrows its scratchpad status, click **Promote to project** at the top. The system will:
+
+1. Create a new public research project with the notebook's title and summary
+2. Add you as the owner-collaborator
+3. Create a collection seeded with every **source pin** in the notebook
+4. Mark the notebook as promoted (and lock the promote button)
+
+Promote-to-project is idempotent — clicking twice returns the existing project.
+
+---
+
+## 39. Cross-Fonds Reasoning Queries
+
+> Available from v3.3.0. Path: sidebar → **Cross-fonds query** (or `/research/cross-fonds-query`).
+
+### When to use it
+
+When the answer to your research question is spread across multiple fonds, and you want a single ranked list of hits instead of running the search separately on each fonds page.
+
+### How it works
+
+1. Enter your query.
+2. Multi-select the fonds / collections you want to search (the picker shows up to 200 top-level archival units).
+3. Optionally tick **Expand with thesaurus terms** — if `ahgSemanticSearchPlugin` is enabled, the system will widen your query with related terms before fanning out.
+4. Click **Run**.
+
+The system fires one OpenSearch query per fonds scoped to that fonds's `lft`/`rgt` MPTT range, takes the top 10 hits from each, merges them by score, and returns the top 30. Each result row shows the title, reference code, snippet, score, and an "Open record" link.
+
+### What gets logged
+
+Every cross-fonds query is persisted to `research_cross_fonds_query` with the query text, fonds list, result count, and elapsed milliseconds. This feeds the analytics dashboard's "Top search terms" tile.
+
+---
+
+## 40. Research Analytics Dashboard
+
+> Available from v3.3.0. Path: sidebar → **Analytics** (or `/research/analytics`).
+
+### Eight KPI tiles
+
+| Tile | Counts |
+|---|---|
+| **Events** | All activity log rows in the date range |
+| **Researchers** | Distinct researcher_id values |
+| **Objects** | Distinct entity_id values |
+| **Views** | `activity_type='view'` |
+| **Searches** | `view` + cross-fonds searches |
+| **Citations** | Logged citations + cite_export downloads |
+| **Downloads** | `activity_type='download'` |
+| **Annotations** | `activity_type='annotate'` |
+
+### Date range
+
+Default is the last 30 days. Change the from/to dates at the top and click **Apply**.
+
+### Sections
+
+- **Daily volume bar chart** — one bar per day
+- **Activity types** — count of every distinct activity_type
+- **Top researchers** — by event count
+- **Popular descriptions** — most-viewed information objects
+- **Top search terms** — most-searched query strings (extracted from activity log details)
+- **Popular collections**
+- **Citations by style/format** — Chicago/MLA/APA + RIS/BibTeX/etc.
+
+The dashboard is read-only and aggregates already-logged data — running it does not affect activity logs.
+
+---
+
+## 41. Live Collaboration Panel
+
+> Available from v3.3.0. Path: project → **Research Output → Live Collaboration** (or `/research/projects/:id/realtime/panel`).
+
+### What you see
+
+The panel polls every 3 seconds for two things:
+
+- **Online now** — every collaborator currently looking at the project, each tagged with a distinct colour. Stale entries drop off after 90 seconds.
+- **Project comments** — a threaded comment feed for the project. New comments appear without a page reload.
+
+### Posting a comment
+
+Type into the box at the bottom and click the send icon. Comments are tied to the project (not to a specific record or item — for record-level annotations, use the W3C Annotation Studio).
+
+### Resolving a comment
+
+Click **Resolve** under any comment. Resolved comments stay visible but are visually faded.
+
+### Shared annotations on IIIF canvases
+
+Annotations you create with **visibility = shared** or **public** are visible to other project collaborators on the same canvas, without any extra setup. Other collaborators see the annotation on the W3C Annotation Studio page for that record.
+
+---
+
+## 42. Per-Record Citation Manager Export
+
+> Available from v3.3.0. Path: any record's **Cite this record** page (`/research/cite/:slug`).
+
+In addition to the existing styled citation card (Chicago / MLA / APA / Harvard / UNISA / Turabian), you'll see a new **Copy in citation manager format** card with six download buttons:
+
+| Format | File extension | Imports into |
+|---|---|---|
+| RIS | `.ris` | Zotero, Mendeley, EndNote |
+| BibTeX | `.bib` | LaTeX, JabRef, Overleaf |
+| EndNote XML | `.xml` | EndNote desktop |
+| APA 7 | `.txt` | Paste into a Word document |
+| MLA 9 | `.txt` | Paste into a Word document |
+| Chicago 17 | `.txt` | Paste into a Word document |
+
+Each download is a real file with the correct MIME type, so most reference managers will import it on first open. The filename is derived from the record's slug.
+
+Every export is logged to the activity log (`activity_type='cite_export'`, `details.format`) so admins can see which formats are popular.
+
+---
+
+## 43. ORCID Works Push & Pull
+
+> Available from v3.3.0. Path: sidebar → **ORCID Works** (or `/research/orcid/works`).
+
+This is an extension of the existing ORCID OAuth flow (sidebar → ORCID).
+
+### Pull works
+
+If your ORCID is linked, the page automatically pulls and displays your complete works list from your ORCID record: titles, types, years, journals, DOIs, put-codes.
+
+Click **Pull works** to force a fresh fetch (the last-sync time is shown in the link card).
+
+### Unlink
+
+Click **Unlink** to remove the saved tokens. Your works stay on ORCID; only the local link is cleared.
+
+### Tokens
+
+Access and refresh tokens are stored AES-256-CBC encrypted using a key derived from the AtoM Heratio app secret. Tokens never appear in logs or the page itself.
+
+### What if ORCID isn't configured
+
+If the operator hasn't set `orcid_client_id` / `orcid_client_secret` / `orcid_redirect_uri`, the page shows a clean "not configured" alert listing the exact ENV keys. No errors, no 500s.
+
+---
+
+## 44. Mobile Shell (PWA)
+
+> Available from v3.3.0. Path: phone browser → `/research/mobile`. Installable as a standalone app.
+
+### What it is
+
+A phone-first researcher home. Designed for two scenarios:
+
+1. **Reading room** — quickly check your reading list, log a journal entry, search for an item
+2. **Off-site** — review collections, draft notes, queue annotations
+
+### Installing as an app
+
+In Chrome / Safari on mobile, open `/research/mobile`, then tap the browser menu → **Add to home screen**. The portal will launch in standalone mode (no browser chrome).
+
+### Layout
+
+- Top — your name, email, online/offline badge
+- 4-button grid — **Search**, **Notebooks**, **Bibliographies**, **Journal**
+- **Quick journal entry** — a one-tap journal-entry form
+- **Recent reading list** — most-recent 50 items from your collections
+
+### Online / offline badge
+
+The badge turns red when your phone reports offline. The badge updates without a page reload.
+
+---
+
+## 45. Offline Mode & Sync
+
+> Available from v3.3.0. Works hand-in-hand with the Mobile Shell (§44).
+
+### What's available offline
+
+If you've visited the mobile shell at least once, the service worker has cached it. Going offline:
+
+- The mobile home page still loads (from cache)
+- The 4-button grid is still visible
+- Other pages may not load until you're back online
+
+### Offline journal entries
+
+When you submit a quick journal entry while offline, the form:
+
+1. Stops the normal submit
+2. Saves the entry to `localStorage` under the key `heratio_offline_queue_v1`
+3. Shows a confirmation that the entry is queued
+
+When your device reconnects, the queue is automatically POSTed to `/research/sync/offline` and applied as a real `research_journal_entry` row. The audit table `research_offline_sync_log` records the run.
+
+### What's supported in the queue
+
+| `kind` value | Applied to |
+|---|---|
+| `journal_entry` | `research_journal_entry` |
+| `annotation` | `research_annotation` |
+
+### What's not supported
+
+Comments on projects, ORCID actions, file uploads, and bookings cannot be queued offline; they require an online connection. If you try to submit one while offline you'll get a browser-level network error.
+
+---
+
+*This manual covers ahgResearchPlugin v3.3.0. For the latest updates, check the plugin documentation in the AtoM Heratio repository.*
