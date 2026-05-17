@@ -1,7 +1,7 @@
 # Time-Limited Share Link — Feature Overview
 
 **Plugin:** `ahgTimeLimitedShareLinkPlugin` (AtoM) / `ahg-share-link` (Heratio)
-**Version:** 0.1.0 (initial release)
+**Version:** 0.2.0 (May 2026 — adds bookmarkable issue form)
 **Author:** The Archive and Heritage Group (Pty) Ltd
 **Category:** Access control / public engagement
 
@@ -80,6 +80,24 @@ Every operation writes a row to `ahg_audit_log` (module = `share_link`):
 - Bulk issuance (one-by-one only). A "Generate links for everything in this folder" flow is a future enhancement.
 - Recipient self-service download for digital objects beyond what the issuer can download themselves at issuance time. The `issuer_download_at_issuance` flag is captured for use in a forthcoming digital-object download flow.
 - HMAC secret rotation runbook. The secret is auto-generated on first use; rotation invalidates every existing token and is intentionally **not** exposed in the admin UI to prevent accidental link-mass-invalidation.
+
+## What's New in v0.2.0 (May 2026)
+
+The v0.1.0 release surfaced the issue form as a **Bootstrap modal** injected onto every information_object show page (via `ViewLinkInjector`). That UI is fully retained — it remains the default path for in-context "share this record" actions.
+
+v0.2.0 adds a **complementary full-page issue form** at `/shareLink/issue?information_object_id=N`:
+
+| Path | When to use it |
+|---|---|
+| Modal (in-context) | Curator is already looking at the record; one-click in-page issue |
+| Full-page form | (a) Bookmarkable URL for a recurring sharing workflow; (b) accessibility — screen readers handle full pages better than modals; (c) demo/walkthrough flows where each step gets its own page |
+
+The action `executeIssue` now **content-negotiates** the response:
+
+- `Accept: application/json` or `X-Requested-With: XMLHttpRequest` → JSON (existing AJAX modal path, unchanged)
+- Anything else → HTML form (`newSuccess.php`) on GET; HTML success page (`issueSuccess.php`) with copy-to-clipboard on successful POST
+
+Validation errors take the form back through `renderIssueForm()` with a flash message instead of returning a 422 JSON body. The existing JSON API for external clients is untouched.
 
 ## Licence
 

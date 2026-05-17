@@ -22,8 +22,9 @@ To meet GCIS's specific requirements set out in clauses 4.1.1.1–4.1.1.14 and 4
 | 1b. SharePoint Online Connector | 4.1.1.1, 4.1.1.2, 4.1.1.4, 4.1.1.11 | New development for GCIS |
 | 1c. POPIA / PAIA Privacy Compliance | 4.1.1.14, 4.6 | Existing AHG plugin — GCIS configuration |
 | 1d. MISS Security Classification | 4.1.1.12.c, 4.1.1.12.d | Existing AHG plugin — GCIS configuration |
-| 1e. Retention / Disposal Management | 4.1.1.6, 4.1.1.13 | Existing AHG plugin — GCIS configuration |
-| 1f. POPIA / NARSSA Audit Trail | 4.1.1.12.f, 4.1.1.14.e–h | Existing AHG plugin — GCIS configuration |
+| 1e. Retention / Disposal Management | 4.1.1.6, 4.1.1.13 | **Extended May 2026** — `ahgExtendedRightsPlugin` v1.3.0 adds File-Plan retention schedules (`retention_schedule`), record-to-schedule assignments (`retention_assignment`), and a multi-stage disposal workflow (`disposal_action`) with officer → legal → executive sign-off chain and full `ahg_audit_log` dual-write. Sample GCIS File-Plan schedules seeded. Paired with the new `ahgNARSSAPlugin` v0.1.0 below for the transfer-to-NARS step. |
+| 1e.b NARSSA Transfer Manifest (NEW PLUGIN) | 4.6 (implicit) | **Built and shipped May 2026** — new `ahgNARSSAPlugin` v0.1.0 ships METS + EAD2002 + SHA-256 transfer-package generator (`php symfony narssa:transfer-package`). Closes the silent NARSSA Act 1996 transfer gap. |
+| 1f. POPIA / NARSSA Audit Trail | 4.1.1.12.f, 4.1.1.14.e–h | Existing AHG plugin — GCIS configuration. **5 pre-built GCIS compliance dashboards** shipped May 2026 in `ahgReportBuilderPlugin` (Audit Summary, Access Logs, Metadata Integrity, Retention Status, Consolidated Quarterly). |
 | 1g. Time-Limited Link Sharing | 4.1.1.12.e | **Built and shipped May 2026** — `ahgTimeLimitedShareLinkPlugin` v0.1.0 live on demo PSIS; HMAC-SHA256 tokens, admin UI, retention sweep, full audit dual-write; 34 / 34 regression assertions pass; user manual + technical manual in `atom-extensions-catalog/docs/` |
 | 1h. Continuous Ingestion API | 4.1.1.6, 4.1.1.5 | Existing AHG plugin — GCIS configuration |
 | 1i. Multi-Tenant "One Instance" | clause 2 background + 4.1.3.1 | Existing AHG plugin (built by AHG for SITA/NARSSA) — non-standard AtoM IP |
@@ -229,9 +230,11 @@ Each add-on is delivered during Phase 4 (Nov 2026 – Jan 2027, Weeks 12–26). 
 
 **Maps to GCIS requirements:** 4.1.1.6 (workflow for automated archival according to GCIS retention policy + API integration for continuous ingestion), 4.1.1.13.a (automated or manual enforcement of records retention schedules), 4.1.1.13.b (controlled disposal workflows with audit logs).
 
-**Activities:** deploy the existing `ahgExtendedRightsPlugin`; load GCIS retention schedule per category in the GCIS file plan; map National Archives and Records Service of South Africa Act requirements onto retention rules; configure controlled disposal workflows with reviewer assignment, hold checks, and audit logging; configure embargo processing CLI (`php symfony embargo:process`) on cron; reporting templates for retention status.
+**Activities:** deploy the existing `ahgExtendedRightsPlugin` (v1.3.0 May 2026 ships `retention_schedule`, `retention_assignment` and `disposal_action` schema with `RetentionScheduleService` and `DisposalWorkflowService` already in place); load the GCIS-specific retention schedule per File Plan category (sample seed schedules already shipped: `GCIS-COMM-001`/`002`, `GCIS-CORP-001`/`002`, `GCIS-HR-001`, `GCIS-LEG-001`); map NARSSA Act requirements onto retention rules; configure the controlled disposal workflow (officer → legal → executive sign-off chain with full `ahg_audit_log` dual-write — already implemented); configure embargo processing CLI on cron; integrate with **new `ahgNARSSAPlugin` v0.1.0** for the transfer manifest export (METS + EAD2002 + SHA-256 package); reporting templates for retention status (5 GCIS compliance templates already seeded in `report_template`).
 
-**Deliverables:** configured `ahgExtendedRightsPlugin`, GCIS retention schedule loaded, disposal workflow documentation, NARS Act compliance mapping document, retention status report template, embargo cron entry.
+**Deliverables:** configured `ahgExtendedRightsPlugin` v1.3.0; configured `ahgNARSSAPlugin` v0.1.0; GCIS retention schedule loaded with disposal_action mappings; disposal-workflow walkthrough; NARS Act compliance mapping document; **5 pre-built GCIS compliance dashboards** in `ahgReportBuilderPlugin` (Audit Summary, Access Logs & User Activity, Metadata Integrity, Retention Status & Lifecycle, Consolidated Quarterly Dashboard); embargo cron entry.
+
+**Built and shipped May 2026:** the underlying data model + workflow + audit dual-write are already live on PSIS. Phase 4 work is GCIS-specific *configuration* and integration testing, not new development.
 
 | Resource | Days | Day Rate (R) | Subtotal (R) |
 |---|---|---|---|

@@ -509,4 +509,51 @@ Contact your system administrator if you experience persistent issues.
 
 ---
 
+## GCIS Compliance Templates (May 2026)
+
+Five pre-built `gcis_compliance` templates ship in `report_template` (ids 21–25) and map directly to GCIS RFB-001 clauses **4.1.1.14.e–h** plus **4.1.1.12.f**. Operators run them via the existing Reports admin (Admin → Reports → New report → Pick a template).
+
+| Template | Bid clause | What it answers |
+|---|---|---|
+| **GCIS Compliance: Audit Summary** | 4.1.1.14.e (audit reports) | Volume by action, top 20 audited users (last 90d), full disposal-workflow audit chain |
+| **GCIS Compliance: Access Logs & User Activity** | 4.1.1.14.f (access logs + user activity tracking) | Active users (90d), share-link access activity, failed access attempts |
+| **GCIS Compliance: Metadata Integrity** | 4.1.1.14.g (metadata integrity verification) | Versioned-record coverage, most-edited records, every restore event |
+| **GCIS Compliance: Retention Status & Lifecycle** | 4.1.1.14.h + 4.1.1.13 | Records assigned to schedule, records due (12 months), disposal pipeline by status, approved transfers awaiting NARSSA package |
+| **GCIS Compliance: Consolidated Quarterly Dashboard** | 4.1.1.14.e–h synthesised | Single-page executive snapshot — 8 KPI tiles + 30-day audit-volume line chart |
+
+### How the templates are structured
+
+Each template is a JSON `structure` field in `report_template` with three section types:
+
+- `narrative` — free-form Markdown intro
+- `summary_card` — KPI cards driven by either a `count:<table>` shorthand or a free SQL query
+- `sql_table` — tabular result of a parameterised SELECT against the live database
+- `chart` — Chart.js (line / bar / pie) driven by a `dataSource` + `groupBy` + `aggregate` config OR a free SQL query returning x/y pairs
+
+All five templates are `scope = system` (every repository sees them) and `is_active = 1` (immediately usable).
+
+### Where the data comes from
+
+The templates query existing system tables:
+
+- `ahg_audit_log` — every audited action (write by every plugin)
+- `information_object_share_token` + `_share_access` — share-link history
+- `information_object_version` + `actor_version` — version capture
+- `retention_assignment` + `retention_schedule` + `disposal_action` — File-Plan compliance
+- `narssa_transfer` — transfers packaged for the National Archives
+
+No new audit-capture work is required — the templates surface what is already being logged.
+
+### Customising for a specific GCIS directorate
+
+Each template is a row in `report_template`. To customise:
+
+1. **Duplicate** the template (Reports → "Duplicate template")
+2. **Edit** the new copy's structure JSON to scope sections (add a `WHERE repository_id = X` clause to SQL queries)
+3. **Save** as `gcis_compliance` category — the new template appears in the same picker
+
+Operators can also use the templates as a starting point for further reports — e.g. extending the Audit Summary with an extra section that filters by directorate.
+
+---
+
 *Part of the AtoM AHG Framework*
