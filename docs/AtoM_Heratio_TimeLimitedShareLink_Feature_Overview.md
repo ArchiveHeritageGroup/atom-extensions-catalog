@@ -31,7 +31,7 @@ Designed for archives that need to share a record with a researcher, journalist,
 |---|---|
 | **POPIA / GDPR / CCPA** | All access is auditable; tokens expire automatically; revocation is immediate; recipient context (email + note) is stored for accountability |
 | **NARSSA** records integrity | All four lifecycle events (issue / access / revoke / prune) are dual-written to the central audit trail |
-| **GCIS RFB 001 2026/2027** clauses 4.1.1.9 (audit trail management) and 4.4 (security & access) | Granular ACL (5 distinct permissions) + per-token audit trail |
+| **applicable tender or regulatory framework** clauses 4.1.1.9 (audit trail management) and 4.4 (security & access) | Granular ACL (5 distinct permissions) + per-token audit trail |
 | **ISO 27001** access control | Bearer-token credentials are time-limited, single-record-scoped, individually revokable, and fully audited |
 | **MISS classification** | Classified records require explicit permission + matching clearance at issuance time; classification level is captured at issuance so subsequent re-classification doesn't quietly broaden the link's scope |
 

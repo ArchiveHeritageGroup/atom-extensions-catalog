@@ -9,7 +9,7 @@
 
 Captures a full, restorable snapshot of every information-object and authority-record (actor) save. Adds a "Versions" history to every record with side-by-side diff and a one-click restore. Integrates with the AHG audit trail and security clearance system so every version event is auditable and classified records are protected from unauthorised rollbacks.
 
-Designed for clients whose tender, regulatory, or policy environment requires demonstrable change-tracking on archival metadata — POPIA, GDPR, NARSSA, GCIS RFB 001 (clauses 4.1.1.3, 4.1.1.9, 4.6.2), and equivalents internationally.
+Designed for clients whose tender, regulatory, or policy environment requires demonstrable change-tracking on archival metadata — POPIA, GDPR, NARSSA, applicable records-management framework (clauses 4.1.1.3, 4.1.1.9, 4.6.2), and equivalents internationally.
 
 ## Key features
 
@@ -28,7 +28,7 @@ Designed for clients whose tender, regulatory, or policy environment requires de
 
 | Standard / regulation | How this plugin supports it |
 |---|---|
-| **GCIS RFB 001 2026/2027** clauses 4.1.1.3, 4.1.1.9, 4.6.2 | Version management, version control for search/retrieval, version control + audit trail management |
+| **applicable tender or regulatory framework** clauses 4.1.1.3, 4.1.1.9, 4.6.2 | Version management, version control for search/retrieval, version control + audit trail management |
 | **POPIA** | Records integrity and traceability of who changed what, when; complements the existing `ahgAuditTrailPlugin` |
 | **NARSSA** | Records-management lifecycle integrity; restore operations are themselves audited |
 | **MISS classification** | Restores on classified records require matching clearance; lower-cleared users see a clear 403 with a friendly reason |

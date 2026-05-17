@@ -509,17 +509,17 @@ Contact your system administrator if you experience persistent issues.
 
 ---
 
-## GCIS Compliance Templates (May 2026)
+## Records Management Compliance Templates (May 2026)
 
-Five pre-built `gcis_compliance` templates ship in `report_template` (ids 21–25) and map directly to GCIS RFB-001 clauses **4.1.1.14.e–h** plus **4.1.1.12.f**. Operators run them via the existing Reports admin (Admin → Reports → New report → Pick a template).
+Five pre-built `records_management_compliance` templates ship in `report_template` (ids 21–25). They provide turn-key coverage for the most-asked records-management compliance reports — audit summary, access logs, metadata integrity, retention status, and an executive consolidated dashboard — and require no setup beyond opening them. Operators run them via the existing Reports admin (Admin → Reports → New report → Pick a template).
 
-| Template | Bid clause | What it answers |
-|---|---|---|
-| **GCIS Compliance: Audit Summary** | 4.1.1.14.e (audit reports) | Volume by action, top 20 audited users (last 90d), full disposal-workflow audit chain |
-| **GCIS Compliance: Access Logs & User Activity** | 4.1.1.14.f (access logs + user activity tracking) | Active users (90d), share-link access activity, failed access attempts |
-| **GCIS Compliance: Metadata Integrity** | 4.1.1.14.g (metadata integrity verification) | Versioned-record coverage, most-edited records, every restore event |
-| **GCIS Compliance: Retention Status & Lifecycle** | 4.1.1.14.h + 4.1.1.13 | Records assigned to schedule, records due (12 months), disposal pipeline by status, approved transfers awaiting NARSSA package |
-| **GCIS Compliance: Consolidated Quarterly Dashboard** | 4.1.1.14.e–h synthesised | Single-page executive snapshot — 8 KPI tiles + 30-day audit-volume line chart |
+| Template | What it answers |
+|---|---|
+| **Records Management Compliance: Audit Summary** | Volume by action, top 20 audited users (last 90d), full disposal-workflow audit chain |
+| **Records Management Compliance: Access Logs & User Activity** | Active users (90d), share-link access activity, failed access attempts |
+| **Records Management Compliance: Metadata Integrity** | Versioned-record coverage, most-edited records, every restore event |
+| **Records Management Compliance: Retention Status & Lifecycle** | Records assigned to schedule, records due (12 months), disposal pipeline by status, approved transfers awaiting NARSSA package |
+| **Records Management Compliance: Consolidated Quarterly Dashboard** | Single-page executive snapshot — 8 KPI tiles + 30-day audit-volume line chart |
 
 ### How the templates are structured
 
@@ -544,13 +544,13 @@ The templates query existing system tables:
 
 No new audit-capture work is required — the templates surface what is already being logged.
 
-### Customising for a specific GCIS directorate
+### Customising for a specific department or business unit
 
 Each template is a row in `report_template`. To customise:
 
 1. **Duplicate** the template (Reports → "Duplicate template")
 2. **Edit** the new copy's structure JSON to scope sections (add a `WHERE repository_id = X` clause to SQL queries)
-3. **Save** as `gcis_compliance` category — the new template appears in the same picker
+3. **Save** as `records_management_compliance` category — the new template appears in the same picker
 
 Operators can also use the templates as a starting point for further reports — e.g. extending the Audit Summary with an extra section that filters by directorate.
 

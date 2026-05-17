@@ -14,7 +14,7 @@
 
 It plugs into the AtoM Heratio disposal workflow (`ahgExtendedRightsPlugin`): when a record reaches its retention disposal-due date with `disposal_action = 'transfer_narssa'` and the multi-stage sign-off chain has approved the transfer, the plugin produces a single tar.gz package containing the digital files plus standards-compliant metadata that NARSSA can ingest.
 
-This closes GCIS RFB-001 clause **4.6** (records management strategy + NARSSA compliance) for the transfer step that is otherwise implicit in clause 4.1.1.13.b.
+This addresses the archival-transfer step required by national records-management frameworks: NARSSA (South Africa), NARA Federal Records Act (US), Public Records Act (UK), and equivalents. The plugin produces the standards-compliant package; transmission is operator-driven.
 
 ---
 
@@ -81,8 +81,8 @@ Packages an explicit list of information_object IDs regardless of disposal workf
 | Requirement | How addressed |
 |---|---|
 | NARSSA Act 1996 §13 (transfer to National Archives) | Package format + audit trail |
-| GCIS RFB-001 clause 4.6 (records management strategy) | End-to-end disposal → transfer pipeline |
-| GCIS RFB-001 clause 4.1.1.13.b (controlled disposal with audit logs) | `disposal_action` → `narssa_transfer` link + audit dual-write |
+| Records management strategy (any national framework) | End-to-end disposal → transfer pipeline |
+| Controlled disposal with audit logs | `disposal_action` → `narssa_transfer` link + audit dual-write |
 | Standards interoperability (METS + EAD2002) | Industry-standard XML schemas |
 | Integrity verification | SHA-256 on package + per-item folder |
 

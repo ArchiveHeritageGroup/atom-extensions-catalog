@@ -10,7 +10,7 @@
 
 ## Overview
 
-NARSSA-compliant transfer manifest generator. Closes the GCIS RFB-001 clause 4.6 gap that is implicit in the bid: when a record reaches end-of-life and the schedule's `disposal_action = 'transfer_narssa'`, this plugin packages the record + digital objects + descriptive metadata in a tar.gz that NARSSA can ingest.
+NARSSA-compliant transfer manifest generator. Closes the applicable records-management frameworks gap that is implicit in the bid: when a record reaches end-of-life and the schedule's `disposal_action = 'transfer_narssa'`, this plugin packages the record + digital objects + descriptive metadata in a tar.gz that NARSSA can ingest.
 
 Built to mirror the existing `ahgNAZPlugin` (Zimbabwe equivalent) in shape and conventions, but tuned to NARSSA Act 1996 expectations and using METS-EAD2002 specifically (NAZ uses simpler CSV).
 
@@ -208,13 +208,13 @@ disposal_action.status = 'executed'
 
 ---
 
-## Bid Mapping
+## Compliance Mapping
 
-| GCIS RFB-001 clause | How this plugin contributes |
+| Records-management requirement | How this plugin contributes |
 |---|---|
-| 4.6 (records management strategy + NARSSA compliance) | Standards-compliant transfer manifest format |
-| 4.1.1.13.b (controlled disposal workflows with audit logs) | Transfer is a disposal action with full audit trail |
-| 4.1.1.14.h (retention status and lifecycle compliance reports) | `narssa_transfer` populates the compliance dashboard |
+| Transfer of non-active records to a national archive (NARSSA / NARA / PRO / equivalents) | Standards-compliant METS + EAD2002 transfer manifest format |
+| Controlled disposal workflow with audit logs | Transfer is a disposal action with full audit trail |
+| Retention status and lifecycle compliance reporting | `narssa_transfer` populates the compliance dashboard |
 
 ---
 

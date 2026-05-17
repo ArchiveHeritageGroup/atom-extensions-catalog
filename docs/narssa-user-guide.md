@@ -31,7 +31,7 @@ Before you run any transfer:
 
 ## 2. Surfacing what's due
 
-Open **Admin → Reports → New report → GCIS Compliance: Retention Status & Lifecycle**.
+Open **Admin → Reports → New report → Records Management Compliance: Retention Status & Lifecycle**.
 
 The "Approved transfers awaiting NARSSA package" table lists every record that:
 

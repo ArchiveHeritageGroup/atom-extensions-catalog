@@ -436,7 +436,7 @@ No base AtoM data is touched at any point.
 1. **Restore scope.** Base + i18n + custom fields only. Access points, events, relations, physical-object links NOT restored. Modal warns clearly. Full restore is the next-release roadmap.
 2. **AtoM admin UI.** The standard `/admin/aclGroup/{id}/edit` page doesn't surface `version.*` actions (it only lists built-in AtoM actions). Admins manage these via direct SQL or a future custom admin page.
 3. **Inline display panel rendering.** `display_panels` is registered correctly and `DisplayActionRegistry` sees the panel, but the legacy `/{slug}` view doesn't emit AHG panels at all (only the GLAM display mode does). The `ViewLinkInjector` produces a banner via `response.filter_content` as a workaround.
-4. **Backfill performance ceiling.** ~120 entities/sec on PSIS-equivalent hardware. Acceptable for the 5,000–50,000-record range typical of GCIS-scale clients; for larger archives, consider parallelising across entity types or batching across multiple `version:backfill` invocations on disjoint id ranges.
+4. **Backfill performance ceiling.** ~120 entities/sec on PSIS-equivalent hardware. Acceptable for the 5,000–50,000-record range typical of mid-sized archive deployments; for larger archives, consider parallelising across entity types or batching across multiple `version:backfill` invocations on disjoint id ranges.
 
 ## Decision log (for future maintainers)
 
@@ -444,7 +444,7 @@ These decisions are LOCKED for v1.0. Revisit only with strong reason.
 
 | # | Decision | Rationale |
 |---|---|---|
-| 1 | Entity scope: information_object + actor only | GCIS clauses 4.1.1.3 / 4.6.2 reference these; the two most-edited entity types in any archive. |
+| 1 | Entity scope: information_object + actor only | the institution clauses 4.1.1.3 / 4.6.2 reference these; the two most-edited entity types in any archive. |
 | 2 | Snapshot includes ALL i18n cultures | Restore must be deterministic; culture-only snapshots can't restore other cultures' content. |
 | 3 | Storage: JSON column per entity type, not normalised | Mirrors existing AHG `report_version` pattern; single row read for diff or restore. |
 | 4 | Concurrency: last-write-wins with parent-row lock | No record-level optimistic lock in AtoM/Heratio; introducing one is out of scope. |

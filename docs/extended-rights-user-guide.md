@@ -635,7 +635,7 @@ For more information on standards:
 
 ## Retention Schedule & Disposal Workflow (v1.3.0, May 2026)
 
-This release adds File-Plan-driven **retention scheduling** and a **multi-stage disposal workflow** with audit dual-write. Closes GCIS RFB-001 clauses **4.1.1.8** (configure per File Plan), **4.1.1.13.a** (automated/manual retention enforcement) and **4.1.1.13.b** (controlled disposal workflows with audit logs).
+This release adds File-Plan-driven **retention scheduling** and a **multi-stage disposal workflow** with audit dual-write. Designed for any records-management environment that requires configuration per a published File Plan, automated/manual retention enforcement, and controlled disposal workflows with audit logs — including NARSSA, ISO 15489, PRO Act (UK), NARA (US), and equivalent national archives regimes.
 
 ### Retention schedules — what they are
 
@@ -648,16 +648,16 @@ A retention schedule is one row in the **File Plan**. It says, for a given recor
 - Which **sign-offs** are mandatory (records officer is always required; legal and executive are configurable per schedule)
 - The **legal basis** for the schedule (e.g. NARSSA Act 1996 §13(2)(d), PFMA, BCEA + POPIA)
 
-Sample seed schedules shipped on every new install:
+Sample seed schedules shipped on every new install (examples — operators replace these with their organisation's File Plan codes):
 
 | Code | Title | Active | Dormant | Trigger | Disposal | Legal/Exec |
 |---|---|---|---|---|---|---|
-| GCIS-COMM-001 | Press releases (general) | 2 y | 3 y | creation_date | destroy | — |
-| GCIS-COMM-002 | Cabinet briefings | 5 y | 25 y | creation_date | transfer_narssa | legal + exec |
-| GCIS-CORP-001 | Annual reports | 5 y | 0 y | creation_date | permanent | exec |
-| GCIS-CORP-002 | Procurement records | 5 y | 7 y | fiscal_year_end | destroy | legal |
-| GCIS-HR-001 | Employee personnel files | 7 y | 30 y | employment_end | destroy | legal |
-| GCIS-LEG-001 | Legal opinions | 5 y | 20 y | creation_date | review | legal + exec |
+| COMM-001 | Press releases (general) | 2 y | 3 y | creation_date | destroy | — |
+| COMM-002 | Cabinet / executive briefings | 5 y | 25 y | creation_date | transfer_narssa | legal + exec |
+| CORP-001 | Annual reports | 5 y | 0 y | creation_date | permanent | exec |
+| CORP-002 | Procurement records | 5 y | 7 y | fiscal_year_end | destroy | legal |
+| HR-001 | Employee personnel files | 7 y | 30 y | employment_end | destroy | legal |
+| LEG-001 | Legal opinions | 5 y | 20 y | creation_date | review | legal + exec |
 
 Operators can add/edit/delete schedules via the rights-admin UI or via `RetentionScheduleService` programmatically.
 
@@ -665,7 +665,7 @@ Operators can add/edit/delete schedules via the rights-admin UI or via `Retentio
 
 When a record reaches archival status (typically on ingest from SharePoint or via the 6-step ingest wizard), an archivist:
 
-1. Picks the matching File-Plan code (e.g. `GCIS-COMM-002`)
+1. Picks the matching File-Plan code (e.g. `COMM-002`)
 2. Supplies the trigger-event date (e.g. file closure date)
 3. The system calculates `calculated_disposal_due = trigger_event_date + active_period + dormant_period`
 
@@ -693,11 +693,11 @@ Every state transition writes one row to `ahg_audit_log` with action codes:
 
 `disposal_proposed`, `disposal_officer_signed`, `disposal_legal_signed`, `disposal_executive_signed`, `disposal_approved`, `disposal_executed`, `disposal_rejected`, `disposal_deferred`.
 
-This satisfies clause **4.1.1.13.b**: every disposal decision is captured with timestamp, user, and the JSON-serialised action_type and any notes. No record can be disposed without a complete sign-off chain visible in the audit log.
+Every disposal decision is captured with timestamp, user, and the JSON-serialised action_type and any notes — satisfying any records-management framework that requires a controlled disposal audit trail (NARSSA, ISO 15489, NARA, PRO Act, and equivalents). No record can be disposed without a complete sign-off chain visible in the audit log.
 
 ### Compliance dashboard integration
 
-The new `GCIS Compliance: Retention Status & Lifecycle` report template (in `ahgReportBuilderPlugin`) surfaces:
+The new `Records Management Compliance: Retention Status & Lifecycle` report template (in `ahgReportBuilderPlugin`) surfaces:
 
 - All records currently assigned to a schedule
 - Records due for disposal in the next 12 months
