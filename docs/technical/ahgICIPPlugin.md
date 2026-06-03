@@ -779,7 +779,11 @@ sudo systemctl restart php8.3-fpm
 - Planned: Check ICIP status in clearance evaluation
 
 ### ahgAuditTrailPlugin
-- Planned: Log all ICIP access when `audit_all_icip_access` enabled
+- Active: when `audit_all_icip_access` is enabled, `ahgICIPService::checkAccess()`
+  records each object-level access decision (allowed/blocked, reason, notice and
+  restriction counts, user, IP) into the `icip_access_log` table. The table is
+  created by `database/install.sql`; before it existed the insert was silently
+  swallowed (best-effort try/catch) and no trail was produced.
 - Track consent changes, consultation updates
 
 ### Local Contexts Hub
