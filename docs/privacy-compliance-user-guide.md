@@ -1224,4 +1224,23 @@ For regulatory guidance:
 
 ---
 
+## Data Protection Impact Assessment (DPIA)
+
+GDPR Article 35 DPIAs for high-risk processing. **Where:** Privacy admin → **DPIAs** (`/privacyAdmin/dpiaList`).
+
+Workflow: **draft → review → completed (signed off) → archived**.
+
+1. Click **New DPIA**, name it, and optionally link a **ROPA processing activity**.
+2. Complete the four WP29 sections — **necessity & proportionality**, **risks to data subjects**, **mitigation + residual risk**, and the **DPO consultation opinion** — then **Save**.
+3. **High-risk** is auto-flagged when the text mentions special-category / biometric / large-scale / cross-border processing (or tick it manually).
+4. **Move to review**, then **Sign off** (optional note). Sign-off marks the DPIA *completed*, stamps who/when, sets `dpia_completed` + `dpia_date` on the **linked ROPA entry**, and writes an audit record. Completed/archived DPIAs are read-only.
+
+---
+
+## Field-level redaction
+
+Redact individual structured metadata fields for public viewers while staff see the full record. See **[Field-level redaction](privacy-field-redaction.md)** for the field types (full / partial patterns / pseudonymised), the admin panel at `/privacyAdmin/redactionManage`, and DSAR scope pre-population.
+
+---
+
 *Part of the AtoM AHG Framework*

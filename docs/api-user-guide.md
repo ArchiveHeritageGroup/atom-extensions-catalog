@@ -448,4 +448,17 @@ GET /api/v2/taxonomies/42/terms
 
 ---
 
+## OpenAPI 3.1 & interactive docs
+
+The v2 API publishes a machine-readable contract and a browsable reference:
+
+| URL | What |
+|-----|------|
+| `/api/v2/openapi` | **OpenAPI 3.1** document (JSON) — every endpoint, parameters, request/response envelopes, and the `X-API-Key` / Bearer security schemes, generated from the live route table |
+| `/api/v2/docs` | **Swagger-UI** — browse and "try it out" against the spec |
+
+Point any OpenAPI-aware tool (Postman, Insomnia, `openapi-generator`, an API gateway) at `/api/v2/openapi` to import the API or generate a typed client. Responses use the `{ "success": true, "data": … }` envelope; errors use `{ "success": false, "error": …, "message": … }`.
+
+---
+
 *Part of the AtoM AHG Framework*
