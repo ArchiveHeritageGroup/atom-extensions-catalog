@@ -61,3 +61,10 @@ KBART harvesting uses two tables:
 
 - **Z39.50 / SRU Integration** — for harvesting bibliographic (MARC) records from remote catalogues.
 - **MARC Import/Export** — for loading and exporting catalogue records directly.
+
+## KBART export, OpenURL & ODI scorecard (v3.46.0)
+
+- **KBART export** — publish the library's holdings as a NISO KBART title list (TSV) from **Library → KBART → Export** (`/library/kbart/export`); `serials_only` limits it to titles with an ISSN.
+- **OpenURL resolver** — an inbound NISO OpenURL 1.0 endpoint at `/openurl` (accepts `rft.isbn` / `rft.issn` / `rft.title`). A single match redirects to the catalogue record; multiple matches list the candidates.
+- **ODI quality scorecard** — **Admin → Library → ODI** (`/admin/library/odi`) scores discovery-metadata completeness (title, creator, subject, publisher, date, identifier, call number) across published items, with per-field fill rates and an overall score.
+- **MARCXML** — available via the metadata-export module (`marc21` format).

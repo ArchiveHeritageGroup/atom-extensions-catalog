@@ -189,3 +189,8 @@ On individual record view pages, Discovery can show a **Related Content** sideba
 | Synonyms not expanding | Populate the thesaurus in ahgSemanticSearchPlugin |
 | Search is slow | Results are cached for 1 hour — first search may be slower |
 | Popular searches empty | Needs at least 2 searches for the same query in the last 30 days |
+
+## Configurable boosts & personalised re-ranking (v3.46.0)
+
+- **Configurable relevance boosts** — the keyword-search field boosts (title, scope & content, subjects, creators, …) can be overridden without code by setting `discovery_field_boosts` in **AHG Settings** to a JSON map of field-pattern → boost. When unset, the built-in defaults apply.
+- **Opt-in personalised re-ranking** — when a signed-in user has opted in, results they have previously clicked are boosted (up to +50%) and re-sorted, using their discovery click history. It is a no-op for anonymous users or those who have not opted in.

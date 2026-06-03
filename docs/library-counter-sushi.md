@@ -63,3 +63,7 @@ The endpoint returns COUNTER-standard exception codes:
 
 - **Library catalogue & OPAC** — the activity that generates usage events.
 - **KBART e-resource feeds** — for the title-level holdings of the packages whose usage these reports count.
+
+## Excel (XLSX) export (v3.46.0)
+
+COUNTER R5 reports can now be downloaded as **XLSX** in addition to JSON and TSV. On **Admin → Library → COUNTER**, pick a report (PR / TR_J1 / TR_J3 / DR / IR), choose the **Excel** format, and **Download**. The workbook carries a report-header block (Report_ID, institution, reporting period, created) followed by the data rows.
