@@ -511,6 +511,47 @@ Maximum: 100
 
 ---
 
+## Field-Level Redaction System (#130)
+
+Structured per-field redaction of archival-description metadata, distinct from
+the PDF/visual redaction below (which redacts digital objects). Field-level
+redaction hides individual metadata fields on the rendered description and in
+the REST API for viewers without access.
+
+### Data model
+
+| Table | Purpose |
+|---|---|
+| `privacy_reason` | Seeded reason vocabulary (personal_data, special_category, access_request, …). |
+| `information_object_privacy` | One privacy profile per IO (reason, status, legal basis, applied by/at). |
+| `information_object_privacy_field` | Per-field rule (field_name, redaction_type, pattern, reason, is_sensitive). |
+| `information_object_privacy_log` | Audit row per decision/access. |
+| `privacy_dsar_object` | DSAR ⇄ IO scope link; pre-populates profiles for in-scope descriptions. |
+
+### Components
+
+- **`PrivacyRedactionService`** - redaction engine (full / partial[`email_partial`,
+  `phone_partial`, `id_last4`] / pseudonymised), profile + field CRUD,
+  `applyRedaction()`, `redactPayload()` (REST), `prepopulateForDsar()`, audit.
+- **`RedactionContentFilter`** - applies redaction to the rendered IO view for
+  unauthorised viewers via the Symfony `response.filter_content` event. Covers
+  the i18n text fields plus `creator_dates` (actor dates of existence) and
+  `event_dates` (event date). No base-AtoM / theme files are modified.
+- **`RedactionAccess`** - single authority for the bypass rule: staff, or an
+  authenticated user with an approved/unexpired `research_researcher` agreement.
+  Shared by the web filter and the REST API. Fail-closed.
+
+### Surfaces
+
+- **Admin**: `privacyAdmin/redactionManage` (mark/remove field rules, list
+  profiled objects, shows linked visual-redaction region count).
+- **DSAR**: `privacyAdmin/dsarScope` (add IOs to a DSAR's scope → profile
+  pre-populated; auto-pre-populate when the DSAR moves to `processing`).
+- **REST API**: `apiv2/descriptions` read + browse redact for non-`admin`-scope
+  keys.
+
+---
+
 ## PDF Redaction System
 
 ### Architecture

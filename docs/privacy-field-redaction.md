@@ -22,10 +22,32 @@ type:
 - **Pseudonymised** - replaced with a stable, non-reversible token
   (`Subject-XXXXXXXX`).
 
-The redaction is applied to the rendered description view for unauthorised
-(public / non-staff) viewers through the content filter; staff (administrator or
-editor) see the original values untouched. Every decision and access is logged
-with the field, action, reason, user, date, and legal basis.
+### Who sees the full record
+
+Redaction is applied to unauthorised viewers; the following bypass it and see
+the original values:
+
+- **Staff** - administrators and editors.
+- **Researchers with an active access agreement** - an authenticated user who
+  holds an *approved, unexpired* researcher record (`research_researcher`) sees
+  the full record. Everyone else - anonymous visitors, and authenticated users
+  without an active agreement - gets the redacted view.
+
+The rule is defined once and applied consistently to both the rendered web view
+and the REST API. Every decision and access is logged with the field, action,
+reason, user, date, and legal basis.
+
+### Which fields can be redacted
+
+- **Description text fields** that render verbatim on the page: scope and
+  content, archival history, arrangement, access/reproduction conditions,
+  physical characteristics, related units, sources, acquisition, appraisal,
+  location of originals/copies, title, alternate title, edition, extent and
+  medium, finding aids, rules, revision history, and institution identifier.
+- **Event and related-entity fields**: `creator_dates` (the creator's dates of
+  existence) and `event_dates` (the description's creation/accumulation dates).
+  Because these are matched on the rendered value, prefer them where the value
+  is a distinctive phrase rather than a bare year.
 
 ## Managing redaction on a description
 
@@ -35,6 +57,25 @@ with the field, action, reason, user, date, and legal basis.
    time (field, type, optional pattern, reason).
 3. Public views of that description immediately show the redacted values; staff
    continue to see the originals.
+
+If the description also has **visual (digital-object) redactions** - black-box
+regions drawn over a PDF or image - the field-redaction panel shows how many
+visual regions exist and links straight to the visual redaction editor, so both
+redaction layers are managed from one place.
+
+## REST API
+
+The same redaction is applied to the JSON API so machine consumers get the same
+view as the public web:
+
+- `GET /apiv2/descriptions/{slug}` - redacts the matching fields in the
+  response (scope and content, title, extent and medium, and the other text
+  fields).
+- `GET /apiv2/descriptions` (browse) - redacts the title in each result.
+
+API keys carrying the **`admin`** scope bypass redaction and receive the full
+record; all other keys receive the redacted view. Descriptions with no
+redaction rules are returned unchanged.
 
 ## DSAR redaction scope
 
