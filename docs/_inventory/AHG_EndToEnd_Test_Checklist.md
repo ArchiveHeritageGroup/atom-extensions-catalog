@@ -1,6 +1,6 @@
 # AHG — Menu-Driven Manual Test Checklist
 
-**Playwright auto-test summary (2026-06-28):** PASS=965 · FAIL=2 · N/A=338 · destructive/manual=1. ☑ = passed automated GET; ☐ = awaiting your manual check (parameterised, destructive/POST, or button/JS interaction). FAIL rows are flagged in the Result column.
+**Playwright auto-test summary (2026-06-28):** PASS=1020 · FAIL=2 · N/A=275 · destructive/manual=1. ☑ = passed automated GET; ☐ = awaiting your manual check (parameterised, destructive/POST, or button/JS interaction). FAIL rows are flagged in the Result column.
 
 
 Every navigation menu item is a **screen**; under each, every link/URL reachable from it is a tick-box test item. Walk the menus top-to-bottom. Tick ☐→☑; record Pass/Fail + notes.
@@ -30,13 +30,13 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/workflow/publish-execute/:object_id` | publishExecute | ahgWorkflowPlugin | PASS | HTTP 302 |
 | ☑ | `/iiif/annotations/object/:id` | annotationsList | ahgIiifPlugin | PASS | HTTP 200 |
 | ☑ | `/admin/iiif-validation/run/:object_id` | validationRun | ahgIiifPlugin | PASS | HTTP 200 (fixed) |
-| ☐ | `/iiif/ocr/object/:id` | ocrExport | ahgIiifPlugin | N/A | HTTP 404 |
+| ☐ | `/iiif/ocr/object/:id` | ocrExport | ahgIiifPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/threeDReports/digitalObjects` | digitalObjects | ahgIiifPlugin | PASS | HTTP 403 (pw 2026-06-27) |
-| ☐ | `/exhibition/:id/objects` | objects | ahgExhibitionPlugin | N/A | HTTP 404 |
-| ☐ | `/exhibition/:id/object-list` | objectList | ahgExhibitionPlugin | N/A | HTTP 404 |
+| ☑ | `/exhibition/:id/objects` | objects | ahgExhibitionPlugin | PASS | HTTP 200 [/exhibition/1/objects] |
+| ☑ | `/exhibition/:id/object-list` | objectList | ahgExhibitionPlugin | PASS | HTTP 200 [/exhibition/1/object-list] |
 | ☑ | `/api/3d/models/:object_id` | apiModels | ahg3DModelPlugin | PASS | HTTP 200 |
 | ☑ | `/customFields/get/:entityType/:objectId` | getValues | ahgCustomFieldsPlugin | PASS | HTTP 200 |
-| ☐ | `/admin/preservation/object/:id` | object | ahgPreservationPlugin | N/A | HTTP 404 |
+| ☐ | `/admin/preservation/object/:id` | object | ahgPreservationPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/api/preservation/package/add-object` | apiPackageAddObject | ahgPreservationPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/api/preservation/package/remove-object` | apiPackageRemoveObject | ahgPreservationPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/tiff-pdf-merge/:informationObject` | index | ahgPreservationPlugin | PASS | HTTP 200 |
@@ -47,13 +47,13 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/security/request-object/create` | createObjectRequest | ahgAccessRequestPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/heritage/object/:slug` | viewByObject | ahgHeritageAccountingPlugin | PASS | HTTP 200 |
 | ☑ | `/heritage/object/:slug/edit` | editByObject | ahgHeritageAccountingPlugin | PASS | HTTP 302 |
-| ☐ | `/loan/:id/add-object` | addObject | ahgLoanPlugin | N/A | HTTP 404 |
-| ☐ | `/loan/:id/remove-object` | removeObject | ahgLoanPlugin | N/A | HTTP 404 |
+| ☑ | `/loan/:id/add-object` | addObject | ahgLoanPlugin | PASS | HTTP 302 [/loan/1/add-object] |
+| ☑ | `/loan/:id/remove-object` | removeObject | ahgLoanPlugin | PASS | HTTP 302 [/loan/1/remove-object] |
 | ☑ | `/loan/search-objects` | searchObjects | ahgLoanPlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☐ | `/informationobject/:slug/delete` | delete | ahgInformationObjectManagePlugin | SKIP | destructive/POST |
 | ☑ | `/informationobject/:slug/edit` | edit | ahgInformationObjectManagePlugin | PASS | HTTP 200 |
 | ☑ | `/digitalobject/upload` | doUpload | ahgInformationObjectManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
-| ☐ | `/digitalobject/:id/edit` | doEdit | ahgInformationObjectManagePlugin | N/A | HTTP 404 |
+| ☑ | `/digitalobject/:id/edit` | doEdit | ahgInformationObjectManagePlugin | PASS | HTTP 200 [/digitalobject/702/edit] |
 | ☐ | `/digitalobject/:id/delete` | doDelete | ahgInformationObjectManagePlugin | SKIP | destructive/POST |
 | ☑ | `/informationobject/treeview` | treeview | ahgInformationObjectManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☑ | `/informationobject/treeviewFull` | treeviewFull | ahgInformationObjectManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
@@ -73,7 +73,7 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/accession/browse` | browse | ahgAccessionManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☑ | `/admin/accessions/dashboard` | dashboard | ahgAccessionManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☐ | `/admin/accessions/:id/submit` | submit | ahgAccessionManagePlugin | SKIP | destructive/POST |
-| ☐ | `/admin/accessions/:id/review` | review | ahgAccessionManagePlugin | N/A | HTTP 404 |
+| ☐ | `/admin/accessions/:id/review` | review | ahgAccessionManagePlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/admin/accessions/:id/accept` | accept | ahgAccessionManagePlugin | SKIP | destructive/POST |
 | ☐ | `/admin/accessions/:id/reject` | reject | ahgAccessionManagePlugin | SKIP | destructive/POST |
 | ☐ | `/admin/accessions/:id/return` | returnRevision | ahgAccessionManagePlugin | SKIP | destructive/POST |
@@ -120,9 +120,9 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/admin/authority/:actorId/functions` | functions | ahgAuthorityPlugin | PASS | HTTP 200 |
 | ☑ | `/admin/authority/:actorId/contact` | contact | ahgAuthorityPlugin | PASS | HTTP 200 |
 | ☑ | `/api/authority/eac-cpf/:actorId` | apiEacExport | ahgAuthorityPlugin | PASS | HTTP 200 |
-| ☐ | `/actor/:slug` | index | ahgActorManagePlugin | N/A | HTTP 404 |
+| ☑ | `/actor/:slug` | index | ahgActorManagePlugin | PASS | HTTP 200 [/actor/historical] |
 | ☐ | `/actor/:slug/delete` | delete | ahgActorManagePlugin | SKIP | destructive/POST |
-| ☐ | `/actor/:slug/edit` | edit | ahgActorManagePlugin | N/A | HTTP 404 |
+| ☑ | `/actor/:slug/edit` | edit | ahgActorManagePlugin | PASS | HTTP 200 [/actor/historical/edit] |
 | ☑ | `/actor/add` | edit | ahgActorManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/actor/browse` | browse | ahgActorManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☑ | `/actor/autocomplete` | autocomplete | ahgActorManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
@@ -149,9 +149,9 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 
 | ✔ | Link / URL | Action | Plugin | Result | Notes |
 |---|---|---|---|---|---|
-| ☐ | `/term/:slug/edit` | edit | ahgTermTaxonomyPlugin | N/A | HTTP 404 |
+| ☐ | `/term/:slug/edit` | edit | ahgTermTaxonomyPlugin | SKIP | no records / not installed |
 | ☐ | `/term/:slug/delete` | delete | ahgTermTaxonomyPlugin | SKIP | destructive/POST |
-| ☐ | `/term/:slug` | index | ahgTermTaxonomyPlugin | N/A | HTTP 404 |
+| ☐ | `/term/:slug` | index | ahgTermTaxonomyPlugin | SKIP | no records / not installed |
 | ☑ | `/api/v2/taxonomies/:id/terms` | taxonomyTerms | ahgAPIPlugin | PASS | HTTP 403 |
 | ☑ | `/informationobject/termAutocomplete` | termAutocomplete | ahgInformationObjectManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
 
@@ -166,9 +166,9 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/admin/authority/functions/browse` | functionBrowse | ahgAuthorityPlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/api/authority/function/save` | apiFunctionSave | ahgAuthorityPlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☐ | `/api/authority/function/:id/delete` | apiFunctionDelete | ahgAuthorityPlugin | SKIP | destructive/POST |
-| ☐ | `/function/:slug` | view | ahgFunctionManagePlugin | N/A | HTTP 404 |
+| ☑ | `/function/:slug` | view | ahgFunctionManagePlugin | PASS | HTTP 200 [/function/test-function] |
 | ☐ | `/function/:slug/delete` | delete | ahgFunctionManagePlugin | SKIP | destructive/POST |
-| ☐ | `/function/:slug/edit` | edit | ahgFunctionManagePlugin | N/A | HTTP 404 |
+| ☑ | `/function/:slug/edit` | edit | ahgFunctionManagePlugin | PASS | HTTP 200 [/function/test-function/edit] |
 | ☑ | `/function/add` | edit | ahgFunctionManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/function/browse` | browse | ahgFunctionManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
 
@@ -187,7 +187,7 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/accession/browse` | browse | ahgAccessionManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☑ | `/admin/accessions/dashboard` | dashboard | ahgAccessionManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☐ | `/admin/accessions/:id/submit` | submit | ahgAccessionManagePlugin | SKIP | destructive/POST |
-| ☐ | `/admin/accessions/:id/review` | review | ahgAccessionManagePlugin | N/A | HTTP 404 |
+| ☐ | `/admin/accessions/:id/review` | review | ahgAccessionManagePlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/admin/accessions/:id/accept` | accept | ahgAccessionManagePlugin | SKIP | destructive/POST |
 | ☐ | `/admin/accessions/:id/reject` | reject | ahgAccessionManagePlugin | SKIP | destructive/POST |
 | ☐ | `/admin/accessions/:id/return` | returnRevision | ahgAccessionManagePlugin | SKIP | destructive/POST |
@@ -235,9 +235,9 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/donor/agreement/reminders` | reminders | ahgDonorAgreementPlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☑ | `/donor/autocomplete/accessions` | autocompleteAccessions | ahgDonorAgreementPlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☑ | `/donor/autocomplete/records` | autocompleteRecords | ahgDonorAgreementPlugin | PASS | HTTP 200 (pw 2026-06-27) |
-| ☐ | `/donor/:slug` | view | ahgDonorManagePlugin | N/A | HTTP 404 |
+| ☑ | `/donor/:slug` | view | ahgDonorManagePlugin | PASS | HTTP 200 [/donor/rock-art-research-institute] |
 | ☐ | `/donor/:slug/delete` | delete | ahgDonorManagePlugin | SKIP | destructive/POST |
-| ☐ | `/donor/:slug/edit` | edit | ahgDonorManagePlugin | N/A | HTTP 404 |
+| ☑ | `/donor/:slug/edit` | edit | ahgDonorManagePlugin | PASS | HTTP 200 [/donor/rock-art-research-institute/edit] |
 | ☑ | `/donor/add` | edit | ahgDonorManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☑ | `/donor/browse` | browse | ahgDonorManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
 
@@ -247,17 +247,17 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ✔ | Link / URL | Action | Plugin | Result | Notes |
 |---|---|---|---|---|---|
 | ☐ | `/jobs` | browse | ahgJobsManagePlugin | N/A | HTTP 404 (pw 2026-06-27) |
-| ☐ | `/jobs/report/:id` | report | ahgJobsManagePlugin | N/A | HTTP 404 |
+| ☐ | `/jobs/report/:id` | report | ahgJobsManagePlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/jobs/delete` | delete | ahgJobsManagePlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/jobs/export` | export | ahgJobsManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☐ | `/api/v2/sharepoint/push/jobs/:id` | pushJob | ahgSharePointPlugin | N/A | HTTP 404 |
 | ☑ | `/ingest/ajax/job-status` | jobStatus | ahgIngestPlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☑ | `/tiff-pdf-merge/job/:job_id` | getJob | ahgPreservationPlugin | PASS | HTTP 200 |
-| ☐ | `/tiff-pdf-merge/download/:job_id` | download | ahgPreservationPlugin | N/A | HTTP 404 |
+| ☐ | `/tiff-pdf-merge/download/:job_id` | download | ahgPreservationPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/tiff-pdf-merge/jobs` | browse | ahgPreservationPlugin | PASS | HTTP 200 (pw 2026-06-27) |
-| ☐ | `/tiff-pdf-merge/job/:job_id/view` | view | ahgPreservationPlugin | N/A | HTTP 404 |
+| ☐ | `/tiff-pdf-merge/job/:job_id/view` | view | ahgPreservationPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/research/extraction-job/create` | createExtractionJob | ahgResearchPlugin | PASS | HTTP 302 (pw 2026-06-27) |
-| ☐ | `/research/extraction-job/:id` | viewExtractionJob | ahgResearchPlugin | N/A | HTTP 404 |
+| ☐ | `/research/extraction-job/:id` | viewExtractionJob | ahgResearchPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/research/extraction-jobs/:project_id` | extractionJobs | ahgResearchPlugin | PASS | HTTP 200 |
 
 
@@ -278,13 +278,13 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/workflow/publish-execute/:object_id` | publishExecute | ahgWorkflowPlugin | PASS | HTTP 302 |
 | ☑ | `/iiif/annotations/object/:id` | annotationsList | ahgIiifPlugin | PASS | HTTP 200 |
 | ☑ | `/admin/iiif-validation/run/:object_id` | validationRun | ahgIiifPlugin | PASS | HTTP 200 (fixed) |
-| ☐ | `/iiif/ocr/object/:id` | ocrExport | ahgIiifPlugin | N/A | HTTP 404 |
+| ☐ | `/iiif/ocr/object/:id` | ocrExport | ahgIiifPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/threeDReports/digitalObjects` | digitalObjects | ahgIiifPlugin | PASS | HTTP 403 (pw 2026-06-27) |
-| ☐ | `/exhibition/:id/objects` | objects | ahgExhibitionPlugin | N/A | HTTP 404 |
-| ☐ | `/exhibition/:id/object-list` | objectList | ahgExhibitionPlugin | N/A | HTTP 404 |
+| ☑ | `/exhibition/:id/objects` | objects | ahgExhibitionPlugin | PASS | HTTP 200 [/exhibition/1/objects] |
+| ☑ | `/exhibition/:id/object-list` | objectList | ahgExhibitionPlugin | PASS | HTTP 200 [/exhibition/1/object-list] |
 | ☑ | `/api/3d/models/:object_id` | apiModels | ahg3DModelPlugin | PASS | HTTP 200 |
 | ☑ | `/customFields/get/:entityType/:objectId` | getValues | ahgCustomFieldsPlugin | PASS | HTTP 200 |
-| ☐ | `/admin/preservation/object/:id` | object | ahgPreservationPlugin | N/A | HTTP 404 |
+| ☐ | `/admin/preservation/object/:id` | object | ahgPreservationPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/api/preservation/package/add-object` | apiPackageAddObject | ahgPreservationPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/api/preservation/package/remove-object` | apiPackageRemoveObject | ahgPreservationPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/tiff-pdf-merge/:informationObject` | index | ahgPreservationPlugin | PASS | HTTP 200 |
@@ -295,13 +295,13 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/security/request-object/create` | createObjectRequest | ahgAccessRequestPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/heritage/object/:slug` | viewByObject | ahgHeritageAccountingPlugin | PASS | HTTP 200 |
 | ☑ | `/heritage/object/:slug/edit` | editByObject | ahgHeritageAccountingPlugin | PASS | HTTP 302 |
-| ☐ | `/loan/:id/add-object` | addObject | ahgLoanPlugin | N/A | HTTP 404 |
-| ☐ | `/loan/:id/remove-object` | removeObject | ahgLoanPlugin | N/A | HTTP 404 |
+| ☑ | `/loan/:id/add-object` | addObject | ahgLoanPlugin | PASS | HTTP 302 [/loan/1/add-object] |
+| ☑ | `/loan/:id/remove-object` | removeObject | ahgLoanPlugin | PASS | HTTP 302 [/loan/1/remove-object] |
 | ☑ | `/loan/search-objects` | searchObjects | ahgLoanPlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☐ | `/informationobject/:slug/delete` | delete | ahgInformationObjectManagePlugin | SKIP | destructive/POST |
 | ☑ | `/informationobject/:slug/edit` | edit | ahgInformationObjectManagePlugin | PASS | HTTP 200 |
 | ☑ | `/digitalobject/upload` | doUpload | ahgInformationObjectManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
-| ☐ | `/digitalobject/:id/edit` | doEdit | ahgInformationObjectManagePlugin | N/A | HTTP 404 |
+| ☑ | `/digitalobject/:id/edit` | doEdit | ahgInformationObjectManagePlugin | PASS | HTTP 200 [/digitalobject/702/edit] |
 | ☐ | `/digitalobject/:id/delete` | doDelete | ahgInformationObjectManagePlugin | SKIP | destructive/POST |
 | ☑ | `/informationobject/treeview` | treeview | ahgInformationObjectManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☑ | `/informationobject/treeviewFull` | treeviewFull | ahgInformationObjectManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
@@ -311,9 +311,9 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 
 | ✔ | Link / URL | Action | Plugin | Result | Notes |
 |---|---|---|---|---|---|
-| ☐ | `/rightsholder/:slug` | view | ahgRightsHolderManagePlugin | N/A | HTTP 404 |
+| ☐ | `/rightsholder/:slug` | view | ahgRightsHolderManagePlugin | SKIP | no records / not installed |
 | ☐ | `/rightsholder/:slug/delete` | delete | ahgRightsHolderManagePlugin | SKIP | destructive/POST |
-| ☐ | `/rightsholder/:slug/edit` | edit | ahgRightsHolderManagePlugin | N/A | HTTP 404 |
+| ☐ | `/rightsholder/:slug/edit` | edit | ahgRightsHolderManagePlugin | SKIP | no records / not installed |
 | ☑ | `/rightsholder/add` | edit | ahgRightsHolderManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☑ | `/rightsholder/browse` | browse | ahgRightsHolderManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
 
@@ -337,7 +337,7 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 
 | ✔ | Link / URL | Action | Plugin | Result | Notes |
 |---|---|---|---|---|---|
-| ☐ | `/requesttopublish/:slug` | edit | ahgRequestToPublishPlugin | N/A | HTTP 404 |
+| ☐ | `/requesttopublish/:slug` | edit | ahgRequestToPublishPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/requesttopublish/delete/:slug` | delete | ahgRequestToPublishPlugin | SKIP | destructive/POST |
 | ☐ | `/requestToPublish/submit/:slug` | submit | ahgRequestToPublishPlugin | SKIP | destructive/POST |
 | ☑ | `/requesttopublish/browse` | browse | ahgRequestToPublishPlugin | PASS | HTTP 200 (pw 2026-06-27) |
@@ -369,10 +369,10 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☐ | `/manifest-collection/:id/delete` | delete | ahgIiifPlugin | SKIP | destructive/POST |
 | ☐ | `/manifest-collection/:id/items/add` | addItems | ahgIiifPlugin | SKIP | destructive/POST |
 | ☐ | `/manifest-collection/item/:item_id/remove` | removeItem | ahgIiifPlugin | SKIP | destructive/POST |
-| ☐ | `/manifest-collection/:slug/manifest.json` | manifest | ahgIiifPlugin | N/A | HTTP 404 |
+| ☐ | `/manifest-collection/:slug/manifest.json` | manifest | ahgIiifPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/api/research/collections/:id` | collection | ahgResearchPlugin | N/A | HTTP 401 |
 | ☐ | `/api/research/collections` | collections | ahgResearchPlugin | N/A | HTTP 401 (pw 2026-06-27) |
-| ☐ | `/research/collection/:id` | viewCollection | ahgResearchPlugin | N/A | HTTP 404 |
+| ☐ | `/research/collection/:id` | viewCollection | ahgResearchPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/research/collections` | collections | ahgResearchPlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☑ | `/research/ajax/add-to-collection` | addToCollection | ahgResearchPlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☑ | `/research/ajax/create-collection` | createCollectionAjax | ahgResearchPlugin | PASS | HTTP 200 (pw 2026-06-27) |
@@ -390,7 +390,7 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/researcher/submission/:id` | viewSubmission | ahgResearcherPlugin | PASS | HTTP 200 |
 | ☑ | `/researcher/submission/:id/edit` | editSubmission | ahgResearcherPlugin | PASS | HTTP 200 |
 | ☐ | `/researcher/submission/:id/item/add` | addItem | ahgResearcherPlugin | SKIP | destructive/POST |
-| ☐ | `/researcher/submission/:id/item/:itemId` | editItem | ahgResearcherPlugin | N/A | HTTP 404 |
+| ☐ | `/researcher/submission/:id/item/:itemId` | editItem | ahgResearcherPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/researcher/submission/:id/item/:itemId/delete` | deleteItem | ahgResearcherPlugin | SKIP | destructive/POST |
 | ☐ | `/researcher/submission/:id/submit` | submit | ahgResearcherPlugin | SKIP | destructive/POST |
 | ☑ | `/researcher/submission/:id/resubmit` | resubmit | ahgResearcherPlugin | PASS | HTTP 302 |
@@ -407,7 +407,7 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/research/datasets/:id` | show | ahgRdmPlugin | PASS | HTTP 200 |
 | ☑ | `/research/datasets/:id/deposit` | deposit | ahgRdmPlugin | PASS | HTTP 302 |
 | ☑ | `/research/datasets/:id/scan` | scan | ahgRdmPlugin | PASS | HTTP 302 |
-| ☐ | `/research/datasets/:id/file/:fid` | fileDownload | ahgRdmPlugin | N/A | HTTP 404 |
+| ☐ | `/research/datasets/:id/file/:fid` | fileDownload | ahgRdmPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/research/datasets/:id/findings/:fid/resolve` | resolveFinding | ahgRdmPlugin | PASS | HTTP 302 |
 | ☑ | `/research/datasets/:id/disposition` | disposition | ahgRdmPlugin | PASS | HTTP 302 |
 | ☑ | `/research/datasets/:id/dmp` | linkDmp | ahgRdmPlugin | PASS | HTTP 302 |
@@ -415,8 +415,8 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/research/datasets/:id/landing` | landing | ahgRdmPlugin | PASS | HTTP 200 |
 | ☑ | `/admin/naz/researchers` | researchers | ahgNAZPlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☑ | `/admin/naz/researcher/create` | researcherCreate | ahgNAZPlugin | PASS | HTTP 200 (pw 2026-06-27) |
-| ☐ | `/admin/naz/researcher/:id/edit` | researcherEdit | ahgNAZPlugin | N/A | HTTP 404 |
-| ☐ | `/admin/naz/researcher/:id` | researcherView | ahgNAZPlugin | N/A | HTTP 404 |
+| ☐ | `/admin/naz/researcher/:id/edit` | researcherEdit | ahgNAZPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
+| ☐ | `/admin/naz/researcher/:id` | researcherView | ahgNAZPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/naz/researchers` | researchers | ahgNAZPlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☐ | `/api/research/stats` | stats | ahgResearchPlugin | N/A | HTTP 401 (pw 2026-06-27) |
 | ☐ | `/api/research/annotations` | annotations | ahgResearchPlugin | N/A | HTTP 401 (pw 2026-06-27) |
@@ -580,9 +580,9 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 
 | ✔ | Link / URL | Action | Plugin | Result | Notes |
 |---|---|---|---|---|---|
-| ☐ | `/user/:slug` | view | ahgUserManagePlugin | N/A | HTTP 404 |
+| ☑ | `/user/:slug` | view | ahgUserManagePlugin | PASS | HTTP 200 [/user/nt96-sgz5-n7wx] |
 | ☐ | `/user/:slug/delete` | delete | ahgUserManagePlugin | SKIP | destructive/POST |
-| ☐ | `/user/:slug/edit` | edit | ahgUserManagePlugin | N/A | HTTP 404 |
+| ☑ | `/user/:slug/edit` | edit | ahgUserManagePlugin | PASS | HTTP 200 [/user/nt96-sgz5-n7wx/edit] |
 | ☑ | `/user/add` | edit | ahgUserManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/user/list` | browse | ahgUserManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/user` | browse | ahgUserManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
@@ -592,23 +592,23 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☐ | `/user/clipboard` | clipboard | ahgUserManagePlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☑ | `/user/passwordReset` | passwordReset | ahgUserManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☐ | `/sharepoint/user-mappings` | userMappings | ahgSharePointPlugin | N/A | HTTP 404 (pw 2026-06-27) |
-| ☐ | `/sharepoint/user-mappings/:id` | userMappingEdit | ahgSharePointPlugin | N/A | HTTP 404 |
+| ☐ | `/sharepoint/user-mappings/:id` | userMappingEdit | ahgSharePointPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/admin/tenants/assign-user` | assignTenantUser | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/admin/tenants/remove-user` | removeTenantUser | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/admin/tenants/update-user-role` | updateTenantUserRole | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
-| ☐ | `/admin/tenants/:id/super-users` | superUsers | ahgMultiTenantPlugin | N/A | HTTP 404 |
+| ☐ | `/admin/tenants/:id/super-users` | superUsers | ahgMultiTenantPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/admin/tenants/assign-super-user` | assignSuperUser | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/admin/tenants/remove-super-user` | removeSuperUser | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
-| ☐ | `/tenant/:id/users` | index | ahgMultiTenantPlugin | N/A | HTTP 404 |
+| ☐ | `/tenant/:id/users` | index | ahgMultiTenantPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/tenant/users/assign` | assign | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/tenant/users/remove` | remove | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
-| ☐ | `/security/clearance/user/:slug` | user | ahgSecurityClearancePlugin | N/A | HTTP 404 |
+| ☐ | `/security/clearance/user/:slug` | user | ahgSecurityClearancePlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/registry/admin/institutions/:id/users` | adminInstitutionUsers | ahgRegistryPlugin | PASS | HTTP 200 |
 | ☑ | `/registry/admin/users` | adminUsers | ahgRegistryPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/registry/admin/users/manage` | adminUserManage | ahgRegistryPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☐ | `/registry/admin/users/:id/edit` | adminUserEdit | ahgRegistryPlugin | N/A | HTTP 404 |
 | ☐ | `/registry/admin/users/:id/reset-password` | adminUserResetPassword | ahgRegistryPlugin | N/A | HTTP 404 |
-| ☐ | `/audit/user/:id` | user | ahgResearchPlugin | N/A | HTTP 404 |
+| ☐ | `/audit/user/:id` | user | ahgResearchPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 
 
 ## Groups  ·  `groups`
@@ -641,7 +641,7 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ✔ | Link / URL | Action | Plugin | Result | Notes |
 |---|---|---|---|---|---|
 | ☐ | `/staticpage/:id/delete` | delete | ahgStaticPagePlugin | SKIP | destructive/POST |
-| ☐ | `/staticpage/:id/edit` | edit | ahgStaticPagePlugin | N/A | HTTP 404 |
+| ☑ | `/staticpage/:id/edit` | edit | ahgStaticPagePlugin | PASS | HTTP 200 [/staticpage/7/edit] |
 | ☑ | `/staticpage/home` | edit | ahgStaticPagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/staticpage/add` | edit | ahgStaticPagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/staticpage/list` | list | ahgStaticPagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
@@ -789,8 +789,8 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 
 | ✔ | Link / URL | Action | Plugin | Result | Notes |
 |---|---|---|---|---|---|
-| ☐ | `/condition/check/:id/export` | exportReport | ahgConditionPlugin | N/A | HTTP 404 |
-| ☐ | `/condition/template/:id/export` | template | ahgConditionPlugin | N/A | HTTP 404 |
+| ☐ | `/condition/check/:id/export` | exportReport | ahgConditionPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
+| ☐ | `/condition/template/:id/export` | template | ahgConditionPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/jobs/export` | export | ahgJobsManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/museum/provenance/export` | provenanceExport | ahgMuseumPlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☑ | `/admin/forms/template/:id/export` | templateExport | ahgFormsPlugin | PASS | HTTP 200 |
@@ -884,9 +884,9 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 
 | ✔ | Link / URL | Action | Plugin | Result | Notes |
 |---|---|---|---|---|---|
-| ☐ | `/user/:slug` | view | ahgUserManagePlugin | N/A | HTTP 404 |
+| ☑ | `/user/:slug` | view | ahgUserManagePlugin | PASS | HTTP 200 [/user/nt96-sgz5-n7wx] |
 | ☐ | `/user/:slug/delete` | delete | ahgUserManagePlugin | SKIP | destructive/POST |
-| ☐ | `/user/:slug/edit` | edit | ahgUserManagePlugin | N/A | HTTP 404 |
+| ☑ | `/user/:slug/edit` | edit | ahgUserManagePlugin | PASS | HTTP 200 [/user/nt96-sgz5-n7wx/edit] |
 | ☑ | `/user/add` | edit | ahgUserManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/user/list` | browse | ahgUserManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/user` | browse | ahgUserManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
@@ -898,25 +898,25 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/glam/profiles` | profiles | ahgDisplayPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/glam/assignProfile` | assignProfile | ahgDisplayPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☐ | `/sharepoint/user-mappings` | userMappings | ahgSharePointPlugin | N/A | HTTP 404 (pw 2026-06-27) |
-| ☐ | `/sharepoint/user-mappings/:id` | userMappingEdit | ahgSharePointPlugin | N/A | HTTP 404 |
+| ☐ | `/sharepoint/user-mappings/:id` | userMappingEdit | ahgSharePointPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/marketplace/sell/profile` | sellerProfile | ahgMarketplacePlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☐ | `/admin/tenants/assign-user` | assignTenantUser | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/admin/tenants/remove-user` | removeTenantUser | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/admin/tenants/update-user-role` | updateTenantUserRole | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
-| ☐ | `/admin/tenants/:id/super-users` | superUsers | ahgMultiTenantPlugin | N/A | HTTP 404 |
+| ☐ | `/admin/tenants/:id/super-users` | superUsers | ahgMultiTenantPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/admin/tenants/assign-super-user` | assignSuperUser | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/admin/tenants/remove-super-user` | removeSuperUser | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
-| ☐ | `/tenant/:id/users` | index | ahgMultiTenantPlugin | N/A | HTTP 404 |
+| ☐ | `/tenant/:id/users` | index | ahgMultiTenantPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/tenant/users/assign` | assign | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/tenant/users/remove` | remove | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
-| ☐ | `/security/clearance/user/:slug` | user | ahgSecurityClearancePlugin | N/A | HTTP 404 |
+| ☐ | `/security/clearance/user/:slug` | user | ahgSecurityClearancePlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/registry/admin/institutions/:id/users` | adminInstitutionUsers | ahgRegistryPlugin | PASS | HTTP 200 |
 | ☑ | `/registry/admin/users` | adminUsers | ahgRegistryPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/registry/admin/users/manage` | adminUserManage | ahgRegistryPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☐ | `/registry/admin/users/:id/edit` | adminUserEdit | ahgRegistryPlugin | N/A | HTTP 404 |
 | ☐ | `/registry/admin/users/:id/reset-password` | adminUserResetPassword | ahgRegistryPlugin | N/A | HTTP 404 |
 | ☐ | `/api/research/profile` | profile | ahgResearchPlugin | N/A | HTTP 401 (pw 2026-06-27) |
-| ☐ | `/audit/user/:id` | user | ahgResearchPlugin | N/A | HTTP 404 |
+| ☐ | `/audit/user/:id` | user | ahgResearchPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/research/orcid/pull-profile` | orcidPullProfile | ahgResearchPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☑ | `/research/profile/api-keys` | apiKeys | ahgResearchPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/research/profile` | profile | ahgResearchPlugin | PASS | HTTP 302 (pw 2026-06-27) |
@@ -926,9 +926,9 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 
 | ✔ | Link / URL | Action | Plugin | Result | Notes |
 |---|---|---|---|---|---|
-| ☐ | `/user/:slug` | view | ahgUserManagePlugin | N/A | HTTP 404 |
+| ☑ | `/user/:slug` | view | ahgUserManagePlugin | PASS | HTTP 200 [/user/nt96-sgz5-n7wx] |
 | ☐ | `/user/:slug/delete` | delete | ahgUserManagePlugin | SKIP | destructive/POST |
-| ☐ | `/user/:slug/edit` | edit | ahgUserManagePlugin | N/A | HTTP 404 |
+| ☑ | `/user/:slug/edit` | edit | ahgUserManagePlugin | PASS | HTTP 200 [/user/nt96-sgz5-n7wx/edit] |
 | ☑ | `/user/add` | edit | ahgUserManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/user/list` | browse | ahgUserManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/user` | browse | ahgUserManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
@@ -940,16 +940,16 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/object/autocomplete` | objectAutocomplete | ahgConditionPlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/informationobject/browse` | browse | ahgDisplayPlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☐ | `/sharepoint/user-mappings` | userMappings | ahgSharePointPlugin | N/A | HTTP 404 (pw 2026-06-27) |
-| ☐ | `/sharepoint/user-mappings/:id` | userMappingEdit | ahgSharePointPlugin | N/A | HTTP 404 |
+| ☐ | `/sharepoint/user-mappings/:id` | userMappingEdit | ahgSharePointPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/api/spectrum/objects/:object_id/events` | spectrumObjectEvents | ahgSpectrumPlugin | N/A | HTTP 404 |
 | ☑ | `/spectrumReports/objectEntry` | objectEntry | ahgSpectrumPlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☐ | `/admin/tenants/assign-user` | assignTenantUser | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/admin/tenants/remove-user` | removeTenantUser | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/admin/tenants/update-user-role` | updateTenantUserRole | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
-| ☐ | `/admin/tenants/:id/super-users` | superUsers | ahgMultiTenantPlugin | N/A | HTTP 404 |
+| ☐ | `/admin/tenants/:id/super-users` | superUsers | ahgMultiTenantPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/admin/tenants/assign-super-user` | assignSuperUser | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/admin/tenants/remove-super-user` | removeSuperUser | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
-| ☐ | `/tenant/:id/users` | index | ahgMultiTenantPlugin | N/A | HTTP 404 |
+| ☐ | `/tenant/:id/users` | index | ahgMultiTenantPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/tenant/users/assign` | assign | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/tenant/users/remove` | remove | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☑ | `/ai-condition/api/object-search` | apiObjectSearch | ahgAiConditionPlugin | PASS | HTTP 200 (pw 2026-06-27) |
@@ -961,10 +961,10 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/workflow/publish-execute/:object_id` | publishExecute | ahgWorkflowPlugin | PASS | HTTP 302 |
 | ☑ | `/iiif/annotations/object/:id` | annotationsList | ahgIiifPlugin | PASS | HTTP 200 |
 | ☑ | `/admin/iiif-validation/run/:object_id` | validationRun | ahgIiifPlugin | PASS | HTTP 200 (fixed) |
-| ☐ | `/iiif/ocr/object/:id` | ocrExport | ahgIiifPlugin | N/A | HTTP 404 |
+| ☐ | `/iiif/ocr/object/:id` | ocrExport | ahgIiifPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/threeDReports/digitalObjects` | digitalObjects | ahgIiifPlugin | PASS | HTTP 403 (pw 2026-06-27) |
-| ☐ | `/exhibition/:id/objects` | objects | ahgExhibitionPlugin | N/A | HTTP 404 |
-| ☐ | `/exhibition/:id/object-list` | objectList | ahgExhibitionPlugin | N/A | HTTP 404 |
+| ☑ | `/exhibition/:id/objects` | objects | ahgExhibitionPlugin | PASS | HTTP 200 [/exhibition/1/objects] |
+| ☑ | `/exhibition/:id/object-list` | objectList | ahgExhibitionPlugin | PASS | HTTP 200 [/exhibition/1/object-list] |
 | ☑ | `/api/3d/models/:object_id` | apiModels | ahg3DModelPlugin | PASS | HTTP 200 |
 
 
@@ -972,9 +972,9 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 
 | ✔ | Link / URL | Action | Plugin | Result | Notes |
 |---|---|---|---|---|---|
-| ☐ | `/user/:slug` | view | ahgUserManagePlugin | N/A | HTTP 404 |
+| ☑ | `/user/:slug` | view | ahgUserManagePlugin | PASS | HTTP 200 [/user/nt96-sgz5-n7wx] |
 | ☐ | `/user/:slug/delete` | delete | ahgUserManagePlugin | SKIP | destructive/POST |
-| ☐ | `/user/:slug/edit` | edit | ahgUserManagePlugin | N/A | HTTP 404 |
+| ☑ | `/user/:slug/edit` | edit | ahgUserManagePlugin | PASS | HTTP 200 [/user/nt96-sgz5-n7wx/edit] |
 | ☑ | `/user/add` | edit | ahgUserManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/user/list` | browse | ahgUserManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/user` | browse | ahgUserManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
@@ -991,23 +991,23 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/admin/authority/:actorId/contact` | contact | ahgAuthorityPlugin | PASS | HTTP 200 |
 | ☑ | `/api/authority/eac-cpf/:actorId` | apiEacExport | ahgAuthorityPlugin | PASS | HTTP 200 |
 | ☐ | `/sharepoint/user-mappings` | userMappings | ahgSharePointPlugin | N/A | HTTP 404 (pw 2026-06-27) |
-| ☐ | `/sharepoint/user-mappings/:id` | userMappingEdit | ahgSharePointPlugin | N/A | HTTP 404 |
+| ☐ | `/sharepoint/user-mappings/:id` | userMappingEdit | ahgSharePointPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/admin/tenants/assign-user` | assignTenantUser | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/admin/tenants/remove-user` | removeTenantUser | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/admin/tenants/update-user-role` | updateTenantUserRole | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
-| ☐ | `/admin/tenants/:id/super-users` | superUsers | ahgMultiTenantPlugin | N/A | HTTP 404 |
+| ☐ | `/admin/tenants/:id/super-users` | superUsers | ahgMultiTenantPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/admin/tenants/assign-super-user` | assignSuperUser | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/admin/tenants/remove-super-user` | removeSuperUser | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
-| ☐ | `/tenant/:id/users` | index | ahgMultiTenantPlugin | N/A | HTTP 404 |
+| ☐ | `/tenant/:id/users` | index | ahgMultiTenantPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/tenant/users/assign` | assign | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/tenant/users/remove` | remove | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
-| ☐ | `/actor/:slug` | index | ahgActorManagePlugin | N/A | HTTP 404 |
+| ☑ | `/actor/:slug` | index | ahgActorManagePlugin | PASS | HTTP 200 [/actor/historical] |
 | ☐ | `/actor/:slug/delete` | delete | ahgActorManagePlugin | SKIP | destructive/POST |
-| ☐ | `/actor/:slug/edit` | edit | ahgActorManagePlugin | N/A | HTTP 404 |
+| ☑ | `/actor/:slug/edit` | edit | ahgActorManagePlugin | PASS | HTTP 200 [/actor/historical/edit] |
 | ☑ | `/actor/add` | edit | ahgActorManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/actor/browse` | browse | ahgActorManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☑ | `/actor/autocomplete` | autocomplete | ahgActorManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
-| ☐ | `/security/clearance/user/:slug` | user | ahgSecurityClearancePlugin | N/A | HTTP 404 |
+| ☐ | `/security/clearance/user/:slug` | user | ahgSecurityClearancePlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/registry/admin/institutions/:id/users` | adminInstitutionUsers | ahgRegistryPlugin | PASS | HTTP 200 |
 | ☑ | `/registry/admin/users` | adminUsers | ahgRegistryPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/registry/admin/users/manage` | adminUserManage | ahgRegistryPlugin | PASS | HTTP 302 (pw 2026-06-27) |
@@ -1018,9 +1018,9 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 
 | ✔ | Link / URL | Action | Plugin | Result | Notes |
 |---|---|---|---|---|---|
-| ☐ | `/user/:slug` | view | ahgUserManagePlugin | N/A | HTTP 404 |
+| ☑ | `/user/:slug` | view | ahgUserManagePlugin | PASS | HTTP 200 [/user/nt96-sgz5-n7wx] |
 | ☐ | `/user/:slug/delete` | delete | ahgUserManagePlugin | SKIP | destructive/POST |
-| ☐ | `/user/:slug/edit` | edit | ahgUserManagePlugin | N/A | HTTP 404 |
+| ☑ | `/user/:slug/edit` | edit | ahgUserManagePlugin | PASS | HTTP 200 [/user/nt96-sgz5-n7wx/edit] |
 | ☑ | `/user/add` | edit | ahgUserManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/user/list` | browse | ahgUserManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/user` | browse | ahgUserManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
@@ -1030,19 +1030,19 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☐ | `/user/clipboard` | clipboard | ahgUserManagePlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☑ | `/user/passwordReset` | passwordReset | ahgUserManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☐ | `/sharepoint/user-mappings` | userMappings | ahgSharePointPlugin | N/A | HTTP 404 (pw 2026-06-27) |
-| ☐ | `/sharepoint/user-mappings/:id` | userMappingEdit | ahgSharePointPlugin | N/A | HTTP 404 |
+| ☐ | `/sharepoint/user-mappings/:id` | userMappingEdit | ahgSharePointPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/repository/add` | edit | ahgRepositoryManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/repository/browse` | browse | ahgRepositoryManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☐ | `/admin/tenants/assign-user` | assignTenantUser | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/admin/tenants/remove-user` | removeTenantUser | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/admin/tenants/update-user-role` | updateTenantUserRole | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
-| ☐ | `/admin/tenants/:id/super-users` | superUsers | ahgMultiTenantPlugin | N/A | HTTP 404 |
+| ☐ | `/admin/tenants/:id/super-users` | superUsers | ahgMultiTenantPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/admin/tenants/assign-super-user` | assignSuperUser | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/admin/tenants/remove-super-user` | removeSuperUser | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
-| ☐ | `/tenant/:id/users` | index | ahgMultiTenantPlugin | N/A | HTTP 404 |
+| ☐ | `/tenant/:id/users` | index | ahgMultiTenantPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/tenant/users/assign` | assign | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/tenant/users/remove` | remove | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
-| ☐ | `/security/clearance/user/:slug` | user | ahgSecurityClearancePlugin | N/A | HTTP 404 |
+| ☐ | `/security/clearance/user/:slug` | user | ahgSecurityClearancePlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/statistics/repository/:id` | repository | ahgStatisticsPlugin | PASS | HTTP 200 |
 | ☑ | `/registry/admin/institutions/:id/users` | adminInstitutionUsers | ahgRegistryPlugin | PASS | HTTP 200 |
 | ☑ | `/registry/admin/users` | adminUsers | ahgRegistryPlugin | PASS | HTTP 302 (pw 2026-06-27) |
@@ -1051,16 +1051,16 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☐ | `/registry/admin/users/:id/reset-password` | adminUserResetPassword | ahgRegistryPlugin | N/A | HTTP 404 |
 | ☑ | `/export/repository` | repository | ahgExportPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/informationobject/repositoryAutocomplete` | repositoryAutocomplete | ahgInformationObjectManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
-| ☐ | `/audit/user/:id` | user | ahgResearchPlugin | N/A | HTTP 404 |
+| ☐ | `/audit/user/:id` | user | ahgResearchPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 
 
 ## Taxonomy permissions  ·  `userTermAcl`
 
 | ✔ | Link / URL | Action | Plugin | Result | Notes |
 |---|---|---|---|---|---|
-| ☐ | `/user/:slug` | view | ahgUserManagePlugin | N/A | HTTP 404 |
+| ☑ | `/user/:slug` | view | ahgUserManagePlugin | PASS | HTTP 200 [/user/nt96-sgz5-n7wx] |
 | ☐ | `/user/:slug/delete` | delete | ahgUserManagePlugin | SKIP | destructive/POST |
-| ☐ | `/user/:slug/edit` | edit | ahgUserManagePlugin | N/A | HTTP 404 |
+| ☑ | `/user/:slug/edit` | edit | ahgUserManagePlugin | PASS | HTTP 200 [/user/nt96-sgz5-n7wx/edit] |
 | ☑ | `/user/add` | edit | ahgUserManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/user/list` | browse | ahgUserManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/user` | browse | ahgUserManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
@@ -1069,29 +1069,29 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/user/passwordEdit` | passwordEdit | ahgUserManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☐ | `/user/clipboard` | clipboard | ahgUserManagePlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☑ | `/user/passwordReset` | passwordReset | ahgUserManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
-| ☐ | `/term/:slug/edit` | edit | ahgTermTaxonomyPlugin | N/A | HTTP 404 |
+| ☐ | `/term/:slug/edit` | edit | ahgTermTaxonomyPlugin | SKIP | no records / not installed |
 | ☐ | `/term/:slug/delete` | delete | ahgTermTaxonomyPlugin | SKIP | destructive/POST |
-| ☐ | `/term/:slug` | index | ahgTermTaxonomyPlugin | N/A | HTTP 404 |
+| ☐ | `/term/:slug` | index | ahgTermTaxonomyPlugin | SKIP | no records / not installed |
 | ☐ | `/sharepoint/user-mappings` | userMappings | ahgSharePointPlugin | N/A | HTTP 404 (pw 2026-06-27) |
-| ☐ | `/sharepoint/user-mappings/:id` | userMappingEdit | ahgSharePointPlugin | N/A | HTTP 404 |
+| ☐ | `/sharepoint/user-mappings/:id` | userMappingEdit | ahgSharePointPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/admin/tenants/assign-user` | assignTenantUser | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/admin/tenants/remove-user` | removeTenantUser | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/admin/tenants/update-user-role` | updateTenantUserRole | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
-| ☐ | `/admin/tenants/:id/super-users` | superUsers | ahgMultiTenantPlugin | N/A | HTTP 404 |
+| ☐ | `/admin/tenants/:id/super-users` | superUsers | ahgMultiTenantPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/admin/tenants/assign-super-user` | assignSuperUser | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/admin/tenants/remove-super-user` | removeSuperUser | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
-| ☐ | `/tenant/:id/users` | index | ahgMultiTenantPlugin | N/A | HTTP 404 |
+| ☐ | `/tenant/:id/users` | index | ahgMultiTenantPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/tenant/users/assign` | assign | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/tenant/users/remove` | remove | ahgMultiTenantPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☑ | `/api/v2/taxonomies/:id/terms` | taxonomyTerms | ahgAPIPlugin | PASS | HTTP 403 |
-| ☐ | `/security/clearance/user/:slug` | user | ahgSecurityClearancePlugin | N/A | HTTP 404 |
+| ☐ | `/security/clearance/user/:slug` | user | ahgSecurityClearancePlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/registry/admin/institutions/:id/users` | adminInstitutionUsers | ahgRegistryPlugin | PASS | HTTP 200 |
 | ☑ | `/registry/admin/users` | adminUsers | ahgRegistryPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/registry/admin/users/manage` | adminUserManage | ahgRegistryPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☐ | `/registry/admin/users/:id/edit` | adminUserEdit | ahgRegistryPlugin | N/A | HTTP 404 |
 | ☐ | `/registry/admin/users/:id/reset-password` | adminUserResetPassword | ahgRegistryPlugin | N/A | HTTP 404 |
 | ☑ | `/informationobject/termAutocomplete` | termAutocomplete | ahgInformationObjectManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
-| ☐ | `/audit/user/:id` | user | ahgResearchPlugin | N/A | HTTP 404 |
+| ☐ | `/audit/user/:id` | user | ahgResearchPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 
 
 # MENU: Admin — Groups
@@ -1146,13 +1146,13 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/workflow/publish-execute/:object_id` | publishExecute | ahgWorkflowPlugin | PASS | HTTP 302 |
 | ☑ | `/iiif/annotations/object/:id` | annotationsList | ahgIiifPlugin | PASS | HTTP 200 |
 | ☑ | `/admin/iiif-validation/run/:object_id` | validationRun | ahgIiifPlugin | PASS | HTTP 200 (fixed) |
-| ☐ | `/iiif/ocr/object/:id` | ocrExport | ahgIiifPlugin | N/A | HTTP 404 |
+| ☐ | `/iiif/ocr/object/:id` | ocrExport | ahgIiifPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/threeDReports/digitalObjects` | digitalObjects | ahgIiifPlugin | PASS | HTTP 403 (pw 2026-06-27) |
-| ☐ | `/exhibition/:id/objects` | objects | ahgExhibitionPlugin | N/A | HTTP 404 |
-| ☐ | `/exhibition/:id/object-list` | objectList | ahgExhibitionPlugin | N/A | HTTP 404 |
+| ☑ | `/exhibition/:id/objects` | objects | ahgExhibitionPlugin | PASS | HTTP 200 [/exhibition/1/objects] |
+| ☑ | `/exhibition/:id/object-list` | objectList | ahgExhibitionPlugin | PASS | HTTP 200 [/exhibition/1/object-list] |
 | ☑ | `/api/3d/models/:object_id` | apiModels | ahg3DModelPlugin | PASS | HTTP 200 |
 | ☑ | `/customFields/get/:entityType/:objectId` | getValues | ahgCustomFieldsPlugin | PASS | HTTP 200 |
-| ☐ | `/admin/preservation/object/:id` | object | ahgPreservationPlugin | N/A | HTTP 404 |
+| ☐ | `/admin/preservation/object/:id` | object | ahgPreservationPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/api/preservation/package/add-object` | apiPackageAddObject | ahgPreservationPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/api/preservation/package/remove-object` | apiPackageRemoveObject | ahgPreservationPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/tiff-pdf-merge/:informationObject` | index | ahgPreservationPlugin | PASS | HTTP 200 |
@@ -1186,9 +1186,9 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/admin/authority/:actorId/functions` | functions | ahgAuthorityPlugin | PASS | HTTP 200 |
 | ☑ | `/admin/authority/:actorId/contact` | contact | ahgAuthorityPlugin | PASS | HTTP 200 |
 | ☑ | `/api/authority/eac-cpf/:actorId` | apiEacExport | ahgAuthorityPlugin | PASS | HTTP 200 |
-| ☐ | `/actor/:slug` | index | ahgActorManagePlugin | N/A | HTTP 404 |
+| ☑ | `/actor/:slug` | index | ahgActorManagePlugin | PASS | HTTP 200 [/actor/historical] |
 | ☐ | `/actor/:slug/delete` | delete | ahgActorManagePlugin | SKIP | destructive/POST |
-| ☐ | `/actor/:slug/edit` | edit | ahgActorManagePlugin | N/A | HTTP 404 |
+| ☑ | `/actor/:slug/edit` | edit | ahgActorManagePlugin | PASS | HTTP 200 [/actor/historical/edit] |
 | ☑ | `/actor/add` | edit | ahgActorManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/actor/browse` | browse | ahgActorManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☑ | `/actor/autocomplete` | autocomplete | ahgActorManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
@@ -1249,9 +1249,9 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 
 | ✔ | Link / URL | Action | Plugin | Result | Notes |
 |---|---|---|---|---|---|
-| ☐ | `/term/:slug/edit` | edit | ahgTermTaxonomyPlugin | N/A | HTTP 404 |
+| ☐ | `/term/:slug/edit` | edit | ahgTermTaxonomyPlugin | SKIP | no records / not installed |
 | ☐ | `/term/:slug/delete` | delete | ahgTermTaxonomyPlugin | SKIP | destructive/POST |
-| ☐ | `/term/:slug` | index | ahgTermTaxonomyPlugin | N/A | HTTP 404 |
+| ☐ | `/term/:slug` | index | ahgTermTaxonomyPlugin | SKIP | no records / not installed |
 | ☑ | `/api/v2/taxonomies/:id/terms` | taxonomyTerms | ahgAPIPlugin | PASS | HTTP 403 |
 | ☑ | `/registry/admin/groups` | adminGroups | ahgRegistryPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/registry/admin/groups/verify` | adminGroupVerify | ahgRegistryPlugin | PASS | HTTP 302 (pw 2026-06-27) |
@@ -1288,10 +1288,10 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/favorites/clear` | clear | ahgFavoritesPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/favorites/bulk` | bulk | ahgFavoritesPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☐ | `/favorites/move` | moveToFolder | ahgFavoritesPlugin | N/A | HTTP 404 (pw 2026-06-27) |
-| ☐ | `/favorites/notes/:id` | updateNotes | ahgFavoritesPlugin | N/A | HTTP 404 |
+| ☐ | `/favorites/notes/:id` | updateNotes | ahgFavoritesPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/favorites/folder/create` | folderCreate | ahgFavoritesPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☑ | `/favorites/folder/:id` | folderView | ahgFavoritesPlugin | PASS | HTTP 302 |
-| ☐ | `/favorites/folder/:id/edit` | folderEdit | ahgFavoritesPlugin | N/A | HTTP 404 |
+| ☐ | `/favorites/folder/:id/edit` | folderEdit | ahgFavoritesPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/favorites/folder/:id/delete` | folderDelete | ahgFavoritesPlugin | SKIP | destructive/POST |
 | ☐ | `/favorites/ajax/toggle` | ajaxToggle | ahgFavoritesPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/favorites/ajax/toggle-custom` | ajaxToggleCustom | ahgFavoritesPlugin | N/A | HTTP 404 (pw 2026-06-27) |
@@ -1300,8 +1300,8 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/favorites/ajax/folders` | ajaxFolders | ahgFavoritesPlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☑ | `/favorites/export/:format` | export | ahgFavoritesPlugin | PASS | HTTP 200 |
 | ☑ | `/favorites/folder/:id/export/:format` | exportFolder | ahgFavoritesPlugin | PASS | HTTP 302 |
-| ☐ | `/favorites/folder/:id/share` | shareFolder | ahgFavoritesPlugin | N/A | HTTP 404 |
-| ☐ | `/favorites/folder/:id/revoke-share` | revokeSharing | ahgFavoritesPlugin | N/A | HTTP 404 |
+| ☐ | `/favorites/folder/:id/share` | shareFolder | ahgFavoritesPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
+| ☐ | `/favorites/folder/:id/revoke-share` | revokeSharing | ahgFavoritesPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/favorites/shared/:token` | viewShared | ahgFavoritesPlugin | N/A | HTTP 404 |
 | ☑ | `/favorites/import` | import | ahgFavoritesPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/favorites/send-to-collection` | sendToCollection | ahgFavoritesPlugin | PASS | HTTP 302 (pw 2026-06-27) |
@@ -1333,11 +1333,11 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/cart/update-item` | updateItem | ahgCartPlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☑ | `/cart/save-selections` | saveSelections | ahgCartPlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☑ | `/cart/payment-return/:order` | paymentReturn | ahgCartPlugin | PASS | HTTP 302 |
-| ☐ | `/cart/payment/:order` | payment | ahgCartPlugin | N/A | HTTP 404 |
-| ☐ | `/cart/payment/success/:order` | paymentSuccess | ahgCartPlugin | N/A | HTTP 404 |
+| ☐ | `/cart/payment/:order` | payment | ahgCartPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
+| ☐ | `/cart/payment/success/:order` | paymentSuccess | ahgCartPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/cart/payment/cancel/:order` | paymentCancel | ahgCartPlugin | SKIP | destructive/POST |
 | ☑ | `/cart/payment/notify` | paymentNotify | ahgCartPlugin | PASS | HTTP 200 (pw 2026-06-27) |
-| ☐ | `/cart/order/:order` | orderConfirmation | ahgCartPlugin | N/A | HTTP 404 |
+| ☐ | `/cart/order/:order` | orderConfirmation | ahgCartPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/cart/orders` | orders | ahgCartPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☐ | `/cart/download/:token` | download | ahgCartPlugin | N/A | HTTP 404 |
 
@@ -1362,13 +1362,13 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/workflow/publish-execute/:object_id` | publishExecute | ahgWorkflowPlugin | PASS | HTTP 302 |
 | ☑ | `/iiif/annotations/object/:id` | annotationsList | ahgIiifPlugin | PASS | HTTP 200 |
 | ☑ | `/admin/iiif-validation/run/:object_id` | validationRun | ahgIiifPlugin | PASS | HTTP 200 (fixed) |
-| ☐ | `/iiif/ocr/object/:id` | ocrExport | ahgIiifPlugin | N/A | HTTP 404 |
+| ☐ | `/iiif/ocr/object/:id` | ocrExport | ahgIiifPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/threeDReports/digitalObjects` | digitalObjects | ahgIiifPlugin | PASS | HTTP 403 (pw 2026-06-27) |
-| ☐ | `/exhibition/:id/objects` | objects | ahgExhibitionPlugin | N/A | HTTP 404 |
-| ☐ | `/exhibition/:id/object-list` | objectList | ahgExhibitionPlugin | N/A | HTTP 404 |
+| ☑ | `/exhibition/:id/objects` | objects | ahgExhibitionPlugin | PASS | HTTP 200 [/exhibition/1/objects] |
+| ☑ | `/exhibition/:id/object-list` | objectList | ahgExhibitionPlugin | PASS | HTTP 200 [/exhibition/1/object-list] |
 | ☑ | `/api/3d/models/:object_id` | apiModels | ahg3DModelPlugin | PASS | HTTP 200 |
 | ☑ | `/customFields/get/:entityType/:objectId` | getValues | ahgCustomFieldsPlugin | PASS | HTTP 200 |
-| ☐ | `/admin/preservation/object/:id` | object | ahgPreservationPlugin | N/A | HTTP 404 |
+| ☐ | `/admin/preservation/object/:id` | object | ahgPreservationPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/api/preservation/package/add-object` | apiPackageAddObject | ahgPreservationPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/api/preservation/package/remove-object` | apiPackageRemoveObject | ahgPreservationPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/tiff-pdf-merge/:informationObject` | index | ahgPreservationPlugin | PASS | HTTP 200 |
@@ -1379,13 +1379,13 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/security/request-object/create` | createObjectRequest | ahgAccessRequestPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/heritage/object/:slug` | viewByObject | ahgHeritageAccountingPlugin | PASS | HTTP 200 |
 | ☑ | `/heritage/object/:slug/edit` | editByObject | ahgHeritageAccountingPlugin | PASS | HTTP 302 |
-| ☐ | `/loan/:id/add-object` | addObject | ahgLoanPlugin | N/A | HTTP 404 |
-| ☐ | `/loan/:id/remove-object` | removeObject | ahgLoanPlugin | N/A | HTTP 404 |
+| ☑ | `/loan/:id/add-object` | addObject | ahgLoanPlugin | PASS | HTTP 302 [/loan/1/add-object] |
+| ☑ | `/loan/:id/remove-object` | removeObject | ahgLoanPlugin | PASS | HTTP 302 [/loan/1/remove-object] |
 | ☑ | `/loan/search-objects` | searchObjects | ahgLoanPlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☐ | `/informationobject/:slug/delete` | delete | ahgInformationObjectManagePlugin | SKIP | destructive/POST |
 | ☑ | `/informationobject/:slug/edit` | edit | ahgInformationObjectManagePlugin | PASS | HTTP 200 |
 | ☑ | `/digitalobject/upload` | doUpload | ahgInformationObjectManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
-| ☐ | `/digitalobject/:id/edit` | doEdit | ahgInformationObjectManagePlugin | N/A | HTTP 404 |
+| ☑ | `/digitalobject/:id/edit` | doEdit | ahgInformationObjectManagePlugin | PASS | HTTP 200 [/digitalobject/702/edit] |
 | ☐ | `/digitalobject/:id/delete` | doDelete | ahgInformationObjectManagePlugin | SKIP | destructive/POST |
 | ☑ | `/informationobject/treeview` | treeview | ahgInformationObjectManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☑ | `/informationobject/treeviewFull` | treeviewFull | ahgInformationObjectManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
@@ -1402,9 +1402,9 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/admin/authority/:actorId/functions` | functions | ahgAuthorityPlugin | PASS | HTTP 200 |
 | ☑ | `/admin/authority/:actorId/contact` | contact | ahgAuthorityPlugin | PASS | HTTP 200 |
 | ☑ | `/api/authority/eac-cpf/:actorId` | apiEacExport | ahgAuthorityPlugin | PASS | HTTP 200 |
-| ☐ | `/actor/:slug` | index | ahgActorManagePlugin | N/A | HTTP 404 |
+| ☑ | `/actor/:slug` | index | ahgActorManagePlugin | PASS | HTTP 200 [/actor/historical] |
 | ☐ | `/actor/:slug/delete` | delete | ahgActorManagePlugin | SKIP | destructive/POST |
-| ☐ | `/actor/:slug/edit` | edit | ahgActorManagePlugin | N/A | HTTP 404 |
+| ☑ | `/actor/:slug/edit` | edit | ahgActorManagePlugin | PASS | HTTP 200 [/actor/historical/edit] |
 | ☑ | `/actor/add` | edit | ahgActorManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/actor/browse` | browse | ahgActorManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☑ | `/actor/autocomplete` | autocomplete | ahgActorManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
@@ -1428,9 +1428,9 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/admin/authority/functions/browse` | functionBrowse | ahgAuthorityPlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/api/authority/function/save` | apiFunctionSave | ahgAuthorityPlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☐ | `/api/authority/function/:id/delete` | apiFunctionDelete | ahgAuthorityPlugin | SKIP | destructive/POST |
-| ☐ | `/function/:slug` | view | ahgFunctionManagePlugin | N/A | HTTP 404 |
+| ☑ | `/function/:slug` | view | ahgFunctionManagePlugin | PASS | HTTP 200 [/function/test-function] |
 | ☐ | `/function/:slug/delete` | delete | ahgFunctionManagePlugin | SKIP | destructive/POST |
-| ☐ | `/function/:slug/edit` | edit | ahgFunctionManagePlugin | N/A | HTTP 404 |
+| ☑ | `/function/:slug/edit` | edit | ahgFunctionManagePlugin | PASS | HTTP 200 [/function/test-function/edit] |
 | ☑ | `/function/add` | edit | ahgFunctionManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/function/browse` | browse | ahgFunctionManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
 
@@ -1506,13 +1506,13 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/workflow/publish-execute/:object_id` | publishExecute | ahgWorkflowPlugin | PASS | HTTP 302 |
 | ☑ | `/iiif/annotations/object/:id` | annotationsList | ahgIiifPlugin | PASS | HTTP 200 |
 | ☑ | `/admin/iiif-validation/run/:object_id` | validationRun | ahgIiifPlugin | PASS | HTTP 200 (fixed) |
-| ☐ | `/iiif/ocr/object/:id` | ocrExport | ahgIiifPlugin | N/A | HTTP 404 |
+| ☐ | `/iiif/ocr/object/:id` | ocrExport | ahgIiifPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/threeDReports/digitalObjects` | digitalObjects | ahgIiifPlugin | PASS | HTTP 403 (pw 2026-06-27) |
-| ☐ | `/exhibition/:id/objects` | objects | ahgExhibitionPlugin | N/A | HTTP 404 |
-| ☐ | `/exhibition/:id/object-list` | objectList | ahgExhibitionPlugin | N/A | HTTP 404 |
+| ☑ | `/exhibition/:id/objects` | objects | ahgExhibitionPlugin | PASS | HTTP 200 [/exhibition/1/objects] |
+| ☑ | `/exhibition/:id/object-list` | objectList | ahgExhibitionPlugin | PASS | HTTP 200 [/exhibition/1/object-list] |
 | ☑ | `/api/3d/models/:object_id` | apiModels | ahg3DModelPlugin | PASS | HTTP 200 |
 | ☑ | `/customFields/get/:entityType/:objectId` | getValues | ahgCustomFieldsPlugin | PASS | HTTP 200 |
-| ☐ | `/admin/preservation/object/:id` | object | ahgPreservationPlugin | N/A | HTTP 404 |
+| ☐ | `/admin/preservation/object/:id` | object | ahgPreservationPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/api/preservation/package/add-object` | apiPackageAddObject | ahgPreservationPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/api/preservation/package/remove-object` | apiPackageRemoveObject | ahgPreservationPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/tiff-pdf-merge/:informationObject` | index | ahgPreservationPlugin | PASS | HTTP 200 |
@@ -1523,13 +1523,13 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/security/request-object/create` | createObjectRequest | ahgAccessRequestPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/heritage/object/:slug` | viewByObject | ahgHeritageAccountingPlugin | PASS | HTTP 200 |
 | ☑ | `/heritage/object/:slug/edit` | editByObject | ahgHeritageAccountingPlugin | PASS | HTTP 302 |
-| ☐ | `/loan/:id/add-object` | addObject | ahgLoanPlugin | N/A | HTTP 404 |
-| ☐ | `/loan/:id/remove-object` | removeObject | ahgLoanPlugin | N/A | HTTP 404 |
+| ☑ | `/loan/:id/add-object` | addObject | ahgLoanPlugin | PASS | HTTP 302 [/loan/1/add-object] |
+| ☑ | `/loan/:id/remove-object` | removeObject | ahgLoanPlugin | PASS | HTTP 302 [/loan/1/remove-object] |
 | ☑ | `/loan/search-objects` | searchObjects | ahgLoanPlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☐ | `/informationobject/:slug/delete` | delete | ahgInformationObjectManagePlugin | SKIP | destructive/POST |
 | ☑ | `/informationobject/:slug/edit` | edit | ahgInformationObjectManagePlugin | PASS | HTTP 200 |
 | ☑ | `/digitalobject/upload` | doUpload | ahgInformationObjectManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
-| ☐ | `/digitalobject/:id/edit` | doEdit | ahgInformationObjectManagePlugin | N/A | HTTP 404 |
+| ☑ | `/digitalobject/:id/edit` | doEdit | ahgInformationObjectManagePlugin | PASS | HTTP 200 [/digitalobject/702/edit] |
 | ☐ | `/digitalobject/:id/delete` | doDelete | ahgInformationObjectManagePlugin | SKIP | destructive/POST |
 | ☑ | `/informationobject/treeview` | treeview | ahgInformationObjectManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☑ | `/informationobject/treeviewFull` | treeviewFull | ahgInformationObjectManagePlugin | PASS | HTTP 200 (pw 2026-06-27) |
@@ -1555,13 +1555,13 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/workflow/publish-execute/:object_id` | publishExecute | ahgWorkflowPlugin | PASS | HTTP 302 |
 | ☑ | `/iiif/annotations/object/:id` | annotationsList | ahgIiifPlugin | PASS | HTTP 200 |
 | ☑ | `/admin/iiif-validation/run/:object_id` | validationRun | ahgIiifPlugin | PASS | HTTP 200 (fixed) |
-| ☐ | `/iiif/ocr/object/:id` | ocrExport | ahgIiifPlugin | N/A | HTTP 404 |
+| ☐ | `/iiif/ocr/object/:id` | ocrExport | ahgIiifPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/threeDReports/digitalObjects` | digitalObjects | ahgIiifPlugin | PASS | HTTP 403 (pw 2026-06-27) |
-| ☐ | `/exhibition/:id/objects` | objects | ahgExhibitionPlugin | N/A | HTTP 404 |
-| ☐ | `/exhibition/:id/object-list` | objectList | ahgExhibitionPlugin | N/A | HTTP 404 |
+| ☑ | `/exhibition/:id/objects` | objects | ahgExhibitionPlugin | PASS | HTTP 200 [/exhibition/1/objects] |
+| ☑ | `/exhibition/:id/object-list` | objectList | ahgExhibitionPlugin | PASS | HTTP 200 [/exhibition/1/object-list] |
 | ☑ | `/api/3d/models/:object_id` | apiModels | ahg3DModelPlugin | PASS | HTTP 200 |
 | ☑ | `/customFields/get/:entityType/:objectId` | getValues | ahgCustomFieldsPlugin | PASS | HTTP 200 |
-| ☐ | `/admin/preservation/object/:id` | object | ahgPreservationPlugin | N/A | HTTP 404 |
+| ☐ | `/admin/preservation/object/:id` | object | ahgPreservationPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/api/preservation/package/add-object` | apiPackageAddObject | ahgPreservationPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/api/preservation/package/remove-object` | apiPackageRemoveObject | ahgPreservationPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/tiff-pdf-merge/:informationObject` | index | ahgPreservationPlugin | PASS | HTTP 200 |
@@ -1601,13 +1601,13 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/workflow/publish-execute/:object_id` | publishExecute | ahgWorkflowPlugin | PASS | HTTP 302 |
 | ☑ | `/iiif/annotations/object/:id` | annotationsList | ahgIiifPlugin | PASS | HTTP 200 |
 | ☑ | `/admin/iiif-validation/run/:object_id` | validationRun | ahgIiifPlugin | PASS | HTTP 200 (fixed) |
-| ☐ | `/iiif/ocr/object/:id` | ocrExport | ahgIiifPlugin | N/A | HTTP 404 |
+| ☐ | `/iiif/ocr/object/:id` | ocrExport | ahgIiifPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/threeDReports/digitalObjects` | digitalObjects | ahgIiifPlugin | PASS | HTTP 403 (pw 2026-06-27) |
-| ☐ | `/exhibition/:id/objects` | objects | ahgExhibitionPlugin | N/A | HTTP 404 |
-| ☐ | `/exhibition/:id/object-list` | objectList | ahgExhibitionPlugin | N/A | HTTP 404 |
+| ☑ | `/exhibition/:id/objects` | objects | ahgExhibitionPlugin | PASS | HTTP 200 [/exhibition/1/objects] |
+| ☑ | `/exhibition/:id/object-list` | objectList | ahgExhibitionPlugin | PASS | HTTP 200 [/exhibition/1/object-list] |
 | ☑ | `/api/3d/models/:object_id` | apiModels | ahg3DModelPlugin | PASS | HTTP 200 |
 | ☑ | `/customFields/get/:entityType/:objectId` | getValues | ahgCustomFieldsPlugin | PASS | HTTP 200 |
-| ☐ | `/admin/preservation/object/:id` | object | ahgPreservationPlugin | N/A | HTTP 404 |
+| ☐ | `/admin/preservation/object/:id` | object | ahgPreservationPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/api/preservation/package/add-object` | apiPackageAddObject | ahgPreservationPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/api/preservation/package/remove-object` | apiPackageRemoveObject | ahgPreservationPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/tiff-pdf-merge/:informationObject` | index | ahgPreservationPlugin | PASS | HTTP 200 |
@@ -1689,10 +1689,10 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/admin/authority/config` | config | ahgAuthorityPlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/admin/authority/dedup` | index | ahgAuthorityPlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/admin/authority/dedup/scan` | scan | ahgAuthorityPlugin | PASS | HTTP 403 (pw 2026-06-27) |
-| ☐ | `/admin/authority/dedup/compare/:id` | compare | ahgAuthorityPlugin | N/A | HTTP 404 |
+| ☐ | `/admin/authority/dedup/compare/:id` | compare | ahgAuthorityPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/admin/authority/ner-pipeline` | index | ahgAuthorityPlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☐ | `/admin/queue` | queueBrowse | ahgJobsManagePlugin | N/A | HTTP 404 (pw 2026-06-27) |
-| ☐ | `/admin/queue/detail/:id` | queueDetail | ahgJobsManagePlugin | N/A | HTTP 404 |
+| ☐ | `/admin/queue/detail/:id` | queueDetail | ahgJobsManagePlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/admin/queue/batches` | queueBatches | ahgJobsManagePlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/admin/queue/progress` | queueProgress | ahgJobsManagePlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/admin/queue/retry` | queueRetry | ahgJobsManagePlugin | N/A | HTTP 404 (pw 2026-06-27) |
@@ -1729,11 +1729,11 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/cart/clear` | clear | ahgCartPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/mediaSettings/clearQueue` | clearQueue | ahgIiifPlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/security/clearances` | index | ahgSecurityClearancePlugin | PASS | HTTP 302 (pw 2026-06-27) |
-| ☐ | `/security/clearance/:id` | view | ahgSecurityClearancePlugin | N/A | HTTP 404 |
+| ☐ | `/security/clearance/:id` | view | ahgSecurityClearancePlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/security/clearance/grant` | grant | ahgSecurityClearancePlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/security/clearance/:id/revoke` | revoke | ahgSecurityClearancePlugin | PASS | HTTP 302 |
 | ☑ | `/security/clearance/bulk-grant` | bulkGrant | ahgSecurityClearancePlugin | PASS | HTTP 302 (pw 2026-06-27) |
-| ☐ | `/security/clearance/user/:slug` | user | ahgSecurityClearancePlugin | N/A | HTTP 404 |
+| ☐ | `/security/clearance/user/:slug` | user | ahgSecurityClearancePlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/research/orcid/credentials/clear` | orcidClearCredentials | ahgResearchPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☑ | `/research/ajax/clipboard-to-project` | clipboardToProject | ahgResearchPlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☑ | `/research/ajax/manage-clipboard-item` | manageClipboardItem | ahgResearchPlugin | PASS | HTTP 200 (pw 2026-06-27) |
@@ -1764,14 +1764,14 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/ai-condition/api/client-upload-consent` | apiClientUploadConsent | ahgAiConditionPlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☑ | `/researcher/api/upload` | apiUpload | ahgResearcherPlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☐ | `/cart/download/:token` | download | ahgCartPlugin | N/A | HTTP 404 |
-| ☐ | `/media/download/:id` | download | ahgIiifPlugin | N/A | HTTP 404 |
+| ☐ | `/media/download/:id` | download | ahgIiifPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☐ | `/api/v2/upload` | fileUpload | ahgAPIPlugin | N/A | HTTP 404 (pw 2026-06-27) |
 | ☐ | `/api/v2/descriptions/:slug/upload` | descriptionUpload | ahgAPIPlugin | N/A | HTTP 404 |
 | ☑ | `/ahg3DModel/upload` | upload | ahg3DModelPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☑ | `/ingest/:id/upload` | upload | ahgIngestPlugin | PASS | HTTP 200 |
-| ☐ | `/admin/preservation/package/:id/download` | packageDownload | ahgPreservationPlugin | N/A | HTTP 404 |
+| ☐ | `/admin/preservation/package/:id/download` | packageDownload | ahgPreservationPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/tiff-pdf-merge/upload` | upload | ahgPreservationPlugin | PASS | HTTP 200 (pw 2026-06-27) |
-| ☐ | `/tiff-pdf-merge/download/:job_id` | download | ahgPreservationPlugin | N/A | HTTP 404 |
+| ☐ | `/tiff-pdf-merge/download/:job_id` | download | ahgPreservationPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/statistics/downloads` | downloads | ahgStatisticsPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☐ | `/registry/my/vendor/software/:id/upload` | myVendorSoftwareUpload | ahgRegistryPlugin | N/A | HTTP 404 |
 | ☑ | `/ftp-upload` | index | ahgFtpPlugin | PASS | HTTP 403 (pw 2026-06-27) |
@@ -1784,7 +1784,7 @@ Source: AtoM `menu` table + plugin route registrations. Generated 2026-06-27.
 | ☑ | `/digitalobject/upload` | doUpload | ahgInformationObjectManagePlugin | PASS | HTTP 403 (pw 2026-06-27) |
 | ☑ | `/api/report-builder/attachment/upload` | apiAttachmentUpload | ahgReportBuilderPlugin | PASS | HTTP 302 (pw 2026-06-27) |
 | ☐ | `/research/reproduction/download/:token` | reproductionDownload | ahgResearchPlugin | N/A | HTTP 404 |
-| ☐ | `/research/studio/:projectId/artefact/:artefactId/download` | studioDownload | ahgResearchPlugin | N/A | HTTP 404 |
+| ☐ | `/research/studio/:projectId/artefact/:artefactId/download` | studioDownload | ahgResearchPlugin | N/A | HTTP 404 — no record exists (correct not-found; needs real data) |
 | ☑ | `/research/ajax/upload-note-image` | uploadNoteImage | ahgResearchPlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☑ | `/research/ajax/clipboard-to-project` | clipboardToProject | ahgResearchPlugin | PASS | HTTP 200 (pw 2026-06-27) |
 | ☑ | `/research/ajax/manage-clipboard-item` | manageClipboardItem | ahgResearchPlugin | PASS | HTTP 200 (pw 2026-06-27) |
