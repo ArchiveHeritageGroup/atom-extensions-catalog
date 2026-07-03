@@ -24,6 +24,10 @@ You might need to export data from your system to:
 | **Dublin Core** | Web publishing, sharing | Digital repositories |
 | **PDF** | Printing, sharing | General use |
 | **JSON** | Developers, APIs | Technical users |
+| **Portable Catalogue** | Offline browsing on CD/USB, or moving a whole collection between systems | Outreach, exhibitions, data portability |
+
+For the **Portable Catalogue** option — a self-contained, offline browsable copy of
+your collection — see the dedicated section below.
 
 ---
 
@@ -196,6 +200,67 @@ The clipboard lets you collect records and export them together.
 | **CSV with paths** | Includes file locations |
 | **Dublin Core** | Standard digital metadata |
 | **IPTC** | Photo metadata |
+
+---
+
+## Portable / Offline Catalogue Export
+
+Sometimes you need your catalogue to travel — to an exhibition kiosk with no internet,
+onto a USB stick for a researcher, burned to CD for a depositor, or moved wholesale into
+another system. The **Portable Export** tool builds a self-contained copy for exactly
+this. Open it from **Admin > Portable Export**.
+
+### Two kinds of package
+
+- **Viewer (offline catalogue)** — a complete little website. Double-click `index.html`
+  and browse, search and view images in any web browser, with **no server and no
+  internet**. Ideal for CDs, USB sticks, and public-access terminals.
+- **Archive (data package)** — structured data files for every record type, with
+  checksums, for moving or preserving the whole collection. Used to re-import into
+  another Heratio/AtoM instance.
+
+### Choosing where it goes
+
+When you build a package you choose a **destination**:
+
+| Destination | What it does | Use it for |
+|-------------|--------------|------------|
+| **ZIP file** | Makes a single `.zip` you download when it's ready | The everyday choice — email, share, archive |
+| **This computer** | After building, asks you to pick a folder or drive **on your own PC, laptop or USB**, and writes the catalogue there **unzipped** so it runs straight off the drive | Copying to USB/external drives with no unzip step |
+| **Server folder / drive** | Writes it uncompressed straight to a drive **on the server** | Very large collections too big for a ZIP |
+
+> **"This computer" tip:** this uses a modern browser feature available in **Chrome,
+> Edge and Opera**. In other browsers (Firefox, Safari) it simply gives you a ZIP
+> download instead. When the export finishes, click **Save to folder on this computer**
+> and choose where to put it.
+
+### What is included — and what is held back
+
+A portable package can leave the building and can't be recalled, so the system is
+careful about what goes into it. **You only ever export what you are allowed to see**,
+and some records are always held back:
+
+- **Records above your access** — anything beyond your security clearance, closed by a
+  donor agreement, or under embargo is left out (just as it is hidden from you in
+  search). Administrators see everything.
+- **Unpublished drafts** — held back unless an administrator has turned on "include
+  unpublished".
+- **Culturally-restricted (ICIP/TK) records** — never exported without authority.
+- **Records with access-policy prohibitions**, and any images redacted for privacy.
+
+Every package includes a small **`disclosure-summary.json`** listing how many records
+were held back and why, and the export list shows a **"N withheld"** shield badge with
+a breakdown. Seeing a withheld count is normal — it means the rules are being honoured.
+
+### Steps
+
+1. Go to **Admin > Portable Export**.
+2. **Scope** — choose the whole catalogue, one fonds/collection, or a repository.
+3. **Content** — pick Viewer or Archive, and whether to include digital objects.
+4. **Configure** — give it a title, language and (for viewers) branding.
+5. **Destination** — ZIP, This computer, or Server folder/drive.
+6. **Generate** — click **Start Export** and watch the progress bar. When it's done,
+   use **Save to folder on this computer** or **Download ZIP**.
 
 ---
 

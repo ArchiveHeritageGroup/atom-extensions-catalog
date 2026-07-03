@@ -196,6 +196,25 @@ CREATE TABLE IF NOT EXISTS portable_export (
 );
 ```
 
+**Later migrations add:**
+
+```sql
+-- migration_destination.sql — output destination
+ALTER TABLE portable_export ADD COLUMN destination VARCHAR(20) DEFAULT 'zip'
+    COMMENT 'zip | local | folder';
+ALTER TABLE portable_export ADD COLUMN destination_path VARCHAR(500) DEFAULT NULL;
+
+-- migration_disclosure_summary.sql — what the confidentiality/ACL gate withheld
+ALTER TABLE portable_export ADD COLUMN disclosure_summary TEXT DEFAULT NULL
+    COMMENT 'JSON: per-category withheld counts + exporting user + total';
+```
+
+- `destination` — `zip` (downloadable ZIP), `local` (browser writes the unzipped tree
+  into an operator-picked folder/drive via the File System Access API; server-identical
+  to `zip`), or `folder` (uncompressed dump to a server path in `destination_path`).
+- `disclosure_summary` — JSON stamped at completion (column-tolerant: if the migration
+  has not run the export still completes, the value is simply not stored).
+
 ### portable_export_token
 ```sql
 CREATE TABLE IF NOT EXISTS portable_export_token (
@@ -244,6 +263,16 @@ VALUES
 | portable_export_download | /portable-export/download | download | Download ZIP (admin or token) |
 | portable_export_api_delete | /portable-export/api/delete | apiDelete | Delete export + files |
 | portable_export_api_token | /portable-export/api/token | apiToken | Generate share token |
+| portable_export_api_manifest | /portable-export/api/manifest | apiManifest | List a completed export's staging-tree files (JSON) for local delivery |
+| portable_export_api_file | /portable-export/api/file | apiFile | Stream one staging-tree file by relative path (path-traversal guarded) |
+
+**Local ("This computer") delivery.** For `destination = local` the browser writes the
+unzipped tree into a File System Access API-picked folder by calling `api/manifest`
+(relative paths + sizes) then `api/file` per entry. Both are admin-gated and funnel
+through the protected `localStagingDir()` helper, which resolves the export's staging
+directory **only** if its realpath sits under `downloads/portable-exports` — server
+`folder`-mode operator paths and `..` traversal resolve outside the base and are
+rejected (404).
 
 ---
 
@@ -285,6 +314,28 @@ VALUES
 - On failure: sets status='failed' with error message
 - v1.1: Parses `scope_items` JSON and passes item IDs to CatalogueExtractor
 - v1.1: Calls `notifyCompletion()` on success — inserts into `audit_trail` if available
+- Passes the export row's `user_id` to both extractors so the DisclosureGate can scope
+  by the exporting user's view rights (correct even though the job has no session)
+- `resolveOutputDir()` returns the operator path for `destination = folder`, else the
+  staging dir; `finaliseOutput()` skips the ZIP only for `folder` (so `local` builds
+  both tree and ZIP); writes `data/disclosure-summary.json` and stamps the
+  `disclosure_summary` column (`stampDisclosureSummary()`, column-tolerant)
+
+### DisclosureGate (`lib/Services/DisclosureGate.php`)
+- Confidentiality + access gate applied to the IO id set **before** anything is written
+  (over-inclusion into an offline package is unrecoverable), fail-closed
+- `__construct(?int $aclUserId)` — positive id scopes to that user, `0` = anonymous/
+  public baseline, `null` (zero-arg) = per-user ACL gating disabled
+- `filter(int[] $ioIds): int[]` — removes, counting each once in precedence order:
+  1. **unpublished** (status type 158 / status 160) unless `portable_export_include_unpublished`
+  2. **ICIP/TK** (`icip_access_restriction`, incl. `applies_to_descendants` subtrees)
+  3. **ODRL** use-prohibitions (`research_rights_policy` action=use / policy=prohibition)
+  4. **ACL** — `SearchAccessFilterService::getRestrictedObjectIds($userId)` (classification
+     above clearance, donor-closed, active full embargoes; user embargo exceptions
+     honoured; admins → `[]`). If the lookup throws, an `aclFailed` flag withholds the
+     **entire** scope (fail closed).
+- `getExcluded()` → `{unpublished, icip, odrl, acl, redacted_objects}`
+- Wired into both `CatalogueExtractor` (viewer) and `ArchiveExtractor` (archive)
 
 ### CatalogueExtractor
 - Entry point: `extract(scopeType, scopeSlug, repositoryId, ?itemIds)`
@@ -521,10 +572,30 @@ On successful export completion, `ExportPipelineService::notifyCompletion()`:
 - Token-based downloads bypass admin auth but are scoped to a single export
 - No user data exposed in the static viewer (only catalogue metadata)
 - Quick-start and clipboard APIs require admin session (CSRF-free POST endpoints)
+- **Confidentiality gate (global):** unpublished, ICIP/TK, ODRL-prohibited and
+  PII-redacted records are withheld from every package (see DisclosureGate)
+- **Per-user ACL scoping:** a package contains only what the exporting user may see —
+  records above their clearance, donor-closed, or fully embargoed are removed, computed
+  from the export row's stored `user_id` (session-independent); **fails closed** if the
+  access check errors
+- **Local-delivery endpoints** (`api/manifest`, `api/file`) are admin-gated and path-
+  traversal guarded via `localStagingDir()` (realpath must be under
+  `downloads/portable-exports`; server `folder` paths and `..` are rejected)
+- **Disclosure transparency:** `data/disclosure-summary.json` in every package + the
+  `disclosure_summary` column record per-category withheld counts and the exporting user
 
 ---
 
 ## Changelog
+
+### v3.79.x (2026-07)
+- **Destinations:** `zip` / `local` (File System Access API — unzipped tree onto the
+  operator's own PC/laptop/USB, ZIP fallback) / `folder` (server drive); new
+  `destination` + `destination_path` columns, `api/manifest` + `api/file` endpoints
+- **Confidentiality gate** (`DisclosureGate`): withholds unpublished / ICIP-TK / ODRL /
+  redacted; `data/disclosure-summary.json` + `disclosure_summary` column + admin badge
+- **Per-user ACL scoping:** exports only what the exporting user has view rights to
+  (classification / donor closure / embargo), fail-closed, background-task safe
 
 ### v1.1.0
 - **Quick export** from description pages (sidebar "Portable Viewer" link)
