@@ -65,7 +65,13 @@ Export your catalogue as a self-contained, portable HTML/JS application on CD, U
 |                                    portable catalogue        |
 |  [Quick]      Quick Export       - One-click export from any |
 |                                    description page          |
-|  [Wizard]     Step-by-Step UI    - 4-step guided wizard for  |
+|  [Dest]       3 Destinations     - ZIP, This computer (local |
+|                                    folder/USB), or server drive|
+|  [Guard]      Confidentiality    - Withholds unpublished,    |
+|                                    ICIP/TK, ODRL, redacted    |
+|  [Access]     View-Rights Scoped - You export only what you  |
+|                                    are allowed to see        |
+|  [Wizard]     Step-by-Step UI    - 5-step guided wizard for  |
 |                                    configuring exports       |
 |  [Retention]  Auto-Cleanup       - Automatic deletion of     |
 |                                    expired exports           |
@@ -187,7 +193,7 @@ Export your catalogue as a self-contained, portable HTML/JS application on CD, U
 ### Step 3: Configure — Title, Language, Branding
 ```
   +-----------------------------------------------------------+
-  |  Step 3 of 4: Configure                                    |
+  |  Step 3 of 5: Configure                                    |
   +-----------------------------------------------------------+
   |                                                             |
   |  Export Title:    [ Portable Catalogue              ]       |
@@ -202,10 +208,43 @@ Export your catalogue as a self-contained, portable HTML/JS application on CD, U
   +-----------------------------------------------------------+
 ```
 
-### Step 4: Review & Generate
+### Step 4: Destination — Where the Package Goes
 ```
   +-----------------------------------------------------------+
-  |  Step 4 of 4: Review & Generate                            |
+  |  Step 4 of 5: Destination                                  |
+  +-----------------------------------------------------------+
+  |                                                             |
+  |  ( ) ZIP file                                               |
+  |      Downloadable archive                                   |
+  |                                                             |
+  |  ( ) This computer                                          |
+  |      Unzipped folder on your PC / laptop / USB              |
+  |                                                             |
+  |  ( ) Server folder / drive                                  |
+  |      Uncompressed — for large collections / mounted drive  |
+  |      Path: [ /mnt/usb/catalogue                    ]        |
+  |                                                             |
+  |                        [ < Back ] [ Next > ]               |
+  +-----------------------------------------------------------+
+```
+
+Choose how the finished package is delivered:
+
+| Destination | What happens | Best for |
+|-------------|--------------|----------|
+| **ZIP file** | A downloadable `.zip` is produced; click **Download ZIP** when it completes | The default — sharing, archiving, any browser |
+| **This computer** | After building, you pick a folder/drive **on your own PC/laptop/USB**; the catalogue is written there **uncompressed** so it runs straight off the drive (double-click `index.html`) | Burning to USB/external drives, no unzip step |
+| **Server folder / drive** | Written uncompressed straight to a directory / mounted drive **on the server** (no ZIP, no size cap) | Very large collections that exceed the ZIP size limit |
+
+> **"This computer" needs a Chromium-based browser** (Chrome, Edge, Opera) for the
+> File System Access API. On Firefox/Safari it automatically falls back to a ZIP
+> download. **"Server folder / drive"** needs a directory that already exists and is
+> writable by the web server; the path is validated before the export starts.
+
+### Step 5: Review & Generate
+```
+  +-----------------------------------------------------------+
+  |  Step 5 of 5: Review & Generate                            |
   +-----------------------------------------------------------+
   |                                                             |
   |  +-------------------------------------------------------+ |
@@ -217,6 +256,7 @@ Export your catalogue as a self-contained, portable HTML/JS application on CD, U
   |  | References           | Yes                            | |
   |  | Masters              | No                             | |
   |  | Mode                 | Read Only                      | |
+  |  | Destination          | This computer                  | |
   |  | Title                | Portable Catalogue             | |
   |  | Language             | en                             | |
   |  +-------------------------------------------------------+ |
@@ -244,15 +284,55 @@ Progress stages:
 - 80-90%: Packaging viewer
 - 90-100%: Creating ZIP archive
 
-### Download
+### Download / Save
 ```
   +-----------------------------------------------------------+
   |  Export complete! 1,234 descriptions, 567 objects (45 MB)  |
-  |  Expires: 2026-03-16                                       |
+  |  Expires: 2026-03-16                          [3 withheld] |
   |                                                             |
-  |  [ Download ZIP ]   [ Share Link ]                          |
+  |  [ Save to folder on this computer ]  [ Download ZIP ]      |
   +-----------------------------------------------------------+
 ```
+
+- For the **This computer** destination, click **Save to folder on this computer**,
+  choose a folder/drive, and the unzipped catalogue is written there (a live
+  "Saving N/M files" status is shown). The **Download ZIP** button is always available
+  as an alternative/fallback.
+- A **"N withheld"** shield badge appears when the confidentiality/access gate held
+  some records back — see [Confidentiality & Access Control](#confidentiality--access-control).
+
+---
+
+## Confidentiality & Access Control
+
+A portable package leaves the building and cannot be recalled, so the system filters
+what may enter it **before anything is written**, and errs on the side of withholding.
+Two layers apply to every export.
+
+### You only export what you can see
+
+The package is scoped to **your** view rights — exactly the records you see in search
+and browse. A record is left out of *your* package when it is above your **security
+clearance**, **donor-closed** (closure, permission-only, embargo, POPIA, legal hold),
+or under an active **full embargo** (your own embargo exceptions are honoured).
+**Administrators** export everything.
+
+### Always-withheld records
+
+Regardless of who exports:
+
+- **Unpublished drafts** — unless an administrator turns on **Include unpublished**.
+- **ICIP / TK culturally-restricted** records — never exported without authority
+  (whole sub-trees where the restriction applies to descendants).
+- **Records with an access-policy (ODRL) prohibition**, and images **redacted** for privacy.
+
+### Seeing what was held back
+
+Every package contains a **`data/disclosure-summary.json`** listing the counts per
+category, who exported it, and the total withheld. The Past Exports list shows a
+**shield "N withheld"** badge whose tooltip breaks the number down (beyond your view
+rights / unpublished / ICIP / ODRL / redacted). A withheld count is expected — it is the
+system honouring access rules, not an error.
 
 ---
 
@@ -372,11 +452,15 @@ Navigate to **Admin > AHG Settings > Portable Export** to configure defaults.
 | Include Thumbnails                   | true             | Include thumbs by default |
 | Include Reference Images            | true             | Include refs by default   |
 | Include Master Files                | false            | Include originals         |
+| Include Unpublished                  | false            | Allow drafts into packages |
 | Default Language                     | en               | Default export language   |
 | Show on Description Pages           | true             | Portable Viewer sidebar   |
 | Show on Clipboard Page              | true             | Portable Catalogue button |
 +--------------------------------------+------------------+---------------------------+
 ```
+
+> **Include Unpublished** overrides the confidentiality gate's unpublished rule. Leave
+> it off (default) so drafts never enter an offline package unless you explicitly intend it.
 
 These defaults are used when starting exports from description pages or the clipboard. The full wizard allows overriding any default per export.
 
@@ -540,6 +624,7 @@ Use `--dry-run` to preview without deleting.
   |   +-- taxonomies.json      <- Subjects, places, genres
   |   +-- config.json          <- Viewer settings
   |   +-- manifest.json        <- File checksums
+  |   +-- disclosure-summary.json <- What was withheld + why
   +-- objects/
       +-- thumb/               <- Thumbnail images
       +-- ref/                 <- Reference images
