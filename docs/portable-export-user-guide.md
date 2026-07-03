@@ -605,6 +605,7 @@ Use `--dry-run` to preview without deleting.
 ```
   portable-export.zip
   |
+  +-- README.txt              <- Start here: what this is + how to use it
   +-- index.html              <- Open this in a browser
   +-- assets/
   |   +-- css/viewer.css
