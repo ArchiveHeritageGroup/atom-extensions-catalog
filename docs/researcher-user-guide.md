@@ -53,7 +53,7 @@
 42. [Per-Record Citation Manager Export](#42-per-record-citation-manager-export) **(NEW v3.3.0)**
 43. [ORCID Works Push & Pull](#43-orcid-works-push--pull) **(NEW v3.3.0)**
 44. [Mobile Shell (PWA)](#44-mobile-shell-pwa) **(NEW v3.3.0)**
-45. [Offline Mode & Sync](#45-offline-mode--sync) **(NEW v3.3.0)**
+45. [Work Offline (offline research packages)](#45-work-offline-offline-research-packages)
 
 ---
 
@@ -2379,38 +2379,79 @@ The badge turns red when your phone reports offline. The badge updates without a
 
 ---
 
-## 45. Offline Mode & Sync
+## 45. Work Offline (offline research packages)
 
-> Available from v3.3.0. Works hand-in-hand with the Mobile Shell (§44).
+Take **your own collected records** offline as a self-contained package, keep
+researching with **no internet** — on a laptop, USB stick or in the field — and then
+bring your work back. Open it from the research sidebar: **Work Offline**
+(`/research/mobile`).
 
-### What's available offline
+### 1. Take records offline
 
-If you've visited the mobile shell at least once, the service worker has cached it. Going offline:
+On the **Work Offline** page, tick which of your own groups to include:
 
-- The mobile home page still loads (from cache)
-- The 4-button grid is still visible
-- Other pages may not load until you're back online
+- **Collections** (evidence sets)
+- **Projects** (their attached records, incl. items added via the project clipboard)
+- **Favourites folders**
+- and, optionally, **your existing notes/annotations** on those records
 
-### Offline journal entries
+Click **Download offline package**. You get a ZIP that contains a small web viewer
+(`index.html`), the record data, thumbnails, and a `README.txt`.
 
-When you submit a quick journal entry while offline, the form:
+> Only records you are **permitted to see** are ever included — restricted, embargoed
+> or unpublished records are automatically withheld.
 
-1. Stops the normal submit
-2. Saves the entry to `localStorage` under the key `heratio_offline_queue_v1`
-3. Shows a confirmation that the entry is queued
+### 2. Work offline
 
-When your device reconnects, the queue is automatically POSTed to `/research/sync/offline` and applied as a real `research_journal_entry` row. The audit table `research_offline_sync_log` records the run.
+Unzip (or copy the folder to a USB stick) and open **`index.html`** in any web
+browser — no internet, server or login needed. The left list groups your records
+**by source** (Collections / Projects / Favourites → group name + count). Pick a
+record to see its details and thumbnail, then add, under **"Add offline work"**:
 
-### What's supported in the queue
+| Tab | What it captures |
+|-----|------------------|
+| **Note** | A research note on the record |
+| **Source** | A reference/citation (title, author, year, URL) |
+| **Suggestion** | A proposed metadata correction/addition (curator-reviewed) |
+| **File** | A photo/document you attach to the record (max **5 MB** each) |
 
-| `kind` value | Applied to |
-|---|---|
-| `journal_entry` | `research_journal_entry` |
-| `annotation` | `research_annotation` |
+Everything is saved in that browser automatically. A live search box filters within
+the groups.
 
-### What's not supported
+### 3. Bring your work back ("Save for sync")
 
-Comments on projects, ORCID actions, file uploads, and bookings cannot be queued offline; they require an online connection. If you try to submit one while offline you'll get a browser-level network error.
+1. In the package, click **Save for sync** → your browser downloads a
+   **`researcher-sync.json`** file. Any files you attached are **embedded inside this
+   JSON**, so it is fully self-contained — you can upload it from any computer; you do
+   **not** need the original files or the same USB stick.
+2. Back in Heratio, on the **Work Offline** page, use **"Bring your work back"** and
+   upload that `researcher-sync.json`.
+3. Heratio verifies it is yours and applies it:
+
+| Change | Applied to |
+|--------|------------|
+| Note | `research_annotation` (your note on the record) |
+| Source | `research_annotation` (type *source*) |
+| Metadata suggestion | `research_metadata_suggestion` — a **curator review queue**, never a live catalogue edit |
+| File | `research_offline_attachment` (saved under `uploads/research-offline/`) |
+| Journal entry | `research_journal_entry` |
+
+The run is recorded in `research_offline_sync_log`. If a change can't be applied, the
+page tells you why (e.g. an attachment folder that isn't writable by the web server).
+
+### Curator review of metadata suggestions
+
+Suggestions never change the catalogue automatically. An administrator reviews them at
+**Research → Administration → Metadata Suggestions** (`/research/metadata-suggestions`),
+with **Open / Accepted / Rejected** tabs and **Accept / Reject** actions (recording the
+reviewer). An accepted suggestion is applied to the record by the curator manually.
+
+### Good to know
+
+- **Images:** the package includes **thumbnails** so records show offline; full-
+  resolution master files are not included (to keep packages small).
+- **Attachments** are carried inside the sync file (base64), capped at **5 MB** each.
+- Work in **one browser** per package so all your changes end up in one sync file.
 
 ---
 
