@@ -2395,8 +2395,13 @@ On the **Work Offline** page, tick which of your own groups to include:
 - **Favourites folders**
 - and, optionally, **your existing notes/annotations** on those records
 
+You can also add **individual records** that aren't in any of the above: under
+**Search & add records**, type a title or identifier, then click a result to include
+it (it appears under *"Records added by search"*). Only records you are permitted to
+see appear in the results.
+
 Click **Download offline package**. You get a ZIP that contains a small web viewer
-(`index.html`), the record data, thumbnails, and a `README.txt`.
+(`index.html`), the record data, thumbnails, and a `README.txt` with instructions.
 
 > Only records you are **permitted to see** are ever included — restricted, embargoed
 > or unpublished records are automatically withheld.
