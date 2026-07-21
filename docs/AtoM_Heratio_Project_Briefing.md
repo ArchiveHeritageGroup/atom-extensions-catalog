@@ -131,7 +131,7 @@ GLAM and DAM institutions internationally:
 | Plugin | Sector | Key Features |
 |--------|--------|-------------|
 | ahgLibraryPlugin | Library | MARC cataloguing, ISBN lookup, circulation, fines, patron management |
-| ahgMuseumPlugin | Museum | CCO, Spectrum 5.1, Getty AAT (1,057 cached terms), condition assessment |
+| ahgMuseumPlugin | Museum | CCO, Collections Procedures, Getty AAT (1,057 cached terms), condition assessment |
 | ahgGalleryPlugin | Gallery | VRA Core, exhibitions, artist tracking, loans, valuations |
 | ahgDAMPlugin | DAM | IPTC metadata extraction, watermarking, batch processing |
 
@@ -205,7 +205,7 @@ GLAM and DAM institutions internationally:
 |--------|----------|
 | ahgHeritageAccountingPlugin | GRAP 103 / IPSAS 45 |
 | ahgIPSASPlugin | International Public Sector Accounting |
-| ahgSpectrumPlugin | Spectrum 5.1 (UK Collections Trust) |
+| ahgSpectrumPlugin | Collections Procedures |
 
 ### Digital Preservation
 
@@ -237,7 +237,7 @@ GLAM and DAM institutions internationally:
 
 | Plugin | Features |
 |--------|----------|
-| ahgConditionPlugin | Condition assessment with AI (LLaVA), photo annotation, Spectrum 5.1 |
+| ahgConditionPlugin | Condition assessment with AI (LLaVA), photo annotation, Collections Procedures |
 | ahgProvenancePlugin | Chain of custody tracking |
 | ahgDonorAgreementPlugin | Donor/institution agreements (SA compliance) |
 | ahgLoanPlugin | Shared loan management |
@@ -298,7 +298,7 @@ GLAM and DAM institutions internationally:
 - **Summarization** — BART-based seq2seq (server 115)
 - **Spellcheck** — aspell CLI
 - **Image Description** — LLaVA:7b via Ollama (server 115 GPU, 0.2s/image)
-- **Condition Assessment** — AI damage detection with Spectrum 5.1 vocabulary (15 damage types)
+- **Condition Assessment** — AI damage detection with Collections Procedures vocabulary (15 damage types)
 - **LLM Suggestions** — Description generation via Ollama/Anthropic Claude
 - **Face Detection** — OpenCV local, AWS/Azure cloud options
 

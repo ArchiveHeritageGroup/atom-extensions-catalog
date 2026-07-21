@@ -846,7 +846,7 @@ User can access a record when:
 
 ## 5. Condition Assessment ERD (ahgConditionPlugin)
 
-**8 tables** — Condition reporting, damage tracking, conservation, scheduling, and controlled vocabularies. Spectrum 5.1 compliant.
+**8 tables** — Condition reporting, damage tracking, conservation, scheduling, and controlled vocabularies. Collections Procedures compliant.
 
 ### Tables
 

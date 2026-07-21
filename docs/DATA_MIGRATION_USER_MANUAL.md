@@ -575,9 +575,9 @@ php symfony migration:import /path/to/file.csv --mapping=10 --limit=10
 | subjectAccessPoints | 6XX | Subject headings |
 | nameAccessPoints | 7XX | Added entries |
 
-### 10.3 Museum (Spectrum) Fields
+### 10.3 Museum (Collections Procedures) Fields
 
-| AtoM Field | Spectrum Unit | Description |
+| AtoM Field | Collections Procedures Unit | Description |
 |------------|---------------|-------------|
 | identifier | Object Number | Unique object number |
 | title | Object Name | Name of object |

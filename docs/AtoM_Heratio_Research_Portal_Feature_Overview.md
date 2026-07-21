@@ -60,8 +60,8 @@ A full physical chain-of-custody system that records every handoff of archival m
 | Staff-to-staff transfer | Record handoffs between staff members (e.g., shift changes) |
 | Batch checkout | Check out multiple items to researchers in a single operation |
 | Batch return | Process multiple returns with per-item condition assessment |
-| Full custody chain view | A unified timeline combining custody handoffs, Spectrum movement records, and provenance events |
-| Spectrum 5.1 integration | Every custody event auto-generates a Spectrum-compliant movement record |
+| Full custody chain view | A unified timeline combining custody handoffs, Collections Procedures movement records, and provenance events |
+| Collections Procedures integration | Every custody event auto-generates a Collections Procedures-compliant movement record |
 
 ### 4a. Equipment Management
 
@@ -418,7 +418,7 @@ The Research Portal is designed for accessibility compliance across all screens:
 | Standard | Coverage |
 |----------|----------|
 | WCAG 2.1 Level AA | All screens |
-| Spectrum 5.1 | Object Location and Movement Control (via custody/movement integration) |
+| Collections Procedures | Object Location and Movement Control (via custody/movement integration) |
 | W3C Web Annotation | Annotation data model |
 | IIIF | Manifest and annotation interoperability |
 | RO-Crate | Research object packaging |
@@ -446,7 +446,7 @@ The Research Portal uses 80+ dedicated database tables (no modifications to core
 - Researcher management (registration, types, audit)
 - Reading room configuration (rooms, seats, bookings, equipment, equipment maintenance)
 - Material requests (retrieval queue, scheduling, status history)
-- Custody tracking (handoff records, Spectrum movement integration)
+- Custody tracking (handoff records, Collections Procedures movement integration)
 - Reproduction workflow (requests, items, files, invoices)
 - Correspondence (threaded messaging with internal notes)
 - Collections, annotations, projects, workspaces

@@ -137,7 +137,7 @@
 | **GLAM Sector Support** | | |
 | Archives (ISAD/EAD) | ✅ | ✅ Enhanced |
 | Libraries (RDA/MARC) | Partial | ✅ Full |
-| Museums (Spectrum 5.0) | ❌ | ✅ |
+| Museums (Collections Procedures) | ❌ | ✅ |
 | Museums (CCO) | ❌ | ✅ |
 | Galleries (CCO/CDWA) | ❌ | ✅ |
 | Digital Asset Management | ❌ | ✅ |
@@ -479,7 +479,7 @@ php bin/atom extension:discover
 | Extension | Description | Standards |
 |-----------|-------------|-----------|
 | **ahgLibraryPlugin** | Library cataloging | RDA, MARC21 |
-| **ahgMuseumPlugin** | Museum cataloging | CCO, Spectrum 5.0 |
+| **ahgMuseumPlugin** | Museum cataloging | CCO, Collections Procedures |
 | **arGalleryPlugin** | Visual arts/gallery | CCO, CDWA |
 | **ahgDAMPlugin** | Digital Asset Management | Dublin Core, IPTC |
 

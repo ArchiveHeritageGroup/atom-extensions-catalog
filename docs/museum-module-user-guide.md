@@ -2,7 +2,7 @@
 
 ## User Guide
 
-Catalog museum objects using Spectrum 5.0 and CCO standards for artifacts, artworks, specimens, and collections. Manage exhibitions, loans, provenance, and condition assessments.
+Catalog museum objects using Collections Procedures and CCO standards for artifacts, artworks, specimens, and collections. Manage exhibitions, loans, provenance, and condition assessments.
 
 ---
 
@@ -586,7 +586,7 @@ Record the object's physical state:
 
 ---
 
-## Spectrum Procedures
+## Collections Procedures
 
 Access collection management workflows:
 ```
@@ -751,7 +751,7 @@ Some menu items and sections only appear when the corresponding plugins are enab
 
 | Feature | Requires Plugin |
 |---------|----------------|
-| SPECTRUM Procedures | ahgSpectrumPlugin |
+| Collections Procedures | ahgSpectrumPlugin |
 | Condition Reports (Add link) | ahgSpectrumPlugin |
 | Heritage Accounting (GRAP) section | ahgHeritageAccountingPlugin |
 | Provenance (CCO) | ahgProvenancePlugin |

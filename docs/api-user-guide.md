@@ -140,7 +140,7 @@ Add `?sector=` to filter by collection type:
 |--------|-----------------|
 | `archive` | Traditional archival records (ISAD) |
 | `library` | Library materials (MARC/Dublin Core) |
-| `museum` | Museum objects (Spectrum/CCO) |
+| `museum` | Museum objects (Collections Procedures/CCO) |
 | `gallery` | Art and gallery items (CCO) |
 | `dam` | Photographs and digital assets (IPTC) |
 

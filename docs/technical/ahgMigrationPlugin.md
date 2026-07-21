@@ -569,7 +569,7 @@ interface SectorInterface
 | Sector | Standard | Plugin Required | Levels |
 |--------|----------|-----------------|--------|
 | Archives | ISAD(G) | None (core) | Fonds, Sub-fonds, Collection, Series, Sub-series, File, Item |
-| Museum | SPECTRUM 5.0 | ahgMuseumPlugin | Collection, Item, Part |
+| Museum | COLLECTIONS PROCEDURES | ahgMuseumPlugin | Collection, Item, Part |
 | Library | MARC/RDA | ahgLibraryPlugin | Collection, Series, Item |
 | Gallery | CCO/VRA Core | ahgGalleryPlugin | Collection, Series, Item |
 | DAM | Dublin Core | ahgDAMPlugin | Collection, Item |
@@ -587,7 +587,7 @@ interface SectorInterface
 | Control (3.7) | archivistNote, rules |
 | Access Points | subjectAccessPoints, placeAccessPoints, nameAccessPoints, genreAccessPoints |
 
-### Museum Sector Fields (SPECTRUM)
+### Museum Sector Fields (COLLECTIONS PROCEDURES)
 
 | Field Group | Fields |
 |-------------|--------|

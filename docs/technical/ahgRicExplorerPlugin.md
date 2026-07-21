@@ -68,16 +68,16 @@ The ahgRicExplorerPlugin implements the ICA's Records in Contexts Ontology (RiC-
 | rights | rico:Rule | Access/use rules |
 | function_object | rico:Function | Business functions |
 
-### Spectrum/GRAP Extensions
+### Collections Procedures/GRAP Extensions
 
 The extractor includes custom namespace extensions:
 
 | Extension | Namespace | Purpose |
 |-----------|-----------|---------|
-| Spectrum | `spectrum:` | Collections Trust activities |
+| Collections Procedures | `spectrum:` | Collections Trust activities |
 | GRAP | `grap:` | Heritage asset accounting (GRAP 103) |
 
-| Spectrum Activity Type | Description |
+| Collections Procedures Activity Type | Description |
 |------------------------|-------------|
 | ConditionCheck | Condition assessments |
 | Valuation | Financial valuations |
@@ -217,7 +217,7 @@ WHERE {
 }
 ```
 
-**5. Get Spectrum condition checks:**
+**5. Get Collections Procedures condition checks:**
 ```sparql
 PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
 PREFIX spectrum: <https://collectionstrust.org.uk/spectrum#>

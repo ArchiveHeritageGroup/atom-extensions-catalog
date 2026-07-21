@@ -364,7 +364,7 @@ php bin/semantic-search-cron.php export-es    # ES export
 | ahgFavoritesPlugin | User bookmarks |
 | ahgFeedbackPlugin | User feedback |
 | ahgIiifCollectionPlugin | IIIF collections |
-| ahgSpectrumPlugin | SPECTRUM 5.0 |
+| ahgSpectrumPlugin | COLLECTIONS PROCEDURES |
 
 ### Ingestion & Import
 | Plugin | Purpose |

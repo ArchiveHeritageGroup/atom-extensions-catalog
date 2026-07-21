@@ -34,18 +34,18 @@ GRAP 103 (Generally Recognised Accounting Practice for Heritage Assets) complian
 1. **Valuation Data:**
    - `heritage_valuation_history` and `spectrum_valuation` both store valuations
    - Different schemas but similar purpose
-   - Spectrum focuses on insurance/market value
+   - Collections Procedures focuses on insurance/market value
    - Heritage focuses on GRAP-compliant book value
 
 2. **Movement Tracking:**
    - `heritage_movement_register` overlaps with `spectrum_movement`
    - Heritage focuses on accounting impact
-   - Spectrum focuses on physical location
+   - Collections Procedures focuses on physical location
 
 ### Recommendation
 
 **Option A: Keep Separate (Recommended for Now)**
-- ahgSpectrumPlugin: Museum collections management (Spectrum 5.0 standard)
+- ahgSpectrumPlugin: Museum collections management (Collections Procedures standard)
 - ahgHeritageAccountingPlugin: Financial/accounting compliance (GRAP 103)
 
 **Rationale:**
@@ -90,5 +90,5 @@ WHERE NOT EXISTS (
 ## Related Documentation
 
 - GRAP 103: Heritage Assets standard
-- Spectrum 5.0: Valuation procedure
+- Collections Procedures: Valuation procedure
 - CLAUDE.md: Plugin architecture guidelines

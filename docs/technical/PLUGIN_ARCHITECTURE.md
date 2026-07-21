@@ -336,7 +336,7 @@ plugin-name/
 
 ### 6.1 The Problem
 
-Sector plugins (Gallery, Museum, DAM) and shared menus (theme, reports) contain links to features provided by optional capability plugins (Spectrum, Provenance, GRAP, etc.). When those plugins are disabled, the links become broken (404 errors or blank pages).
+Sector plugins (Gallery, Museum, DAM) and shared menus (theme, reports) contain links to features provided by optional capability plugins (Collections Procedures, Provenance, GRAP, etc.). When those plugins are disabled, the links become broken (404 errors or blank pages).
 
 ### 6.2 The `ahg_is_plugin_enabled()` Helper
 

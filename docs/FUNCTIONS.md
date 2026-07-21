@@ -829,7 +829,7 @@ Complete listing of every function available in the AtoM Heratio framework and p
 - Feature detection for Favorites
 - Feature detection for Backup
 - Feature detection for Audit
-- Feature detection for Spectrum
+- Feature detection for Collections Procedures
 - Feature detection for Privacy
 - Feature detection for Security
 
@@ -1176,7 +1176,7 @@ Complete listing of every function available in the AtoM Heratio framework and p
 - Define field groups
 - Map display fields to database
 - Map to ISAD(G) elements
-- Map to Spectrum units
+- Map to Collections Procedures units
 - Map to Dublin Core elements
 - Set field display order
 - Set field visibility
@@ -2593,7 +2593,7 @@ Complete listing of every function available in the AtoM Heratio framework and p
 
 ## ahgMuseumPlugin
 
-### Spectrum 5.0 Fields
+### Collections Procedures Fields
 - Enter object number
 - Enter other number
 - Set acquisition method
@@ -3468,7 +3468,7 @@ Complete listing of every function available in the AtoM Heratio framework and p
 
 ## ahgSpectrumPlugin
 
-### Spectrum 5.0 Procedures
+### Collections Procedures
 - Object entry
 - Acquisition
 - Location and movement control
@@ -3490,7 +3490,7 @@ Complete listing of every function available in the AtoM Heratio framework and p
 - Collections care
 - Deaccessioning and disposal
 
-### Spectrum Units
+### Collections Procedures Units
 - Object identification
 - Object name
 - Object number
@@ -3506,19 +3506,19 @@ Complete listing of every function available in the AtoM Heratio framework and p
 - Object use
 
 ### CIDOC CRM Mapping
-- Map Spectrum to CIDOC-CRM
+- Map Collections Procedures to CIDOC-CRM
 - Export CIDOC-CRM RDF
 - Import CIDOC-CRM data
 
 ### Validation
-- Validate against Spectrum
+- Validate against Collections Procedures
 - Check required fields
 - Check controlled vocabularies
 - Generate compliance report
 
 ### Reporting
-- Spectrum procedure checklist
-- Spectrum compliance report
+- Collections Procedure checklist
+- Collections Procedures compliance report
 - Object entry report
 - Exit report
 
@@ -3842,7 +3842,7 @@ Complete listing of every function available in the AtoM Heratio framework and p
 ### Museum Standards Overlap
 | Function | ahgMuseumPlugin | ahgSpectrumPlugin |
 |----------|----------------|------------------|
-| Spectrum fields | ✓ (core) | ✓ (full) |
+| Collections Procedures fields | ✓ (core) | ✓ (full) |
 | CCO fields | ✓ | |
 | Procedures | | ✓ |
 

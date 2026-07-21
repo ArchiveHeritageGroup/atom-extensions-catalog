@@ -391,7 +391,7 @@ Some sidebar and admin menu items only appear when the corresponding plugins are
 |---------|----------------|
 | Provenance (CCO) | ahgProvenancePlugin |
 | Condition Assessment | ahgConditionPlugin |
-| SPECTRUM Procedures | ahgSpectrumPlugin |
+| Collections Procedures | ahgSpectrumPlugin |
 | Heritage Accounting (GRAP) | ahgHeritageAccountingPlugin |
 | Digital Preservation (OAIS) | ahgPreservationPlugin |
 | Research Requests | ahgResearchPlugin |

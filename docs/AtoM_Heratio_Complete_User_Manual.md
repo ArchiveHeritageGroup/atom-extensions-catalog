@@ -65,7 +65,7 @@ AtoM Heratio is a comprehensive modernization of Access to Memory (AtoM) 2.10 �
 
 - **Archivists** — managing archival collections with full ISAD(G)/DACS/RAD support
 - **Librarians** — cataloguing with MARC-inspired fields, ISBN lookup, circulation management
-- **Museum curators** — CCO cataloguing, Spectrum 5.1 procedures, Getty AAT integration
+- **Museum curators** — CCO cataloguing, Collections Procedures, Getty AAT integration
 - **Gallery managers** — exhibition management, artist tracking, loan management
 - **Digital asset managers** — IPTC metadata, watermarks, batch processing
 - **Compliance officers** — POPIA/GDPR compliance, audit trails, security classification
@@ -229,7 +229,7 @@ Cataloguing Culturual Objects standard with:
 - **Object identification** — object name, classification, materials, techniques
 - **Getty AAT** — linked vocabulary for materials, techniques, styles
 - **Condition assessment** — with photo documentation
-- **Spectrum 5.1** — UK Collections Trust procedures
+- **Collections Procedures** — Collections Procedures
 
 ### 3.4 Gallery
 
@@ -534,9 +534,9 @@ South African public sector heritage asset valuation and reporting.
 
 International Public Sector Accounting Standards for heritage assets.
 
-### 10.3 Spectrum 5.1
+### 10.3 Collections Procedures
 
-UK Collections Trust museum procedures — acquisition, loans, location/movement, condition checking.
+Collections Procedures for museums — acquisition, loans, location/movement, condition checking.
 
 ---
 
@@ -572,7 +572,7 @@ Bookmark records for later reference.
 
 ### 12.1 Condition Assessment
 
-Spectrum-compliant condition recording with photo documentation and scoring.
+Collections Procedures-compliant condition recording with photo documentation and scoring.
 
 ### 12.2 Provenance
 
@@ -664,11 +664,11 @@ Centralized settings management with 21 sections and 200+ configurable options.
 | Show Branding | Toggle | On | Display AHG branding |
 | Custom CSS | Textarea | (empty) | Custom CSS styles |
 
-#### Spectrum — Collections Management
+#### Collections Procedures — Collections Management
 
 | Setting | Type | Default | Description |
 |---------|------|---------|-------------|
-| Enable Spectrum | Toggle | On | Enable Spectrum procedures |
+| Enable Collections Procedures | Toggle | On | Enable Collections Procedures |
 | Default Currency | Select | ZAR | ZAR, USD, EUR, GBP |
 | Valuation Reminder | Days | 365 | Re-valuation reminder period |
 | Default Loan Period | Days | 90 | Default loan duration |

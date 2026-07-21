@@ -698,7 +698,7 @@ Each sector has specialized validation rules:
 | Validator | Sector | Key Validations |
 |-----------|--------|-----------------|
 | `ArchivesValidator` | ISAD-G | Level hierarchy, fonds→series→file→item flow |
-| `MuseumValidator` | Spectrum | Object number format, acquisition date |
+| `MuseumValidator` | Collections Procedures | Object number format, acquisition date |
 | `LibraryValidator` | MARC/RDA | ISBN-10/13 checksum, ISSN format |
 | `GalleryValidator` | CCO | Work type vocabulary, creator format |
 | `DamValidator` | Dublin Core | DC type, MIME type, GPS coordinates |
@@ -1101,7 +1101,7 @@ abstract class BaseExporter
 | Exporter | Columns | Standard |
 |----------|---------|----------|
 | `ArchivesExporter` | 45 | ISAD(G) |
-| `MuseumExporter` | 38 | Spectrum 5.1 |
+| `MuseumExporter` | 38 | Collections Procedures |
 | `LibraryExporter` | 32 | MARC/RDA |
 | `GalleryExporter` | 35 | CCO/VRA |
 | `DamExporter` | 52 | Dublin Core/IPTC |
@@ -1115,7 +1115,7 @@ Located in `data/mappings/defaults/`:
 | `library.json` | Maps MARC/RDA fields (ISBN, call number, publisher, etc.) |
 | `gallery.json` | Maps CCO/VRA fields (creator, provenance, exhibition history, etc.) |
 | `dam.json` | Maps Dublin Core/IPTC fields (camera metadata, GPS, keywords, etc.) |
-| `museum.json` | Maps Spectrum 5.1 fields |
+| `museum.json` | Maps Collections Procedures fields |
 | `information_object.json` | Generic ISAD(G) mapping |
 
 ### Database Export (NEW in 1.4.0)
@@ -1532,7 +1532,7 @@ abstract class sectorImportTask extends arBaseTask
 | Task Class | Command | Sector |
 |------------|---------|--------|
 | `archivesCsvImportTask` | `php symfony sector:archives-csv-import` | ISAD-G |
-| `museumCsvImportTask` | `php symfony sector:museum-csv-import` | Spectrum |
+| `museumCsvImportTask` | `php symfony sector:museum-csv-import` | Collections Procedures |
 | `libraryCsvImportTask` | `php symfony sector:library-csv-import` | MARC/RDA |
 | `galleryCsvImportTask` | `php symfony sector:gallery-csv-import` | CCO |
 | `damCsvImportTask` | `php symfony sector:dam-csv-import` | Dublin Core |

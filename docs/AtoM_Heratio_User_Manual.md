@@ -246,7 +246,7 @@ CCO (Cataloguing Cultural Objects) standard:
 - **Object identification** — name, classification, materials, techniques, dimensions
 - **Getty AAT** — linked vocabulary from the Art & Architecture Thesaurus
 - **Condition assessment** — scoring with photo documentation
-- **Spectrum 5.1** — UK Collections Trust procedures for acquisition, loans, movement, condition
+- **Collections Procedures** — Collections Procedures for acquisition, loans, movement, condition
 - **Exhibition linking** — connect objects to exhibitions
 
 ### 4.4 Gallery

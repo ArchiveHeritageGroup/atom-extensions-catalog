@@ -8,7 +8,7 @@
 
 ## Overview
 
-UK Collections Trust Spectrum 5.0 procedures implementation for museum collections management including loans, location tracking, valuation, and movement control.
+Collections Procedures implementation for museum collections management including loans, location tracking, valuation, and movement control.
 
 ---
 
@@ -160,7 +160,7 @@ UK Collections Trust Spectrum 5.0 procedures implementation for museum collectio
 
 ---
 
-## Spectrum Procedures Covered
+## Collections Procedures Covered
 
 | Procedure | Description |
 |-----------|-------------|

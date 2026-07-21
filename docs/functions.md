@@ -107,7 +107,7 @@ Every navigable (GET) route below was requested with a logged-in admin session a
 94. [Semantic Search (ahgSemanticSearchPlugin)](#semantic-search-ahgsemanticsearchplugin)
 95. [Settings (ahgSettingsPlugin)](#settings-ahgsettingsplugin)
 96. [Share Point (ahgSharePointPlugin)](#share-point-ahgsharepointplugin)
-97. [Spectrum (ahgSpectrumPlugin)](#spectrum-ahgspectrumplugin)
+97. [Collections Procedures (ahgSpectrumPlugin)](#spectrum-ahgspectrumplugin)
 98. [Static Page (ahgStaticPagePlugin)](#static-page-ahgstaticpageplugin)
 99. [Statistics (ahgStatisticsPlugin)](#statistics-ahgstatisticsplugin)
 100. [Storage Manage (ahgStorageManagePlugin)](#storage-manage-ahgstoragemanageplugin)
@@ -318,7 +318,7 @@ Shopping cart for reproduction requests
 ## Condition (ahgConditionPlugin)
 *Category: ahg - enabled*
 
-Condition assessment and reporting for physical objects with Spectrum 5.0 compliance
+Condition assessment and reporting for physical objects with Collections Procedures compliance
 
 ## Contact (ahgContactPlugin)
 *Category: ahg - enabled*
@@ -827,7 +827,7 @@ Repository-based multi-tenancy with user hierarchy (Admin > Super User > User)
 ## Museum (ahgMuseumPlugin)
 *Category: ahg - enabled*
 
-Museum cataloging with CCO (Cataloging Cultural Objects), CIDOC-CRM, and Spectrum 5.0 integration
+Museum cataloging with CCO (Cataloging Cultural Objects), CIDOC-CRM, and Collections Procedures integration
 
 ## NARSSA (ahgNARSSAPlugin)
 *Category: compliance - enabled*
@@ -1057,10 +1057,10 @@ AHG Settings Management
 ## Share Point (ahgSharePointPlugin)
 *Category: integration - enabled*
 
-## Spectrum (ahgSpectrumPlugin)
+## Collections Procedures (ahgSpectrumPlugin)
 *Category: ahg - enabled*
 
-Spectrum 5.0 museum procedures - acquisition, loans, movement, conservation, valuation, and workflow management
+Collections Procedures museum procedures - acquisition, loans, movement, conservation, valuation, and workflow management
 
 ## Static Page (ahgStaticPagePlugin)
 *Category: admin - enabled*

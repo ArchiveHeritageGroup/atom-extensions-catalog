@@ -78,13 +78,13 @@ Controls the visual appearance of the site.
 
 ---
 
-### 2.2 Spectrum — Collections Management
+### 2.2 Collections Procedures — Collections Management
 
-Controls Spectrum 5.1 procedures (UK Collections Trust standard).
+Controls Collections Procedures.
 
 | Setting | Type | Default | Description |
 |---------|------|---------|-------------|
-| Enable Spectrum | Toggle | On | Master switch. When off, Spectrum features are hidden from all menus and record pages. |
+| Enable Collections Procedures | Toggle | On | Master switch. When off, Collections Procedures features are hidden from all menus and record pages. |
 | Default Currency | Select | ZAR | Currency for valuation records. Options: ZAR (South African Rand), USD, EUR, GBP. |
 | Valuation Reminder | Number (days) | 365 | System will flag items for re-valuation after this many days since last valuation. Range: 30–1825. |
 | Default Loan Period | Number (days) | 90 | Default duration for new loan records. Range: 1–365. |

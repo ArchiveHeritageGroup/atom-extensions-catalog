@@ -865,7 +865,7 @@ Download pre-built CSV templates for each GLAM sector from the dashboard:
 | Archive - ISAD(G) | Archive | ISAD(G) | identifier, title, levelOfDescription, eventDates, eventTypes, eventActors, repository, scopeAndContent, extentAndMedium, ... |
 | Archive - RAD | Archive | RAD | identifier, title, levelOfDescription, dates, nameAccessPoints, placeAccessPoints, ... |
 | Archive - DACS | Archive | DACS | identifier, title, levelOfDescription, date, extent, scopeAndContent, ... |
-| Museum - Spectrum | Museum | Spectrum | objectNumber, objectName, title, briefDescription, numberOfObjects, ... |
+| Museum - Collections Procedures | Museum | Collections Procedures | objectNumber, objectName, title, briefDescription, numberOfObjects, ... |
 | Library - Dublin Core | Library | Dublin Core | identifier, title, creator, subject, description, publisher, date, type, format, ... |
 | Gallery - CCO | Gallery | CCO | identifier, title, creator, date, workType, measurements, materials, ... |
 | DAM - Dublin Core | DAM | Dublin Core | identifier, title, creator, date, format, rights, description, ... |
@@ -939,7 +939,7 @@ Download pre-built CSV templates for each GLAM sector from the dashboard:
 | Sector | Recommended Standard | Alternatives |
 |--------|---------------------|--------------|
 | Archive | ISAD(G) | RAD, DACS |
-| Museum | Spectrum | CCO |
+| Museum | Collections Procedures | CCO |
 | Library | Dublin Core | - |
 | Gallery | CCO | Dublin Core |
 | DAM | Dublin Core | - |

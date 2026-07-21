@@ -83,7 +83,7 @@ Paid API service for AI-powered entity extraction:
 - EAD - Encoded Archival Description
 - Dublin Core
 - MODS
-- Spectrum 5.0 (museum procedures)
+- Collections Procedures (museum procedures)
 - CCO - Cataloging Cultural Objects
 - RDA - Resource Description and Access
 

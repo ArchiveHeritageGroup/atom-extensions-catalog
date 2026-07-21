@@ -45,7 +45,7 @@ AI Condition Assessment uses a local vision model (LLaVA) to analyze photographs
 
 ## Damage Types Detected
 
-15 Spectrum 5.1 damage types with 30+ synonym mappings:
+15 Collections Procedures damage types with 30+ synonym mappings:
 
 | Damage Type | Synonyms Recognised |
 |-------------|-------------------|
