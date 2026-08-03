@@ -21,16 +21,11 @@ A record catalogued in RiC is still an ordinary archival description underneath.
 
 RiC appears in the same **Display standard** dropdown as ISAD(G), RAD, DACS, MODS and Dublin Core. Its full label reads *"Records in Context (RiC-O 1.0), International Council on Archives"*.
 
-```
-Add / edit archival description
-+-------------------------------------------------------------+
-| Display standard *                                          |
-|  ( ) ISAD(G), 2nd ed.                                        |
-|  ( ) RAD, July 2008                                         |
-|  ( ) DACS, 2nd ed.                                          |
-|  (o) Records in Context (RiC-O 1.0)   <- choose this        |
-+-------------------------------------------------------------+
-```
+- Display standard *
+- ( ) ISAD(G), 2nd ed.
+- ( ) RAD, July 2008
+- ( ) DACS, 2nd ed.
+- (o) Records in Context (RiC-O 1.0)   <- choose this
 
 **On a new record.** Use **Add > Records in Context** from the main menu, or pick RiC in the Display standard dropdown on the add form. The form reloads into the RiC field set.
 
