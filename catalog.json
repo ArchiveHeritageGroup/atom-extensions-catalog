@@ -2,7 +2,7 @@
   "$schema": "https://theahg.co.za/schemas/atom-catalog-v1.json",
   "name": "AtoM Extensions Catalog",
   "description": "Official catalog of AtoM extensions by The Archive and Heritage Group",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "organization": "The Archive and Heritage Group (Pty) Ltd",
   "homepage": "https://theahg.co.za",
   "repositories": {
@@ -35,195 +35,1989 @@
   "plugins": {
     "core": [
       {
-        "name": "ahgThemeB5Plugin",
-        "description": "Bootstrap 5 theme for AtoM",
-        "category": "theme",
-        "required": true,
-        "locked": true
+        "name": "ahgCorePlugin",
+        "title": "AHG Core Plugin",
+        "description": "Core utilities and shared services for AHG plugins. Provides centralized database access, configuration, taxonomy resolution, file storage, and cross-plugin contracts.",
+        "category": "core",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "tables": 5,
+        "locked": true,
+        "required": true
+      },
+      {
+        "name": "ahgDisplayPlugin",
+        "title": "Display Plugin",
+        "description": "GLAM browser and display modes for archival content. Includes DisplayRegistry for extension-based action/panel/badge registration.",
+        "category": "display",
+        "version": "1.3.1",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 14,
+        "locked": true,
+        "required": true
       },
       {
         "name": "ahgSecurityClearancePlugin",
-        "description": "Security classification and clearance management",
-        "category": "security",
-        "required": true,
-        "locked": true
+        "title": "Security Clearance",
+        "description": "Security classification, user clearance, embargo, watermarking and extended rights management",
+        "category": "ahg",
+        "version": "1.2.9",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 21,
+        "locked": true,
+        "required": true
+      },
+      {
+        "name": "ahgThemeB5Plugin",
+        "title": "AHG Theme Bootstrap 5",
+        "description": "Modern Bootstrap 5 theme for Access to Memory",
+        "category": "theme",
+        "version": "1.14.21",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin",
+          "ahgContactPlugin",
+          "ahgUiOverridesPlugin",
+          "ahgMetadataExtractionPlugin"
+        ],
+        "locked": true,
+        "required": true
+      },
+      {
+        "name": "ahgUiOverridesPlugin",
+        "title": "UI Overrides",
+        "description": "UI action overrides for AtoM modules - centralized location for action customizations",
+        "category": "ahg",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "locked": true,
+        "required": true
       }
     ],
     "official": [
       {
-        "name": "ahgDisplayPlugin",
-        "description": "GLAM browser and display modes",
-        "category": "display"
+        "name": "ahg3DModelPlugin",
+        "title": "3D Model Viewer",
+        "description": "3D model viewing with Google Model Viewer, Gaussian Splat support, AR, hotspots, and IIIF 3D manifests",
+        "category": "ahg",
+        "version": "1.2.2",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 11
       },
       {
-        "name": "ahgLibraryPlugin",
-        "description": "Library sector support with ISBN lookup",
-        "category": "sector"
-      },
-      {
-        "name": "ahgMuseumPlugin",
-        "description": "Museum sector support with Getty integration",
-        "category": "sector"
-      },
-      {
-        "name": "ahgGalleryPlugin",
-        "description": "Gallery sector support",
-        "category": "sector"
-      },
-      {
-        "name": "ahgDAMPlugin",
-        "description": "Digital Asset Management sector support",
-        "category": "sector"
-      },
-      {
-        "name": "ahgBackupPlugin",
-        "description": "Database and file backup with scheduling",
-        "category": "maintenance"
-      },
-      {
-        "name": "ahgAuditTrailPlugin",
-        "description": "Comprehensive audit logging",
-        "category": "compliance"
-      },
-      {
-        "name": "ahgPrivacyPlugin",
-        "description": "POPIA/GDPR privacy compliance and PII detection",
-        "category": "compliance"
-      },
-      {
-        "name": "ahgResearchPlugin",
-        "description": "Research portal with reading room booking",
-        "category": "research"
-      },
-      {
-        "name": "ahgAccessRequestPlugin",
-        "description": "Researcher access request management",
-        "category": "rights"
-      },
-      {
-        "name": "ahgExtendedRightsPlugin",
-        "description": "Extended rights management",
-        "category": "rights"
-      },
-      {
-        "name": "ahgRightsPlugin",
-        "description": "Core rights management",
-        "category": "rights"
-      },
-      {
-        "name": "ahgDonorAgreementPlugin",
-        "description": "Donor agreement management with contracts",
-        "category": "rights"
-      },
-      {
-        "name": "ahgLoanPlugin",
-        "description": "Loan management for GLAM institutions",
-        "category": "loans"
-      },
-      {
-        "name": "ahgSpectrumPlugin",
-        "description": "Spectrum 5.0 museum procedures",
-        "category": "sector"
-      },
-      {
-        "name": "ahgConditionPlugin",
-        "description": "Object condition reporting with annotations",
-        "category": "preservation"
-      },
-      {
-        "name": "ahgPreservationPlugin",
-        "description": "Digital preservation with fixity verification",
-        "category": "preservation"
-      },
-      {
-        "name": "ahgMetadataExtractionPlugin",
-        "description": "Universal metadata extraction with ExifTool",
-        "category": "preservation"
-      },
-      {
-        "name": "ahgNerPlugin",
-        "description": "Named Entity Recognition with spaCy",
-        "category": "ai"
-      },
-      {
-        "name": "ahgSemanticSearchPlugin",
-        "description": "Semantic search with thesaurus and embeddings",
-        "category": "search"
-      },
-      {
-        "name": "ahgReportBuilderPlugin",
-        "description": "Custom report builder with drag-drop designer",
-        "category": "reporting"
+        "name": "ahgAIPlugin",
+        "title": "AI Tools",
+        "description": "AI-powered tools for archival management: Named Entity Recognition (NER), Translation, Summarization, Spellcheck, and LLM Description Suggestions",
+        "category": "ai",
+        "version": "2.3.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 27
       },
       {
         "name": "ahgAPIPlugin",
-        "description": "Enhanced REST API v2 with webhooks",
-        "category": "integration"
+        "title": "AHG API Plugin",
+        "description": "Enhanced REST API v2 with API key management, full CRUD operations, batch processing, webhooks with HMAC signatures and retry logic, rate limiting, and GLAM/DAM sector support",
+        "category": "integration",
+        "version": "1.2.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "tables": 7
       },
       {
-        "name": "ahgMigrationPlugin",
-        "description": "Universal data migration tool",
-        "category": "migration"
+        "name": "ahgAccessRequestPlugin",
+        "title": "Access Request",
+        "description": "Researcher access request management for restricted materials",
+        "category": "rights",
+        "version": "1.1.6",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin",
+          "ahgSecurityClearancePlugin"
+        ],
+        "tables": 7,
+        "locked": true
       },
       {
-        "name": "ahgDataMigrationPlugin",
-        "description": "Data migration utilities",
-        "category": "migration"
+        "name": "ahgAccessibilityPlugin",
+        "title": "AHG Accessibility",
+        "description": "WCAG accessibility tooling for archival descriptions — human-authored image alternative text (WCAG 1.1.1), authoring UI, coverage dashboard and a consumer API.",
+        "category": "reporting",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "tables": 1
       },
       {
-        "name": "ahgRicExplorerPlugin",
-        "description": "Records in Contexts (RiC) visualization",
-        "category": "standards"
+        "name": "ahgAccessionManagePlugin",
+        "title": "AHG Accession Manage",
+        "description": "First-class accession management with intake queue, appraisal workflow, container tracking, rights inheritance, and multi-tenant isolation",
+        "category": "browse",
+        "version": "2.0.1",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=2.8.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 15,
+        "locked": true
       },
       {
-        "name": "ahgHeritageAccountingPlugin",
-        "description": "Heritage asset accounting (GRAP 103/IPSAS)",
-        "category": "accounting"
+        "name": "ahgActorManagePlugin",
+        "title": "AHG Actor Manage",
+        "description": "High-performance actor browse and autocomplete using Laravel Query Builder and direct ES queries. Replaces base AtoM actor browse that causes N+1 query hangs.",
+        "category": "browse",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 1,
+        "locked": true
       },
       {
-        "name": "ahgProvenancePlugin",
-        "description": "Provenance tracking and visualization",
-        "category": "provenance"
+        "name": "ahgAiCompliancePlugin",
+        "title": "AI Compliance",
+        "description": "EU AI Act Article 12 record-keeping (PSIS port of ahg/ai-compliance). Tamper-evident receipt chain over every AI inference call using the ahg/inference-receipts library (SHA-256 chain + RFC 8785 JCS + Ed25519).",
+        "category": "ahg",
+        "version": "0.1.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.2"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 6
       },
       {
-        "name": "ahgIiifCollectionPlugin",
-        "description": "IIIF manifest and collection management",
-        "category": "integration"
+        "name": "ahgAiConditionPlugin",
+        "title": "AI Condition Assessment",
+        "description": "AI-powered condition assessment using YOLOv8 damage detection and EfficientNet classification. Companion to ahgConditionPlugin.",
+        "category": "ai",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "dependencies": [
+          "ahgCorePlugin",
+          "ahgConditionPlugin"
+        ],
+        "tables": 6
       },
       {
-        "name": "ahg3DModelPlugin",
-        "description": "3D model viewer with Blender integration",
-        "category": "display"
+        "name": "ahgAnnotationsPlugin",
+        "title": "AHG Web Annotations Plugin",
+        "description": "Standalone W3C Web Annotation Data Model + Protocol backend (#146, parity with Heratio ahg-annotations)",
+        "category": "advanced_features",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 1
+      },
+      {
+        "name": "ahgArchaeologyPlugin",
+        "title": "Archaeology",
+        "description": "Archaeological site, find and stratigraphic context recording - single-context recording with Harris Matrix, for excavation archives",
+        "category": "heritage",
+        "version": "0.1.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 4
+      },
+      {
+        "name": "ahgArtworkRequestPlugin",
+        "title": "Artwork Request",
+        "description": "Staff requests to place artworks in offices and shared spaces. Captures the request, checks availability, notifies the responsible staff and records the decision - the conversation itself stays with people.",
+        "category": "collection_management",
+        "version": "0.3.1",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom": ">=2.9",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 4
+      },
+      {
+        "name": "ahgAuditTrailPlugin",
+        "title": "Audit Trail",
+        "description": "Comprehensive audit trail logging for AtoM with POPIA/NARSSA compliance. Provides AhgAuditService for centralized audit logging.",
+        "category": "ahg",
+        "version": "1.3.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 6
+      },
+      {
+        "name": "ahgAuthorityPlugin",
+        "title": "AHG Authority Records Enhancement",
+        "description": "Comprehensive authority record enhancements: external linking (Wikidata, VIAF, ULAN, LCNAF), completeness dashboard, NER-to-authority pipeline, relationship graph, merge/split workflow, bulk deduplication, structured occupations, ISDF functions, EAC-CPF export enrichment, and contact panel surfacing.",
+        "category": "authority",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=2.8.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin",
+          "ahgActorManagePlugin"
+        ],
+        "tables": 7
+      },
+      {
+        "name": "ahgAuthorityResolutionPlugin",
+        "title": "AHG Authority Resolution Engine",
+        "description": "Evidence-based authority resolution for persons, places, and organisations. Replaces name-only matching with an archivist-driven workflow that surfaces neighbourhood-context evidence, ranked candidates, and provenance-tracked decisions. Provenance writes to Fuseki as RDF-Star.",
+        "category": "authority",
+        "version": "0.1.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=2.8.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin",
+          "ahgActorManagePlugin",
+          "ahgAIPlugin"
+        ],
+        "tables": 7
+      },
+      {
+        "name": "ahgBackupPlugin",
+        "title": "Backup & Restore",
+        "description": "Database and file backup with scheduling, restore, upload and retention management",
+        "category": "maintenance",
+        "version": "1.1.3",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 3
+      },
+      {
+        "name": "ahgC2paPlugin",
+        "title": "C2PA Content Credentials",
+        "description": "C2PA (Coalition for Content Provenance and Authenticity) 2.1 content credentials. Generate, Ed25519-sign and embed signed provenance manifests on digital-object derivatives (JUMBF via c2patool, or .c2pa.json sidecars), surface embedded EXIF/IPTC/XMP as C2PA Standard Metadata Assertions, declare AI training-mining stance, and verify manifests. PSIS port of Heratio's ahg/c2pa, sharing the ahg/inference-receipts Ed25519 key chain with ahgAiCompliancePlugin.",
+        "category": "ahg",
+        "version": "0.1.1",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.2"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 1
+      },
+      {
+        "name": "ahgCDPAPlugin",
+        "title": "Zimbabwe CDPA Compliance",
+        "description": "Zimbabwe Cyber and Data Protection Act [Chapter 12:07] compliance — DPO registration, breach management, DPIA, consent tracking, data subject requests, and POTRAZ reporting",
+        "category": "compliance",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 9
       },
       {
         "name": "ahgCartPlugin",
-        "description": "Shopping cart for orders and requests",
-        "category": "user-engagement"
+        "title": "AHG Cart Plugin",
+        "description": "Shopping cart with dual-mode support: Standard (Request to Publish) and E-Commerce with PayFast payment integration",
+        "category": "ahg",
+        "version": "2.1.1",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 8
+      },
+      {
+        "name": "ahgConditionPlugin",
+        "title": "Condition Assessment",
+        "description": "Condition assessment and reporting for museum objects",
+        "category": "museum",
+        "version": "1.2.7",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1",
+          "php_extensions": [
+            "gd"
+          ]
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 16
+      },
+      {
+        "name": "ahgContactPlugin",
+        "title": "Contact Management",
+        "description": "Contact information management for actors and repositories",
+        "category": "ahg",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 1
+      },
+      {
+        "name": "ahgCustomFieldsPlugin",
+        "title": "Custom Fields",
+        "description": "Admin-configurable custom metadata fields for any entity type. Define fields via UI — no code changes needed.",
+        "category": "metadata",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=2.8.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 2
+      },
+      {
+        "name": "ahgDAMPlugin",
+        "title": "Digital Asset Management",
+        "description": "Digital Asset Management with IPTC metadata, watermarks, derivatives, and Creative Commons licensing",
+        "category": "sector",
+        "version": "1.3.14",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 12
+      },
+      {
+        "name": "ahgDacsManagePlugin",
+        "title": "DACS Descriptive Standard",
+        "description": "DACS (Describing Archives: A Content Standard) edit form for information objects",
+        "category": "descriptive-standard",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ]
+      },
+      {
+        "name": "ahgDataMigrationPlugin",
+        "title": "Data Migration Tool",
+        "description": "Migrate records from external systems (ArchivesSpace, Vernon CMS, Preservica OPEX/PAX) with field mapping, Gearman background jobs, sector-specific CSV export, rights and provenance import",
+        "category": "ahg",
+        "version": "1.2.11",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "tables": 5
+      },
+      {
+        "name": "ahgDcManagePlugin",
+        "title": "Dublin Core Descriptive Standard",
+        "description": "Dublin Core descriptive standard edit form for information objects",
+        "category": "descriptive-standard",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ]
+      },
+      {
+        "name": "ahgDedupePlugin",
+        "title": "Duplicate Detection",
+        "description": "Duplicate detection and merging for archival records — configurable rules, scan jobs, compare view, merge workflow, and reports",
+        "category": "data-quality",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 5
+      },
+      {
+        "name": "ahgDiscoveryPlugin",
+        "title": "Discovery",
+        "description": "Topic discovery and related content — natural language search with NER, synonym expansion, hierarchical context, and PageIndex LLM-driven retrieval over EAD, PDF, and RiC-O records",
+        "category": "search",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=2.8.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 4
+      },
+      {
+        "name": "ahgDoiPlugin",
+        "title": "DOI Integration",
+        "description": "DOI integration via DataCite — mint, deactivate, sync, queue processing, badge display, and verification",
+        "category": "integration",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 5
+      },
+      {
+        "name": "ahgDonorAgreementPlugin",
+        "title": "Donor Agreement Management",
+        "description": "Donor Agreement Management with contract uploads, reminders, and rights tracking",
+        "category": "rights",
+        "version": "1.3.7",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 11
+      },
+      {
+        "name": "ahgDonorManagePlugin",
+        "title": "AHG Donor Manage",
+        "description": "Donor browse and management using Laravel Query Builder",
+        "category": "browse",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "locked": true
+      },
+      {
+        "name": "ahgEmailDeliveryPlugin",
+        "title": "AHG Email Delivery Plugin",
+        "description": "Email deliverability: bounce capture + suppression list + send-time gate (#145, parity with Heratio EmailBounceController/EmailSuppressionGate)",
+        "category": "communication",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 1
+      },
+      {
+        "name": "ahgExhibitionPlugin",
+        "title": "AHG Exhibition",
+        "description": "Exhibition management for GLAM/DAM sectors - standalone plugin for managing exhibitions, objects, storylines, and events",
+        "category": "glam",
+        "version": "1.0.1",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom": ">=2.6.0"
+        },
+        "tables": 15
+      },
+      {
+        "name": "ahgExportPlugin",
+        "title": "AHG Export",
+        "description": "Archival export functionality for CSV, EAD, and other formats",
+        "category": "export",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ]
+      },
+      {
+        "name": "ahgExtendedRightsPlugin",
+        "title": "Extended Rights Management",
+        "description": "Extended rights management with RightsStatements.org integration, embargo management, Traditional Knowledge labels, and batch rights assignment",
+        "category": "rights",
+        "version": "1.2.9",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin",
+          "ahgRightsPlugin"
+        ],
+        "tables": 14
       },
       {
         "name": "ahgFavoritesPlugin",
-        "description": "User favorites and bookmarks",
-        "category": "user-engagement"
+        "title": "AHG Favorites Plugin",
+        "description": "Full-featured favorites/bookmarks management with folders, notes, bulk operations, and AJAX toggle",
+        "category": "ahg",
+        "version": "2.0.1",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 3
+      },
+      {
+        "name": "ahgFederationPlugin",
+        "title": "AHG Federation",
+        "description": "OAI-PMH Federation plugin for Heritage Platform metadata exchange",
+        "category": "integration",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "tables": 10
       },
       {
         "name": "ahgFeedbackPlugin",
-        "description": "User feedback collection",
-        "category": "user-engagement"
+        "title": "AHG Feedback Plugin",
+        "description": "User feedback and suggestions management for archival records",
+        "category": "user_engagement",
+        "version": "1.0.6",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 2
       },
       {
-        "name": "ahgRequestToPublishPlugin",
-        "description": "Publication request workflow",
-        "category": "user-engagement"
+        "name": "ahgFormsPlugin",
+        "title": "Forms Builder",
+        "description": "Configurable metadata entry forms per repository — drag-drop form builder, template library, field assignments, draft saving, and import/export",
+        "category": "data-entry",
+        "version": "1.0.2",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 6
       },
       {
-        "name": "ahgVendorPlugin",
-        "description": "Third-party vendor management",
-        "category": "integration"
+        "name": "ahgFtpPlugin",
+        "title": "FTP / SFTP Upload",
+        "description": "Browser-based FTP/SFTP upload for CSV import digital objects. Provides drag-and-drop upload interface under Import > FTP Upload so users can place files on the server without external FTP client software. Prominently shows the path to use in CSV digitalObjectPath column.",
+        "category": "import",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=2.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin",
+          "ahgSettingsPlugin"
+        ]
+      },
+      {
+        "name": "ahgFunctionManagePlugin",
+        "title": "ISDF Function Manage",
+        "description": "ISDF function browse, view, edit, and delete management using Laravel Query Builder",
+        "category": "browse",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ]
+      },
+      {
+        "name": "ahgFunctionsDocsPlugin",
+        "title": "AHG Functions Docs Plugin",
+        "description": "Auto-generated, browsable catalogue of routes, CLI tasks and services (#148, parity with Heratio ahg-functions-docs).",
+        "category": "admin",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ]
+      },
+      {
+        "name": "ahgGISPlugin",
+        "title": "GIS & Spatial Heritage",
+        "description": "Geospatial search and GeoJSON export for heritage records with coordinates",
+        "category": "search",
+        "version": "0.1.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=2.8.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ]
+      },
+      {
+        "name": "ahgGalleryPlugin",
+        "title": "Gallery & Exhibition Management",
+        "description": "Gallery and exhibition management with artist tracking, loans, insurance, and facility reports",
+        "category": "sector",
+        "version": "1.2.11",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 12
+      },
+      {
+        "name": "ahgGraphQLPlugin",
+        "title": "AHG GraphQL Plugin",
+        "description": "GraphQL API endpoint providing flexible querying with security safeguards including depth limiting and complexity analysis",
+        "category": "integration",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1",
+          "ahgAPIPlugin": ">=1.0.0"
+        },
+        "dependencies": [
+          "webonyx/graphql-php"
+        ],
+        "tables": 1
+      },
+      {
+        "name": "ahgHelpPlugin",
+        "title": "AHG Help Plugin",
+        "description": "Online help system with searchable documentation, contextual help, and FlexSearch-powered instant search",
+        "category": "admin",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 2
+      },
+      {
+        "name": "ahgHeritageAccountingPlugin",
+        "title": "Heritage Asset Accounting",
+        "description": "Multi-regional heritage asset financial accounting with support for IPSAS, GRAP, FRS, GASB, AASB, PSAS standards",
+        "category": "accounting",
+        "version": "2.0.1",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 11
+      },
+      {
+        "name": "ahgHeritagePlugin",
+        "title": "Heritage Plugin",
+        "description": "Heritage discovery platform with contributor system, custodian management, and analytics",
+        "category": "uncategorised",
+        "version": "1.1.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgThemeB5Plugin"
+        ],
+        "tables": 45
+      },
+      {
+        "name": "ahgICIPPlugin",
+        "title": "Indigenous Cultural IP",
+        "description": "Indigenous Cultural and Intellectual Property management — community registration, TK Labels, cultural notices, consent tracking, consultations, and access restrictions",
+        "category": "rights",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 13
+      },
+      {
+        "name": "ahgIPSASPlugin",
+        "title": "IPSAS Heritage Accounting",
+        "description": "International Public Sector Accounting Standards (IPSAS 45) heritage asset accounting — asset register, valuations, impairments, insurance, depreciation, disposals, and financial year reporting",
+        "category": "finance",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 10
+      },
+      {
+        "name": "ahgIiifPlugin",
+        "title": "AHG IIIF Plugin",
+        "description": "IIIF viewer integration with Mirador and OpenSeadragon support",
+        "category": "viewer",
+        "version": "1.2.3",
+        "license": "AGPL-3.0-or-later",
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 25
+      },
+      {
+        "name": "ahgImageArPlugin",
+        "title": "AHG Image AR Plugin",
+        "description": "Place a flat 2D archival image into augmented reality (WebXR hit-test). #147, parity with Heratio ahg-image-ar.",
+        "category": "advanced_features",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ]
+      },
+      {
+        "name": "ahgInformationObjectManagePlugin",
+        "title": "ISAD(G) Information Object Manage",
+        "description": "ISAD(G) information object CRUD management — create, edit, delete, digital object upload, treeview navigation via Laravel Query Builder",
+        "category": "descriptive-standard",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ]
+      },
+      {
+        "name": "ahgIngestPlugin",
+        "title": "Ingestion Manager",
+        "description": "OAIS-aligned multi-stage ingestion pipeline: configure, upload, map, validate, preview, commit with rollback support",
+        "category": "ingestion",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin",
+          "ahgSecurityClearancePlugin"
+        ],
+        "tables": 7
+      },
+      {
+        "name": "ahgIntegrityPlugin",
+        "title": "Integrity Assurance",
+        "description": "Enterprise-grade automated integrity assurance: scheduled fixity verification, scoped validation, concurrency controls, append-only ledger, dead-letter queue, retention policies, legal holds, disposition review, threshold alerting",
+        "category": "preservation",
+        "version": "1.1.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=2.8.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin",
+          "ahgPreservationPlugin"
+        ],
+        "tables": 12
+      },
+      {
+        "name": "ahgJobsManagePlugin",
+        "title": "Background Jobs Manage",
+        "description": "Background jobs browse, delete, and report management using Laravel Query Builder",
+        "category": "admin",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ]
+      },
+      {
+        "name": "ahgLabelPlugin",
+        "title": "Label Generator",
+        "description": "Label generation for archival objects with customizable templates",
+        "category": "tools",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 1
+      },
+      {
+        "name": "ahgLandingPagePlugin",
+        "title": "Landing Page Builder",
+        "description": "Visual landing page builder with drag-and-drop blocks",
+        "category": "admin",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 8
+      },
+      {
+        "name": "ahgLibraryPlugin",
+        "title": "Library & Bibliographic",
+        "description": "Library cataloging with MARC-inspired fields, ISBN lookup, and bibliographic management",
+        "category": "sector",
+        "version": "1.9.15",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 44
+      },
+      {
+        "name": "ahgLoanPlugin",
+        "title": "Loan Management",
+        "description": "Shared loan management for GLAM institutions - Museums, Galleries, Archives, Libraries, and Digital Assets. Based on Collections Procedures and international GLAM standards.",
+        "category": "loans",
+        "version": "1.0.1",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 19
+      },
+      {
+        "name": "ahgMarketplacePlugin",
+        "title": "AHG Marketplace Plugin",
+        "description": "Online art/gallery marketplace with multi-GLAM sector support. Fixed pricing, make-an-offer negotiations, and timed auctions. Multi-currency, seller verification, commission tracking, and payout management.",
+        "category": "ahg",
+        "version": "1.0.1",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=2.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 16
+      },
+      {
+        "name": "ahgMenuManagePlugin",
+        "title": "Menu Configuration Manage",
+        "description": "Menu configuration management — list, edit, and delete AtoM navigation menus via Laravel Query Builder",
+        "category": "admin",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ]
+      },
+      {
+        "name": "ahgMetadataExportPlugin",
+        "title": "GLAM Metadata Export Framework",
+        "description": "Unified export framework supporting 10 metadata standards across GLAM sectors (Galleries, Libraries, Archives, Museums) and digital preservation.",
+        "category": "export",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom": ">=2.6.0",
+          "php": ">=7.4",
+          "atom-framework": ">=1.0.0"
+        },
+        "tables": 2
+      },
+      {
+        "name": "ahgMetadataExtractionPlugin",
+        "title": "Metadata Extraction",
+        "description": "Universal metadata extraction from digital objects using ExifTool, with automatic field mapping and preservation metadata support",
+        "category": "preservation",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 2
+      },
+      {
+        "name": "ahgMiradorPlugin",
+        "title": "AHG Mirador Viewer",
+        "description": "Contributes the Mirador IIIF image viewer as an independently installable plugin. Registers a renderer with ahgIiifPlugin's RendererRegistry; install or disable it to choose the viewer.",
+        "category": "uncategorised",
+        "version": "1.2.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom": ">=2.10",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgIiifPlugin"
+        ]
+      },
+      {
+        "name": "ahgModsManagePlugin",
+        "title": "MODS Descriptive Standard",
+        "description": "MODS (Metadata Object Description Schema) descriptive standard edit form for information objects",
+        "category": "descriptive-standard",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ]
+      },
+      {
+        "name": "ahgMultiTenantPlugin",
+        "title": "AHG Multi-Tenant",
+        "description": "Multi-tenancy with domain routing, dedicated tenant tables, and user hierarchy",
+        "category": "security",
+        "version": "1.2.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom": ">=2.6.0"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 3
+      },
+      {
+        "name": "ahgMuseumPlugin",
+        "title": "Museum Cataloging (CCO/Collections Procedures)",
+        "description": "Museum cataloging with CCO (Cataloging Cultural Objects), CIDOC-CRM, and Collections Procedures integration",
+        "category": "sector",
+        "version": "1.4.18",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin",
+          "ahgSpectrumPlugin"
+        ],
+        "tables": 36
+      },
+      {
+        "name": "ahgNARSSAPlugin",
+        "title": "NARSSA Transfer (South Africa)",
+        "description": "South African National Archives and Records Service Act 1996 compliance — generates NARSSA-compliant transfer manifests (METS-EAD2002 XML + digital files + manifest.csv) for records reaching disposal-due via the ahgExtendedRightsPlugin disposal workflow.",
+        "category": "compliance",
+        "version": "0.1.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin",
+          "ahgExtendedRightsPlugin"
+        ],
+        "tables": 2
+      },
+      {
+        "name": "ahgNAZPlugin",
+        "title": "Zimbabwe NAZ Compliance",
+        "description": "Zimbabwe National Archives Act [Chapter 25:06] compliance — 25-year closure rule, researcher permits, records schedules, transfers, and protected records management",
+        "category": "compliance",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 10
+      },
+      {
+        "name": "ahgNMMZPlugin",
+        "title": "Zimbabwe NMMZ Compliance",
+        "description": "Zimbabwe National Museums and Monuments Act [Chapter 25:11] compliance — monument register, antiquities, export permits, archaeological sites, heritage impact assessments",
+        "category": "compliance",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 9
+      },
+      {
+        "name": "ahgObservabilityPlugin",
+        "title": "AHG Observability Plugin",
+        "description": "Prometheus-format /metrics exporter for AtoM. Exposes app, HTTP request, DB query and queue-depth metrics through a lightweight, auth-gated (bearer token OR IP allow-list) endpoint. Auto-selecting APCu/Redis/in-memory counter storage with graceful fallback. CLI commands sample queue depth and emit node_exporter textfiles.",
+        "category": "integration",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        }
+      },
+      {
+        "name": "ahgOcflPlugin",
+        "title": "OCFL Preservation Storage",
+        "description": "OCFL v1.1 (Oxford Common File Layout) preservation storage: storage-root management, content-addressed object versioning with deterministic inventory.json + SHA-512 digests, per-version directories, fixity verification and tar export.",
+        "category": "preservation",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 1
       },
       {
         "name": "ahgPortableExportPlugin",
-        "description": "Standalone portable catalogue viewer for CD/USB/ZIP offline distribution",
-        "category": "export"
+        "title": "Portable Export & Import",
+        "description": "Full-system portable export and import for AtoM Heratio. Export complete instances with 15 entity types, SHA-256 checksummed manifests, and self-documenting packages. Import archives into fresh instances with ID remapping, merge/replace/dry-run modes. Also supports offline HTML viewer export for CD/USB/ZIP distribution.",
+        "category": "export",
+        "version": "3.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=2.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 3
+      },
+      {
+        "name": "ahgPreservationPlugin",
+        "title": "Digital Preservation",
+        "description": "Digital preservation: checksums, fixity verification, PREMIS events, format registry",
+        "category": "preservation",
+        "version": "1.0.6",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 30
+      },
+      {
+        "name": "ahgPrivacyPlugin",
+        "title": "Privacy Compliance Management",
+        "description": "POPIA/GDPR Privacy Compliance Management - DSAR tracking, Breach register, ROPA, Consent management",
+        "category": "compliance",
+        "version": "1.1.14",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 34
+      },
+      {
+        "name": "ahgProvenancePlugin",
+        "title": "Provenance Tracking",
+        "description": "Chain of custody and provenance tracking for archival records, museum objects, and library materials, plus AI inference provenance recording and Ed25519 manifest signing",
+        "category": "provenance",
+        "version": "1.2.3",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 9
+      },
+      {
+        "name": "ahgRadManagePlugin",
+        "title": "RAD Descriptive Standard",
+        "description": "RAD (Rules for Archival Description) descriptive standard edit form for information objects",
+        "category": "descriptive-standard",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ]
+      },
+      {
+        "name": "ahgRdmPlugin",
+        "title": "RDM Manager",
+        "description": "Sovereign (POPIA-resident) research-data-management module: dataset deposit, AI-assisted human-gated POPIA sensitivity scan, access/embargo + DOI, compliance dashboard. Reverse port of Heratio ahg-rdm (heratio#1337).",
+        "category": "research",
+        "version": "0.1.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin",
+          "ahgIngestPlugin",
+          "ahgInformationObjectManagePlugin",
+          "ahgResearchPlugin"
+        ],
+        "tables": 4
+      },
+      {
+        "name": "ahgRecordsManagePlugin",
+        "title": "Records Management (File Plan)",
+        "description": "Records-management file plan / classification scheme — a nested-set tree of classification nodes (function/series/file) with retention and disposal-action metadata. PSIS-parity port of the Heratio ahg-records-manage FilePlanService (#118). Email capture and full disposal/retention execution are follow-ups.",
+        "category": "records-management",
+        "version": "0.1.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 2
+      },
+      {
+        "name": "ahgRedactionPlugin",
+        "title": "AHG Redaction Plugin",
+        "description": "Manual visual redaction of digital objects: draw regions over a PDF or image, save them, and generate a redacted copy. The original file is never modified.",
+        "category": "compliance",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=2.14.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "tables": 2
+      },
+      {
+        "name": "ahgRegistryPlugin",
+        "title": "Registry Plugin",
+        "description": "AtoM/Heratio Community Hub & Registry - Directory of institutions, vendors, software, user groups, discussions, blog, and sync API for the GLAM community.",
+        "category": "uncategorised",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=2.8.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 36
+      },
+      {
+        "name": "ahgReportBuilderPlugin",
+        "title": "Report Builder",
+        "description": "Enterprise report builder with rich text editing (Quill.js), Word/PDF/XLSX/CSV export, drag-drop sections, templates, collaboration workflows, SQL queries, sharing, and scheduling",
+        "category": "reporting",
+        "version": "2.0.1",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 15
+      },
+      {
+        "name": "ahgReportsPlugin",
+        "title": "AHG Reports",
+        "description": "Central reporting dashboard with accession, authority, repository, storage and taxonomy reports",
+        "category": "admin",
+        "version": "1.1.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ]
+      },
+      {
+        "name": "ahgRepositoryManagePlugin",
+        "title": "AHG Repository Manage",
+        "description": "High-performance archival institution browse using Laravel Query Builder and direct ES queries",
+        "category": "browse",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "locked": true
+      },
+      {
+        "name": "ahgRequestToPublishPlugin",
+        "title": "Request to Publish",
+        "description": "Manage publication requests for archival images and digital objects",
+        "category": "user-engagement",
+        "version": "1.0.3",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 4
+      },
+      {
+        "name": "ahgResearchPlugin",
+        "title": "Research Portal",
+        "description": "Research knowledge platform with evidence graphs, source criticism, cross-collection synthesis, W3C annotations, AI extraction orchestration, validation queues, snapshots, assertions, hypotheses, ORCID integration, collaboration, bibliography, reproduction requests, workspaces, journal, reports, notifications, RO-Crate packaging, ODRL rights, reproducibility packs, DOI minting, and REST API access",
+        "category": "research",
+        "version": "3.1.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin",
+          "ahgAccessRequestPlugin"
+        ],
+        "tables": 145
+      },
+      {
+        "name": "ahgResearcherPlugin",
+        "title": "Researcher Collection Upload",
+        "description": "Researcher collection upload and approval workflow — online submissions and offline exchange import with two-step archivist review",
+        "category": "research",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=2.8.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 4
+      },
+      {
+        "name": "ahgResourceSyncPlugin",
+        "title": "AHG ResourceSync Plugin",
+        "description": "ResourceSync 1.1 (NISO Z39.99-2017) Source endpoints: Source Description, Capability List, Resource List and Change List as sitemap-formatted XML. Mirrors the OAI-PMH publication filter so aggregators see the same record + tombstone set across both federation surfaces.",
+        "category": "integration",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "tables": 1
+      },
+      {
+        "name": "ahgRicExplorerPlugin",
+        "title": "RiC Explorer",
+        "description": "Records in Context (RiC) visualization, exploration, and Fuseki triplestore integration",
+        "category": "ahg",
+        "version": "1.1.5",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 6
+      },
+      {
+        "name": "ahgRicManagePlugin",
+        "title": "Records in Context (RiC) Cataloguing",
+        "description": "Adds Records in Context (RiC-O) as a selectable descriptive standard. A record captured as RiC keeps its RiC-O entity type, record-centric RiC properties, and typed RiC relations, all sourced from MySQL. Record-centric now, extensible to further RiC entity types later.",
+        "category": "metadata",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 1
+      },
+      {
+        "name": "ahgRightsHolderManagePlugin",
+        "title": "AHG Rights Holder Manage",
+        "description": "Rights holder browse and management using Laravel Query Builder",
+        "category": "browse",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "locked": true
+      },
+      {
+        "name": "ahgRightsPlugin",
+        "title": "Rights Management",
+        "description": "Core rights management including PREMIS rights, Creative Commons, rights holders, and orphan works tracking",
+        "category": "rights",
+        "version": "1.1.2",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 24
+      },
+      {
+        "name": "ahgRuntimePlugin",
+        "title": "ahgRuntimePlugin",
+        "description": "AHG runtime - shared services and base classes required by AHG plugins",
+        "category": "uncategorised",
+        "version": "2.18.28",
+        "license": "AGPL-3.0-or-later",
+        "tables": 3
+      },
+      {
+        "name": "ahgSAHRAPlugin",
+        "title": "SAHRA / NHRA Heritage Permits",
+        "description": "South African Heritage Resources Agency (SAHRA) permit workflow under the National Heritage Resources Act, 1999 (Act 25 of 1999). Researcher applies, supervising professor endorses, then the application is submitted to SAHRA and the outcome recorded. Covers s.35 archaeology/palaeontology/meteorites, s.32 heritage object export, s.34 structures and s.36 burial grounds & graves.",
+        "category": "compliance",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 7
+      },
+      {
+        "name": "ahgScanPlugin",
+        "title": "Watched Folder Scanner",
+        "description": "Watched-folder streaming ingest: configurable watched folders, a scan/watch CLI that detects new files and feeds the ingest pipeline, processed/failed disposition dirs, and dedupe by SHA-256 checksum.",
+        "category": "ingestion",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin",
+          "ahgIngestPlugin"
+        ],
+        "tables": 2
+      },
+      {
+        "name": "ahgSeadragonPlugin",
+        "title": "AHG Seadragon Viewer",
+        "description": "Contributes the Seadragon IIIF image viewer as an independently installable plugin. Registers a renderer with ahgIiifPlugin's RendererRegistry; install or disable it to choose the viewer.",
+        "category": "uncategorised",
+        "version": "1.1.3",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom": ">=2.10",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgIiifPlugin"
+        ]
+      },
+      {
+        "name": "ahgSearchPlugin",
+        "title": "AHG Search",
+        "description": "Global search, autocomplete, description updates, and search/replace for AtoM Heratio",
+        "category": "search",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "tables": 6
+      },
+      {
+        "name": "ahgSemanticSearchPlugin",
+        "title": "Semantic Search",
+        "description": "Semantic search and thesaurus management with WordNet/Datamuse API sync, Wikidata SPARQL integration, and vector embeddings via Ollama",
+        "category": "search",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 8
+      },
+      {
+        "name": "ahgSettingsPlugin",
+        "title": "AHG Settings",
+        "description": "Extended settings management for AtoM with sections, metadata templates, and configuration tools",
+        "category": "admin",
+        "version": "1.0.1",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 5
+      },
+      {
+        "name": "ahgSharePointPlugin",
+        "title": "SharePoint Integration",
+        "description": "Microsoft 365 SharePoint integration: tenant config, drive registration, manual delta sync (Phase 1); webhook records handoff (Phase 2); federated search + M365 connector feed (Phase 3). One-way: SharePoint -> AtoM ingest.",
+        "category": "integration",
+        "version": "0.1.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=2.8.2",
+          "atom": ">=2.8",
+          "php": ">=8.2"
+        },
+        "dependencies": [
+          "ahgCorePlugin",
+          "ahgSettingsPlugin",
+          "ahgIngestPlugin",
+          "ahgAuditTrailPlugin"
+        ],
+        "tables": 7
+      },
+      {
+        "name": "ahgSiteRecordPlugin",
+        "title": "Site Record",
+        "description": "Field recording for archaeological, heritage and rock art sites - site records attached to authority records, with role-gated locality",
+        "category": "heritage",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 3
+      },
+      {
+        "name": "ahgSpectrumPlugin",
+        "title": "Collections Procedures",
+        "description": "Museum collections procedures - acquisition, loans, movement, conservation, valuation, and workflow management",
+        "category": "sector",
+        "version": "1.3.1",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 33
+      },
+      {
+        "name": "ahgStaticPagePlugin",
+        "title": "Static Page Manage",
+        "description": "Static page management — list, edit, and delete AtoM static pages via Laravel Query Builder",
+        "category": "admin",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ]
+      },
+      {
+        "name": "ahgStatisticsPlugin",
+        "title": "Usage Statistics",
+        "description": "Usage statistics tracking with page views, downloads, GeoIP lookup, bot filtering, and reporting dashboards",
+        "category": "analytics",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 5
+      },
+      {
+        "name": "ahgStorageManagePlugin",
+        "title": "AHG Storage Manage",
+        "description": "Physical storage browse and management using Laravel Query Builder",
+        "category": "browse",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 3,
+        "locked": true
+      },
+      {
+        "name": "ahgTermTaxonomyPlugin",
+        "title": "AHG Term Taxonomy",
+        "description": "High-performance term and taxonomy browse (subjects, places, genres) using Laravel Query Builder and direct ES queries",
+        "category": "browse",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "locked": true
+      },
+      {
+        "name": "ahgTiffPdfMergePlugin",
+        "title": "TIFF PDF Merge",
+        "description": "TIFF and PDF merge job management for digital preservation",
+        "category": "preservation",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 3
+      },
+      {
+        "name": "ahgTimeLimitedShareLinkPlugin",
+        "title": "Time-Limited Share Link",
+        "description": "Time-limited, auditable share links for information_object records. Anonymous bearer-token access with HMAC-derived URL-safe tokens, optional max-access count, expiry caps, classified-record gating, and admin revocation. Integrates with ahgAuditTrailPlugin and ahgSecurityClearancePlugin.",
+        "category": "records-management",
+        "version": "0.2.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 2
+      },
+      {
+        "name": "ahgTranslationPlugin",
+        "title": "Translation",
+        "description": "On-prem translation integration for AtoM via local MT endpoint (supports Afrikaans/Dutch and SA languages -> English depending on MT service).",
+        "category": "ai",
+        "version": "1.0.1",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "tables": 3
+      },
+      {
+        "name": "ahgUserManagePlugin",
+        "title": "AHG User Manage",
+        "description": "User browse and management using Laravel Query Builder",
+        "category": "browse",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ]
+      },
+      {
+        "name": "ahgUserRegistrationPlugin",
+        "title": "AHG User Registration",
+        "description": "Public user self-registration with email verification and admin approval workflow",
+        "category": "user",
+        "version": "1.0.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=2.8.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 1
+      },
+      {
+        "name": "ahgVendorPlugin",
+        "title": "Vendor Management",
+        "description": "Vendor and supplier management with transactions, services, and contact tracking",
+        "category": "ahg",
+        "version": "1.0.11",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 14
+      },
+      {
+        "name": "ahgVersionControlPlugin",
+        "title": "Version Control",
+        "description": "Version history with diff and restore for information_object and actor. Mirrors the AHG version-snapshot pattern used by reports, landing pages and heritage contributions. Integrates with ahgAuditTrailPlugin and ahgSecurityClearancePlugin.",
+        "category": "records-management",
+        "version": "0.1.0",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin"
+        ],
+        "tables": 2
+      },
+      {
+        "name": "ahgWorkflowPlugin",
+        "title": "Workflow Manager",
+        "description": "Configurable approval workflow system for archival submissions with role-based task routing, pool claiming, and email notifications",
+        "category": "workflow",
+        "version": "1.0.2",
+        "license": "AGPL-3.0-or-later",
+        "requires": {
+          "atom_framework": ">=1.0.0",
+          "atom": ">=2.8",
+          "php": ">=8.1"
+        },
+        "dependencies": [
+          "ahgCorePlugin",
+          "ahgSecurityClearancePlugin"
+        ],
+        "tables": 10
       }
     ]
   },
@@ -247,7 +2041,85 @@
     "accounting": "Heritage asset accounting",
     "provenance": "Provenance tracking",
     "user-engagement": "User engagement features",
-    "export": "Data export and portable distribution"
+    "export": "Data export and portable distribution",
+    "admin": {
+      "description": "Admin"
+    },
+    "advanced_features": {
+      "description": "Advanced_features"
+    },
+    "ahg": {
+      "description": "Ahg"
+    },
+    "analytics": {
+      "description": "Analytics"
+    },
+    "authority": {
+      "description": "Authority"
+    },
+    "browse": {
+      "description": "Browse"
+    },
+    "collection_management": {
+      "description": "Collection_management"
+    },
+    "communication": {
+      "description": "Communication"
+    },
+    "core": {
+      "description": "Core"
+    },
+    "data-entry": {
+      "description": "Data entry"
+    },
+    "data-quality": {
+      "description": "Data quality"
+    },
+    "descriptive-standard": {
+      "description": "Descriptive standard"
+    },
+    "finance": {
+      "description": "Finance"
+    },
+    "glam": {
+      "description": "Glam"
+    },
+    "heritage": {
+      "description": "Heritage"
+    },
+    "import": {
+      "description": "Import"
+    },
+    "ingestion": {
+      "description": "Ingestion"
+    },
+    "metadata": {
+      "description": "Metadata"
+    },
+    "museum": {
+      "description": "Museum"
+    },
+    "records-management": {
+      "description": "Records management"
+    },
+    "tools": {
+      "description": "Tools"
+    },
+    "uncategorised": {
+      "description": "Uncategorised"
+    },
+    "user": {
+      "description": "User"
+    },
+    "user_engagement": {
+      "description": "User_engagement"
+    },
+    "viewer": {
+      "description": "Viewer"
+    },
+    "workflow": {
+      "description": "Workflow"
+    }
   },
-  "updated_at": "2026-02-14T12:00:00Z"
+  "updated_at": "2026-09-02T18:56:23Z"
 }

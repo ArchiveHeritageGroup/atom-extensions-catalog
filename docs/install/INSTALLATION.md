@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**Version 2.8.2** | **Last Updated: 2026-02-18** | **AtoM 2.8.x - 2.10.x**
+**Framework v2.18.x** | **Last Updated: 2026-09-02** | **AtoM 2.8.x - 2.10.2**
 
 </div>
 
@@ -21,6 +21,7 @@
 | **Nginx** | 1.18+ | latest | Web server |
 | **Gearman** | 1.1+ | latest | Job server for background tasks |
 | **Composer** | 2.x | latest | PHP dependency manager |
+| **php8.3-gd** | - | - | Image handling. Required, and **absent from AtoM's own package list** |
 | **Node.js** | 16.x | LTS (20.x+) | Asset building |
 | **Git** | 2.x | latest | Version control |
 | **Python** | 3.10 | 3.12 | AI features, scripting |
@@ -111,6 +112,137 @@ sudo bash atom-framework/bin/install-deps --preserve   # Siegfried, ClamAV, BagI
 sudo bash atom-framework/bin/install-deps --3d         # Blender, MeshLab
 sudo bash atom-framework/bin/install-deps --check      # Check only, don't install
 ```
+
+---
+
+---
+
+## Two ways to install, and how they differ
+
+| | Full stack | Single plugin (standalone) |
+|---|---|---|
+| What you get | Framework plus every AHG plugin | The framework plus the one plugin you want |
+| Base AtoM | Untouched | Untouched |
+| Plugins directory | Symlinks, created by `bin/install` | **A real directory** - see below |
+| Enabled via | `atom_plugin` (AHG `ProjectConfiguration`) | The serialised `plugins` setting (stock) |
+
+Both are supported. The rest of this guide describes the full stack; the
+standalone route is below.
+
+### The framework is not optional
+
+Measured across the plugin set: 112 of 115 plugins touch the framework, 99 of
+them extend `AhgController`. There is no plugins-only path. Install
+`atom-framework` first regardless of how many plugins you want.
+
+### Base AtoM is never modified
+
+```bash
+./bin/install                      # correct
+./bin/install --with-base-patches  # do not use
+```
+
+Three installer steps are gated behind that flag - ProjectConfiguration,
+QubitMetadataRoute and the AtoM core patches. Watch for these lines and stop if
+any of them does something:
+
+```
+Base patches: disabled (base AtoM will not be modified)
+Step 3:  Left untouched
+Step 7:  QubitMetadataRoute patch skipped
+Step 11: Skipped. Base AtoM is left exactly as installed.
+```
+
+One instance reached 29 changed base files against the four ever authorised
+through that flag, over seven months, each change reasonable in isolation.
+
+---
+
+## Installing a single plugin (standalone)
+
+For adding one plugin to an existing AtoM without taking the whole stack.
+
+### 1. Fetch it as a real directory, not a symlink
+
+```bash
+cd <atom-root>/plugins
+git clone --depth 1 --filter=blob:none --sparse \
+    https://github.com/ArchiveHeritageGroup/atom-ahg-plugins.git tmp-fetch
+cd tmp-fetch && git sparse-checkout set <pluginName> && cd ..
+mv tmp-fetch/<pluginName> ./<pluginName> && rm -rf tmp-fetch
+```
+
+**Why not a symlink.** `pluginsAction.class.php` line 51 tests that the plugin
+path *begins with* `sf_plugins_dir`. A symlink resolves to the checkout
+directory, fails that prefix test, and the plugin vanishes from the stock plugin
+admin screen - which on a stock instance is how you enable it. It loads fine; you
+simply cannot see it to switch it on, and nothing reports an error.
+
+The full-stack install uses symlinks safely because the AHG
+`ProjectConfiguration` reads `atom_plugin` and never depends on that screen.
+
+### 2. Apply the schema
+
+```bash
+mysql -u <user> -p <database> < <atom-root>/plugins/<pluginName>/database/install.sql
+```
+
+Plugin schema uses `CREATE TABLE IF NOT EXISTS`, which **never alters an existing
+table**. A table created by an older version keeps its old columns, and a newer
+`install.sql` then fails on an INSERT naming a column that does not exist. When
+upgrading a plugin, diff `information_schema.columns` rather than comparing table
+names - one instance was missing 55 columns across 16 tables, all invisible to a
+table count.
+
+### 3. Work out which plugin list governs
+
+```bash
+grep -c 'loadPluginsFromDatabase' <atom-root>/config/ProjectConfiguration.class.php
+```
+
+**`0` - stock AtoM.** Plugins load from the serialised `plugins` row in
+`setting_i18n`. The `atom_plugin` table is **inert**: the plugin admin screen can
+show a plugin as enabled that does not load. Read the real list with:
+
+```bash
+mysql -u <user> -p <db> -N --raw -e \
+  "SELECT si.value FROM setting s JOIN setting_i18n si ON si.id=s.id WHERE s.name='plugins' LIMIT 1;" \
+  | php -r '$l=unserialize(trim(file_get_contents("php://stdin"))); echo count($l)."\n"; print_r($l);'
+```
+
+**`1` or more - AHG.** `atom_plugin` is the source of truth.
+
+Verify against whichever list governs, never against the admin screen. One
+instance showed 36 plugins enabled while loading 34, with the image viewer among
+the two that were not loading, and nobody had connected the missing viewer to a
+cause.
+
+### 4. Clear the cache and reload
+
+```bash
+cd <atom-root>
+php symfony cc
+sudo systemctl reload php8.3-fpm
+```
+
+### If ahgRuntimePlugin is present
+
+```bash
+ls -d <atom-root>/plugins/ahgRuntimePlugin
+```
+
+If it exists, every `AtomFramework\*` and `AtomExtensions\*` class loads from
+that **generated copy**, not from `atom-framework/src`. A framework release does
+nothing until it is rebuilt:
+
+```bash
+cd atom-framework && sudo -u www-data bin/build-runtime-plugin
+```
+
+Run it as `www-data`; root leaves files that `ProtectSystem=full` cannot write.
+Classes loaded by explicit `require_once` still come from the fresh framework, so
+part of a release works while the rest is stale - a fix appearing to work proves
+nothing about whether the framework deployed.
 
 ---
 
