@@ -2817,7 +2817,7 @@ Sources: user guide `museum-module-user-guide.md`, technical manual.
 | ☐ | Loan Workflow States | UG | | | |
 | ☐ | Location Tracking | UG | | | |
 | ☐ | Condition Assessment | UG | | | |
-| ☐ | Spectrum Procedures | UG | | | |
+| ☐ | Collections Procedures | UG | | | |
 | ☐ | Valuation and Insurance | UG | | | |
 | ☐ | Getty Vocabulary Integration | UG | | | |
 | ☐ | Local AAT Cache (Recommended) | UG | | | |
@@ -4298,7 +4298,7 @@ Sources: user guide `spectrum-user-guide.md`, technical manual.
 | ✔ | Functionality | Source | Result (P/F) | Tester / Date | Notes |
 |---|---|---|---|---|---|
 | ☐ | A Guide for Museum Staff | UG | | | |
-| ☐ | What is Spectrum? | UG | | | |
+| ☐ | What are collections procedures? | UG | | | |
 | ☐ | The Dashboard | UG | | | |
 | ☐ | When Objects Arrive | UG | | | |
 | ☐ | The Process | UG | | | |
@@ -4334,8 +4334,8 @@ Sources: user guide `spectrum-user-guide.md`, technical manual.
 | ☐ | Record a Movement | UG | | | |
 | ☐ | Condition Checking | UG | | | |
 | ☐ | Valuation | UG | | | |
-| ☐ | Spectrum Dashboard | UG | | | |
-| ☐ | Tips for Spectrum | UG | | | |
+| ☐ | Collections Procedures Dashboard | UG | | | |
+| ☐ | Tips for collections procedures | UG | | | |
 | ☐ | Need Help? | UG | | | |
 | ☑ | Route /:slug/spectrum → index | TECH | PASS | pw-authed 2026-06-27 | HTTP 200 (id=553) |
 | ☑ | Route /:slug/spectrum/label → label | TECH | PASS | pw-authed 2026-06-27 | HTTP 200 (id=553) |

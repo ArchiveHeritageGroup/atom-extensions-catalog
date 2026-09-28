@@ -1,6 +1,6 @@
-# Spectrum 5.1 procedure starter pack
+# Collections procedures starter pack
 
-The Spectrum procedure starter pack installs 21 workflows on your Heratio install — one for each of the Spectrum 5.1 primary procedures defined by [UK Collections Trust](https://collectionstrust.org.uk/spectrum/). Each shipped workflow comes with a sensible set of paraphrased starter steps you can immediately use, customise, or replace.
+The collections procedures starter pack installs 21 workflows on your Heratio install - one for each of the primary procedures defined by [UK Collections Trust](https://collectionstrust.org.uk/spectrum/). Each shipped workflow comes with a sensible set of paraphrased starter steps you can immediately use, customise, or replace.
 
 ## What it is
 
@@ -40,9 +40,9 @@ The Spectrum procedure starter pack installs 21 workflows on your Heratio instal
 
 1. Log in as administrator
 2. Go to **Workflow → Workflows & diagrams** (top-right AHG Plugins dropdown)
-3. Click **Install Spectrum pack** in the page header
+3. Click **Install collections procedures pack** in the page header
 4. Confirm the dialogue
-5. Workflows tagged with their Spectrum procedure now appear in the list
+5. Workflows tagged with their collections procedure now appear in the list
 
 The button is **safe to re-click** — by default it only adds missing procedures. Existing workflows with the same `spectrum_procedure` tag are left untouched.
 
@@ -58,7 +58,7 @@ php artisan workflow:seed-spectrum --dry-run
 # Install only a specific procedure (or several)
 php artisan workflow:seed-spectrum --only=object_entry --only=cataloguing
 
-# RESET existing Spectrum workflows to seed defaults
+# RESET existing collections procedure workflows to seed defaults
 # ⚠️ This DELETES hand-customised steps for those procedures
 php artisan workflow:seed-spectrum --overwrite
 ```
@@ -67,7 +67,7 @@ php artisan workflow:seed-spectrum --overwrite
 
 | Without `--overwrite` (default) | With `--overwrite` |
 |---|---|
-| Existing Spectrum workflows are **skipped** | Existing Spectrum workflows have their **name + description updated** to seed defaults |
+| Existing collections procedure workflows are **skipped** | Existing collections procedure workflows have their **name + description updated** to seed defaults |
 | Steps are **not touched** | All steps for that workflow are **deleted and re-inserted** from the seed |
 | Safe to run repeatedly | Safe ONLY if you want a clean reset |
 
@@ -75,12 +75,12 @@ If your team has hand-customised the steps for, say, Cataloguing — running wit
 
 ## Customising after install
 
-After install, each Spectrum workflow is a normal Heratio workflow. You can:
+After install, each collections procedure workflow is a normal Heratio workflow. You can:
 
 - Add/edit/reorder steps from the workflow edit page
 - Use the **drag-and-drop designer** (`Designer` button) to add branching between steps
 - Adjust step types, approvers, escalation rules
-- View the workflow diagram (`Diagram` button) including the Spectrum badge
+- View the workflow diagram (`Diagram` button) including the procedure badge
 
 Your customisations stay until you run `workflow:seed-spectrum --overwrite` on that procedure.
 

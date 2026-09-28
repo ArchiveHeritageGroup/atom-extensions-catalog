@@ -2107,7 +2107,7 @@ The public discovery surface. From here a user can:
 | ✔ | Function | Sub-function | Result | Notes |
 |---|---|---|---|---|
 | ☐ | Library (ahgLibraryPlugin) | OPAC search; FRBR clusters; export (CSV/BibTeX/RIS); MARC | | |
-| ☐ | Museum (ahgMuseumPlugin) | Museum browse; Spectrum; CIDOC-CRM | | |
+| ☐ | Museum (ahgMuseumPlugin) | Museum browse; collections procedures; CIDOC-CRM | | |
 | ☐ | Gallery (ahgGalleryPlugin) | Gallery browse / show | | |
 | ☐ | DAM (ahgDAMPlugin) | DAM browse; rights/technical metadata | | |
 

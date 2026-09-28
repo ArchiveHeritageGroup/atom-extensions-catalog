@@ -304,7 +304,7 @@ php bin/semantic-search-cron.php export-es    # ES export
 | Plugin | Purpose |
 |--------|---------|
 | ahgLibraryPlugin | MARC-inspired cataloging |
-| ahgMuseumPlugin | CCO/SPECTRUM/CIDOC-CRM |
+| ahgMuseumPlugin | CCO / collections procedures / CIDOC-CRM |
 | ahgGalleryPlugin | Gallery/exhibition management |
 | ahgDAMPlugin | Digital Asset Management |
 

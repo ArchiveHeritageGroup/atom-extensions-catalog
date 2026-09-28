@@ -154,7 +154,7 @@ Then wrap optional plugin links:
 ```php
 <?php if (ahg_is_plugin_enabled('ahgSpectrumPlugin')): ?>
     <a href="<?php echo url_for(['module' => 'spectrum', 'action' => 'index']); ?>">
-        SPECTRUM Procedures
+        Collections Procedures
     </a>
 <?php endif; ?>
 ```

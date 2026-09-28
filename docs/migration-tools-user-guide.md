@@ -28,7 +28,7 @@ Import data from external systems including Vernon CMS, ArchivesSpace, DB/TextWo
 |---|---|---|---|
 | Sector | Standard | Plugin Required | Description |
 | Archives | ISAD(G) | None (core) | Archival descriptions |
-| Museum | SPECTRUM | ahgMuseumPlugin | Museum objects |
+| Museum | Collections procedures | ahgMuseumPlugin | Museum objects |
 | Library | MARC/RDA | ahgLibraryPlugin | Bibliographic records |
 | Gallery | CCO/VRA | ahgGalleryPlugin | Art & visual works |
 | DAM | Dublin Core | ahgDAMPlugin | Digital assets |
@@ -83,7 +83,7 @@ Choose where records will be imported:
 | Item | Description |
 |---|---|
 | **( ) Archives** | ISAD(G) archival descriptions |
-| **(*) Museum** | SPECTRUM object records |
+| **(*) Museum** | Collections procedure object records |
 | **( ) Library** | MARC/RDA bibliographic records |
 | **( ) Gallery** | CCO/VRA art records |
 | **( ) DAM** | Dublin Core digital assets |

@@ -620,7 +620,7 @@ php symfony migration:import /path/to/file.csv --mapping=10 --dry-run
 php symfony sector:archives-csv-import /path/to/file.csv \
     --repository=SLUG --validate-only --mapping=ID --update=FIELD
 
-# Museum (Spectrum)
+# Museum (collections procedures)
 php symfony sector:museum-csv-import /path/to/file.csv \
     --repository=SLUG --validate-only --mapping=ID --update=FIELD
 
