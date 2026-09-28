@@ -87,6 +87,26 @@ Checksums are digital fingerprints that uniquely identify file contents. If a fi
 
 Fixity checks verify that files haven't changed since checksums were created.
 
+#### The first run records a baseline
+
+On an archive that has never been checked there is nothing to compare against, so
+the first run records a checksum for every master file and reports them as
+**baselines**, not as passes or failures:
+
+```
+Fixity Check Complete:
+  Passed:        0
+  Baselines:     5 (first check, nothing to compare against yet)
+  Failed:        0
+```
+
+From the second run onwards each file is hashed and compared with its baseline,
+and the summary reads `Passed: 5`. A mismatch is counted under **Failed** (or
+**Repair Failed** when auto-repair is on and no backup copy could be used), and
+the run ends with `WARNING: Some files have integrity issues!`. **Errors** means
+the check itself could not be carried out - an unreadable file or a bad path -
+and not that the file is corrupt.
+
 #### Running Fixity Checks
 
 **Single Object:**
@@ -766,6 +786,8 @@ Step 7: Verify results
 | "LibreOffice not found" | libreoffice command missing | Install: `sudo apt install libreoffice` |
 | "File not found" during fixity | File moved or deleted | Check storage paths, restore from backup |
 | Checksum mismatch | File corruption/modification | Investigate cause, restore if needed |
+| Everything reported as a baseline | First run on this archive | Expected. Run it again: the second run compares against those baselines |
+| "Illegal mix of collations" on a preservation screen | Plugin tables installed with a collation that differs from the AtoM database (common on MySQL 8) | Convert them: `mysql <db> -N -e "SELECT CONCAT('ALTER TABLE \\`', table_name, '\\` CONVERT TO CHARACTER SET utf8mb4 COLLATE ', @@collation_database, ';') FROM information_schema.tables WHERE table_schema = DATABASE() AND table_collation <> @@collation_database" \| mysql <db>` |
 | Conversion failed | Tool error or unsupported format | Check tool logs, verify file format |
 | Replication failed | Network or permission issue | Check target connectivity and permissions |
 | PUID showing as UNKNOWN | Format not in PRONOM registry | File may have non-standard format |
