@@ -19,7 +19,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with the training video of the same name. It takes you through one complete import: a small fonds with two series, three files and an item, built from a single CSV file. You make one deliberate mistake on the way and fix it, so that you know what to do when it happens with your own data.
+This guide goes with the training video of the same name ([watch on YouTube](https://youtu.be/wS-EbXtmkT0)). It takes you through one complete import: a small fonds with two series, three files and an item, built from a single CSV file. You make one deliberate mistake on the way and fix it, so that you know what to do when it happens with your own data.
 
 Allow about 20 minutes to work through it with the practice file.
 

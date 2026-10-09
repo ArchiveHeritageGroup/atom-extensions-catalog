@@ -139,6 +139,9 @@ nav:
     - Custom Fields: custom-fields-user-guide.md
     - DAM Module: dam-module-user-guide.md
     - Data Ingest: data-ingest-user-guide.md
+    - "Training: Hierarchy from CSV": training-hierarchical-csv-import.md
+    - "Training: Excel Import and Grid Entry": training-excel-import-grid-entry.md
+    - "Training: CAAIS Accessions": training-caais-accessions.md
     - Data Migration: data-migration-user-guide.md
     - Discovery: discovery-user-guide.md
     - DOI Integration: doi-user-guide.md
