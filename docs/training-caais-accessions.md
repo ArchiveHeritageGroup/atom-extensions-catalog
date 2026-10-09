@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with the training video of the same name. CAAIS, the Canadian Archival Accession Information Standard, version 1.0, defines what an accession record should hold. With the CAAIS profile switched on, AtoM's accession form gains a CAAIS section, the accession page checks the mandatory elements, and each record exports as CAAIS in JSON, CSV or XML.
+This guide goes with the training video of the same name ([watch on YouTube](https://youtu.be/LpKUEkOb-E4)). CAAIS, the Canadian Archival Accession Information Standard, version 1.0, defines what an accession record should hold. With the CAAIS profile switched on, AtoM's accession form gains a CAAIS section, the accession page checks the mandatory elements, and each record exports as CAAIS in JSON, CSV or XML.
 
 You will switch CAAIS on, record an accession, find and fix a missing mandatory element, and export the result. Allow about 15 minutes.
 

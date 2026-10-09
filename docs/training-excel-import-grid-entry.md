@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with the training video of the same name. It covers two ways to add many descriptions at once. Part one imports an Excel workbook under a new fonds. Part two adds more records to that fonds through Grid entry, by typing, pasting from Excel, and duplicating rows. On the way you meet one deliberate mistake, a date typed day first, and fix it.
+This guide goes with the training video of the same name ([watch on YouTube](https://youtu.be/kcp3qgratMY)). It covers two ways to add many descriptions at once. Part one imports an Excel workbook under a new fonds. Part two adds more records to that fonds through Grid entry, by typing, pasting from Excel, and duplicating rows. On the way you meet one deliberate mistake, a date typed day first, and fix it.
 
 Allow about 20 minutes with the practice files.
 
