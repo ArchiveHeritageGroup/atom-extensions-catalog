@@ -142,6 +142,14 @@ nav:
     - "Training: Hierarchy from CSV": training-hierarchical-csv-import.md
     - "Training: Excel Import and Grid Entry": training-excel-import-grid-entry.md
     - "Training: CAAIS Accessions": training-caais-accessions.md
+    - "Training: Batch Edit": training-batch-edit.md
+    - "Training: Sort the Records Below": training-sort-records.md
+    - "Training: Move a Term": training-term-move.md
+    - "Training: Wikidata Links": training-wikidata-links.md
+    - "Training: Report Builder": training-report-builder.md
+    - "Training: Custom Fields": training-custom-fields.md
+    - "Training: Preservation Triage": training-preservation-triage.md
+    - "Training: REST API and GraphQL": training-rest-api-graphql.md
     - Data Migration: data-migration-user-guide.md
     - Discovery: discovery-user-guide.md
     - DOI Integration: doi-user-guide.md
