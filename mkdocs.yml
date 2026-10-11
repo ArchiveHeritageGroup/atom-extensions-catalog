@@ -150,6 +150,12 @@ nav:
     - "Training: Custom Fields": training-custom-fields.md
     - "Training: Preservation Triage": training-preservation-triage.md
     - "Training: REST API and GraphQL": training-rest-api-graphql.md
+    - "Training: Research Portal 1 - Becoming a Researcher": training-research-1-becoming-a-researcher.md
+    - "Training: Research Portal 2 - The Reading Room": training-research-2-reading-room.md
+    - "Training: Research Portal 3 - Workspace and Citing": training-research-3-workspace-and-citing.md
+    - "Training: Research Portal 4 - Projects and Writing": training-research-4-projects-and-writing.md
+    - "Training: Research Portal 5 - Reproduction Requests": training-research-5-reproduction-requests.md
+    - "Training: Research Portal 6 - Researcher Submissions": training-research-6-researcher-submissions.md
     - Data Migration: data-migration-user-guide.md
     - Discovery: discovery-user-guide.md
     - DOI Integration: doi-user-guide.md
