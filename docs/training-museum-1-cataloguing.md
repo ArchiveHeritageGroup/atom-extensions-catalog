@@ -36,7 +36,7 @@ Go to **Add museum object** (`/museum/add`). The **Object Template** panel offer
 
 ![The add form.](images/training-museum-1/01-add.png)
 
-Choose **Painting**. The object number is generated from the museum numbering scheme (for example `MUS.2026.0016`); **Use** accepts it.
+Choose **Painting**. The object number is generated from the museum numbering scheme (for example `MUS.2026.0018`); **Use** accepts it.
 
 ![The Painting template.](images/training-museum-1/02-painting.png)
 
@@ -90,4 +90,4 @@ Click **Save**. The record's **Museum object information** shows the object numb
 3. Use the Getty term for the work type.
 4. Link the creator to an authority record.
 
-Part 2 covers the Spectrum collections procedures.
+Part 2 covers the collections procedures: object entry and acquisition.

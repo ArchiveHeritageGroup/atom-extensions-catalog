@@ -1,12 +1,12 @@
 ---
-title: "Training: Museum, Part 2 - Spectrum Collections Procedures"
-subtitle: "Step-by-step guide to recording an object entry and taking an acquisition through review and approval as a Spectrum workflow"
+title: "Training: Museum, Part 2 - Collections Procedures"
+subtitle: "Step-by-step guide to recording an object entry and taking an acquisition through review and approval as a workflow"
 author: "Dr Johan Pieterse"
 ---
 
 | Field | Value |
 |---|---|
-| Document title | Training: Museum, Part 2 - Spectrum Collections Procedures |
+| Document title | Training: Museum, Part 2 - Collections Procedures |
 | Author | Dr Johan Pieterse |
 | Owner | The Archive and Heritage Group (Pty) Ltd |
 | Version | 1.0 |
@@ -32,7 +32,7 @@ This guide goes with part 2 of the museum training videos. The painting catalogu
 
 ## 1. The procedures
 
-On the object, open **Collections Procedures data** (`/<slug>/spectrum`). It lists the 21 Spectrum 5.1 procedures, from Object Entry and Acquisition through Location & Movement, Condition Checking, Valuation, Loans In and Out, Audit and Disposal, to Retrospective Documentation. **Manage** opens each one.
+On the object, under **Collections Management**, open **Collections Procedures data**. It lists the 21 collections procedures, from Object Entry and Acquisition through Location & Movement, Condition Checking, Valuation, Loans In and Out, Audit and Disposal, to Retrospective Documentation. **Manage** opens each one.
 
 ![The Collections Procedures page.](images/training-museum-2/01-procedures.png)
 
@@ -42,7 +42,7 @@ Open **Object Entry**. Record the entry date, how the object came in, the reason
 
 ![The object entry form.](images/training-museum-2/02-entry.png)
 
-Click **Record object entry**. The entry gets its own number (for example `OE-20261012-913371`).
+Click **Record object entry**. The entry gets its own number (for example `OE-20261012-913375`).
 
 ![Object entry recorded.](images/training-museum-2/03-entry-saved.png)
 
@@ -62,7 +62,7 @@ The workflow moves from Proposed to Under Review.
 
 ## 4. The reviewer
 
-When the reviewer signs in, a notice says a task is waiting. **My Tasks** (`/spectrum/my-tasks`) lists it with the object, the procedure, its state, and who assigned it and when.
+When the reviewer signs in, a notice says a task is waiting. **My Tasks** (from the notice, or from the Collections Procedures dashboard's quick links) lists it with the object, the procedure, its state, and who assigned it and when.
 
 ![My Tasks.](images/training-museum-2/07-my-tasks.png)
 
@@ -76,7 +76,7 @@ The reviewer opens the workflow. The actions on offer depend on the state: here,
 
 ![The activity history.](images/training-museum-2/09-history.png)
 
-The **Collections Procedures Workflow Dashboard** (`/spectrum/dashboard`) shows every procedure across the collection: pending, in progress and completed.
+The **Collections Procedures Workflow Dashboard** shows every procedure across the collection: pending, in progress and completed.
 
 ![The workflow dashboard.](images/training-museum-2/10-dashboard.png)
 
