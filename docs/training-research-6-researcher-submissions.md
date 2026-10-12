@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with part 6, the last of the research portal training videos. A researcher who holds records of her own, family letters for instance, describes them and offers them to the archive. The archive reviews the submission in two workflow steps, then an administrator publishes it as archival descriptions with the files attached. Allow about 20 minutes.
+This guide goes with part 6 of the research portal training videos. A researcher who holds records of her own, family letters for instance, describes them and offers them to the archive. The archive reviews the submission in two workflow steps, then an administrator publishes it as archival descriptions with the files attached. Allow about 20 minutes.
 
 ## Before you start
 
@@ -92,4 +92,4 @@ The researcher sees the submission as **published**, with its review history.
 4. Submit; staff approve it in two workflow steps.
 5. An administrator publishes it into the catalogue.
 
-This completes the research portal series.
+Part 7 covers turning research into a manuscript for a journal.
