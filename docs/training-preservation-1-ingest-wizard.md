@@ -111,9 +111,13 @@ Click **Approve & Commit**, then **Start Commit**. The commit runs as a backgrou
 
 ![The new fonds.](images/training-preservation-1/08-fonds.png)
 
-Each diary carries its description, dates and creator from the CSV, and its scan in the IIIF viewer.
+Each diary carries its description and its scan in the IIIF viewer.
 
 ![A diary with its digital object.](images/training-preservation-1/09-item.png)
+
+The CSV's event columns (`eventTypes`, `eventActors`, `eventDates`, `eventStartDates`, `eventEndDates`, pipe-separated and aligned by position) become the record's dates and creator. A creator not yet in the archive becomes a new authority record, shared by every row that names it; a missing event type is Creation.
+
+![The date and creator from the CSV.](images/training-preservation-1/10-item-dates.png)
 
 ## Rolling back
 
