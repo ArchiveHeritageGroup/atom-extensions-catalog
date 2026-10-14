@@ -166,6 +166,10 @@ nav:
     - "Training: Museum 2 - Collections Procedures": training-museum-2-procedures.md
     - "Training: Museum 3 - Condition Checking": training-museum-3-condition.md
     - "Training: Museum 4 - Provenance and the Chain of Custody": training-museum-4-provenance.md
+    - "Training: Museum 5 - Exhibitions and Loans": training-museum-5-exhibitions-loans.md
+    - "Training: Museum 6 - Heritage Accounting": training-museum-6-heritage-accounting.md
+    - "Walkthrough: Library Services": training-library-services.md
+    - "Walkthrough: Records in Contexts and Graph Discovery": training-ric-graph-discovery.md
     - Data Migration: data-migration-user-guide.md
     - Discovery: discovery-user-guide.md
     - DOI Integration: doi-user-guide.md
