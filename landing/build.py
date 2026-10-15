@@ -14,6 +14,7 @@ import json
 import os
 import re
 import shutil
+import subprocess
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PLUGINS = next(p for p in (os.environ.get('AHG_PLUGINS_DIR', ''),
@@ -57,6 +58,110 @@ CATEGORY_LABELS = {
     'authority': 'Authority records', 'workflow': 'Workflow', 'theme': 'Theme', 'data-quality': 'Data quality',
 }
 
+CONTENT = os.path.join(HERE, 'content')          # hand-written sections: content/<slug>.md
+DOC_IMAGES = os.path.normpath(os.path.join(HERE, '..', 'docs', 'images'))
+
+# External services a plugin can use, found in its own code (PHP, Python, shell).
+# The settings and theme plugins only configure or display these, so they are skipped.
+SERVICES = {
+    'Cantaloupe IIIF image server': r'cantaloupe|:8182',
+    'Apache Jena Fuseki triplestore': r'fuseki|:3030',
+    'ExifTool': r'exiftool',
+    'ClamAV virus scanner': r'clamdscan|clamscan',
+    'Siegfried format identification': r"siegfried|'sf'",
+    'Qdrant vector database': r'qdrant|:6333',
+    'AHG AI gateway': r'AiGatewayClient|ai\.theahg\.co\.za',
+    'Tesseract OCR': r'tesseract',
+    'FFmpeg': r'ffmpeg',
+    'LibreOffice': r'soffice|libreoffice',
+    'Gearman job server': r'gearman',
+    'DataCite (DOIs)': r'datacite',
+}
+SERVICE_SKIP = {'ahgSettingsPlugin', 'ahgThemeB5Plugin'}
+
+# Pages on the live demo that work without signing in, checked 15 Oct 2026.
+DEMO_PAGES = {
+    'ahgDiscoveryPlugin': ('/discovery', 'Discover search'),
+    'ahgIiifPlugin': ('/iiif-viewer-photo-taken-with-phase-one-iq3-100mp-captured-on-november-17-2017-80mm-f-11', 'a record in the IIIF viewer'),
+    'ahg3DModelPlugin': ('/3d-more-glb', 'a record with a 3D model'),
+    'ahgHeritagePlugin': ('/heritage', 'the heritage discovery portal'),
+    'ahgGalleryPlugin': ('/gallery/browse', 'the gallery browse'),
+    'ahgMarketplacePlugin': ('/marketplace', 'the marketplace'),
+    'ahgLibraryPlugin': ('/library', 'the library catalogue'),
+    'ahgDisplayPlugin': ('/glam/browse', 'the GLAM browse'),
+    'ahgMuseumPlugin': ('/glam/browse?type=museum', 'museum objects in the GLAM browse'),
+    'ahgActorManagePlugin': ('/actor/browse', 'the authority record browse'),
+    'ahgRepositoryManagePlugin': ('/repository/browse', 'the archival institution browse'),
+    'ahgFunctionManagePlugin': ('/function/browse', 'the function browse'),
+    'ahgSearchPlugin': ('/search/descriptionUpdates', 'newest additions'),
+    'ahgUserRegistrationPlugin': ('/register', 'the registration form'),
+    'ahgFeedbackPlugin': ('/feedback/general', 'the feedback form'),
+    'ahgChatbotPlugin': ('/', 'the home page: use "Ask the archive"'),
+}
+
+
+def code_services():
+    """{machine_name: [service, ...]} from a scan of each plugin's own code."""
+    found = {}
+    for label, pattern in SERVICES.items():
+        rx = re.compile(pattern, re.I)
+        for path in glob.glob(os.path.join(PLUGINS, 'ahg*Plugin', '**', '*.*'), recursive=True):
+            if not path.endswith(('.php', '.py', '.sh')) or '/vendor/' in path or '/test' in path:
+                continue
+            machine = os.path.relpath(path, PLUGINS).split(os.sep)[0]
+            if machine in SERVICE_SKIP or label in found.get(machine, []):
+                continue
+            try:
+                if rx.search(open(path, encoding='utf-8', errors='ignore').read()):
+                    found.setdefault(machine, []).append(label)
+            except OSError:
+                pass
+    return found
+
+
+def md_html(text):
+    """GitHub markdown to HTML through pandoc (no python-markdown on this host)."""
+    if not text.strip():
+        return ''
+    out = subprocess.run(['pandoc', '-f', 'gfm', '-t', 'html5', '--wrap=none'], input=text,
+                         capture_output=True, text=True, check=True).stdout
+    # links into the repository are relative: point them at GitHub
+    return re.sub(r'href="(?!https?:|#|/|mailto:)([^"]+)"', lambda m: f'href="{REPO}/blob/main/{m.group(1)}"', out)
+
+
+def readme_sections(machine):
+    """The README's level-2 sections, {title: markdown}."""
+    path = os.path.join(PLUGINS, machine, 'README.md')
+    if not os.path.isfile(path):
+        return {}
+    sections, title = {}, None
+    for line in open(path, encoding='utf-8', errors='replace'):
+        m = re.match(r'^## (.+?)\s*$', line)
+        if m:
+            title = m.group(1)
+            sections[title] = ''
+        elif title:
+            sections[title] += line
+    return sections
+
+
+def content_html(slug):
+    """Hand-written page content (content/<slug>.md), copying the screenshots it uses."""
+    path = os.path.join(CONTENT, slug + '.md')
+    if not os.path.isfile(path):
+        return ''
+    text = open(path, encoding='utf-8').read()
+    for rel in re.findall(r'\(/img/([^)]+)\)', text):
+        src = os.path.join(DOC_IMAGES, rel)
+        if not os.path.isfile(src):
+            raise SystemExit(f'build refused: {slug}.md uses missing image {rel}')
+        dst = os.path.join(OUT, 'img', rel)
+        os.makedirs(os.path.dirname(dst), exist_ok=True)
+        shutil.copyfile(src, dst)
+    html_out = md_html(text).replace('<img ', '<img loading="lazy" ')
+    return html_out.replace('<h2', '<h3').replace('</h2>', '</h3>')
+
+
 # Readable slugs where the package name would give a poor one. The collections
 # procedures plugin's package name is never shown as text on these pages.
 SLUGS = {'ahg3DModelPlugin': '3d-model', 'ahgSpectrumPlugin': 'collections-procedures'}
@@ -94,6 +199,15 @@ th{background:var(--green);color:#fff;font-weight:bold;width:150px}
 .plugin-list{columns:2 300px;padding-left:20px}.plugin-list li{margin:0 0 8px;break-inside:avoid}
 footer{background:var(--green);color:var(--cream);padding:28px 0;font-size:15px}footer a{color:var(--gold)}
 .crumb{font-size:15px;margin:0 0 14px}
+.detail img{max-width:100%;height:auto;border:1px solid #ddd6ca;border-radius:4px;margin:6px 0}
+.detail pre{background:var(--cream);padding:10px 12px;overflow-x:auto;font-size:14px;border-radius:4px}
+.detail pre code{background:none;padding:0}
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 6px}
+.filters label{display:flex;flex-direction:column;font-size:14px;color:var(--muted);gap:2px}
+.filters input,.filters select{font:16px Arial,sans-serif;padding:7px 9px;border:1px solid #bdb5a6;border-radius:4px;min-width:200px}
+.filters input:focus,.filters select:focus,a:focus{outline:3px solid var(--gold);outline-offset:2px}
+.badge{display:inline-block;font-size:13px;border-radius:3px;padding:0 6px;margin-left:6px;background:var(--cream);color:var(--green)}
+#count{font-weight:bold}
 @media(max-width:600px){.hero{padding:40px 0 44px}.hero h1{font-size:30px}.hero p{font-size:18px}
 header.top nav a{margin:0 14px 0 0}th{width:auto}}
 """
@@ -190,6 +304,18 @@ def packaged():
     return set(re.findall(r'releases/tag/(ahg\w+Plugin)-v', text))
 
 
+# Catalogue filter. The full list is plain HTML; without JavaScript nothing is hidden.
+FILTER_JS = """<script>
+(function(){var q=document.getElementById('q'),c=document.getElementById('cat'),s=document.getElementById('status'),i=document.getElementById('install');
+var items=[].slice.call(document.querySelectorAll('#catalogue li')),groups=[].slice.call(document.querySelectorAll('#catalogue .cat'));
+function run(){var t=q.value.trim().toLowerCase(),n=0;items.forEach(function(li){var ok=(!t||t.split(/\\s+/).every(function(w){return (' '+li.dataset.text).indexOf(' '+w)>-1;}))&&(!c.value||li.dataset.cat===c.value)&&(!s.value||li.dataset.status===s.value)&&(!i.value||li.dataset.install===i.value);li.hidden=!ok;if(ok)n++;});
+groups.forEach(function(g){g.hidden=!g.querySelector('li:not([hidden])');});document.getElementById('count').textContent=n;document.getElementById('none').hidden=n>0;
+var u=new URLSearchParams();if(t)u.set('q',t);if(c.value)u.set('group',c.value);if(s.value)u.set('status',s.value);if(i.value)u.set('install',i.value);history.replaceState(null,'',u.toString()?'?'+u:location.pathname);}
+var p=new URLSearchParams(location.search);q.value=p.get('q')||'';c.value=p.get('group')||'';s.value=p.get('status')||'';i.value=p.get('install')||'';
+[q,c,s,i].forEach(function(el){el.addEventListener('input',run);el.addEventListener('change',run);});run();})();
+</script>"""
+
+
 def check(plugins):
     """Refuse to publish a catalogue with gaps a visitor would notice."""
     problems, seen = [], {}
@@ -232,6 +358,7 @@ def build():
     plugins = load_plugins()
     check(plugins)
     bundles = packaged()
+    services = code_services()
     by_machine = {p['machine_name']: p for p in plugins}
     flags = flagships()
 
@@ -300,9 +427,22 @@ def build():
         groups.setdefault(label, []).append(p)
     sections = []
     for label in sorted(groups):
-        items = ''.join(f'<li><a href="/plugins/{p["slug"]}.html">{e(p.get("name") or p["machine_name"])}</a>: {e(p.get("description", ""))}</li>'
-                        for p in sorted(groups[label], key=lambda x: (x.get('name') or '').lower()))
+        items = ''.join(
+            f'<li data-cat="{e(label)}" data-status="{e(p.get("status") or "unknown")}" '
+            f'data-install="{"packaged" if p["machine_name"] in bundles else "source"}" '
+            f'data-text="{e(re.sub(r"[^a-z0-9]+", " ", ((p.get("name") or "") + " " + p.get("description", "") + " " + p["machine_name"]).lower()).strip())}">'
+            f'<a href="/plugins/{p["slug"]}.html">{e(p.get("name") or p["machine_name"])}</a>'
+            f'{"<span class=badge>packaged</span>" if p["machine_name"] in bundles else ""}: {e(p.get("description", ""))}</li>'
+            for p in sorted(groups[label], key=lambda x: (x.get('name') or '').lower()))
         sections.append(f'<div class="cat"><h2>{e(label)}</h2><ul class="plugin-list">{items}</ul></div>')
+    cat_opts = ''.join(f'<option>{e(l)}</option>' for l in sorted(groups))
+    status_opts = ''.join(f'<option value="{k}">{e(v.split(":")[0].split(",")[0])}</option>' for k, v in STATUS.items())
+    filters = (f'<form class="filters" role="search" onsubmit="return false">'
+               f'<label>Search<input id="q" type="search" placeholder="e.g. preservation, IIIF, POPIA" autocomplete="off"></label>'
+               f'<label>Group<select id="cat"><option value="">All groups</option>{cat_opts}</select></label>'
+               f'<label>Status<select id="status"><option value="">Any status</option>{status_opts}</select></label>'
+               f'<label>Install<select id="install"><option value="">Any</option><option value="packaged">Packaged download</option><option value="source">From source</option></select></label>'
+               f'</form><p aria-live="polite">Showing <span id="count">{len(plugins)}</span> of {len(plugins)} plugins.</p>')
     foundations_text = '; '.join(f'<a href="/plugins/{by_machine[m]["slug"]}.html">{e(by_machine[m].get("name") or m)}</a>, {e(why)}'
                                  for m, why in FOUNDATIONS.items() if m in by_machine)
     open(os.path.join(OUT, 'plugins', 'index.html'), 'w').write(page(
@@ -313,7 +453,7 @@ def build():
         f'<p>Grouped by what they do. Each page gives the plugin\'s purpose, what it depends on, and where its source and documentation are.</p>'
         f'<p>Two of the {len(plugins)} are foundations rather than features: {foundations_text}. You install them because the other plugins need them, not for what they do alone.</p>'
         f'<p>{len(bundles - {"ahgRuntimePlugin"})} plugins are available today as <a href="{DOWNLOADS}">packaged downloads</a> with their own installer, plus the runtime they share. The rest install from the source repository, following its README; they have not all been tested on a clean installation.</p>'
-        f'{"".join(sections)}</div></section></main>'))
+        f'{filters}<div id="catalogue">{"".join(sections)}</div><p id="none" hidden>No plugin matches. Clear a filter to see more.</p></div></section></main>{FILTER_JS}'))
 
     # One page per plugin
     for p in plugins:
@@ -332,12 +472,23 @@ def build():
         rows.append(('Status', status))
         if deps:
             rows.append(('Requires', deps))
+        optional = []
+        for field in ('optional', 'optional_dependencies', 'suggests'):
+            v = p.get(field) or []
+            if isinstance(v, dict):  # {"extensions": [...]} or {"ahgXPlugin": "why"}
+                v = v.get('extensions', []) if 'extensions' in v else list(v)
+            optional += [o for o in v if isinstance(o, str) and re.match(r'^ahg\w+Plugin$', o)]
+        optional = list(dict.fromkeys(optional))
+        if optional:
+            rows.append(('Works with', ''.join(f'<a class="tag" href="/plugins/{by_machine[o]["slug"]}.html">{e(by_machine[o].get("name") or o)}</a>' if o in by_machine else f'<span class="tag">{e(o)}</span>' for o in optional)))
+        if services.get(p['machine_name']):
+            rows.append(('External services', 'Can use, when installed: ' + ', '.join(e(x) for x in services[p['machine_name']])))
         if p.get('license'):
             rows.append(('Licence', e(p['license'])))
         if p['machine_name'] in bundles:
             rows.append(('Install', f'Packaged download with its own installer: see the <a href="{DOWNLOADS}">downloads page</a>'))
         else:
-            rows.append(('Install', f'From the <a href="{REPO}">source repository</a>, following its README. No packaged download yet.'))
+            rows.append(('Install', 'From the source repository: see <a href="#install">Installation</a> below. No packaged download yet.'))
         if p['machine_name'] in FOUNDATIONS:
             rows.append(('Role', 'Foundation: ' + e(FOUNDATIONS[p['machine_name']])))
         flag = next((f for f in flags if any(m == p['machine_name'] for _, m in f['plugins'])), None)
@@ -346,11 +497,37 @@ def build():
             flag_html = f'<p>Part of the <a href="/#capabilities">{e(flag["name"])}</a> capability.'
             flag_html += (f' <a href="{e(flag["video"])}">Watch the walkthrough</a>.' if flag['video'] else '') + '</p>'
         table = ''.join(f'<tr><th scope="row">{k}</th><td>{v}</td></tr>' for k, v in rows)
-        body = f"""<main><section><div class="wrap"><p class="crumb"><a href="/">Home</a> / <a href="/plugins/">Plugins</a> / {e(name)}</p>
+
+        sec = readme_sections(p['machine_name'])
+        extra = content_html(p['slug'])
+        req = sec.get('Requirements', '')
+        limits = sec.get('Not implemented', '')
+        if p['machine_name'] in bundles:
+            install = (f'<p>Download the bundle and the runtime from the <a href="{DOWNLOADS}">downloads page</a>, '
+                       'then follow the bundle\'s INSTALL.md. In short, from the AtoM root, after a backup and on a staging copy first:</p>'
+                       '<pre><code>unzip ahgRuntimePlugin-&lt;version&gt;.zip -d plugins/\n'
+                       f'unzip {e(p["machine_name"])}-&lt;version&gt;.zip -d plugins/\n'
+                       f'php plugins/{e(p["machine_name"])}/bin/install-plugin-schema.php \\\n'
+                       '    --database=&lt;database&gt; --user=&lt;user&gt; --password=&lt;password&gt;</code></pre>'
+                       '<p>Then enable it in Admin &gt; Plugins, clear the cache and reload PHP.</p>')
+        else:
+            install = md_html(sec.get('Installation', '')) or f'<p>See the <a href="{REPO}/tree/main/{e(p["machine_name"])}">README on GitHub</a>.</p>'
+        demo = DEMO_PAGES.get(p['machine_name'])
+        if demo:
+            demo_html = f'<p>See it on the live demo (sample data, no sign-in): <a href="{DEMO}{e(demo[0])}">{e(demo[1])}</a>.</p>'
+        elif flag and flag['video']:
+            demo_html = f'<p>This feature is for signed-in staff, so it is not open on the public demo. <a href="{e(flag["video"])}">Watch the walkthrough</a> instead.</p>'
+        else:
+            demo_html = '<p>This feature is for signed-in staff, so it is not open on the public demo.</p>'
+        body = f"""<main><section><div class="wrap detail"><p class="crumb"><a href="/">Home</a> / <a href="/plugins/">Plugins</a> / {e(name)}</p>
 <h2>{e(name)}</h2><p>{e(desc)}</p>{flag_html}
 <table>{table}</table>
-{readme_summary(p['machine_name'])}
-<p><a href="{REPO}/tree/main/{e(p['machine_name'])}">Source and README on GitHub</a> &middot; <a href="{DEMO}">Try it on the live demo</a></p>
+{extra or readme_summary(p['machine_name'])}
+{('<h3>Requirements</h3>' + md_html(req)) if req.strip() else ''}
+{('<h3>Known limits</h3>' + md_html(limits)) if limits.strip() else ''}
+<h3 id="install">Installation</h3>{install}
+<h3>Try it</h3>{demo_html}
+<p><a href="{REPO}/tree/main/{e(p['machine_name'])}">Source and README on GitHub</a> &middot; Questions: <a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a> or <a href="{WHATSAPP}">WhatsApp</a></p>
 </div></section></main>"""
         open(os.path.join(OUT, 'plugins', p['slug'] + '.html'), 'w').write(page(
             f'{name}: AtoM plugin from AHG Extensions for AtoM',

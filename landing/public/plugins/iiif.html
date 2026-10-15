@@ -6,11 +6,53 @@
 <link rel="stylesheet" href="/style.css"></head><body>
 <header class="top"><div class="wrap"><a class="brand" href="/">AHG Extensions for AtoM</a>
 <nav><a href="/#capabilities">Capabilities</a><a href="/plugins/">Plugins</a><a href="https://psis.theahg.co.za">Live demo</a><a href="/#contact">Contact</a></nav></div></header>
-<main><section><div class="wrap"><p class="crumb"><a href="/">Home</a> / <a href="/plugins/">Plugins</a> / IIIF</p>
+<main><section><div class="wrap detail"><p class="crumb"><a href="/">Home</a> / <a href="/plugins/">Plugins</a> / IIIF</p>
 <h2>IIIF</h2><p>IIIF viewer integration with Mirador and OpenSeadragon support</p><p>Part of the <a href="/#capabilities">IIIF &amp; Advanced Viewing</a> capability. <a href="https://youtu.be/9tQ9Z79M_H0">Watch the walkthrough</a>.</p>
-<table><tr><th scope="row">Category</th><td>Viewing</td></tr><tr><th scope="row">Package</th><td><code>ahgIiifPlugin</code></td></tr><tr><th scope="row">Version</th><td>1.2.3</td></tr><tr><th scope="row">Status</th><td>Packaged download, installer tested (tested 2026-08-18)</td></tr><tr><th scope="row">Requires</th><td><span class="tag">Core</span></td></tr><tr><th scope="row">Licence</th><td>AGPL-3.0-or-later</td></tr><tr><th scope="row">Install</th><td>Packaged download with its own installer: see the <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/blob/main/docs/plugins/README.md">downloads page</a></td></tr></table>
-<p>IIIF for AtoM 2.9 and 2.10. Manifests, collections, annotations, search, authorisation, OCR export and media handling. Nothing in base AtoM is modified. No file under <code>apps/</code>, <code>lib/</code>, <code>vendor/</code> or <code>config/</code> is touched, and <code>ProjectConfiguration.class.php</code> stays as upstream ships it.</p>
-<p><a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/tree/main/ahgIiifPlugin">Source and README on GitHub</a> &middot; <a href="https://psis.theahg.co.za">Try it on the live demo</a></p>
+<table><tr><th scope="row">Category</th><td>Viewing</td></tr><tr><th scope="row">Package</th><td><code>ahgIiifPlugin</code></td></tr><tr><th scope="row">Version</th><td>1.2.3</td></tr><tr><th scope="row">Status</th><td>Packaged download, installer tested (tested 2026-08-18)</td></tr><tr><th scope="row">Requires</th><td><span class="tag">Core</span></td></tr><tr><th scope="row">Works with</th><td><a class="tag" href="/plugins/3d-model.html">3D Model Viewer</a></td></tr><tr><th scope="row">External services</th><td>Can use, when installed: Cantaloupe IIIF image server, ExifTool, AHG AI gateway, Tesseract OCR, FFmpeg, LibreOffice</td></tr><tr><th scope="row">Licence</th><td>AGPL-3.0-or-later</td></tr><tr><th scope="row">Install</th><td>Packaged download with its own installer: see the <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/blob/main/docs/plugins/README.md">downloads page</a></td></tr></table>
+<h3 id="what-it-is-for">What it is for</h3>
+<p>Show digitised images, books and maps the way researchers expect: deep zoom, page turning and side-by-side comparison, from the record itself. Every digital object gets a IIIF Presentation 3 manifest, so the same images open in any IIIF viewer elsewhere.</p>
+<ul>
+<li>Two viewers on the record page: Mirador for comparing and annotating, OpenSeadragon for fast deep zoom.</li>
+<li>Share a view: zoom to a detail and copy a link that opens the same image at the same place.</li>
+<li>Collections: group images from different records into a curated set with its own manifest.</li>
+<li>A validation dashboard for checking manifests, and an administrators' list of shared views.</li>
+</ul>
+<p><img loading="lazy" src="/img/training-discovery-1/01-mirador.png" alt="Mirador on a record page" /></p>
+<p><img loading="lazy" src="/img/training-discovery-1/03-share.png" alt="Sharing a zoomed view" /></p>
+<p><img loading="lazy" src="/img/training-discovery-1/07-collections.png" alt="A IIIF collection" /></p>
+<p>Training guide: <a href="https://github.com/ArchiveHeritageGroup/atom-extensions-catalog/blob/main/docs/training-discovery-1-iiif.md">Discovery, part 1 - IIIF images</a>.</p>
+
+<h3>Requirements</h3><pre><code>AtoM              2.9 or 2.10
+PHP               8.1 or later
+MySQL             8.0
+ahgRuntimePlugin  2.14.1 or later, installed separately</code></pre>
+<p>Optional:</p>
+<pre><code>An IIIF image server   deep zoom and tiling. Cantaloupe is what we run.
+                       Manifests, viewers and OCR export work without one.
+ffmpeg, ffprobe        audio and video
+exiftool               embedded metadata
+tesseract              OCR</code></pre>
+<p>Setup guides, deliberately kept out of the download because your web server and image server are yours:</p>
+<ul>
+<li><a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/blob/main/../docs/infrastructure/iiif-image-server.md">Setting up an IIIF image server</a></li>
+<li><a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/blob/main/../docs/infrastructure/nginx.md">nginx</a></li>
+</ul>
+
+<h3>Known limits</h3><p>Stated because a gap you know about is cheaper than one you discover:</p>
+<ul>
+<li><code>rendering</code> - the PDF or download alternative - is the last unemitted Presentation 3 property</li>
+<li>Nothing checks at runtime that an image server is reachable, so a misconfigured Cantaloupe is indistinguishable from none: manifests build, viewers load, images are flat, and nothing says why</li>
+<li>A conditional property that does not appear on a record and one that cannot be produced look identical from outside</li>
+<li>The right-to-left branch is unexercised by any material we hold</li>
+</ul>
+<p>Licence: AGPL-3.0-or-later.</p>
+
+<h3 id="install">Installation</h3><p>Download the bundle and the runtime from the <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/blob/main/docs/plugins/README.md">downloads page</a>, then follow the bundle's INSTALL.md. In short, from the AtoM root, after a backup and on a staging copy first:</p><pre><code>unzip ahgRuntimePlugin-&lt;version&gt;.zip -d plugins/
+unzip ahgIiifPlugin-&lt;version&gt;.zip -d plugins/
+php plugins/ahgIiifPlugin/bin/install-plugin-schema.php \
+    --database=&lt;database&gt; --user=&lt;user&gt; --password=&lt;password&gt;</code></pre><p>Then enable it in Admin &gt; Plugins, clear the cache and reload PHP.</p>
+<h3>Try it</h3><p>See it on the live demo (sample data, no sign-in): <a href="https://psis.theahg.co.za/iiif-viewer-photo-taken-with-phase-one-iq3-100mp-captured-on-november-17-2017-80mm-f-11">a record in the IIIF viewer</a>.</p>
+<p><a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/tree/main/ahgIiifPlugin">Source and README on GitHub</a> &middot; Questions: <a href="mailto:support@theahg.co.za">support@theahg.co.za</a> or <a href="https://wa.me/27648830533?text=Tell%20me%20about%20the%20AHG%20Plugins">WhatsApp</a></p>
 </div></section></main>
 <footer><div class="wrap">AHG Extensions for AtoM were developed by <a href="https://plainsailingisystems.co.za/">Plain Sailing Information Systems</a> and are offered by <a href="https://theahg.co.za">The Archive and Heritage Group (Pty) Ltd</a>, South Africa. Open source under AGPL-3.0-or-later: <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins">source code</a> and <a href="https://github.com/ArchiveHeritageGroup/atom-extensions-catalog/tree/main/docs">documentation</a>.</div></footer>
 </body></html>

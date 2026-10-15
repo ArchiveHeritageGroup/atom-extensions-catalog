@@ -28,5 +28,14 @@ th{background:var(--green);color:#fff;font-weight:bold;width:150px}
 .plugin-list{columns:2 300px;padding-left:20px}.plugin-list li{margin:0 0 8px;break-inside:avoid}
 footer{background:var(--green);color:var(--cream);padding:28px 0;font-size:15px}footer a{color:var(--gold)}
 .crumb{font-size:15px;margin:0 0 14px}
+.detail img{max-width:100%;height:auto;border:1px solid #ddd6ca;border-radius:4px;margin:6px 0}
+.detail pre{background:var(--cream);padding:10px 12px;overflow-x:auto;font-size:14px;border-radius:4px}
+.detail pre code{background:none;padding:0}
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 6px}
+.filters label{display:flex;flex-direction:column;font-size:14px;color:var(--muted);gap:2px}
+.filters input,.filters select{font:16px Arial,sans-serif;padding:7px 9px;border:1px solid #bdb5a6;border-radius:4px;min-width:200px}
+.filters input:focus,.filters select:focus,a:focus{outline:3px solid var(--gold);outline-offset:2px}
+.badge{display:inline-block;font-size:13px;border-radius:3px;padding:0 6px;margin-left:6px;background:var(--cream);color:var(--green)}
+#count{font-weight:bold}
 @media(max-width:600px){.hero{padding:40px 0 44px}.hero h1{font-size:30px}.hero p{font-size:18px}
 header.top nav a{margin:0 14px 0 0}th{width:auto}}

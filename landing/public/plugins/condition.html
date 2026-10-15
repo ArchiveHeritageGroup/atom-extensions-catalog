@@ -6,11 +6,34 @@
 <link rel="stylesheet" href="/style.css"></head><body>
 <header class="top"><div class="wrap"><a class="brand" href="/">AHG Extensions for AtoM</a>
 <nav><a href="/#capabilities">Capabilities</a><a href="/plugins/">Plugins</a><a href="https://psis.theahg.co.za">Live demo</a><a href="/#contact">Contact</a></nav></div></header>
-<main><section><div class="wrap"><p class="crumb"><a href="/">Home</a> / <a href="/plugins/">Plugins</a> / Condition Assessment</p>
+<main><section><div class="wrap detail"><p class="crumb"><a href="/">Home</a> / <a href="/plugins/">Plugins</a> / Condition Assessment</p>
 <h2>Condition Assessment</h2><p>Condition assessment and reporting for museum objects</p><p>Part of the <a href="/#capabilities">Digital Preservation</a> capability. <a href="https://youtu.be/8BKhG_I6iyI">Watch the walkthrough</a>.</p>
-<table><tr><th scope="row">Category</th><td>GLAM sectors</td></tr><tr><th scope="row">Package</th><td><code>ahgConditionPlugin</code></td></tr><tr><th scope="row">Version</th><td>1.2.7</td></tr><tr><th scope="row">Status</th><td>Tested: installs on a clean AtoM from source (tested 2026-08-18)</td></tr><tr><th scope="row">Requires</th><td><span class="tag">Core</span></td></tr><tr><th scope="row">Licence</th><td>AGPL-3.0-or-later</td></tr><tr><th scope="row">Install</th><td>From the <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins">source repository</a>, following its README. No packaged download yet.</td></tr></table>
+<table><tr><th scope="row">Category</th><td>GLAM sectors</td></tr><tr><th scope="row">Package</th><td><code>ahgConditionPlugin</code></td></tr><tr><th scope="row">Version</th><td>1.2.7</td></tr><tr><th scope="row">Status</th><td>Tested: installs on a clean AtoM from source (tested 2026-08-18)</td></tr><tr><th scope="row">Requires</th><td><span class="tag">Core</span></td></tr><tr><th scope="row">Works with</th><td><a class="tag" href="/plugins/museum.html">Museum Cataloging (CCO/Collections Procedures)</a></td></tr><tr><th scope="row">External services</th><td>Can use, when installed: AHG AI gateway</td></tr><tr><th scope="row">Licence</th><td>AGPL-3.0-or-later</td></tr><tr><th scope="row">Install</th><td>From the source repository: see <a href="#install">Installation</a> below. No packaged download yet.</td></tr></table>
 <p>Condition assessment and reporting for museum objects.</p><h3>Features</h3><ul><li>Condition check templates (Museum, Library, Archive, Artwork)</li><li>Photo documentation with annotations</li><li>Condition reports (PDF export)</li><li>Integration with object records</li></ul>
-<p><a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/tree/main/ahgConditionPlugin">Source and README on GitHub</a> &middot; <a href="https://psis.theahg.co.za">Try it on the live demo</a></p>
+<h3>Requirements</h3><ul>
+<li>PHP 8.1+</li>
+<li>PHP GD extension (for image processing)</li>
+</ul>
+<h3 id="installing-php-gd">Installing PHP GD</h3>
+<p><strong>Ubuntu/Debian:</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install php8.3-gd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart php8.3-fpm</span></code></pre></div>
+<p><strong>CentOS/RHEL:</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> yum install php-gd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart php-fpm</span></code></pre></div>
+
+
+<h3 id="install">Installation</h3><ol type="1">
+<li>Check requirements:</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">php</span> check-requirements.php</span></code></pre></div>
+<ol start="2" type="1">
+<li>Install via extension manager:</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">php</span> bin/atom extension:install ahgConditionPlugin</span></code></pre></div>
+
+<h3>Try it</h3><p>This feature is for signed-in staff, so it is not open on the public demo. <a href="https://youtu.be/8BKhG_I6iyI">Watch the walkthrough</a> instead.</p>
+<p><a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/tree/main/ahgConditionPlugin">Source and README on GitHub</a> &middot; Questions: <a href="mailto:support@theahg.co.za">support@theahg.co.za</a> or <a href="https://wa.me/27648830533?text=Tell%20me%20about%20the%20AHG%20Plugins">WhatsApp</a></p>
 </div></section></main>
 <footer><div class="wrap">AHG Extensions for AtoM were developed by <a href="https://plainsailingisystems.co.za/">Plain Sailing Information Systems</a> and are offered by <a href="https://theahg.co.za">The Archive and Heritage Group (Pty) Ltd</a>, South Africa. Open source under AGPL-3.0-or-later: <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins">source code</a> and <a href="https://github.com/ArchiveHeritageGroup/atom-extensions-catalog/tree/main/docs">documentation</a>.</div></footer>
 </body></html>

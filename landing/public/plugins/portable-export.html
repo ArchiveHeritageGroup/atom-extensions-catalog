@@ -6,11 +6,65 @@
 <link rel="stylesheet" href="/style.css"></head><body>
 <header class="top"><div class="wrap"><a class="brand" href="/">AHG Extensions for AtoM</a>
 <nav><a href="/#capabilities">Capabilities</a><a href="/plugins/">Plugins</a><a href="https://psis.theahg.co.za">Live demo</a><a href="/#contact">Contact</a></nav></div></header>
-<main><section><div class="wrap"><p class="crumb"><a href="/">Home</a> / <a href="/plugins/">Plugins</a> / Portable Export &amp; Import</p>
+<main><section><div class="wrap detail"><p class="crumb"><a href="/">Home</a> / <a href="/plugins/">Plugins</a> / Portable Export &amp; Import</p>
 <h2>Portable Export &amp; Import</h2><p>Full-system portable export and import for AtoM Heratio. Export complete instances with 15 entity types, SHA-256 checksummed manifests, and self-documenting packages. Import archives into fresh instances with ID remapping, merge/replace/dry-run modes. Also supports offline HTML viewer export for CD/USB/ZIP distribution.</p>
-<table><tr><th scope="row">Category</th><td>Export</td></tr><tr><th scope="row">Package</th><td><code>ahgPortableExportPlugin</code></td></tr><tr><th scope="row">Version</th><td>3.0.0</td></tr><tr><th scope="row">Status</th><td>Source only: clean install not yet verified</td></tr><tr><th scope="row">Requires</th><td><span class="tag">Core</span></td></tr><tr><th scope="row">Licence</th><td>AGPL-3.0-or-later</td></tr><tr><th scope="row">Install</th><td>From the <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins">source repository</a>, following its README. No packaged download yet.</td></tr></table>
+<table><tr><th scope="row">Category</th><td>Export</td></tr><tr><th scope="row">Package</th><td><code>ahgPortableExportPlugin</code></td></tr><tr><th scope="row">Version</th><td>3.0.0</td></tr><tr><th scope="row">Status</th><td>Source only: clean install not yet verified</td></tr><tr><th scope="row">Requires</th><td><span class="tag">Core</span></td></tr><tr><th scope="row">Licence</th><td>AGPL-3.0-or-later</td></tr><tr><th scope="row">Install</th><td>From the source repository: see <a href="#install">Installation</a> below. No packaged download yet.</td></tr></table>
 <p>Full-system portable export and import for AtoM Heratio. Export complete instances with 15 entity types, SHA-256 checksummed manifests, and self-documenting packages. Import archives into fresh instances with ID remapping, merge/replace/dry-run modes. Also supports offline HTML viewer export for CD/USB/ZIP distribution.</p><h3>Features</h3><ul><li>Self-contained HTML/JS viewer for offline catalogue access</li><li>Archive export: 15 entity types (descriptions, authorities, taxonomies, rights, accessions, physical objects, events, notes, relations, digital objects, repositories, object term relations, settings, users, menus)</li><li>Archive import: merge, replace, or dry-run modes with full ID remapping</li><li>Self-documenting packages: README.md + schema documentation in manifest</li><li>SHA-256 checksummed manifest for all exported files</li><li>FK-dependency-ordered import pipeline (taxonomies → repositories → descriptions → etc.)</li><li>Dry-run estimate (record counts + estimated package size)</li><li>Export and import verification CLI: portable:verify, portable:import --mode=dry_run</li><li>Export full or partial catalogue (fonds, repository, custom scope)</li><li>Client-side search with FlexSearch</li><li>Hierarchical tree navigation (MPPT-ordered)</li><li>Digital object inline viewing (images, PDFs)</li><li>Edit mode with researcher exchange format</li><li>CLI commands: portable:export, portable:import, portable:verify, portable:cleanup</li><li>Admin UI with background processing and progress tracking (export + import)</li></ul>
-<p><a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/tree/main/ahgPortableExportPlugin">Source and README on GitHub</a> &middot; <a href="https://psis.theahg.co.za">Try it on the live demo</a></p>
+<h3>Requirements</h3><table>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Version</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>atom framework</td>
+<td><code>&gt;=2.0.0</code></td>
+</tr>
+<tr class="even">
+<td>atom</td>
+<td><code>&gt;=2.8</code></td>
+</tr>
+<tr class="odd">
+<td>php</td>
+<td><code>&gt;=8.1</code></td>
+</tr>
+</tbody>
+</table>
+
+
+<h3 id="install">Installation</h3><p>This plugin requires <strong>atom-framework</strong>. It is not optional: the framework provides <code>AhgController</code>, <code>AtomFramework\*</code> and the routing and settings services that this plugin builds on.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Fetch into the AtoM plugins directory as a REAL DIRECTORY.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#    A symlink fails the prefix test in pluginsAction.class.php and the</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#    plugin is then invisible in the stock admin UI with no error shown.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="op">&lt;</span>atom-root<span class="op">&gt;</span>/plugins</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="at">--depth</span> 1 <span class="at">--filter</span><span class="op">=</span>blob:none <span class="at">--sparse</span> <span class="dt">\</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    https://github.com/ArchiveHeritageGroup/atom-ahg-plugins.git tmp-fetch</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> tmp-fetch <span class="kw">&amp;&amp;</span> <span class="fu">git</span> sparse-checkout set ahgPortableExportPlugin <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> ..</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> tmp-fetch/ahgPortableExportPlugin ./ahgPortableExportPlugin <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> <span class="at">-rf</span> tmp-fetch</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Apply the schema with the framework&#39;s installer. It stops on the first</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#    error, reports it, and checks every declared table exists. Never use a</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">#    plain `mysql &lt; install.sql`: it can stop half way without saying so.</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="op">&lt;</span>atom-root<span class="op">&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ex">php</span> atom-framework/bin/install-plugin-schema.php <span class="dt">\</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">--database</span><span class="op">=&lt;</span>database<span class="op">&gt;</span> --user=<span class="op">&lt;</span>user<span class="op">&gt;</span> --password=<span class="op">&lt;</span>password<span class="op">&gt;</span> --plugin=ahgPortableExportPlugin</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Enable it, then clear the cache and reload PHP-FPM.</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="op">&lt;</span>atom-root<span class="op">&gt;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="ex">php</span> symfony cc</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl reload php8.3-fpm</span></code></pre></div>
+<p><strong>Enabling differs by instance shape.</strong> Check which list governs:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> <span class="st">&#39;loadPluginsFromDatabase&#39;</span> <span class="op">&lt;</span>atom-root<span class="op">&gt;</span>/config/ProjectConfiguration.class.php</span></code></pre></div>
+<ul>
+<li><code>0</code> (stock AtoM): plugins load from the serialised <code>plugins</code> row in <code>setting_i18n</code>. The <code>atom_plugin</code> table is inert and the admin screen can show a plugin as enabled that does not load.</li>
+<li><code>1</code> or more (AHG): <code>atom_plugin</code> is the source of truth.</li>
+</ul>
+<p>Verify against whichever list governs, not against the admin screen.</p>
+
+<h3>Try it</h3><p>This feature is for signed-in staff, so it is not open on the public demo.</p>
+<p><a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/tree/main/ahgPortableExportPlugin">Source and README on GitHub</a> &middot; Questions: <a href="mailto:support@theahg.co.za">support@theahg.co.za</a> or <a href="https://wa.me/27648830533?text=Tell%20me%20about%20the%20AHG%20Plugins">WhatsApp</a></p>
 </div></section></main>
 <footer><div class="wrap">AHG Extensions for AtoM were developed by <a href="https://plainsailingisystems.co.za/">Plain Sailing Information Systems</a> and are offered by <a href="https://theahg.co.za">The Archive and Heritage Group (Pty) Ltd</a>, South Africa. Open source under AGPL-3.0-or-later: <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins">source code</a> and <a href="https://github.com/ArchiveHeritageGroup/atom-extensions-catalog/tree/main/docs">documentation</a>.</div></footer>
 </body></html>

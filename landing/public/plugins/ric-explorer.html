@@ -6,11 +6,50 @@
 <link rel="stylesheet" href="/style.css"></head><body>
 <header class="top"><div class="wrap"><a class="brand" href="/">AHG Extensions for AtoM</a>
 <nav><a href="/#capabilities">Capabilities</a><a href="/plugins/">Plugins</a><a href="https://psis.theahg.co.za">Live demo</a><a href="/#contact">Contact</a></nav></div></header>
-<main><section><div class="wrap"><p class="crumb"><a href="/">Home</a> / <a href="/plugins/">Plugins</a> / RiC Explorer</p>
+<main><section><div class="wrap detail"><p class="crumb"><a href="/">Home</a> / <a href="/plugins/">Plugins</a> / RiC Explorer</p>
 <h2>RiC Explorer</h2><p>Records in Context (RiC) visualization, exploration, and Fuseki triplestore integration</p><p>Part of the <a href="/#capabilities">Records in Contexts &amp; Graph Discovery</a> capability.</p>
-<table><tr><th scope="row">Category</th><td>Metadata</td></tr><tr><th scope="row">Package</th><td><code>ahgRicExplorerPlugin</code></td></tr><tr><th scope="row">Version</th><td>1.1.5</td></tr><tr><th scope="row">Status</th><td>Source only: clean install not yet verified</td></tr><tr><th scope="row">Requires</th><td><span class="tag">Core</span></td></tr><tr><th scope="row">Licence</th><td>AGPL-3.0-or-later</td></tr><tr><th scope="row">Install</th><td>From the <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins">source repository</a>, following its README. No packaged download yet.</td></tr></table>
+<table><tr><th scope="row">Category</th><td>Metadata</td></tr><tr><th scope="row">Package</th><td><code>ahgRicExplorerPlugin</code></td></tr><tr><th scope="row">Version</th><td>1.1.5</td></tr><tr><th scope="row">Status</th><td>Source only: clean install not yet verified</td></tr><tr><th scope="row">Requires</th><td><span class="tag">Core</span></td></tr><tr><th scope="row">External services</th><td>Can use, when installed: Apache Jena Fuseki triplestore</td></tr><tr><th scope="row">Licence</th><td>AGPL-3.0-or-later</td></tr><tr><th scope="row">Install</th><td>From the source repository: see <a href="#install">Installation</a> below. No packaged download yet.</td></tr></table>
 <p>Records in Context (RiC) visualization and exploration plugin for Access to Memory (AtoM).</p><h3>Features</h3><ul><li><strong>RiC Relations Panel</strong>: Shows creators, accumulators, and related records on description pages</li><li><strong>Graph Visualization</strong>: Interactive mini-graph showing entity relationships</li><li><strong>Full Explorer</strong>: Modal window with comprehensive graph exploration</li><li><strong>Cross-fonds Discovery</strong>: Find related records via shared creators</li></ul>
-<p><a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/tree/main/ahgRicExplorerPlugin">Source and README on GitHub</a> &middot; <a href="https://psis.theahg.co.za">Try it on the live demo</a></p>
+<h3>Requirements</h3><ul>
+<li>AtoM 2.x</li>
+<li>Apache Jena Fuseki (or compatible SPARQL endpoint) with RiC data loaded</li>
+<li>RiC Extractor for populating the triplestore</li>
+</ul>
+
+
+<h3 id="install">Installation</h3><h3 id="1-copy-plugin-files">1. Copy Plugin Files</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> arRicExplorerPlugin /usr/share/nginx/atom/plugins/</span></code></pre></div>
+<h3 id="2-configure-settings">2. Configure Settings</h3>
+<p>Add to <code>apps/qubit/config/app.yml</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span><span class="kw">:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">ric_explorer</span><span class="kw">:</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">sparql_endpoint</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;http://localhost:3030/ric/query&#39;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">base_uri</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;https://your-domain.com/ric/atom&#39;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">explorer_url</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;/ric/&#39;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">enabled</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
+<h3 id="3-enable-the-plugin">3. Enable the Plugin</h3>
+<p>Add to <code>apps/qubit/config/settings.yml</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span><span class="kw">:</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">.settings</span><span class="kw">:</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">plugins</span><span class="kw">:</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> arRicExplorerPlugin</span></span></code></pre></div>
+<h3 id="4-include-panel-in-templates">4. Include Panel in Templates</h3>
+<p>Edit <code>plugins/arDominionPlugin/modules/informationobject/templates/indexSuccess.php</code> (or your theme's equivalent):</p>
+<p>Add after the main description content:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode php"><code class="sourceCode php"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span> include_component(<span class="st">&#39;arRicExplorer&#39;</span><span class="ot">,</span> <span class="st">&#39;ricPanel&#39;</span><span class="ot">,</span> <span class="dt">array</span>(<span class="st">&#39;resource&#39;</span> =&gt; <span class="va">$resource</span>))<span class="ot">;</span> <span class="kw">?&gt;</span></span></code></pre></div>
+<h3 id="5-clear-cache">5. Clear Cache</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">php</span> symfony cc</span></code></pre></div>
+<h3 id="6-deploy-static-assets">6. Deploy Static Assets</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy CSS and JS to web directory</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> plugins/arRicExplorerPlugin/css/ric-explorer.css web/plugins/arRicExplorerPlugin/css/</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> plugins/arRicExplorerPlugin/js/ric-explorer.js web/plugins/arRicExplorerPlugin/js/</span></code></pre></div>
+<p>Or create symlinks:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> web/plugins/arRicExplorerPlugin</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> ../../../plugins/arRicExplorerPlugin/css web/plugins/arRicExplorerPlugin/css</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> ../../../plugins/arRicExplorerPlugin/js web/plugins/arRicExplorerPlugin/js</span></code></pre></div>
+
+<h3>Try it</h3><p>This feature is for signed-in staff, so it is not open on the public demo.</p>
+<p><a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/tree/main/ahgRicExplorerPlugin">Source and README on GitHub</a> &middot; Questions: <a href="mailto:support@theahg.co.za">support@theahg.co.za</a> or <a href="https://wa.me/27648830533?text=Tell%20me%20about%20the%20AHG%20Plugins">WhatsApp</a></p>
 </div></section></main>
 <footer><div class="wrap">AHG Extensions for AtoM were developed by <a href="https://plainsailingisystems.co.za/">Plain Sailing Information Systems</a> and are offered by <a href="https://theahg.co.za">The Archive and Heritage Group (Pty) Ltd</a>, South Africa. Open source under AGPL-3.0-or-later: <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins">source code</a> and <a href="https://github.com/ArchiveHeritageGroup/atom-extensions-catalog/tree/main/docs">documentation</a>.</div></footer>
 </body></html>

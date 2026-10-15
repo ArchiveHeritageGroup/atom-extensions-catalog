@@ -6,11 +6,43 @@
 <link rel="stylesheet" href="/style.css"></head><body>
 <header class="top"><div class="wrap"><a class="brand" href="/">AHG Extensions for AtoM</a>
 <nav><a href="/#capabilities">Capabilities</a><a href="/plugins/">Plugins</a><a href="https://psis.theahg.co.za">Live demo</a><a href="/#contact">Contact</a></nav></div></header>
-<main><section><div class="wrap"><p class="crumb"><a href="/">Home</a> / <a href="/plugins/">Plugins</a> / 3D Model Viewer</p>
+<main><section><div class="wrap detail"><p class="crumb"><a href="/">Home</a> / <a href="/plugins/">Plugins</a> / 3D Model Viewer</p>
 <h2>3D Model Viewer</h2><p>3D model viewing with Google Model Viewer, Gaussian Splat support, AR, hotspots, and IIIF 3D manifests</p><p>Part of the <a href="/#capabilities">Digital Asset Management</a> capability. <a href="https://youtu.be/seJ8o9F46Tc">Watch the walkthrough</a>.</p>
-<table><tr><th scope="row">Category</th><td>Viewing</td></tr><tr><th scope="row">Package</th><td><code>ahg3DModelPlugin</code></td></tr><tr><th scope="row">Version</th><td>1.2.2</td></tr><tr><th scope="row">Status</th><td>Source only: clean install not yet verified</td></tr><tr><th scope="row">Requires</th><td><span class="tag">Core</span></td></tr><tr><th scope="row">Licence</th><td>AGPL-3.0-or-later</td></tr><tr><th scope="row">Install</th><td>From the <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins">source repository</a>, following its README. No packaged download yet.</td></tr></table>
+<table><tr><th scope="row">Category</th><td>Viewing</td></tr><tr><th scope="row">Package</th><td><code>ahg3DModelPlugin</code></td></tr><tr><th scope="row">Version</th><td>1.2.2</td></tr><tr><th scope="row">Status</th><td>Source only: clean install not yet verified</td></tr><tr><th scope="row">Requires</th><td><span class="tag">Core</span></td></tr><tr><th scope="row">Licence</th><td>AGPL-3.0-or-later</td></tr><tr><th scope="row">Install</th><td>From the source repository: see <a href="#install">Installation</a> below. No packaged download yet.</td></tr></table>
 <p>A comprehensive 3D model viewing plugin for Access to Memory (AtoM) with IIIF 3D extension support, augmented reality (AR) capabilities, and interactive hotspot annotations.</p><h3>Features</h3><ul><li><strong>Multiple 3D Formats</strong>: Support for GLB, glTF, OBJ, STL, PLY, and USDZ formats (FBX via Blender thumbnail only)</li><li><strong>Google Model Viewer</strong>: Uses Google&#x27;s <code>&lt;model-viewer&gt;</code> component for high-quality WebGL rendering</li><li><strong>Augmented Reality</strong>: AR viewing on iOS (Quick Look) and Android (Scene Viewer)</li><li><strong>3D Hotspots</strong>: Interactive annotation points with customizable types (info, damage, detail, link)</li><li><strong>IIIF 3D Manifests</strong>: Generates IIIF 3D-compliant manifests for interoperability</li><li><strong>Three.js Fallback</strong>: Alternative viewer for older browsers</li><li><strong>Responsive Design</strong>: Works on desktop, tablet, and mobile devices</li><li><strong>Bootstrap 5 Integration</strong>: Seamless integration with AtoM&#x27;s Bootstrap 5 themes</li></ul>
-<p><a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/tree/main/ahg3DModelPlugin">Source and README on GitHub</a> &middot; <a href="https://psis.theahg.co.za">Try it on the live demo</a></p>
+<h3>Requirements</h3><ul>
+<li>AtoM 2.9+ or 2.10</li>
+<li>PHP 8.1+</li>
+<li>MySQL 5.7+ or MariaDB 10.3+</li>
+<li>atom-framework (Laravel Query Builder)</li>
+<li>HTTPS (required for AR features)</li>
+</ul>
+
+
+<h3 id="install">Installation</h3><h3 id="1-copy-plugin-files">1. Copy Plugin Files</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /usr/share/nginx/archive/plugins</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> /path/to/ahg3DModelPlugin .</span></code></pre></div>
+<h3 id="2-copy-service-file">2. Copy Service File</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ahg3DModelPlugin/services/Model3DService.php <span class="dt">\</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>   /usr/share/nginx/archive/atom-framework/src/Services/</span></code></pre></div>
+<h3 id="3-install-database-schema">3. Install Database Schema</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">php</span> atom-framework/bin/install-plugin-schema.php <span class="at">--database</span><span class="op">=&lt;</span>database<span class="op">&gt;</span> --user=<span class="op">&lt;</span>user<span class="op">&gt;</span> --password=<span class="op">&lt;</span>password<span class="op">&gt;</span> --plugin=ahg3DModelPlugin   <span class="co"># from the AtoM root; never a plain mysql &lt; install.sql</span></span></code></pre></div>
+<h3 id="4-create-upload-directory">4. Create Upload Directory</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> /usr/share/nginx/archive/uploads/3d</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> <span class="at">-R</span> www-data:www-data /usr/share/nginx/archive/uploads/3d</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 755 /usr/share/nginx/archive/uploads/3d</span></code></pre></div>
+<h3 id="5-clear-cache">5. Clear Cache</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">php</span> /usr/share/nginx/archive/symfony cc</span></code></pre></div>
+<h3 id="6-enable-plugin">6. Enable Plugin</h3>
+<p>Add to <code>apps/qubit/config/settings.yml</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span><span class="kw">:</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">.settings</span><span class="kw">:</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">plugins</span><span class="kw">:</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> ahg3DModelPlugin</span></span></code></pre></div>
+<p>Or enable via Admin &gt; Plugins in AtoM.</p>
+
+<h3>Try it</h3><p>See it on the live demo (sample data, no sign-in): <a href="https://psis.theahg.co.za/3d-more-glb">a record with a 3D model</a>.</p>
+<p><a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/tree/main/ahg3DModelPlugin">Source and README on GitHub</a> &middot; Questions: <a href="mailto:support@theahg.co.za">support@theahg.co.za</a> or <a href="https://wa.me/27648830533?text=Tell%20me%20about%20the%20AHG%20Plugins">WhatsApp</a></p>
 </div></section></main>
 <footer><div class="wrap">AHG Extensions for AtoM were developed by <a href="https://plainsailingisystems.co.za/">Plain Sailing Information Systems</a> and are offered by <a href="https://theahg.co.za">The Archive and Heritage Group (Pty) Ltd</a>, South Africa. Open source under AGPL-3.0-or-later: <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins">source code</a> and <a href="https://github.com/ArchiveHeritageGroup/atom-extensions-catalog/tree/main/docs">documentation</a>.</div></footer>
 </body></html>

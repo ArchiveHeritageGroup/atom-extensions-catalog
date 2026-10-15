@@ -6,11 +6,34 @@
 <link rel="stylesheet" href="/style.css"></head><body>
 <header class="top"><div class="wrap"><a class="brand" href="/">AHG Extensions for AtoM</a>
 <nav><a href="/#capabilities">Capabilities</a><a href="/plugins/">Plugins</a><a href="https://psis.theahg.co.za">Live demo</a><a href="/#contact">Contact</a></nav></div></header>
-<main><section><div class="wrap"><p class="crumb"><a href="/">Home</a> / <a href="/plugins/">Plugins</a> / Museum Cataloging (CCO/Collections Procedures)</p>
+<main><section><div class="wrap detail"><p class="crumb"><a href="/">Home</a> / <a href="/plugins/">Plugins</a> / Museum Cataloging (CCO/Collections Procedures)</p>
 <h2>Museum Cataloging (CCO/Collections Procedures)</h2><p>Museum cataloging with CCO (Cataloging Cultural Objects), CIDOC-CRM, and Collections Procedures integration</p><p>Part of the <a href="/#capabilities">Museum Collections</a> capability. <a href="https://youtu.be/D_uUDuzps7k">Watch the walkthrough</a>.</p>
-<table><tr><th scope="row">Category</th><td>GLAM sectors</td></tr><tr><th scope="row">Package</th><td><code>ahgMuseumPlugin</code></td></tr><tr><th scope="row">Version</th><td>1.4.18</td></tr><tr><th scope="row">Status</th><td>Source only: clean install not yet verified</td></tr><tr><th scope="row">Requires</th><td><span class="tag">Core</span><span class="tag">Collections Procedures</span></td></tr><tr><th scope="row">Licence</th><td>AGPL-3.0-or-later</td></tr><tr><th scope="row">Install</th><td>From the <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins">source repository</a>, following its README. No packaged download yet.</td></tr></table>
+<table><tr><th scope="row">Category</th><td>GLAM sectors</td></tr><tr><th scope="row">Package</th><td><code>ahgMuseumPlugin</code></td></tr><tr><th scope="row">Version</th><td>1.4.18</td></tr><tr><th scope="row">Status</th><td>Source only: clean install not yet verified</td></tr><tr><th scope="row">Requires</th><td><span class="tag">Core</span><span class="tag">Collections Procedures</span></td></tr><tr><th scope="row">Works with</th><td><a class="tag" href="/plugins/condition.html">Condition Assessment</a><span class="tag">ahgGrapPlugin</span></td></tr><tr><th scope="row">Licence</th><td>AGPL-3.0-or-later</td></tr><tr><th scope="row">Install</th><td>From the source repository: see <a href="#install">Installation</a> below. No packaged download yet.</td></tr></table>
 <p>Museum and GLAM (Galleries, Libraries, Archives, Museums) extension for AtoM, providing specialized functionality for cultural heritage institutions.</p>
-<p><a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/tree/main/ahgMuseumPlugin">Source and README on GitHub</a> &middot; <a href="https://psis.theahg.co.za">Try it on the live demo</a></p>
+<h3>Requirements</h3><ul>
+<li>AtoM 2.10+</li>
+<li>PHP 8.1+</li>
+<li>MySQL 8.0+</li>
+<li>atom-framework (Laravel Query Builder)</li>
+</ul>
+<hr />
+
+
+<h3 id="install">Installation</h3><h3 id="1-enable-the-plugin">1. Enable the plugin</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">php</span> bin/atom extension:enable ahgMuseumPlugin</span></code></pre></div>
+<h3 id="2-run-database-migrations">2. Run database migrations</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">php</span> atom-framework/bin/install-plugin-schema.php <span class="at">--database</span><span class="op">=&lt;</span>database<span class="op">&gt;</span> --user=<span class="op">&lt;</span>user<span class="op">&gt;</span> --password=<span class="op">&lt;</span>password<span class="op">&gt;</span> --plugin=ahgMuseumPlugin   <span class="co"># from the AtoM root; never a plain mysql &lt; install.sql</span></span></code></pre></div>
+<h3 id="3-clear-cache">3. Clear cache</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">php</span> symfony cc</span></code></pre></div>
+<h3 id="4-access-the-modules">4. Access the modules</h3>
+<ul>
+<li>Exhibitions: <code>/index.php/exhibition</code></li>
+<li>Provenance: <code>/index.php/{object-slug}/ahgMuseumPlugin/provenance</code></li>
+</ul>
+<hr />
+
+<h3>Try it</h3><p>See it on the live demo (sample data, no sign-in): <a href="https://psis.theahg.co.za/glam/browse?type=museum">museum objects in the GLAM browse</a>.</p>
+<p><a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/tree/main/ahgMuseumPlugin">Source and README on GitHub</a> &middot; Questions: <a href="mailto:support@theahg.co.za">support@theahg.co.za</a> or <a href="https://wa.me/27648830533?text=Tell%20me%20about%20the%20AHG%20Plugins">WhatsApp</a></p>
 </div></section></main>
 <footer><div class="wrap">AHG Extensions for AtoM were developed by <a href="https://plainsailingisystems.co.za/">Plain Sailing Information Systems</a> and are offered by <a href="https://theahg.co.za">The Archive and Heritage Group (Pty) Ltd</a>, South Africa. Open source under AGPL-3.0-or-later: <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins">source code</a> and <a href="https://github.com/ArchiveHeritageGroup/atom-extensions-catalog/tree/main/docs">documentation</a>.</div></footer>
 </body></html>

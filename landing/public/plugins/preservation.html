@@ -6,11 +6,55 @@
 <link rel="stylesheet" href="/style.css"></head><body>
 <header class="top"><div class="wrap"><a class="brand" href="/">AHG Extensions for AtoM</a>
 <nav><a href="/#capabilities">Capabilities</a><a href="/plugins/">Plugins</a><a href="https://psis.theahg.co.za">Live demo</a><a href="/#contact">Contact</a></nav></div></header>
-<main><section><div class="wrap"><p class="crumb"><a href="/">Home</a> / <a href="/plugins/">Plugins</a> / Digital Preservation</p>
+<main><section><div class="wrap detail"><p class="crumb"><a href="/">Home</a> / <a href="/plugins/">Plugins</a> / Digital Preservation</p>
 <h2>Digital Preservation</h2><p>Digital preservation: checksums, fixity verification, PREMIS events, format registry</p><p>Part of the <a href="/#capabilities">Digital Preservation</a> capability. <a href="https://youtu.be/8BKhG_I6iyI">Watch the walkthrough</a>.</p>
-<table><tr><th scope="row">Category</th><td>Digital preservation</td></tr><tr><th scope="row">Package</th><td><code>ahgPreservationPlugin</code></td></tr><tr><th scope="row">Version</th><td>1.0.6</td></tr><tr><th scope="row">Status</th><td>Packaged download, installer tested (tested 2026-08-18)</td></tr><tr><th scope="row">Requires</th><td><span class="tag">Core</span></td></tr><tr><th scope="row">Licence</th><td>AGPL-3.0-or-later</td></tr><tr><th scope="row">Install</th><td>Packaged download with its own installer: see the <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/blob/main/docs/plugins/README.md">downloads page</a></td></tr></table>
-<p>Digital preservation: checksums, fixity verification, PREMIS events, format registry</p>
-<p><a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/tree/main/ahgPreservationPlugin">Source and README on GitHub</a> &middot; <a href="https://psis.theahg.co.za">Try it on the live demo</a></p>
+<table><tr><th scope="row">Category</th><td>Digital preservation</td></tr><tr><th scope="row">Package</th><td><code>ahgPreservationPlugin</code></td></tr><tr><th scope="row">Version</th><td>1.0.6</td></tr><tr><th scope="row">Status</th><td>Packaged download, installer tested (tested 2026-08-18)</td></tr><tr><th scope="row">Requires</th><td><span class="tag">Core</span></td></tr><tr><th scope="row">External services</th><td>Can use, when installed: ClamAV virus scanner, Siegfried format identification, FFmpeg, LibreOffice</td></tr><tr><th scope="row">Licence</th><td>AGPL-3.0-or-later</td></tr><tr><th scope="row">Install</th><td>Packaged download with its own installer: see the <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/blob/main/docs/plugins/README.md">downloads page</a></td></tr></table>
+<h3 id="what-it-is-for">What it is for</h3>
+<p>Know that the files you hold are the files you were given, and keep a record of everything done to them.</p>
+<ul>
+<li>Checksums (SHA-256) for every digital object, and scheduled fixity checks that compare them again.</li>
+<li>Format identification against the PRONOM registry, with a format register that shows which formats are at risk.</li>
+<li>Virus scanning on ingest and on demand.</li>
+<li>A PREMIS event log per object: every check, scan and identification, with outcome and date.</li>
+<li>A scheduler, so checks run on their own and the results are there in the morning.</li>
+</ul>
+<p><img loading="lazy" src="/img/training-preservation-2/02-fixity.png" alt="Fixity checks on an object" /></p>
+<p><img loading="lazy" src="/img/training-preservation-2/05-registry.png" alt="The format register" /></p>
+<p><img loading="lazy" src="/img/training-preservation-2/07-events.png" alt="PREMIS events" /></p>
+<h3 id="limits">Limits</h3>
+<p>It checks and records the files AtoM holds. Copies kept elsewhere need their own checks, and using it does not by itself make an institution an OAIS-certified repository.</p>
+<p>Training guide: <a href="https://github.com/ArchiveHeritageGroup/atom-extensions-catalog/blob/main/docs/training-preservation-2-fixity-formats-premis.md">Preservation, part 2 - fixity, formats and PREMIS</a>.</p>
+
+<h3>Requirements</h3><table>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Version</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>atom framework</td>
+<td><code>&gt;=1.0.0</code></td>
+</tr>
+<tr class="even">
+<td>atom</td>
+<td><code>&gt;=2.8</code></td>
+</tr>
+<tr class="odd">
+<td>php</td>
+<td><code>&gt;=8.1</code></td>
+</tr>
+</tbody>
+</table>
+
+
+<h3 id="install">Installation</h3><p>Download the bundle and the runtime from the <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/blob/main/docs/plugins/README.md">downloads page</a>, then follow the bundle's INSTALL.md. In short, from the AtoM root, after a backup and on a staging copy first:</p><pre><code>unzip ahgRuntimePlugin-&lt;version&gt;.zip -d plugins/
+unzip ahgPreservationPlugin-&lt;version&gt;.zip -d plugins/
+php plugins/ahgPreservationPlugin/bin/install-plugin-schema.php \
+    --database=&lt;database&gt; --user=&lt;user&gt; --password=&lt;password&gt;</code></pre><p>Then enable it in Admin &gt; Plugins, clear the cache and reload PHP.</p>
+<h3>Try it</h3><p>This feature is for signed-in staff, so it is not open on the public demo. <a href="https://youtu.be/8BKhG_I6iyI">Watch the walkthrough</a> instead.</p>
+<p><a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/tree/main/ahgPreservationPlugin">Source and README on GitHub</a> &middot; Questions: <a href="mailto:support@theahg.co.za">support@theahg.co.za</a> or <a href="https://wa.me/27648830533?text=Tell%20me%20about%20the%20AHG%20Plugins">WhatsApp</a></p>
 </div></section></main>
 <footer><div class="wrap">AHG Extensions for AtoM were developed by <a href="https://plainsailingisystems.co.za/">Plain Sailing Information Systems</a> and are offered by <a href="https://theahg.co.za">The Archive and Heritage Group (Pty) Ltd</a>, South Africa. Open source under AGPL-3.0-or-later: <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins">source code</a> and <a href="https://github.com/ArchiveHeritageGroup/atom-extensions-catalog/tree/main/docs">documentation</a>.</div></footer>
 </body></html>
