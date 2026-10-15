@@ -1,0 +1,32 @@
+:root{--gold:#E1B34F;--green:#10373E;--cream:#F2EDE6;--body:#262626;--link:#653332;--muted:#55656a}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;font:17px/1.6 Arial,Helvetica,sans-serif;color:var(--body);background:#fff}
+a{color:var(--link)}a:hover{text-decoration:none}
+code{font-size:15px;background:var(--cream);padding:1px 5px;border-radius:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+header.top{background:var(--green);color:var(--cream)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;flex-wrap:wrap}
+header.top a{color:var(--cream);text-decoration:none}
+header.top .brand{font-weight:bold;color:var(--gold)}
+header.top nav a{margin-left:18px}
+.hero{background:var(--green);color:var(--cream);padding:56px 0 64px}
+.hero h1{color:var(--gold);font-size:40px;line-height:1.15;margin:0 0 16px}
+.hero p{font-size:20px;max-width:760px;margin:0 0 26px}
+.btn{display:inline-block;background:var(--gold);color:var(--green);padding:12px 22px;border-radius:4px;font-weight:bold;text-decoration:none;margin:0 10px 10px 0}
+.btn.ghost{background:transparent;color:var(--cream);border:2px solid var(--gold)}
+main section{padding:44px 0;border-bottom:1px solid #e6e2da}
+h2{color:var(--green);font-size:28px;line-height:1.25;margin:0 0 14px}
+h3{color:var(--green);font-size:19px;margin:0 0 6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+.card{border:1px solid #ddd6ca;border-top:4px solid var(--gold);padding:18px;border-radius:4px;background:#fff}
+.card p{margin:0 0 10px}.card .by{font-size:15px;color:var(--muted)}
+.tag{display:inline-block;font-size:14px;background:var(--cream);border-radius:3px;padding:1px 8px;margin:2px 4px 2px 0}
+table{border-collapse:collapse;width:100%;margin:12px 0}
+th,td{border:1px solid #ddd6ca;padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--green);color:#fff;font-weight:bold;width:150px}
+.cat h2{margin-top:32px;font-size:23px}
+.plugin-list{columns:2 300px;padding-left:20px}.plugin-list li{margin:0 0 8px;break-inside:avoid}
+footer{background:var(--green);color:var(--cream);padding:28px 0;font-size:15px}footer a{color:var(--gold)}
+.crumb{font-size:15px;margin:0 0 14px}
+@media(max-width:600px){.hero{padding:40px 0 44px}.hero h1{font-size:30px}.hero p{font-size:18px}
+header.top nav a{margin:0 14px 0 0}th{width:auto}}
