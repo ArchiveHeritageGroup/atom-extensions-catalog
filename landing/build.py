@@ -30,9 +30,17 @@ SUPPORT_EMAIL = 'support@theahg.co.za'
 WHATSAPP = 'https://wa.me/27648830533?text=' + 'Tell%20me%20about%20the%20AHG%20Plugins'
 CALLHUB = 'https://callhub.theahg.co.za/login'
 LICENCE = 'AGPL-3.0-or-later'
+# The "status" field in each extension.json. Anything unassessed shows as not verified.
+STATUS = {
+    'packaged': 'Packaged download, installer tested',
+    'tested': 'Tested: installs on a clean AtoM from source',
+    'source': 'Source only: clean install not yet verified',
+    'experimental': 'Experimental: not for production',
+    'deprecated': 'Deprecated: will be removed',
+}
 # Foundations rather than features: installed because other plugins need them.
 FOUNDATIONS = {
-    'ahgRuntimePlugin': 'a shared runtime that every packaged download carries; on its own it adds nothing to AtoM',
+    'ahgRuntimePlugin': 'a shared runtime, downloaded once as its own package and installed before any other; on its own it adds nothing to AtoM',
     'ahgCorePlugin': 'shared services (database access, settings, file storage) that the other plugins build on; on its own it adds no screens',
 }
 e = html.escape
@@ -304,7 +312,7 @@ def build():
         f'<main><section><div class="wrap"><p class="crumb"><a href="/">Home</a> / Plugins</p><h2>All {len(plugins)} plugins</h2>'
         f'<p>Grouped by what they do. Each page gives the plugin\'s purpose, what it depends on, and where its source and documentation are.</p>'
         f'<p>Two of the {len(plugins)} are foundations rather than features: {foundations_text}. You install them because the other plugins need them, not for what they do alone.</p>'
-        f'<p>{len(bundles)} plugins are available today as <a href="{DOWNLOADS}">packaged downloads</a> with their own installer. The rest install from the source repository, following its README.</p>'
+        f'<p>{len(bundles - {"ahgRuntimePlugin"})} plugins are available today as <a href="{DOWNLOADS}">packaged downloads</a> with their own installer, plus the runtime they share. The rest install from the source repository, following its README; they have not all been tested on a clean installation.</p>'
         f'{"".join(sections)}</div></section></main>'))
 
     # One page per plugin
@@ -318,6 +326,10 @@ def build():
         if p['machine_name'] not in HIDE_PACKAGE:
             rows.append(('Package', f'<code>{e(p["machine_name"])}</code>'))
         rows.append(('Version', e(str(p.get('version', '')))))
+        status = STATUS.get(p.get('status', ''), 'Not verified')
+        if p.get('tested_at') and p.get('status') in ('packaged', 'tested'):
+            status += f' (tested {e(p["tested_at"])})'
+        rows.append(('Status', status))
         if deps:
             rows.append(('Requires', deps))
         if p.get('license'):
