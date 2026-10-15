@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build atom-extensions.theahg.co.za: the product page (index.html) and the plugin
+"""Build www.atom-extensions.com: the product page (index.html) and the plugin
 catalogue (plugins/), from the plugins' own extension.json files and the flagship
 table in atom-ahg-plugins/README.md. Static HTML, no JavaScript.
 
@@ -20,7 +20,7 @@ PLUGINS = next(p for p in (os.environ.get('AHG_PLUGINS_DIR', ''),
                            os.path.normpath(os.path.join(HERE, '..', '..', 'atom-ahg-plugins')),
                            '/usr/share/nginx/archive/atom-ahg-plugins') if p and os.path.isdir(p))
 OUT = os.path.join(HERE, 'public')
-SITE = 'https://atom-extensions.theahg.co.za'
+SITE = 'https://www.atom-extensions.com'
 DEMO = 'https://psis.theahg.co.za'
 REPO = 'https://github.com/ArchiveHeritageGroup/atom-ahg-plugins'
 DOCS = 'https://github.com/ArchiveHeritageGroup/atom-extensions-catalog/tree/main/docs'

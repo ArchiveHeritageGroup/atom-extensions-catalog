@@ -336,5 +336,5 @@ nav:
     - operations/README.md
   - Reference:
     - reference/README.md
-  - Roadmap: ROADMAP.md
+  - Roadmap: reference/ROADMAP.md
   - Changelog: MEETING-NOTES.md

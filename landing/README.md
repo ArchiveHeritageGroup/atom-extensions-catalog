@@ -1,4 +1,4 @@
-# atom-extensions.theahg.co.za
+# www.atom-extensions.com
 
 The product page and plugin catalogue for AHG Extensions for AtoM, as static HTML.
 
@@ -8,4 +8,4 @@ plugins release so versions and descriptions stay current:
 
     python3 landing/build.py
 
-nginx serves `public/` (vhost: `stuff/atom-extensions.theahg.co.za.conf` on the PSIS host).
+nginx serves `public/` (vhost: `stuff/atom-extensions.com.conf` on the PSIS host). www.atom-extensions.com is the main address; atom-extensions.com, atom-extensions.info and atom-extensions.theahg.co.za redirect to it.
