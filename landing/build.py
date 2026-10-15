@@ -25,6 +25,16 @@ DEMO = 'https://psis.theahg.co.za'
 REPO = 'https://github.com/ArchiveHeritageGroup/atom-ahg-plugins'
 DOCS = 'https://github.com/ArchiveHeritageGroup/atom-extensions-catalog/tree/main/docs'
 YOUTUBE = 'https://www.youtube.com/@TheArchiveandHeritageGroup'
+DOWNLOADS = REPO + '/blob/main/docs/plugins/README.md'
+SUPPORT_EMAIL = 'support@theahg.co.za'
+WHATSAPP = 'https://wa.me/27648830533?text=' + 'Tell%20me%20about%20the%20AHG%20Plugins'
+CALLHUB = 'https://callhub.theahg.co.za/login'
+LICENCE = 'AGPL-3.0-or-later'
+# Foundations rather than features: installed because other plugins need them.
+FOUNDATIONS = {
+    'ahgRuntimePlugin': 'a shared runtime that every packaged download carries; on its own it adds nothing to AtoM',
+    'ahgCorePlugin': 'shared services (database access, settings, file storage) that the other plugins build on; on its own it adds no screens',
+}
 e = html.escape
 
 CATEGORY_LABELS = {
@@ -103,7 +113,7 @@ def _page(title, description, path, body, jsonld=None):
 <header class="top"><div class="wrap"><a class="brand" href="/">AHG Extensions for AtoM</a>
 <nav><a href="/#capabilities">Capabilities</a><a href="/plugins/">Plugins</a><a href="{DEMO}">Live demo</a><a href="/#contact">Contact</a></nav></div></header>
 {body}
-<footer><div class="wrap">AHG Extensions for AtoM were developed by <a href="https://plainsailingisystems.co.za/">Plain Sailing Information Systems</a> and are offered by <a href="https://theahg.co.za">The Archive and Heritage Group (Pty) Ltd</a>, South Africa. Open source under AGPL-3.0: <a href="{REPO}">source code</a> and <a href="{DOCS}">documentation</a>.</div></footer>
+<footer><div class="wrap">AHG Extensions for AtoM were developed by <a href="https://plainsailingisystems.co.za/">Plain Sailing Information Systems</a> and are offered by <a href="https://theahg.co.za">The Archive and Heritage Group (Pty) Ltd</a>, South Africa. Open source under AGPL-3.0-or-later: <a href="{REPO}">source code</a> and <a href="{DOCS}">documentation</a>.</div></footer>
 </body></html>
 """
 
@@ -164,6 +174,31 @@ def load_plugins():
     return out
 
 
+def packaged():
+    """Plugins with a packaged download today: the release links on the
+    downloads page, so the site never claims a package that does not exist."""
+    path = os.path.join(PLUGINS, 'docs', 'plugins', 'README.md')
+    text = open(path, encoding='utf-8').read() if os.path.isfile(path) else ''
+    return set(re.findall(r'releases/tag/(ahg\w+Plugin)-v', text))
+
+
+def check(plugins):
+    """Refuse to publish a catalogue with gaps a visitor would notice."""
+    problems, seen = [], {}
+    for p in plugins:
+        m = p['machine_name']
+        for field in ('license', 'version', 'description'):
+            if not p.get(field):
+                problems.append(f'{m}: no {field} in extension.json')
+        if p.get('license') and p['license'] != LICENCE:
+            problems.append(f'{m}: licence {p["license"]} is not {LICENCE}')
+        if p['slug'] in seen:
+            problems.append(f'{m}: slug {p["slug"]} also used by {seen[p["slug"]]}')
+        seen[p['slug']] = m
+    if problems:
+        raise SystemExit('build refused:\n  ' + '\n  '.join(problems))
+
+
 def flagships():
     readme = open(os.path.join(PLUGINS, 'README.md')).read()
     block = readme.split('## Nine flagship capabilities', 1)[1].split('\n## ', 1)[0]
@@ -187,6 +222,8 @@ def build():
     os.makedirs(os.path.join(OUT, 'plugins'))
     open(os.path.join(OUT, 'style.css'), 'w').write(CSS.strip() + '\n')
     plugins = load_plugins()
+    check(plugins)
+    bundles = packaged()
     by_machine = {p['machine_name']: p for p in plugins}
     flags = flagships()
 
@@ -200,7 +237,7 @@ def build():
                      f'<p class="by">Plugins: {links}.{video}</p></div>')
     body = f"""<div class="hero"><div class="wrap">
 <h1>AHG Extensions for AtoM</h1>
-<p>Preservation, provenance, Records in Contexts, AI-assisted description, museum, library and digital asset workflows, rights and privacy, added to Access to Memory 2.10 as plugins. Base AtoM stays exactly as upstream ships it, and an institution installs only the capabilities it needs.</p>
+<p>Preservation, provenance, Records in Contexts, AI-assisted description, museum, library and digital asset workflows, rights and privacy, added to Access to Memory 2.9 and 2.10 as plugins. Base AtoM stays as upstream ships it, and an institution installs only the capabilities it needs.</p>
 <a class="btn" href="{DEMO}">Try the live demo</a><a class="btn ghost" href="/plugins/">Browse all {len(plugins)} plugins</a>
 </div></div>
 <main>
@@ -211,7 +248,7 @@ def build():
 </div></section>
 <section><div class="wrap">
 <h2>Not a fork of AtoM</h2>
-<p>AtoM 2.10 is installed and updated as normal. The extensions sit beside it: a shared framework, <code>atom-framework</code>, and the plugins, <code>atom-ahg-plugins</code>. Each plugin is switched on or off from the administration screens. None of them edits AtoM's own code, so upstream upgrades stay open to you.</p>
+<p>AtoM is installed and updated as normal. The extensions sit beside it: a shared framework, <code>atom-framework</code>, and the plugins, <code>atom-ahg-plugins</code>. Each plugin is switched on or off from the administration screens. None of them edits AtoM's own code, so upstream upgrades stay open to you.</p>
 </div></section>
 <section><div class="wrap">
 <h2>Who it is for</h2>
@@ -219,7 +256,7 @@ def build():
 <div class="card"><h3>Archives</h3><p>ISAD(G), RAD, DACS and Dublin Core description. OAIS ingest with SIP, AIP and DIP packages. Fixity, format identification and PREMIS events. Records in Contexts.</p></div>
 <div class="card"><h3>Museums and galleries</h3><p>Object cataloguing to museum standards, collections procedures run as workflows, condition checks, provenance, loans, exhibitions, and heritage asset accounting under GRAP 103 and IPSAS 45.</p></div>
 <div class="card"><h3>Libraries</h3><p>Cataloguing with ISBN lookup, copies and barcodes, circulation with holds and fines, and a public catalogue, on the same platform as the archive.</p></div>
-<div class="card"><h3>Public bodies and regulated institutions</h3><p>POPIA, GDPR and other privacy regimes, security classification, embargoes, audit trails and retention rules, inside the catalogue rather than beside it.</p></div>
+<div class="card"><h3>Public bodies and regulated institutions</h3><p>Tools that support POPIA, GDPR and other privacy obligations, security classification, embargoes, audit trails and retention rules, inside the catalogue rather than beside it. They help an institution meet its obligations; they do not certify compliance.</p></div>
 </div></div></section>
 <section><div class="wrap">
 <h2>Learn it</h2>
@@ -227,7 +264,13 @@ def build():
 </div></section>
 <section id="contact"><div class="wrap">
 <h2>Installation, hosting and support</h2>
-<p>The Archive and Heritage Group installs and hosts the extensions, migrates existing AtoM catalogues, trains staff and supports institutions in production. To talk about your collection, contact <a href="https://theahg.co.za">The Archive and Heritage Group</a>.</p>
+<p>The software is free and open source. The Archive and Heritage Group offers the services around it: installation, hosting, migration of existing AtoM catalogues, staff training and support in production. None of them is required to use the plugins.</p>
+<ul>
+<li>Email <a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a> with your institution, your AtoM version and the extensions you are interested in.</li>
+<li>Message us on <a href="{WHATSAPP}">WhatsApp</a>.</li>
+<li>Existing clients: log a call in <a href="{CALLHUB}">CallHub</a>.</li>
+</ul>
+<p>Packaged downloads and install steps are on the <a href="{DOWNLOADS}">downloads page</a>. Install on a staging copy first, with a backup.</p>
 </div></section>
 </main>"""
     ld = {'@context': 'https://schema.org', '@type': 'SoftwareApplication', 'name': 'AHG Extensions for AtoM',
@@ -252,12 +295,17 @@ def build():
         items = ''.join(f'<li><a href="/plugins/{p["slug"]}.html">{e(p.get("name") or p["machine_name"])}</a>: {e(p.get("description", ""))}</li>'
                         for p in sorted(groups[label], key=lambda x: (x.get('name') or '').lower()))
         sections.append(f'<div class="cat"><h2>{e(label)}</h2><ul class="plugin-list">{items}</ul></div>')
+    foundations_text = '; '.join(f'<a href="/plugins/{by_machine[m]["slug"]}.html">{e(by_machine[m].get("name") or m)}</a>, {e(why)}'
+                                 for m, why in FOUNDATIONS.items() if m in by_machine)
     open(os.path.join(OUT, 'plugins', 'index.html'), 'w').write(page(
         f'All {len(plugins)} AtoM plugins: AHG Extensions for AtoM catalogue',
         f'Every plugin in AHG Extensions for AtoM, grouped by what it does: {len(plugins)} plugins for archives, museums, libraries and galleries running AtoM 2.10.',
         '/plugins/',
         f'<main><section><div class="wrap"><p class="crumb"><a href="/">Home</a> / Plugins</p><h2>All {len(plugins)} plugins</h2>'
-        f'<p>Grouped by what they do. Each page gives the plugin\'s purpose, what it depends on, and where its source and documentation are.</p>{"".join(sections)}</div></section></main>'))
+        f'<p>Grouped by what they do. Each page gives the plugin\'s purpose, what it depends on, and where its source and documentation are.</p>'
+        f'<p>Two of the {len(plugins)} are foundations rather than features: {foundations_text}. You install them because the other plugins need them, not for what they do alone.</p>'
+        f'<p>{len(bundles)} plugins are available today as <a href="{DOWNLOADS}">packaged downloads</a> with their own installer. The rest install from the source repository, following its README.</p>'
+        f'{"".join(sections)}</div></section></main>'))
 
     # One page per plugin
     for p in plugins:
@@ -274,6 +322,12 @@ def build():
             rows.append(('Requires', deps))
         if p.get('license'):
             rows.append(('Licence', e(p['license'])))
+        if p['machine_name'] in bundles:
+            rows.append(('Install', f'Packaged download with its own installer: see the <a href="{DOWNLOADS}">downloads page</a>'))
+        else:
+            rows.append(('Install', f'From the <a href="{REPO}">source repository</a>, following its README. No packaged download yet.'))
+        if p['machine_name'] in FOUNDATIONS:
+            rows.append(('Role', 'Foundation: ' + e(FOUNDATIONS[p['machine_name']])))
         flag = next((f for f in flags if any(m == p['machine_name'] for _, m in f['plugins'])), None)
         flag_html = ''
         if flag:
