@@ -33,12 +33,17 @@ CALLHUB = 'https://callhub.theahg.co.za/login'
 LICENCE = 'AGPL-3.0-or-later'
 # The "status" field in each extension.json. Anything unassessed shows as not verified.
 STATUS = {
-    'packaged': 'Packaged download, installer tested',
-    'tested': 'Tested: installs on a clean AtoM from source',
-    'source': 'Source only: clean install not yet verified',
+    'packaged': 'Packaged download with its own installer',
+    'tested': 'Installs from source',
+    'source': 'Installs from source',
     'experimental': 'Experimental: not for production',
     'deprecated': 'Deprecated: will be removed',
 }
+# Labels for the catalogue's Status filter.
+STATUS_FILTER = {'packaged': 'Packaged download', 'tested': 'Clean-install verified, from source', 'source': 'Source, not yet verified',
+                 'experimental': 'Experimental', 'deprecated': 'Deprecated'}
+# The clean-database run behind tested_at (README "Verified standalone set").
+VERIFIED_RUN = 'plugins v3.103.12'
 # Foundations rather than features: installed because other plugins need them.
 FOUNDATIONS = {
     'ahgRuntimePlugin': 'a shared runtime, downloaded once as its own package and installed before any other; on its own it adds nothing to AtoM',
@@ -436,13 +441,14 @@ def build():
             for p in sorted(groups[label], key=lambda x: (x.get('name') or '').lower()))
         sections.append(f'<div class="cat"><h2>{e(label)}</h2><ul class="plugin-list">{items}</ul></div>')
     cat_opts = ''.join(f'<option>{e(l)}</option>' for l in sorted(groups))
-    status_opts = ''.join(f'<option value="{k}">{e(v.split(":")[0].split(",")[0])}</option>' for k, v in STATUS.items())
+    status_opts = ''.join(f'<option value="{k}">{e(v)}</option>' for k, v in STATUS_FILTER.items())
     filters = (f'<form class="filters" role="search" onsubmit="return false">'
                f'<label>Search<input id="q" type="search" placeholder="e.g. preservation, IIIF, POPIA" autocomplete="off"></label>'
                f'<label>Group<select id="cat"><option value="">All groups</option>{cat_opts}</select></label>'
                f'<label>Status<select id="status"><option value="">Any status</option>{status_opts}</select></label>'
                f'<label>Install<select id="install"><option value="">Any</option><option value="packaged">Packaged download</option><option value="source">From source</option></select></label>'
                f'</form><p aria-live="polite">Showing <span id="count">{len(plugins)}</span> of {len(plugins)} plugins.</p>')
+    verified_count = sum(1 for p in plugins if p.get('tested_at'))
     foundations_text = '; '.join(f'<a href="/plugins/{by_machine[m]["slug"]}.html">{e(by_machine[m].get("name") or m)}</a>, {e(why)}'
                                  for m, why in FOUNDATIONS.items() if m in by_machine)
     open(os.path.join(OUT, 'plugins', 'index.html'), 'w').write(page(
@@ -452,7 +458,9 @@ def build():
         f'<main><section><div class="wrap"><p class="crumb"><a href="/">Home</a> / Plugins</p><h2>All {len(plugins)} plugins</h2>'
         f'<p>Grouped by what they do. Each page gives the plugin\'s purpose, what it depends on, and where its source and documentation are.</p>'
         f'<p>Two of the {len(plugins)} are foundations rather than features: {foundations_text}. You install them because the other plugins need them, not for what they do alone.</p>'
-        f'<p>{len(bundles - {"ahgRuntimePlugin"})} plugins are available today as <a href="{DOWNLOADS}">packaged downloads</a> with their own installer, plus the runtime they share. The rest install from the source repository, following its README; they have not all been tested on a clean installation.</p>'
+        f'<p>{len(bundles - {"ahgRuntimePlugin"})} plugins are currently offered as <a href="{DOWNLOADS}">packaged downloads</a> with installers, together with the shared runtime. Additional plugins can be installed from source. '
+        f'The project documents a verified standalone installation set of {verified_count} components, installed onto an empty database on 18 August 2026 ({VERIFIED_RUN}); '
+        f'testing and deployment evidence for other plugins varies by module and environment. Each plugin page shows its status: consult it, and the plugin\'s documentation, before deployment.</p>'
         f'{filters}<div id="catalogue">{"".join(sections)}</div><p id="none" hidden>No plugin matches. Clear a filter to see more.</p></div></section></main>{FILTER_JS}'))
 
     # One page per plugin
@@ -467,8 +475,11 @@ def build():
             rows.append(('Package', f'<code>{e(p["machine_name"])}</code>'))
         rows.append(('Version', e(str(p.get('version', '')))))
         status = STATUS.get(p.get('status', ''), 'Not verified')
-        if p.get('tested_at') and p.get('status') in ('packaged', 'tested'):
-            status += f' (tested {e(p["tested_at"])})'
+        if p.get('tested_at'):
+            when = datetime.date.fromisoformat(p['tested_at']).strftime('%-d %B %Y')
+            status += f'. Clean-database install verified {when} ({VERIFIED_RUN}).'
+        elif p.get('status') in ('packaged', 'tested', 'source'):
+            status += '. Clean-database install not yet verified.'
         rows.append(('Status', status))
         if deps:
             rows.append(('Requires', deps))
