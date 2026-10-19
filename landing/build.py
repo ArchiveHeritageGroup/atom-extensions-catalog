@@ -91,7 +91,7 @@ SERVICE_SKIP = {'ahgSettingsPlugin', 'ahgThemeB5Plugin'}
 # Pages on the live demo that work without signing in, checked 15 Oct 2026.
 DEMO_PAGES = {
     'ahgDiscoveryPlugin': ('/discovery', 'Discover search'),
-    'ahgIiifPlugin': ('/iiif-viewer-photo-taken-with-phase-one-iq3-100mp-captured-on-november-17-2017-80mm-f-11', 'a record in the IIIF viewer'),
+    'ahgIiifPlugin': ('/hendrik-and-debora-engelbrecht', 'a photograph in the IIIF viewer'),
     'ahg3DModelPlugin': ('/3d-more-glb', 'a record with a 3D model'),
     'ahgHeritagePlugin': ('/heritage', 'the heritage discovery portal'),
     'ahgGalleryPlugin': ('/gallery/browse', 'the gallery browse'),
