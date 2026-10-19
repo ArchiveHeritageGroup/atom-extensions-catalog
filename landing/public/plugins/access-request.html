@@ -7,10 +7,10 @@
 <header class="top"><div class="wrap"><a class="brand" href="/">AHG Extensions for AtoM</a>
 <nav><a href="/#capabilities">Capabilities</a><a href="/plugins/">Plugins</a><a href="https://psis.theahg.co.za">Live demo</a><a href="/#contact">Contact</a></nav></div></header>
 <main><section><div class="wrap detail"><p class="crumb"><a href="/">Home</a> / <a href="/plugins/">Plugins</a> / Access Request</p>
-<h2>Access Request</h2><p>Researcher access request management for restricted materials</p>
+<h1>Access Request</h1><p>Researcher access request management for restricted materials</p>
 <table><tr><th scope="row">Category</th><td>Rights</td></tr><tr><th scope="row">Package</th><td><code>ahgAccessRequestPlugin</code></td></tr><tr><th scope="row">Version</th><td>1.1.6</td></tr><tr><th scope="row">Status</th><td>Installs from source. Clean-database install verified 18 August 2026 (plugins v3.103.12).</td></tr><tr><th scope="row">Requires</th><td><span class="tag">Core</span><span class="tag">Security Clearance</span></td></tr><tr><th scope="row">Licence</th><td>AGPL-3.0-or-later</td></tr><tr><th scope="row">Install</th><td>From the source repository: see <a href="#install">Installation</a> below. No packaged download yet.</td></tr></table>
 <p>Researcher access request management for restricted materials</p>
-<h3>Requirements</h3><table>
+<h2>Requirements</h2><table>
 <thead>
 <tr class="header">
 <th>Component</th>
@@ -34,8 +34,8 @@
 </table>
 
 
-<h3 id="install">Installation</h3><p>This plugin requires <strong>atom-framework</strong>. It is not optional: the framework provides <code>AhgController</code>, <code>AtomFramework\*</code> and the routing and settings services that this plugin builds on.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Fetch into the AtoM plugins directory as a REAL DIRECTORY.</span></span>
+<h2 id="install">Installation</h2><p>This plugin requires <strong>atom-framework</strong>. It is not optional: the framework provides <code>AhgController</code>, <code>AtomFramework\*</code> and the routing and settings services that this plugin builds on.</p>
+<div class="sourceCode" id="cb1"><pre tabindex="0" aria-label="Code" class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Fetch into the AtoM plugins directory as a REAL DIRECTORY.</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#    A symlink fails the prefix test in pluginsAction.class.php and the</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#    plugin is then invisible in the stock admin UI with no error shown.</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="op">&lt;</span>atom-root<span class="op">&gt;</span>/plugins</span>
@@ -56,14 +56,14 @@
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="ex">php</span> symfony cc</span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl reload php8.3-fpm</span></code></pre></div>
 <p><strong>Enabling differs by instance shape.</strong> Check which list governs:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> <span class="st">&#39;loadPluginsFromDatabase&#39;</span> <span class="op">&lt;</span>atom-root<span class="op">&gt;</span>/config/ProjectConfiguration.class.php</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre tabindex="0" aria-label="Code" class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> <span class="st">&#39;loadPluginsFromDatabase&#39;</span> <span class="op">&lt;</span>atom-root<span class="op">&gt;</span>/config/ProjectConfiguration.class.php</span></code></pre></div>
 <ul>
 <li><code>0</code> (stock AtoM): plugins load from the serialised <code>plugins</code> row in <code>setting_i18n</code>. The <code>atom_plugin</code> table is inert and the admin screen can show a plugin as enabled that does not load.</li>
 <li><code>1</code> or more (AHG): <code>atom_plugin</code> is the source of truth.</li>
 </ul>
 <p>Verify against whichever list governs, not against the admin screen.</p>
 
-<h3>Try it</h3><p>This feature is for signed-in staff, so it is not open on the public demo.</p>
+<h2>Try it</h2><p>This feature is for signed-in staff, so it is not open on the public demo.</p>
 <p><a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/tree/main/ahgAccessRequestPlugin">Source and README on GitHub</a> &middot; Questions: <a href="mailto:support@theahg.co.za">support@theahg.co.za</a> or <a href="https://wa.me/27648830533?text=Tell%20me%20about%20the%20AHG%20Plugins">WhatsApp</a></p>
 </div></section></main>
 <footer><div class="wrap">AHG Extensions for AtoM were developed by <a href="https://plainsailingisystems.co.za/">Plain Sailing Information Systems</a> and are offered by <a href="https://theahg.co.za">The Archive and Heritage Group (Pty) Ltd</a>, South Africa. Open source under AGPL-3.0-or-later: <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins">source code</a> and <a href="https://github.com/ArchiveHeritageGroup/atom-extensions-catalog/tree/main/docs">documentation</a>.</div></footer>

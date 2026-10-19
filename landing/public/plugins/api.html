@@ -7,41 +7,41 @@
 <header class="top"><div class="wrap"><a class="brand" href="/">AHG Extensions for AtoM</a>
 <nav><a href="/#capabilities">Capabilities</a><a href="/plugins/">Plugins</a><a href="https://psis.theahg.co.za">Live demo</a><a href="/#contact">Contact</a></nav></div></header>
 <main><section><div class="wrap detail"><p class="crumb"><a href="/">Home</a> / <a href="/plugins/">Plugins</a> / REST API</p>
-<h2>REST API</h2><p>Enhanced REST API v2 with API key management, full CRUD operations, batch processing, webhooks with HMAC signatures and retry logic, rate limiting, and GLAM/DAM sector support</p>
+<h1>REST API</h1><p>Enhanced REST API v2 with API key management, full CRUD operations, batch processing, webhooks with HMAC signatures and retry logic, rate limiting, and GLAM/DAM sector support</p>
 <table><tr><th scope="row">Category</th><td>Integration and APIs</td></tr><tr><th scope="row">Package</th><td><code>ahgAPIPlugin</code></td></tr><tr><th scope="row">Version</th><td>1.2.0</td></tr><tr><th scope="row">Status</th><td>Installs from source. Clean-database install not yet verified.</td></tr><tr><th scope="row">External services</th><td>Can use, when installed: ExifTool</td></tr><tr><th scope="row">Licence</th><td>AGPL-3.0-or-later</td></tr><tr><th scope="row">Install</th><td>From the source repository: see <a href="#install">Installation</a> below. No packaged download yet.</td></tr></table>
-<p>Enhanced REST API v2 for Access to Memory (AtoM) 2.x</p><h3>Features</h3><ul><li><strong>API Key Management</strong> - Create and manage API keys with granular scopes (read/write/delete)</li><li><strong>Rate Limiting</strong> - Configurable rate limits per API key (requests/hour)</li><li><strong>Request Logging</strong> - Full request/response logging for analytics and debugging</li><li><strong>Webhooks</strong> - Real-time notifications for record changes</li><li><strong>Batch Operations</strong> - Process multiple records in a single request</li><li><strong>Full Data Export</strong> - Get complete record data with <code>?full=true</code> parameter</li><li><strong>GLAM/DAM Support</strong> - Sector filtering for Archive, Museum, Library, Gallery, DAM</li></ul>
-<h3>Requirements</h3><ul>
+<p>Enhanced REST API v2 for Access to Memory (AtoM) 2.x</p><h2>Features</h2><ul><li><strong>API Key Management</strong> - Create and manage API keys with granular scopes (read/write/delete)</li><li><strong>Rate Limiting</strong> - Configurable rate limits per API key (requests/hour)</li><li><strong>Request Logging</strong> - Full request/response logging for analytics and debugging</li><li><strong>Webhooks</strong> - Real-time notifications for record changes</li><li><strong>Batch Operations</strong> - Process multiple records in a single request</li><li><strong>Full Data Export</strong> - Get complete record data with <code>?full=true</code> parameter</li><li><strong>GLAM/DAM Support</strong> - Sector filtering for Archive, Museum, Library, Gallery, DAM</li></ul>
+<h2>Requirements</h2><ul>
 <li>AtoM 2.8 or higher</li>
 <li>PHP 8.1 or higher</li>
 <li>atom-framework installed and configured</li>
 </ul>
 
 
-<h3 id="install">Installation</h3><h3 id="via-ahg-framework-recommended">Via AHG Framework (Recommended)</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /path/to/atom</span>
+<h2 id="install">Installation</h2><h3 id="via-ahg-framework-recommended">Via AHG Framework (Recommended)</h3>
+<div class="sourceCode" id="cb1"><pre tabindex="0" aria-label="Code" class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /path/to/atom</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">php</span> bin/atom extension:enable ahgAPIPlugin</span></code></pre></div>
 <h3 id="manual-installation">Manual Installation</h3>
 <ol type="1">
 <li>Copy the plugin to your AtoM plugins directory:</li>
 </ol>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>   <span class="fu">cp</span> <span class="at">-r</span> ahgAPIPlugin /path/to/atom/plugins/</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre tabindex="0" aria-label="Code" class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>   <span class="fu">cp</span> <span class="at">-r</span> ahgAPIPlugin /path/to/atom/plugins/</span></code></pre></div>
 <ol start="2" type="1">
 <li>Run the database migrations:</li>
 </ol>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>   <span class="ex">php</span> atom-framework/bin/install-plugin-schema.php <span class="at">--database</span><span class="op">=&lt;</span>database<span class="op">&gt;</span> --user=<span class="op">&lt;</span>user<span class="op">&gt;</span> --password=<span class="op">&lt;</span>password<span class="op">&gt;</span> --plugin=ahgAPIPlugin   <span class="co"># from the AtoM root; never a plain mysql &lt; install.sql</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre tabindex="0" aria-label="Code" class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>   <span class="ex">php</span> atom-framework/bin/install-plugin-schema.php <span class="at">--database</span><span class="op">=&lt;</span>database<span class="op">&gt;</span> --user=<span class="op">&lt;</span>user<span class="op">&gt;</span> --password=<span class="op">&lt;</span>password<span class="op">&gt;</span> --plugin=ahgAPIPlugin   <span class="co"># from the AtoM root; never a plain mysql &lt; install.sql</span></span></code></pre></div>
 <ol start="3" type="1">
 <li>Enable the plugin in <code>apps/qubit/config/settings.yml</code>:</li>
 </ol>
-<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="at">   </span><span class="fu">all</span><span class="kw">:</span></span>
+<div class="sourceCode" id="cb4"><pre tabindex="0" aria-label="Code" class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="at">   </span><span class="fu">all</span><span class="kw">:</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">     </span><span class="fu">.settings</span><span class="kw">:</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">       </span><span class="fu">enabled_modules</span><span class="kw">:</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">         </span><span class="kw">-</span><span class="at"> apiv2</span></span></code></pre></div>
 <ol start="4" type="1">
 <li>Clear the cache:</li>
 </ol>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>   <span class="ex">php</span> symfony cc</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre tabindex="0" aria-label="Code" class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>   <span class="ex">php</span> symfony cc</span></code></pre></div>
 
-<h3>Try it</h3><p>This feature is for signed-in staff, so it is not open on the public demo.</p>
+<h2>Try it</h2><p>This feature is for signed-in staff, so it is not open on the public demo.</p>
 <p><a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/tree/main/ahgAPIPlugin">Source and README on GitHub</a> &middot; Questions: <a href="mailto:support@theahg.co.za">support@theahg.co.za</a> or <a href="https://wa.me/27648830533?text=Tell%20me%20about%20the%20AHG%20Plugins">WhatsApp</a></p>
 </div></section></main>
 <footer><div class="wrap">AHG Extensions for AtoM were developed by <a href="https://plainsailingisystems.co.za/">Plain Sailing Information Systems</a> and are offered by <a href="https://theahg.co.za">The Archive and Heritage Group (Pty) Ltd</a>, South Africa. Open source under AGPL-3.0-or-later: <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins">source code</a> and <a href="https://github.com/ArchiveHeritageGroup/atom-extensions-catalog/tree/main/docs">documentation</a>.</div></footer>

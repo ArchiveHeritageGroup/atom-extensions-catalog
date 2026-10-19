@@ -20,7 +20,11 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 PLUGINS = next(p for p in (os.environ.get('AHG_PLUGINS_DIR', ''),
                            os.path.normpath(os.path.join(HERE, '..', '..', 'atom-ahg-plugins')),
                            '/usr/share/nginx/archive/atom-ahg-plugins') if p and os.path.isdir(p))
-OUT = os.path.join(HERE, 'public')
+# Built into a staging folder and swapped in only when every check passes, so a
+# refused build never leaves the live site half-written. AHG_SITE_OUT lets the
+# tests build somewhere harmless.
+OUT_FINAL = os.environ.get('AHG_SITE_OUT') or os.path.join(HERE, 'public')
+OUT = OUT_FINAL + '.building'
 SITE = 'https://www.atom-extensions.com'
 DEMO = 'https://psis.theahg.co.za'
 REPO = 'https://github.com/ArchiveHeritageGroup/atom-ahg-plugins'
@@ -131,7 +135,13 @@ def md_html(text):
     out = subprocess.run(['pandoc', '-f', 'gfm', '-t', 'html5', '--wrap=none'], input=text,
                          capture_output=True, text=True, check=True).stdout
     # links into the repository are relative: point them at GitHub
-    return re.sub(r'href="(?!https?:|#|/|mailto:)([^"]+)"', lambda m: f'href="{REPO}/blob/main/{m.group(1)}"', out)
+    out = re.sub(r'href="(?!https?:|#|/|mailto:)([^"]+)"', lambda m: f'href="{REPO}/blob/main/{m.group(1)}"', out)
+    return focusable_pre(out)
+
+
+def focusable_pre(html_text):
+    """Code blocks scroll sideways on phones; tabindex lets keyboard users scroll them (WCAG 2.1.1)."""
+    return re.sub(r'<pre(?![^>]*tabindex)', '<pre tabindex="0" aria-label="Code"', html_text)
 
 
 def readme_sections(machine):
@@ -163,8 +173,20 @@ def content_html(slug):
         dst = os.path.join(OUT, 'img', rel)
         os.makedirs(os.path.dirname(dst), exist_ok=True)
         shutil.copyfile(src, dst)
-    html_out = md_html(text).replace('<img ', '<img loading="lazy" ')
-    return html_out.replace('<h2', '<h3').replace('</h2>', '</h3>')
+    html_out = md_html(text)
+
+    def sized(m):
+        # width/height reserve the space, so the page does not jump as lazy images arrive
+        src = re.search(r'src="/img/([^"]+)"', m.group(0))
+        attrs = ' loading="lazy"'
+        if src:
+            with open(os.path.join(DOC_IMAGES, src.group(1)), 'rb') as f:
+                head = f.read(24)
+            if head[:8] == b'\x89PNG\r\n\x1a\n':
+                attrs += f' width="{int.from_bytes(head[16:20], "big")}" height="{int.from_bytes(head[20:24], "big")}"'
+        return '<img' + attrs + m.group(0)[4:]
+    html_out = re.sub(r'<img [^>]*>', sized, html_out)
+    return html_out
 
 
 # Readable slugs where the package name would give a poor one. The collections
@@ -191,7 +213,7 @@ header.top nav a{margin-left:18px}
 .btn{display:inline-block;background:var(--gold);color:var(--green);padding:12px 22px;border-radius:4px;font-weight:bold;text-decoration:none;margin:0 10px 10px 0}
 .btn.ghost{background:transparent;color:var(--cream);border:2px solid var(--gold)}
 main section{padding:44px 0;border-bottom:1px solid #e6e2da}
-h2{color:var(--green);font-size:28px;line-height:1.25;margin:0 0 14px}
+h2,main h1{color:var(--green);font-size:28px;line-height:1.25;margin:0 0 14px}
 h3{color:var(--green);font-size:19px;margin:0 0 6px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
 .card{border:1px solid #ddd6ca;border-top:4px solid var(--gold);padding:18px;border-radius:4px;background:#fff}
@@ -204,6 +226,7 @@ th{background:var(--green);color:#fff;font-weight:bold;width:150px}
 .plugin-list{columns:2 300px;padding-left:20px}.plugin-list li{margin:0 0 8px;break-inside:avoid}
 footer{background:var(--green);color:var(--cream);padding:28px 0;font-size:15px}footer a{color:var(--gold)}
 .crumb{font-size:15px;margin:0 0 14px}
+.detail h2{font-size:22px;margin:28px 0 10px}
 .detail img{max-width:100%;height:auto;border:1px solid #ddd6ca;border-radius:4px;margin:6px 0}
 .detail pre{background:var(--cream);padding:10px 12px;overflow-x:auto;font-size:14px;border-radius:4px}
 .detail pre code{background:none;padding:0}
@@ -282,7 +305,7 @@ def readme_summary(machine):
         if on and re.match(r'^\s*[-*]\s+', line):
             feats.append(re.sub(r'^\s*[-*]\s+', '', line).strip())
     if feats:
-        html_out += '<h3>Features</h3><ul>' + ''.join(f'<li>{inline_md(f)}</li>' for f in feats[:15]) + '</ul>'
+        html_out += '<h2>Features</h2><ul>' + ''.join(f'<li>{inline_md(f)}</li>' for f in feats[:15]) + '</ul>'
     return html_out
 
 
@@ -321,9 +344,35 @@ var p=new URLSearchParams(location.search);q.value=p.get('q')||'';c.value=p.get(
 </script>"""
 
 
+def verified_set():
+    """Plugin names in the README's "Verified standalone set" paragraph: the one
+    source for which plugins may carry a clean-install date."""
+    readme = open(os.path.join(PLUGINS, 'README.md'), encoding='utf-8').read()
+    m = re.search(r'### Verified standalone set\s+(.*?)\n\n', readme, re.S)
+    if not m:
+        raise SystemExit('build refused: README has no "Verified standalone set" section')
+    names = re.findall(r'\b(ahg[A-Z]\w*?)(?=[,.\s])', m.group(1).split(':', 1)[1])
+    return {n if n.endswith('Plugin') else n + 'Plugin' for n in names}
+
+
 def check(plugins):
     """Refuse to publish a catalogue with gaps a visitor would notice."""
     problems, seen = [], {}
+    # Counts: the README total must agree with the manifests.
+    readme = open(os.path.join(PLUGINS, 'README.md'), encoding='utf-8').read()
+    total = re.search(r'^Totals: (\d+) plugins', readme, re.M)
+    if not total:
+        problems.append('README.md has no "Totals: N plugins" line')
+    elif int(total.group(1)) != len(plugins):
+        problems.append(f'README.md says {total.group(1)} plugins, the manifests give {len(plugins)}')
+    # No unjustified test status: a clean-install date only for the verified set.
+    verified = verified_set()
+    for p in plugins:
+        m = p['machine_name']
+        if p.get('tested_at') and m not in verified:
+            problems.append(f'{m}: tested_at set but not in the README verified standalone set')
+        if m in verified and not p.get('tested_at'):
+            problems.append(f'{m}: in the README verified standalone set but has no tested_at')
     for p in plugins:
         m = p['machine_name']
         for field in ('license', 'version', 'description'):
@@ -336,6 +385,51 @@ def check(plugins):
         seen[p['slug']] = m
     if problems:
         raise SystemExit('build refused:\n  ' + '\n  '.join(problems))
+
+
+def check_site(root):
+    """Every internal link and #anchor in the built site must resolve."""
+    problems = []
+    pages = {}
+    for path in glob.glob(os.path.join(root, '**', '*.html'), recursive=True):
+        rel = '/' + os.path.relpath(path, root).replace(os.sep, '/')
+        pages[rel] = open(path, encoding='utf-8').read()
+    def ids(html_text):
+        return set(re.findall(r'\bid="([^"]+)"', html_text))
+    for rel, text in pages.items():
+        for href in re.findall(r'href="([^"]+)"', text):
+            if href.startswith(('http:', 'https:', 'mailto:')):
+                continue
+            target, _, anchor = href.partition('#')
+            if not target:
+                target_rel = rel
+            elif target.startswith('/'):
+                target_rel = target + 'index.html' if target.endswith('/') else target
+            else:
+                continue
+            if not os.path.exists(os.path.join(root, target_rel.lstrip('/'))):
+                problems.append(f'{rel}: link to {href} has no page')
+            elif anchor and target_rel.endswith('.html') and anchor not in ids(pages.get(target_rel, '')):
+                problems.append(f'{rel}: link to {href} has no #{anchor} on that page')
+    return problems
+
+
+def check_external(plugins, bundles, flags):
+    """Optional (--check-external): packaged downloads and walkthrough videos exist."""
+    import urllib.request
+    urls = [f'{REPO}/releases/tag/{t}' for t in sorted(set(re.findall(r'releases/tag/(ahg\w+Plugin-v[\w.]+)',
+            open(os.path.join(PLUGINS, 'docs', 'plugins', 'README.md'), encoding='utf-8').read())))]
+    urls += [f['video'] for f in flags if f['video']]
+    problems = []
+    for u in urls:
+        try:
+            req = urllib.request.Request(u, method='HEAD', headers={'User-Agent': 'atom-extensions-build/1.0'})
+            code = urllib.request.urlopen(req, timeout=20).status
+        except Exception as ex:
+            code = getattr(ex, 'code', str(ex))
+        if code != 200:
+            problems.append(f'{u}: {code}')
+    return problems
 
 
 def flagships():
@@ -355,7 +449,7 @@ def flagships():
     return rows
 
 
-def build():
+def build(check_ext=False):
     if os.path.isdir(OUT):
         shutil.rmtree(OUT)
     os.makedirs(os.path.join(OUT, 'plugins'))
@@ -375,12 +469,11 @@ def build():
         video = f' <a href="{e(f["video"])}">Watch the walkthrough</a>.' if f['video'] else ''
         cards.append(f'<div class="card"><h3>{e(f["name"])}</h3><p>{e(f["what"])}</p>'
                      f'<p class="by">Plugins: {links}.{video}</p></div>')
-    body = f"""<div class="hero"><div class="wrap">
+    body = f"""<main><div class="hero"><div class="wrap">
 <h1>AHG Extensions for AtoM</h1>
 <p>Preservation, provenance, Records in Contexts, AI-assisted description, museum, library and digital asset workflows, rights and privacy, added to Access to Memory 2.9 and 2.10 as plugins. Base AtoM stays as upstream ships it, and an institution installs only the capabilities it needs.</p>
 <a class="btn" href="{DEMO}">Try the live demo</a><a class="btn ghost" href="/plugins/">Browse all {len(plugins)} plugins</a>
 </div></div>
-<main>
 <section id="capabilities"><div class="wrap">
 <h2>Nine flagship capabilities</h2>
 <p>Each is a family of plugins rather than a single module. Most have a short walkthrough recorded on the live demo.</p>
@@ -455,7 +548,7 @@ def build():
         f'All {len(plugins)} AtoM plugins: AHG Extensions for AtoM catalogue',
         f'Every plugin in AHG Extensions for AtoM, grouped by what it does: {len(plugins)} plugins for archives, museums, libraries and galleries running AtoM 2.10.',
         '/plugins/',
-        f'<main><section><div class="wrap"><p class="crumb"><a href="/">Home</a> / Plugins</p><h2>All {len(plugins)} plugins</h2>'
+        f'<main><section><div class="wrap"><p class="crumb"><a href="/">Home</a> / Plugins</p><h1>All {len(plugins)} plugins</h1>'
         f'<p>Grouped by what they do. Each page gives the plugin\'s purpose, what it depends on, and where its source and documentation are.</p>'
         f'<p>Two of the {len(plugins)} are foundations rather than features: {foundations_text}. You install them because the other plugins need them, not for what they do alone.</p>'
         f'<p>{len(bundles - {"ahgRuntimePlugin"})} plugins are currently offered as <a href="{DOWNLOADS}">packaged downloads</a> with installers, together with the shared runtime. Additional plugins can be installed from source. '
@@ -516,7 +609,7 @@ def build():
         if p['machine_name'] in bundles:
             install = (f'<p>Download the bundle and the runtime from the <a href="{DOWNLOADS}">downloads page</a>, '
                        'then follow the bundle\'s INSTALL.md. In short, from the AtoM root, after a backup and on a staging copy first:</p>'
-                       '<pre><code>unzip ahgRuntimePlugin-&lt;version&gt;.zip -d plugins/\n'
+                       '<pre tabindex="0" aria-label="Code"><code>unzip ahgRuntimePlugin-&lt;version&gt;.zip -d plugins/\n'
                        f'unzip {e(p["machine_name"])}-&lt;version&gt;.zip -d plugins/\n'
                        f'php plugins/{e(p["machine_name"])}/bin/install-plugin-schema.php \\\n'
                        '    --database=&lt;database&gt; --user=&lt;user&gt; --password=&lt;password&gt;</code></pre>'
@@ -531,13 +624,13 @@ def build():
         else:
             demo_html = '<p>This feature is for signed-in staff, so it is not open on the public demo.</p>'
         body = f"""<main><section><div class="wrap detail"><p class="crumb"><a href="/">Home</a> / <a href="/plugins/">Plugins</a> / {e(name)}</p>
-<h2>{e(name)}</h2><p>{e(desc)}</p>{flag_html}
+<h1>{e(name)}</h1><p>{e(desc)}</p>{flag_html}
 <table>{table}</table>
 {extra or readme_summary(p['machine_name'])}
-{('<h3>Requirements</h3>' + md_html(req)) if req.strip() else ''}
-{('<h3>Known limits</h3>' + md_html(limits)) if limits.strip() else ''}
-<h3 id="install">Installation</h3>{install}
-<h3>Try it</h3>{demo_html}
+{('<h2>Requirements</h2>' + md_html(req)) if req.strip() else ''}
+{('<h2>Known limits</h2>' + md_html(limits)) if limits.strip() else ''}
+<h2 id="install">Installation</h2>{install}
+<h2>Try it</h2>{demo_html}
 <p><a href="{REPO}/tree/main/{e(p['machine_name'])}">Source and README on GitHub</a> &middot; Questions: <a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a> or <a href="{WHATSAPP}">WhatsApp</a></p>
 </div></section></main>"""
         open(os.path.join(OUT, 'plugins', p['slug'] + '.html'), 'w').write(page(
@@ -551,8 +644,27 @@ def build():
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + ''.join(f'<url><loc>{SITE}{u}</loc><lastmod>{today}</lastmod></url>\n' for u in urls) + '</urlset>\n')
     open(os.path.join(OUT, 'robots.txt'), 'w').write(f'User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n')
-    print(f'built {len(plugins)} plugin pages, {len(flags)} capabilities -> {OUT}')
+    problems = check_site(OUT) + (check_external(plugins, bundles, flags) if check_ext else [])
+    if problems:
+        shutil.rmtree(OUT)
+        raise SystemExit('build refused, live site left unchanged:\n  ' + '\n  '.join(problems))
+    # Swap the checked build in.
+    old = OUT_FINAL + '.old'
+    if os.path.isdir(old):
+        shutil.rmtree(old)
+    if os.path.isdir(OUT_FINAL):
+        os.rename(OUT_FINAL, old)
+    os.rename(OUT, OUT_FINAL)
+    if os.path.isdir(old):
+        shutil.rmtree(old)
+    print(f'built {len(plugins)} plugin pages, {len(flags)} capabilities -> {OUT_FINAL}')
 
 
 if __name__ == '__main__':
-    build()
+    import sys
+    try:
+        build(check_ext='--check-external' in sys.argv)
+    except BaseException:
+        # Any refusal or error: drop the staging folder; the live site was never touched.
+        shutil.rmtree(OUT, ignore_errors=True)
+        raise

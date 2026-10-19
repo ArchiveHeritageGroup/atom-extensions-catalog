@@ -7,10 +7,10 @@
 <header class="top"><div class="wrap"><a class="brand" href="/">AHG Extensions for AtoM</a>
 <nav><a href="/#capabilities">Capabilities</a><a href="/plugins/">Plugins</a><a href="https://psis.theahg.co.za">Live demo</a><a href="/#contact">Contact</a></nav></div></header>
 <main><section><div class="wrap detail"><p class="crumb"><a href="/">Home</a> / <a href="/plugins/">Plugins</a> / Provenance Tracking</p>
-<h2>Provenance Tracking</h2><p>Chain of custody and provenance tracking for archival records, museum objects, and library materials, plus AI inference provenance recording and Ed25519 manifest signing</p><p>Part of the <a href="/#capabilities">Provenance &amp; Audit</a> capability. <a href="https://youtu.be/B6lHwCby1Zk">Watch the walkthrough</a>.</p>
+<h1>Provenance Tracking</h1><p>Chain of custody and provenance tracking for archival records, museum objects, and library materials, plus AI inference provenance recording and Ed25519 manifest signing</p><p>Part of the <a href="/#capabilities">Provenance &amp; Audit</a> capability. <a href="https://youtu.be/B6lHwCby1Zk">Watch the walkthrough</a>.</p>
 <table><tr><th scope="row">Category</th><td>Provenance</td></tr><tr><th scope="row">Package</th><td><code>ahgProvenancePlugin</code></td></tr><tr><th scope="row">Version</th><td>1.2.3</td></tr><tr><th scope="row">Status</th><td>Packaged download with its own installer. Clean-database install verified 18 August 2026 (plugins v3.103.12).</td></tr><tr><th scope="row">Requires</th><td><span class="tag">Core</span></td></tr><tr><th scope="row">Works with</th><td><a class="tag" href="/plugins/donor-agreement.html">Donor Agreement Management</a><a class="tag" href="/plugins/rights.html">Rights Management</a></td></tr><tr><th scope="row">External services</th><td>Can use, when installed: Apache Jena Fuseki triplestore</td></tr><tr><th scope="row">Licence</th><td>AGPL-3.0-or-later</td></tr><tr><th scope="row">Install</th><td>Packaged download with its own installer: see the <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/blob/main/docs/plugins/README.md">downloads page</a></td></tr></table>
 <p>Chain of custody and provenance tracking for archival records, museum objects, and library materials, plus AI inference provenance recording and Ed25519 manifest signing</p>
-<h3>Requirements</h3><table>
+<h2>Requirements</h2><table>
 <thead>
 <tr class="header">
 <th>Component</th>
@@ -34,11 +34,11 @@
 </table>
 
 
-<h3 id="install">Installation</h3><p>Download the bundle and the runtime from the <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/blob/main/docs/plugins/README.md">downloads page</a>, then follow the bundle's INSTALL.md. In short, from the AtoM root, after a backup and on a staging copy first:</p><pre><code>unzip ahgRuntimePlugin-&lt;version&gt;.zip -d plugins/
+<h2 id="install">Installation</h2><p>Download the bundle and the runtime from the <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/blob/main/docs/plugins/README.md">downloads page</a>, then follow the bundle's INSTALL.md. In short, from the AtoM root, after a backup and on a staging copy first:</p><pre tabindex="0" aria-label="Code"><code>unzip ahgRuntimePlugin-&lt;version&gt;.zip -d plugins/
 unzip ahgProvenancePlugin-&lt;version&gt;.zip -d plugins/
 php plugins/ahgProvenancePlugin/bin/install-plugin-schema.php \
     --database=&lt;database&gt; --user=&lt;user&gt; --password=&lt;password&gt;</code></pre><p>Then enable it in Admin &gt; Plugins, clear the cache and reload PHP.</p>
-<h3>Try it</h3><p>This feature is for signed-in staff, so it is not open on the public demo. <a href="https://youtu.be/B6lHwCby1Zk">Watch the walkthrough</a> instead.</p>
+<h2>Try it</h2><p>This feature is for signed-in staff, so it is not open on the public demo. <a href="https://youtu.be/B6lHwCby1Zk">Watch the walkthrough</a> instead.</p>
 <p><a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/tree/main/ahgProvenancePlugin">Source and README on GitHub</a> &middot; Questions: <a href="mailto:support@theahg.co.za">support@theahg.co.za</a> or <a href="https://wa.me/27648830533?text=Tell%20me%20about%20the%20AHG%20Plugins">WhatsApp</a></p>
 </div></section></main>
 <footer><div class="wrap">AHG Extensions for AtoM were developed by <a href="https://plainsailingisystems.co.za/">Plain Sailing Information Systems</a> and are offered by <a href="https://theahg.co.za">The Archive and Heritage Group (Pty) Ltd</a>, South Africa. Open source under AGPL-3.0-or-later: <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins">source code</a> and <a href="https://github.com/ArchiveHeritageGroup/atom-extensions-catalog/tree/main/docs">documentation</a>.</div></footer>

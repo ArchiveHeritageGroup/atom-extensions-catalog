@@ -7,19 +7,19 @@
 <header class="top"><div class="wrap"><a class="brand" href="/">AHG Extensions for AtoM</a>
 <nav><a href="/#capabilities">Capabilities</a><a href="/plugins/">Plugins</a><a href="https://psis.theahg.co.za">Live demo</a><a href="/#contact">Contact</a></nav></div></header>
 <main><section><div class="wrap detail"><p class="crumb"><a href="/">Home</a> / <a href="/plugins/">Plugins</a> / Audit Trail</p>
-<h2>Audit Trail</h2><p>Comprehensive audit trail logging for AtoM with POPIA/NARSSA compliance. Provides AhgAuditService for centralized audit logging.</p><p>Part of the <a href="/#capabilities">Provenance &amp; Audit</a> capability. <a href="https://youtu.be/B6lHwCby1Zk">Watch the walkthrough</a>.</p>
+<h1>Audit Trail</h1><p>Comprehensive audit trail logging for AtoM with POPIA/NARSSA compliance. Provides AhgAuditService for centralized audit logging.</p><p>Part of the <a href="/#capabilities">Provenance &amp; Audit</a> capability. <a href="https://youtu.be/B6lHwCby1Zk">Watch the walkthrough</a>.</p>
 <table><tr><th scope="row">Category</th><td>Provenance</td></tr><tr><th scope="row">Package</th><td><code>ahgAuditTrailPlugin</code></td></tr><tr><th scope="row">Version</th><td>1.3.0</td></tr><tr><th scope="row">Status</th><td>Installs from source. Clean-database install verified 18 August 2026 (plugins v3.103.12).</td></tr><tr><th scope="row">Requires</th><td><span class="tag">Core</span></td></tr><tr><th scope="row">Licence</th><td>AGPL-3.0-or-later</td></tr><tr><th scope="row">Install</th><td>From the source repository: see <a href="#install">Installation</a> below. No packaged download yet.</td></tr></table>
-<p>Comprehensive audit trail logging plugin for AtoM 2.10 Laravel rebuild.</p><h3>Features</h3><ul><li>Full CRUD action logging</li><li>Authentication event tracking</li><li>Download/access logging</li><li>Security classification tracking</li><li>POPIA/NARSSA compliance</li><li>Statistics dashboard</li><li>Export to CSV/JSON</li></ul>
+<p>Comprehensive audit trail logging plugin for AtoM 2.10 Laravel rebuild.</p><h2>Features</h2><ul><li>Full CRUD action logging</li><li>Authentication event tracking</li><li>Download/access logging</li><li>Security classification tracking</li><li>POPIA/NARSSA compliance</li><li>Statistics dashboard</li><li>Export to CSV/JSON</li></ul>
 
 
-<h3 id="install">Installation</h3><ol type="1">
+<h2 id="install">Installation</h2><ol type="1">
 <li>Extract to <code>plugins/ahgAuditTrailPlugin</code></li>
 <li>Run database migration: <code>php atom-framework/bin/install-plugin-schema.php --database=&lt;database&gt; --user=&lt;user&gt; --password=&lt;password&gt; --plugin=ahgAuditTrailPlugin</code> (from the AtoM root)</li>
 <li>Enable in <code>apps/qubit/config/settings.yml</code></li>
 <li>Clear cache: <code>php symfony cc</code></li>
 </ol>
 
-<h3>Try it</h3><p>This feature is for signed-in staff, so it is not open on the public demo. <a href="https://youtu.be/B6lHwCby1Zk">Watch the walkthrough</a> instead.</p>
+<h2>Try it</h2><p>This feature is for signed-in staff, so it is not open on the public demo. <a href="https://youtu.be/B6lHwCby1Zk">Watch the walkthrough</a> instead.</p>
 <p><a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/tree/main/ahgAuditTrailPlugin">Source and README on GitHub</a> &middot; Questions: <a href="mailto:support@theahg.co.za">support@theahg.co.za</a> or <a href="https://wa.me/27648830533?text=Tell%20me%20about%20the%20AHG%20Plugins">WhatsApp</a></p>
 </div></section></main>
 <footer><div class="wrap">AHG Extensions for AtoM were developed by <a href="https://plainsailingisystems.co.za/">Plain Sailing Information Systems</a> and are offered by <a href="https://theahg.co.za">The Archive and Heritage Group (Pty) Ltd</a>, South Africa. Open source under AGPL-3.0-or-later: <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins">source code</a> and <a href="https://github.com/ArchiveHeritageGroup/atom-extensions-catalog/tree/main/docs">documentation</a>.</div></footer>

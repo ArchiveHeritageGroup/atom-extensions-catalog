@@ -7,10 +7,10 @@
 <header class="top"><div class="wrap"><a class="brand" href="/">AHG Extensions for AtoM</a>
 <nav><a href="/#capabilities">Capabilities</a><a href="/plugins/">Plugins</a><a href="https://psis.theahg.co.za">Live demo</a><a href="/#contact">Contact</a></nav></div></header>
 <main><section><div class="wrap detail"><p class="crumb"><a href="/">Home</a> / <a href="/plugins/">Plugins</a> / Mirador Viewer</p>
-<h2>Mirador Viewer</h2><p>Contributes the Mirador IIIF image viewer as an independently installable plugin. Registers a renderer with ahgIiifPlugin&#x27;s RendererRegistry; install or disable it to choose the viewer.</p><p>Part of the <a href="/#capabilities">IIIF &amp; Advanced Viewing</a> capability. <a href="https://youtu.be/9tQ9Z79M_H0">Watch the walkthrough</a>.</p>
+<h1>Mirador Viewer</h1><p>Contributes the Mirador IIIF image viewer as an independently installable plugin. Registers a renderer with ahgIiifPlugin&#x27;s RendererRegistry; install or disable it to choose the viewer.</p><p>Part of the <a href="/#capabilities">IIIF &amp; Advanced Viewing</a> capability. <a href="https://youtu.be/9tQ9Z79M_H0">Watch the walkthrough</a>.</p>
 <table><tr><th scope="row">Category</th><td>Viewing</td></tr><tr><th scope="row">Package</th><td><code>ahgMiradorPlugin</code></td></tr><tr><th scope="row">Version</th><td>1.2.0</td></tr><tr><th scope="row">Status</th><td>Packaged download with its own installer. Clean-database install not yet verified.</td></tr><tr><th scope="row">Requires</th><td><span class="tag">IIIF</span></td></tr><tr><th scope="row">Licence</th><td>AGPL-3.0-or-later</td></tr><tr><th scope="row">Install</th><td>Packaged download with its own installer: see the <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/blob/main/docs/plugins/README.md">downloads page</a></td></tr></table>
 <p>Mirador as an independently installable AtoM plugin. A full IIIF workspace - deep zoom, thumbnails, metadata panel, and the side-by-side comparison Mirador is chosen for.</p>
-<h3>Requirements</h3><pre><code>AtoM              2.9 or 2.10
+<h2>Requirements</h2><pre tabindex="0" aria-label="Code"><code>AtoM              2.9 or 2.10
 PHP               8.1 or later
 ahgIiifPlugin     carried in this bundle
 ahgCorePlugin     carried in this bundle
@@ -19,18 +19,18 @@ ahgRuntimePlugin  2.14.1 or later, installed separately</code></pre>
 <p>Mirador is vendored, so there is no CDN to whitelist and no build step. Mirador 3 injects its own styles from JavaScript; the <code>mirador.min.css</code> beside it is a placeholder and carries no rules.</p>
 <p>An IIIF image server is optional and stays yours - see the <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/blob/main/../docs/infrastructure/iiif-image-server.md">image server guide</a>.</p>
 
-<h3>Known limits</h3><ul>
+<h2>Known limits</h2><ul>
 <li><strong>Annotations are not wired to a store.</strong> Mirador can display annotations carried in a manifest, but nothing here writes them back, and <code>ahgIiifPlugin</code> runs its own annotation store that knows nothing about Mirador's. Connecting them means deciding which is authoritative and what becomes of annotations already held in either, so it is a design decision rather than a missing call. Tracked in issue #286.</li>
 <li><strong>The viewer does not match the site around it.</strong> <code>theme</code> is passed through and accepted, but nothing derives a Mirador theme from the active AtoM theme, so a site with its own colours gets Mirador's defaults.</li>
 </ul>
 <p>Verified on AtoM 2.10 against Cantaloupe 5.0.6: mounts on a record page, refuses a cross-origin manifest, reports a missing one, and drops a non-allowlisted override.</p>
 <p>Licence: AGPL-3.0-or-later.</p>
 
-<h3 id="install">Installation</h3><p>Download the bundle and the runtime from the <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/blob/main/docs/plugins/README.md">downloads page</a>, then follow the bundle's INSTALL.md. In short, from the AtoM root, after a backup and on a staging copy first:</p><pre><code>unzip ahgRuntimePlugin-&lt;version&gt;.zip -d plugins/
+<h2 id="install">Installation</h2><p>Download the bundle and the runtime from the <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/blob/main/docs/plugins/README.md">downloads page</a>, then follow the bundle's INSTALL.md. In short, from the AtoM root, after a backup and on a staging copy first:</p><pre tabindex="0" aria-label="Code"><code>unzip ahgRuntimePlugin-&lt;version&gt;.zip -d plugins/
 unzip ahgMiradorPlugin-&lt;version&gt;.zip -d plugins/
 php plugins/ahgMiradorPlugin/bin/install-plugin-schema.php \
     --database=&lt;database&gt; --user=&lt;user&gt; --password=&lt;password&gt;</code></pre><p>Then enable it in Admin &gt; Plugins, clear the cache and reload PHP.</p>
-<h3>Try it</h3><p>This feature is for signed-in staff, so it is not open on the public demo. <a href="https://youtu.be/9tQ9Z79M_H0">Watch the walkthrough</a> instead.</p>
+<h2>Try it</h2><p>This feature is for signed-in staff, so it is not open on the public demo. <a href="https://youtu.be/9tQ9Z79M_H0">Watch the walkthrough</a> instead.</p>
 <p><a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins/tree/main/ahgMiradorPlugin">Source and README on GitHub</a> &middot; Questions: <a href="mailto:support@theahg.co.za">support@theahg.co.za</a> or <a href="https://wa.me/27648830533?text=Tell%20me%20about%20the%20AHG%20Plugins">WhatsApp</a></p>
 </div></section></main>
 <footer><div class="wrap">AHG Extensions for AtoM were developed by <a href="https://plainsailingisystems.co.za/">Plain Sailing Information Systems</a> and are offered by <a href="https://theahg.co.za">The Archive and Heritage Group (Pty) Ltd</a>, South Africa. Open source under AGPL-3.0-or-later: <a href="https://github.com/ArchiveHeritageGroup/atom-ahg-plugins">source code</a> and <a href="https://github.com/ArchiveHeritageGroup/atom-extensions-catalog/tree/main/docs">documentation</a>.</div></footer>
