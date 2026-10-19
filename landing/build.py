@@ -170,9 +170,12 @@ def content_html(slug):
         src = os.path.join(DOC_IMAGES, rel)
         if not os.path.isfile(src):
             raise SystemExit(f'build refused: {slug}.md uses missing image {rel}')
-        dst = os.path.join(OUT, 'img', rel)
+        # Served as WebP (quality 82): about a fifth of the PNG size, same look.
+        dst = os.path.join(OUT, 'img', os.path.splitext(rel)[0] + '.webp')
         os.makedirs(os.path.dirname(dst), exist_ok=True)
-        shutil.copyfile(src, dst)
+        from PIL import Image
+        with Image.open(src) as im:
+            im.save(dst, 'WEBP', quality=82, method=6)
     html_out = md_html(text)
 
     def sized(m):
@@ -184,7 +187,8 @@ def content_html(slug):
                 head = f.read(24)
             if head[:8] == b'\x89PNG\r\n\x1a\n':
                 attrs += f' width="{int.from_bytes(head[16:20], "big")}" height="{int.from_bytes(head[20:24], "big")}"'
-        return '<img' + attrs + m.group(0)[4:]
+        tag = re.sub(r'(src="/img/[^"]+)\.png"', r'\1.webp"', m.group(0))
+        return '<img' + attrs + tag[4:]
     html_out = re.sub(r'<img [^>]*>', sized, html_out)
     return html_out
 
