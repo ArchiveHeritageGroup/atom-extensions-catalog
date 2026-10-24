@@ -1,6 +1,6 @@
-# AtoM Heratio — Backup Strategy Feature Overview
+# AHG Extensions for AtoM — Backup Strategy Feature Overview
 
-**Product:** AtoM Heratio Framework v2.8.2
+**Product:** AHG Extensions for AtoM v2.8.2
 **Component:** Backup & Restore (ahgBackupPlugin)
 **Date:** 16 March 2026
 **Author:** The Archive and Heritage Group (Pty) Ltd
@@ -9,7 +9,7 @@
 
 ## What It Does
 
-AtoM Heratio provides a comprehensive backup and restore system for archival data, digital objects, plugins, and framework code. The system supports full, incremental, and scheduled backups with configurable retention policies and email notifications.
+AHG Extensions for AtoM provides a comprehensive backup and restore system for archival data, digital objects, plugins, and framework code. The system supports full, incremental, and scheduled backups with configurable retention policies and email notifications.
 
 ## Key Features
 

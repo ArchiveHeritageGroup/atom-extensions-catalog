@@ -10,7 +10,7 @@
 
 Cantaloupe is a standalone Java-based IIIF image server that provides deep zoom tiling for high-resolution images. It runs as a separate service alongside AtoM and is proxied via Nginx.
 
-AtoM Heratio uses Cantaloupe with a **Ruby delegate script** (`delegates.rb`) that provides:
+AHG Extensions for AtoM uses Cantaloupe with a **Ruby delegate script** (`delegates.rb`) that provides:
 1. **Multi-instance path routing** — a single Cantaloupe instance serves multiple AtoM instances based on the `Host` header
 2. **IIIF Auth enforcement** — calls back to AtoM's internal auth endpoint to check access permissions per image
 

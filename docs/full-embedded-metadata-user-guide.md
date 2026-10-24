@@ -1,13 +1,13 @@
 # Full Embedded Metadata
 
-AtoM Heratio captures the **complete** technical metadata embedded in your photographs and
+AHG Extensions for AtoM captures the **complete** technical metadata embedded in your photographs and
 images — every EXIF, IPTC, XMP, MakerNotes, ICC profile, GPS and File/System tag that the file
 carries — not just a handful of common fields. This guide explains where to find it, how it is
 captured, and how location data is protected.
 
 ## What is captured
 
-When you upload an image (or run the backfill on existing images), AtoM Heratio runs ExifTool
+When you upload an image (or run the backfill on existing images), AHG Extensions for AtoM runs ExifTool
 across **all metadata groups** and stores the full result on the master digital object. Typical
 groups you will see include:
 

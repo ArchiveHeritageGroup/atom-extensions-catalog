@@ -1,4 +1,4 @@
-# AtoM Heratio --- Full Library System (ILS)
+# AHG Extensions for AtoM --- Full Library System (ILS)
 
 **Component:** ahgLibraryPlugin v2.0.0
 **Category:** GLAM Sector --- Library
@@ -9,7 +9,7 @@
 
 ## Summary
 
-AtoM Heratio's Full Library System delivers a complete Integrated Library System (ILS) within the AtoM archival platform. Building on a 71-field MARC-inspired cataloging foundation, the plugin adds circulation management, patron services, an Online Public Access Catalog (OPAC), acquisitions, serial control, interlibrary loan, and full MARC 21 import/export.
+AHG Extensions for AtoM's Full Library System delivers a complete Integrated Library System (ILS) within the AtoM archival platform. Building on a 71-field MARC-inspired cataloging foundation, the plugin adds circulation management, patron services, an Online Public Access Catalog (OPAC), acquisitions, serial control, interlibrary loan, and full MARC 21 import/export.
 
 For institutions that manage both archival collections and lending libraries, the plugin eliminates the need for a separate ILS by embedding library operations directly into the AtoM environment. Heritage accounting fields aligned with GRAP 103 and IPSAS 45 enable asset valuation and financial tracking on every library item.
 
@@ -248,6 +248,6 @@ All status values, types, and categories throughout the library system are manag
 
 ## About The Archive and Heritage Group
 
-The Archive and Heritage Group (Pty) Ltd develops AtoM Heratio, a comprehensive modernization of the Access to Memory (AtoM) archival platform. Heratio extends AtoM with 80 plugins covering the full GLAM spectrum --- galleries, libraries, archives, museums, and digital asset management --- serving institutions internationally.
+The Archive and Heritage Group (Pty) Ltd develops AHG Extensions for AtoM, a comprehensive modernization of the Access to Memory (AtoM) archival platform. Heratio extends AtoM with 80 plugins covering the full GLAM spectrum --- galleries, libraries, archives, museums, and digital asset management --- serving institutions internationally.
 
 For more information, contact: **johan@theahg.co.za**

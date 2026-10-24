@@ -1,4 +1,4 @@
-# AtoM Heratio — Migration Technical Reference
+# AHG Extensions for AtoM — Migration Technical Reference
 
 **Version:** 2.8.2
 **Last Updated:** February 2026
@@ -310,4 +310,4 @@ Very large effort. Only after all other phases stable.
 
 ---
 
-*Part of the AtoM Heratio Framework*
+*Part of the AHG Extensions for AtoM*

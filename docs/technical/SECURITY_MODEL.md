@@ -1,4 +1,4 @@
-# AtoM Heratio — Security Model
+# AHG Extensions for AtoM — Security Model
 
 **Version:** 1.0
 **Date:** 2026-02-28
@@ -8,7 +8,7 @@
 
 ## 1. Overview
 
-AtoM Heratio is a two-layer system: base AtoM (Symfony 1.x) and the AHG Framework (Laravel-based services). Security controls span both layers and must be understood together.
+AHG Extensions for AtoM is a two-layer system: base AtoM (Symfony 1.x) and the AHG Framework (Laravel-based services). Security controls span both layers and must be understood together.
 
 This document defines the trust boundaries, authentication model, secret management, and the four hardened attack surfaces: CSP, file uploads, outbound HTTP, CSRF, and shell execution.
 

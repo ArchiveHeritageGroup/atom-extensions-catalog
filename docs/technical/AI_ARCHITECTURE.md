@@ -1,14 +1,14 @@
-# AtoM Heratio — AI Architecture & Installation
+# AHG Extensions for AtoM — AI Architecture & Installation
 
 **Author:** The Archive and Heritage Group (Pty) Ltd
-**Applies to:** AtoM Heratio (Symfony/AtoM stack) — `ahgAIPlugin` and companion AI plugins
+**Applies to:** AHG Extensions for AtoM (Symfony/AtoM stack) — `ahgAIPlugin` and companion AI plugins
 **Status:** Technical reference
 
 ---
 
 ## 1. Overview
 
-AI in AtoM Heratio is split into two layers:
+AI in AHG Extensions for AtoM is split into two layers:
 
 1. **In‑app layer (PHP / Symfony)** — the `ahgAIPlugin` plugin and its companions. This layer owns the UI, routing, persistence, governance and orchestration. **It never runs models itself.**
 2. **Inference services (outside the web process)** — Python/model services running on the GPU/CPU fleet. The PHP layer reaches them over HTTP.

@@ -1,4 +1,4 @@
-# AtoM Heratio — Accessibility Statement
+# AHG Extensions for AtoM — Accessibility Statement
 
 **Version:** 2.8.2
 **Date:** 16 March 2026
@@ -9,11 +9,11 @@
 
 ## Our Commitment
 
-AtoM Heratio is committed to ensuring digital accessibility for people with disabilities. We continually improve the user experience for everyone and apply the relevant accessibility standards.
+AHG Extensions for AtoM is committed to ensuring digital accessibility for people with disabilities. We continually improve the user experience for everyone and apply the relevant accessibility standards.
 
 ## Conformance Status
 
-AtoM Heratio aims to conform to the **Web Content Accessibility Guidelines (WCAG) 2.1 at Level AA**. These guidelines explain how to make web content more accessible to people with a wide range of disabilities.
+AHG Extensions for AtoM aims to conform to the **Web Content Accessibility Guidelines (WCAG) 2.1 at Level AA**. These guidelines explain how to make web content more accessible to people with a wide range of disabilities.
 
 ## Accessibility Features
 
@@ -76,7 +76,7 @@ Accessibility is continuously verified using:
 
 ## Feedback
 
-We welcome your feedback on the accessibility of AtoM Heratio. If you encounter accessibility barriers, please contact us:
+We welcome your feedback on the accessibility of AHG Extensions for AtoM. If you encounter accessibility barriers, please contact us:
 
 - **Email:** johan@theahg.co.za
 - **Organization:** The Archive and Heritage Group (Pty) Ltd

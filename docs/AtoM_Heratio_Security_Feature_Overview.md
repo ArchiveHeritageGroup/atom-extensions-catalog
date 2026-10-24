@@ -1,4 +1,4 @@
-# AtoM Heratio — Security Feature Overview
+# AHG Extensions for AtoM — Security Feature Overview
 
 **Version:** 2.8.2
 **Date:** March 2026
@@ -8,7 +8,7 @@
 
 ## Overview
 
-AtoM Heratio provides enterprise-grade security for GLAM and DAM institutions, aligned with international standards including OWASP Top 10, ISO 27001, Bell-LaPadula mandatory access control, and POPIA data protection requirements.
+AHG Extensions for AtoM provides enterprise-grade security for GLAM and DAM institutions, aligned with international standards including OWASP Top 10, ISO 27001, Bell-LaPadula mandatory access control, and POPIA data protection requirements.
 
 ---
 

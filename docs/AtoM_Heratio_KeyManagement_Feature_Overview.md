@@ -1,4 +1,4 @@
-# AtoM Heratio — Key Management
+# AHG Extensions for AtoM — Key Management
 
 ## Feature Overview
 
@@ -11,12 +11,12 @@
 
 ## Summary
 
-Heratio Key Management is a standalone application for managing client API keys and AI server tokens used by AtoM Heratio installations. It operates independently from AtoM with its own database, providing a centralized point of control for all client authentication credentials. Available as both a CLI tool and a web interface.
+Heratio Key Management is a standalone application for managing client API keys and AI server tokens used by AHG Extensions for AtoM installations. It operates independently from AtoM with its own database, providing a centralized point of control for all client authentication credentials. Available as both a CLI tool and a web interface.
 
 ## Key Features
 
 ### Client Management
-- **Client Registry** — Register and manage client organizations using AtoM Heratio
+- **Client Registry** — Register and manage client organizations using AHG Extensions for AtoM
 - **Contact Information** — Store client name, email, and organization details
 - **Status Control** — Activate or deactivate clients; deactivation automatically revokes all associated keys and tokens
 
@@ -107,4 +107,4 @@ Heratio Key Management is a standalone application for managing client API keys 
 
 ---
 
-*AtoM Heratio is developed by The Archive and Heritage Group (Pty) Ltd for GLAM and DAM institutions worldwide.*
+*AHG Extensions for AtoM is developed by The Archive and Heritage Group (Pty) Ltd for GLAM and DAM institutions worldwide.*

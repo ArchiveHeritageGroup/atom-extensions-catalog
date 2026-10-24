@@ -1,4 +1,4 @@
-# AtoM Heratio — FileValidationService Feature Overview
+# AHG Extensions for AtoM — FileValidationService Feature Overview
 
 **Version:** 1.0.0
 **Date:** 2026-02-28
@@ -9,7 +9,7 @@
 
 ## What It Does
 
-The FileValidationService provides centralized, secure file validation for the entire AtoM Heratio platform. It ensures that all file uploads — whether through the REST API, data ingest pipeline, or any plugin — are validated against a consistent set of security rules before being accepted into the system.
+The FileValidationService provides centralized, secure file validation for the entire AHG Extensions for AtoM platform. It ensures that all file uploads — whether through the REST API, data ingest pipeline, or any plugin — are validated against a consistent set of security rules before being accepted into the system.
 
 ## Key Features
 
@@ -50,7 +50,7 @@ The FileValidationService provides centralized, secure file validation for the e
 
 - PHP 8.1 or higher
 - `fileinfo` PHP extension (standard in PHP 8.x)
-- AtoM Heratio Framework v2.8.2+
+- AHG Extensions for AtoM v2.8.2+
 
 ## Configuration
 

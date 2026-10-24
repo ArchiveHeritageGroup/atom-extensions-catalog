@@ -236,4 +236,4 @@ Contact your system administrator if you experience issues.
 
 ---
 
-*Part of the AtoM Heratio Framework - The Archive and Heritage Group (Pty) Ltd*
+*Part of the AHG Extensions for AtoM - The Archive and Heritage Group (Pty) Ltd*

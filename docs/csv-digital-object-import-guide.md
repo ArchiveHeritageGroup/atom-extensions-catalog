@@ -12,7 +12,7 @@ AtoM supports importing digital objects alongside archival descriptions using th
 php symfony import:csv /path/to/your/import.csv --source-name="My Import"
 ```
 
-### AtoM Heratio (Laravel framework CLI)
+### AHG Extensions for AtoM (Laravel framework CLI)
 
 ```bash
 php bin/atom import:csv /path/to/your/import.csv --source-name="My Import"

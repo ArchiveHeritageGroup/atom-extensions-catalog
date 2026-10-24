@@ -2,7 +2,7 @@
 
 **Plugin:** `ahgTimeLimitedShareLinkPlugin` (AtoM) / `ahg-share-link` (Heratio)
 **Version:** 0.1.0
-**Audience:** Developers and DBAs operating an AtoM Heratio installation
+**Audience:** Developers and DBAs operating an AHG Extensions for AtoM installation
 **Cross-surface:** byte-equivalent schema, audit payload, and token format on both AtoM (Symfony 1.x) and Heratio (Laravel)
 
 ---

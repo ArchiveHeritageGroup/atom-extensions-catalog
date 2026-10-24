@@ -1,11 +1,11 @@
-# AtoM Heratio - Database ERD
+# AHG Extensions for AtoM - Database ERD
 
 **Version:** 2.8.2
 **Last Updated:** March 2026
 
 ---
 
-## 1. Core Extension Tables (AtoM Heratio)
+## 1. Core Extension Tables (AHG Extensions for AtoM)
 
 **2 tables** — Plugin registry and centralized settings.
 
@@ -478,4 +478,4 @@ The audit system tracks changes across ALL plugins via polymorphic entity refere
 
 ---
 
-*Part of the AtoM Heratio - v2.8.2*
+*Part of the AHG Extensions for AtoM - v2.8.2*

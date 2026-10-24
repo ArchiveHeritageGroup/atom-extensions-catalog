@@ -1,4 +1,4 @@
-# AtoM Heratio -- Library Order System REST API
+# AHG Extensions for AtoM -- Library Order System REST API
 
 **Version:** 1.0
 **Author:** The Archive and Heritage Group (Pty) Ltd

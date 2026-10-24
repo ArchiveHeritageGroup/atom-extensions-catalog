@@ -1,4 +1,4 @@
-# AtoM Heratio — Shell Execution Policy
+# AHG Extensions for AtoM — Shell Execution Policy
 
 **Version:** 1.0
 **Date:** 2026-02-28
@@ -10,7 +10,7 @@
 
 Shell command execution is a high-risk operation. Improperly escaped arguments can lead to command injection, allowing attackers to execute arbitrary system commands.
 
-AtoM Heratio uses `ShellCommandService` as the centralized, safe interface for building shell commands. All code that invokes `exec()`, `shell_exec()`, `system()`, or `passthru()` MUST escape external input.
+AHG Extensions for AtoM uses `ShellCommandService` as the centralized, safe interface for building shell commands. All code that invokes `exec()`, `shell_exec()`, `system()`, or `passthru()` MUST escape external input.
 
 ---
 

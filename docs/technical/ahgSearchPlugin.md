@@ -1,6 +1,6 @@
 # ahgSearchPlugin - Technical Documentation
 
-> Auto-generated from plugin code (2026-06-27). Global search, autocomplete, description updates, and search/replace for AtoM Heratio
+> Auto-generated from plugin code (2026-06-27). Global search, autocomplete, description updates, and search/replace for AHG Extensions for AtoM
 
 ## Overview
 

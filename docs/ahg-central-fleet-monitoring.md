@@ -1,20 +1,20 @@
-# AHG Central — Fleet Monitoring (AtoM Heratio)
+# AHG Central — Fleet Monitoring (AHG Extensions for AtoM)
 
 AHG Central is the optional cloud service from The Archive and Heritage Group
-that lets a group of AtoM Heratio installs be watched from one place. Each
+that lets a group of AHG Extensions for AtoM installs be watched from one place. Each
 install reports a daily **heartbeat** (it is alive, and on which version) and —
 when the operator opts in — an hourly **error-log sync**. The fleet is
 monitored from the AHG Workbench.
 
 AHG Central is **advisory**. If it is switched off, unreachable, or the
-install is air-gapped, AtoM Heratio runs exactly as before — nothing in the
+install is air-gapped, AHG Extensions for AtoM runs exactly as before — nothing in the
 product depends on it.
 
 Configure it at **Admin → AHG Settings → AHG Integration**.
 
 ## Onboarding is automatic
 
-A fresh AtoM Heratio install joins the fleet without any registration form:
+A fresh AHG Extensions for AtoM install joins the fleet without any registration form:
 
 - the AHG Central client ships inside the AHG plugin collection
   (`ahgCorePlugin`'s `AhgCentralService`, with the optional standalone
@@ -30,7 +30,7 @@ confirms reachability before any data flows.
 ## Cron is required
 
 Unlike the Heratio Laravel platform — which auto-schedules the heartbeat —
-the AtoM Heratio platform ships the tasks but **does not auto-schedule them**.
+the AHG Extensions for AtoM platform ships the tasks but **does not auto-schedule them**.
 Each install needs an explicit cron entry. The AHG Integration page shows the
 exact commands; the default pattern is:
 
@@ -49,7 +49,7 @@ heartbeat path, not both.)
 Error logs can contain sensitive detail, so shipping them off the server
 needs a deliberate decision.
 
-When you turn it on, AtoM Heratio sends the current set of open errors from
+When you turn it on, AHG Extensions for AtoM sends the current set of open errors from
 the `ahg_error_log` table once an hour, **redacted before they leave the
 server**: email addresses and long number sequences are masked, and URL
 query strings are stripped. Stack traces, client IP addresses, user agents

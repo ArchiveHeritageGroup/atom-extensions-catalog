@@ -6,7 +6,7 @@
 
 ## What is it?
 
-The AHG Help plugin (`ahgHelpPlugin`) is the built-in online help system for AtoM Heratio. It turns
+The AHG Help plugin (`ahgHelpPlugin`) is the built-in online help system for AHG Extensions for AtoM. It turns
 the project's markdown documentation into a searchable, browsable **Help Center** inside the
 application, with category navigation, individual help articles, instant client-side search powered
 by FlexSearch, contextual help, and an AI-assisted help chatbot. It also offers an administrative

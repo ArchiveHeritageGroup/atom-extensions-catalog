@@ -1,4 +1,4 @@
-# AtoM Heratio - 3D Model Viewer
+# AHG Extensions for AtoM - 3D Model Viewer
 
 ## Feature Overview
 
@@ -11,7 +11,7 @@
 
 ## Summary
 
-The AtoM Heratio 3D Model Viewer provides GLAM and DAM institutions with comprehensive 3D digital object visualization directly within the AtoM archival platform. Museum objects, archaeological finds, architectural models, and other 3D-scanned items can be uploaded, viewed, annotated, and shared using industry-standard web technologies.
+The AHG Extensions for AtoM 3D Model Viewer provides GLAM and DAM institutions with comprehensive 3D digital object visualization directly within the AtoM archival platform. Museum objects, archaeological finds, architectural models, and other 3D-scanned items can be uploaded, viewed, annotated, and shared using industry-standard web technologies.
 
 ---
 

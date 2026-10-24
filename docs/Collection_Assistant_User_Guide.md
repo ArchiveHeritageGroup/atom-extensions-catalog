@@ -1,6 +1,6 @@
 # Collection Assistant — User Guide
 
-**AtoM Heratio**
+**AHG Extensions for AtoM**
 The Archive and Heritage Group (Pty) Ltd
 
 ---
@@ -21,7 +21,7 @@ The assistant reads the published descriptions that best match your question and
 
 ## Opening the assistant
 
-1. Sign in to AtoM Heratio.
+1. Sign in to AHG Extensions for AtoM.
 2. In the top navigation, open the **Manage** menu.
 3. Choose **Collection assistant**.
 

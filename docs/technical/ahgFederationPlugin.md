@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Federation Plugin enables inter-institutional data sharing for AtoM Heratio instances. It implements:
+The Federation Plugin enables inter-institutional data sharing for AHG Extensions for AtoM instances. It implements:
 
 - **OAI-PMH Harvesting** - Periodic import of records from peer repositories
 - **Federated Search** (#88) - Real-time search across multiple institutions

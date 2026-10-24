@@ -2,7 +2,7 @@
 
 ## Overview
 
-AtoM Heratio provides enterprise-grade security features aligned with OWASP Top 10, ISO 27001, Bell-LaPadula, and POPIA standards. This guide covers how to use and configure security features.
+AHG Extensions for AtoM provides enterprise-grade security features aligned with OWASP Top 10, ISO 27001, Bell-LaPadula, and POPIA standards. This guide covers how to use and configure security features.
 
 ## Password Policy
 
@@ -49,7 +49,7 @@ If you are locked out, wait 15 minutes and try again. Contact your administrator
 
 ## Multi-Factor Authentication (2FA)
 
-AtoM Heratio supports Time-based One-Time Password (TOTP) for two-factor authentication.
+AHG Extensions for AtoM supports Time-based One-Time Password (TOTP) for two-factor authentication.
 
 ### Setting Up 2FA
 
@@ -70,7 +70,7 @@ If you don't have your authenticator app available, you can request a code via e
 
 ## Security Classification (Bell-LaPadula)
 
-AtoM Heratio implements mandatory access control using the Bell-LaPadula model.
+AHG Extensions for AtoM implements mandatory access control using the Bell-LaPadula model.
 
 ### Classification Levels
 

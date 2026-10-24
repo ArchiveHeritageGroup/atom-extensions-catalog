@@ -4,7 +4,7 @@
 **Author:** The Archive and Heritage Group (Pty) Ltd
 **Date:** 2026-05-10
 **Targets (must achieve 100% feature parity):**
-- AtoM Heratio (Symfony 1.x + atom-framework) at `/usr/share/nginx/archive` → `atom-ahg-plugins/ahgSharePointPlugin/`
+- AHG Extensions for AtoM (Symfony 1.x + atom-framework) at `/usr/share/nginx/archive` → `atom-ahg-plugins/ahgSharePointPlugin/`
 - Heratio standalone (Laravel 12 monorepo) at `/usr/share/nginx/heratio` → `packages/ahg-sharepoint/`
 **Namespaces:** `AtomExtensions\SharePoint` (AtoM plugin) / `AhgSharePoint` (Heratio package)
 
@@ -12,7 +12,7 @@
 
 ## 1. Purpose
 
-Integrate Microsoft 365 SharePoint Online with AtoM Heratio so that:
+Integrate Microsoft 365 SharePoint Online with AHG Extensions for AtoM so that:
 
 1. **Records management handoff** — when documents in SharePoint are tagged for disposition (Microsoft Purview retention labels) or change relevant content, they are ingested into AtoM as archival descriptions with attached digital objects.
 2. **Staff discovery in M365** — staff working in SharePoint, Teams, or M365.com search can discover archival records held in AtoM without leaving the M365 surface.
@@ -40,7 +40,7 @@ Direction is one-way (SharePoint → AtoM). No data flows out of AtoM into Share
 
 ### Design principle — thin SharePoint adapter
 
-The plugin delegates everything heavy to existing AtoM Heratio services:
+The plugin delegates everything heavy to existing AHG Extensions for AtoM services:
 
 | SharePoint plugin concern | Delegates to |
 |---------------------------|--------------|
@@ -769,7 +769,7 @@ All seven open questions from the planning round were resolved on 2026-05-10 (se
 
 ## 19. Portability — Dual-Target Implementation
 
-**Hard requirement: 100% feature parity between AtoM Heratio (Symfony 1.x) and Heratio standalone (Laravel 12).** Established codebase pattern (every plugin in `atom-ahg-plugins/` has a matching package in `heratio/packages/`, e.g., `ahgIngestPlugin` ↔ `ahg-ingest`, `ahgAPIPlugin` ↔ `ahg-api`). The schemas of `ahg-ingest` were ported from `ahgIngestPlugin` on 2026-04-30 with transforms documented inline — same approach applies here.
+**Hard requirement: 100% feature parity between AHG Extensions for AtoM (Symfony 1.x) and Heratio standalone (Laravel 12).** Established codebase pattern (every plugin in `atom-ahg-plugins/` has a matching package in `heratio/packages/`, e.g., `ahgIngestPlugin` ↔ `ahg-ingest`, `ahgAPIPlugin` ↔ `ahg-api`). The schemas of `ahg-ingest` were ported from `ahgIngestPlugin` on 2026-04-30 with transforms documented inline — same approach applies here.
 
 ### 19.1 Two implementations, mirrored schema
 

@@ -1,4 +1,4 @@
-# AtoM Heratio — Documentation Standard
+# AHG Extensions for AtoM — Documentation Standard
 
 **Version:** 1.0
 **Date:** 2026-02-28
@@ -8,7 +8,7 @@
 
 ## 1. Overview
 
-All AtoM Heratio plugins and framework components MUST follow this documentation standard. Consistent documentation ensures maintainability, reduces onboarding time, and supports the commercial distribution of the platform.
+All AHG Extensions for AtoM plugins and framework components MUST follow this documentation standard. Consistent documentation ensures maintainability, reduces onboarding time, and supports the commercial distribution of the platform.
 
 ---
 
@@ -148,7 +148,7 @@ Links to related guides and technical docs.
 ### 5.2 Feature Overview Template
 
 ```markdown
-# AtoM Heratio — {Component Name}
+# AHG Extensions for AtoM — {Component Name}
 
 **Feature Overview**
 
@@ -173,7 +173,7 @@ List applicable standards (ISAD(G), POPIA, Spectrum, etc.)
 ## Screenshots / Diagrams
 (Include as appropriate for the audience)
 
-## About AtoM Heratio
+## About AHG Extensions for AtoM
 Standard boilerplate about the platform.
 ```
 

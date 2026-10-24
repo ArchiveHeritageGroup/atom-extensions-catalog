@@ -1,8 +1,8 @@
-# AtoM Heratio — Full Embedded Metadata
+# AHG Extensions for AtoM — Full Embedded Metadata
 
 ## Overview
 
-AtoM Heratio captures and surfaces the **complete embedded technical metadata** of photographic
+AHG Extensions for AtoM captures and surfaces the **complete embedded technical metadata** of photographic
 and image assets — the entire EXIF, IPTC, XMP, MakerNotes, ICC profile, GPS, Composite and
 File/System tag set produced by ExifTool — rather than a curated subset. This gives archivists,
 cataloguers and digital-preservation staff full visibility of the technical provenance of every
@@ -30,7 +30,7 @@ image, while protecting sensitive location data on public-facing surfaces.
 
 - **ExifTool** tag families: EXIF/TIFF, IPTC IIM, XMP, MakerNotes, ICC, GPS, Composite.
 - **POPIA / GDPR alignment** — embedded location data is treated as potentially personal/sensitive
-  information and is gated from public display by default, consistent with AtoM Heratio's privacy
+  information and is gated from public display by default, consistent with AHG Extensions for AtoM's privacy
   posture.
 - **Digital preservation** — the complete, unaltered technical metadata is retained as structured
   data and captured by the platform's database backup routine.
@@ -39,7 +39,7 @@ image, while protecting sensitive location data on public-facing surfaces.
 ## Technical Requirements
 
 - **ExifTool** installed on the application server (`/usr/bin/exiftool`).
-- AtoM Heratio with the metadata-extraction component (storage table `ahg_embedded_metadata`,
+- AHG Extensions for AtoM with the metadata-extraction component (storage table `ahg_embedded_metadata`,
   created automatically on install or first backfill).
 - No changes to core AtoM database tables; the full set is stored in a dedicated plugin table
   (`LONGTEXT`), so there is ample capacity for large tag sets.

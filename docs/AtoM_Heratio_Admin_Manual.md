@@ -1,7 +1,7 @@
-# AtoM Heratio — Administrator Manual
+# AHG Extensions for AtoM — Administrator Manual
 
 **For:** System Administrators, IT Staff, Compliance Officers
-**Product:** AtoM Heratio Framework v2.8.2
+**Product:** AHG Extensions for AtoM v2.8.2
 **Date:** 16 March 2026
 **Author:** The Archive and Heritage Group (Pty) Ltd
 
@@ -54,7 +54,7 @@ Controls the visual appearance of the site.
 | Sidebar Background | Color picker | #f8f9fa | Background color for the left sidebar on two-column pages. |
 | Sidebar Text | Color picker | #333333 | Text color in the sidebar. |
 | Footer Text | Text | (empty) | Custom text displayed in the site footer. Leave blank to hide footer. |
-| Show Branding | Toggle | On | Display "Powered by AtoM Heratio" branding in footer. |
+| Show Branding | Toggle | On | Display "Powered by AHG Extensions for AtoM" branding in footer. |
 | Custom CSS | Textarea | (empty) | Additional CSS rules injected after the theme stylesheet. Use for institution-specific styling without modifying theme files. |
 
 **Tips:**
@@ -628,4 +628,4 @@ sudo systemctl restart elasticsearch   # Search
 
 ---
 
-*AtoM Heratio Framework v2.8.2 — The Archive and Heritage Group (Pty) Ltd*
+*AHG Extensions for AtoM v2.8.2 — The Archive and Heritage Group (Pty) Ltd*

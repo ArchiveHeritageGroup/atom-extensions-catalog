@@ -7,7 +7,7 @@
 ## What is it?
 
 The Observability plugin (`ahgObservabilityPlugin`) exposes a single,
-auth-gated **Prometheus-format `/metrics` endpoint** for AtoM Heratio. It lets
+auth-gated **Prometheus-format `/metrics` endpoint** for AHG Extensions for AtoM. It lets
 your monitoring stack scrape application, HTTP-request, database-query and
 queue-depth metrics without any external Composer dependency — the Prometheus
 client and text renderer are self-contained, and a metrics fault never returns a

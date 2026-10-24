@@ -1,4 +1,4 @@
-# AtoM Heratio — Outbound HTTP / SSRF Protection Policy
+# AHG Extensions for AtoM — Outbound HTTP / SSRF Protection Policy
 
 **Version:** 1.0
 **Date:** 2026-02-28
@@ -8,7 +8,7 @@
 
 ## 1. Overview
 
-Server-Side Request Forgery (SSRF) attacks trick the server into making HTTP requests to unintended destinations, often internal services or cloud metadata endpoints. AtoM Heratio uses `HttpClientService` as the safe HTTP client and `XmlParserService` for XXE-protected XML parsing.
+Server-Side Request Forgery (SSRF) attacks trick the server into making HTTP requests to unintended destinations, often internal services or cloud metadata endpoints. AHG Extensions for AtoM uses `HttpClientService` as the safe HTTP client and `XmlParserService` for XXE-protected XML parsing.
 
 ---
 

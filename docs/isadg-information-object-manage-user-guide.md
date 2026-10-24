@@ -6,7 +6,7 @@
 
 ## What is it?
 
-The ISAD(G) Information Object Manage plugin (`ahgInformationObjectManagePlugin`) is the high-performance create, edit, and delete engine for archival descriptions in AtoM Heratio. It intercepts the standard `/informationobject/...` editing URLs and serves a modern ISAD(G) edit form, plus digital-object upload/edit/delete and treeview navigation, all backed by the Laravel Query Builder instead of the slower legacy path.
+The ISAD(G) Information Object Manage plugin (`ahgInformationObjectManagePlugin`) is the high-performance create, edit, and delete engine for archival descriptions in AHG Extensions for AtoM. It intercepts the standard `/informationobject/...` editing URLs and serves a modern ISAD(G) edit form, plus digital-object upload/edit/delete and treeview navigation, all backed by the Laravel Query Builder instead of the slower legacy path.
 
 This is the default editing experience for archival descriptions catalogued to **ISAD(G)** (General International Standard Archival Description). It adds no new database tables — it writes to the standard AtoM information-object tables — and it also provides the autocomplete and identifier-generation services that the descriptive-standard forms (DACS, Dublin Core, MODS, RAD) rely on.
 

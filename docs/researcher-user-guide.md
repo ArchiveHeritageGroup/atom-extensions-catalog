@@ -1,7 +1,7 @@
-# AtoM Heratio Research Portal — Training Manual
+# AHG Extensions for AtoM Research Portal — Training Manual
 
 **Plugin:** ahgResearchPlugin v3.3.0
-**Platform:** AtoM Heratio (AtoM 2.10 + AHG Framework v2.8.2)
+**Platform:** AHG Extensions for AtoM (AtoM 2.10 + AHG Framework v2.8.2)
 **Author:** The Archive and Heritage Group (Pty) Ltd
 **Last Updated:** May 2026
 
@@ -59,7 +59,7 @@
 
 ## 1. Overview
 
-The AtoM Heratio Research Portal is an enterprise-grade research support platform built into the AtoM archival management system. It provides a complete environment for researchers to discover, analyze, annotate, and publish findings from archival collections.
+The AHG Extensions for AtoM Research Portal is an enterprise-grade research support platform built into the AtoM archival management system. It provides a complete environment for researchers to discover, analyze, annotate, and publish findings from archival collections.
 
 ### Key Capabilities
 
@@ -95,7 +95,7 @@ The AtoM Heratio Research Portal is an enterprise-grade research support platfor
 
 ### Accessing the Portal
 
-Navigate to **`/research`** on your AtoM Heratio instance (e.g., `https://psis.theahg.co.za/research`).
+Navigate to **`/research`** on your AHG Extensions for AtoM instance (e.g., `https://psis.theahg.co.za/research`).
 
 ### First-Time Setup
 
@@ -2320,7 +2320,7 @@ Click **Unlink** to remove the saved tokens. Your works stay on ORCID; only the 
 
 ### Tokens
 
-Access and refresh tokens are stored AES-256-CBC encrypted using a key derived from the AtoM Heratio app secret. Tokens never appear in logs or the page itself.
+Access and refresh tokens are stored AES-256-CBC encrypted using a key derived from the AHG Extensions for AtoM app secret. Tokens never appear in logs or the page itself.
 
 ### What if ORCID isn't configured
 
@@ -2437,4 +2437,4 @@ reviewer). An accepted suggestion is applied to the record by the curator manual
 
 ---
 
-*This manual covers ahgResearchPlugin v3.3.0. For the latest updates, check the plugin documentation in the AtoM Heratio repository.*
+*This manual covers ahgResearchPlugin v3.3.0. For the latest updates, check the plugin documentation in the AHG Extensions for AtoM repository.*

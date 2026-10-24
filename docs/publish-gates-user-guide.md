@@ -1,10 +1,10 @@
-# AtoM Heratio — Publish Gates & Type-Driven Editor
+# AHG Extensions for AtoM — Publish Gates & Type-Driven Editor
 
 ## Overview
 
 The **Publish Gates** system provides configurable quality control rules that must pass before archival records can be published to public view. Combined with the **Type-Driven Editor** enhancements, it ensures metadata completeness, rights compliance, and security clearance before any record becomes publicly accessible.
 
-This feature is part of the AtoM Heratio framework v2.8.2 by The Archive and Heritage Group (Pty) Ltd.
+This feature is part of the AHG Extensions for AtoM v2.8.2 by The Archive and Heritage Group (Pty) Ltd.
 
 ## Key Features
 
@@ -71,7 +71,7 @@ Four new workflow event types: `gate_evaluated`, `gate_passed`, `gate_failed`, `
 
 - PHP 8.1+
 - MySQL 8.0+
-- AtoM Heratio Framework v2.8.2+
+- AHG Extensions for AtoM v2.8.2+
 - ahgWorkflowPlugin (required)
 - ahgFormsPlugin (optional, for editor bridge)
 - ahgIiifPlugin (optional, for IIIF readiness checks)

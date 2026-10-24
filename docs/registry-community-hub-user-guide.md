@@ -1805,4 +1805,4 @@ For technical reference, the Registry uses the following database tables:
 
 ---
 
-*This guide covers the ahgRegistryPlugin v1.0.0 for AtoM Heratio v2.8+. For technical documentation, see the [technical manual](technical/). For questions, contact The Archive and Heritage Group at johan@theahg.co.za.*
+*This guide covers the ahgRegistryPlugin v1.0.0 for AHG Extensions for AtoM v2.8+. For technical documentation, see the [technical manual](technical/). For questions, contact The Archive and Heritage Group at johan@theahg.co.za.*

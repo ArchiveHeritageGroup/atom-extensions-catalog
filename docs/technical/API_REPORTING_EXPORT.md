@@ -1,4 +1,4 @@
-# AtoM Heratio — API, Reporting & Export Technical Manual
+# AHG Extensions for AtoM — API, Reporting & Export Technical Manual
 
 **Framework Version:** 2.8.2
 **Document Date:** 2026-03-04
@@ -8,7 +8,7 @@
 
 ## Overview
 
-This document catalogs all API endpoints, reporting systems, export functionality, and data integration capabilities in the AtoM Heratio platform. It covers the REST API v2, GraphQL API, OAI-PMH federation, reporting and analytics, export pipelines, CLI commands, and background queue infrastructure.
+This document catalogs all API endpoints, reporting systems, export functionality, and data integration capabilities in the AHG Extensions for AtoM platform. It covers the REST API v2, GraphQL API, OAI-PMH federation, reporting and analytics, export pipelines, CLI commands, and background queue infrastructure.
 
 ---
 

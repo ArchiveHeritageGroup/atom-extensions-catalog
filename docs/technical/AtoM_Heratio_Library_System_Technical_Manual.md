@@ -1,7 +1,7 @@
-# AtoM Heratio Library System Technical Manual
+# AHG Extensions for AtoM Library System Technical Manual
 
 **Plugin:** ahgLibraryPlugin v2.0.0
-**Framework:** AtoM Heratio (atom-framework v2.8.2)
+**Framework:** AHG Extensions for AtoM (atom-framework v2.8.2)
 **Author:** The Archive and Heritage Group (Pty) Ltd
 **Date:** 2026-03-08
 
@@ -11,7 +11,7 @@
 
 ### 1.1 Plugin Structure
 
-The ahgLibraryPlugin implements a full Integrated Library System (ILS) within AtoM Heratio. It extends the archival platform with circulation, cataloging, acquisitions, serials, interlibrary loan, and public access catalog (OPAC) capabilities.
+The ahgLibraryPlugin implements a full Integrated Library System (ILS) within AHG Extensions for AtoM. It extends the archival platform with circulation, cataloging, acquisitions, serials, interlibrary loan, and public access catalog (OPAC) capabilities.
 
 ```
 ahgLibraryPlugin/

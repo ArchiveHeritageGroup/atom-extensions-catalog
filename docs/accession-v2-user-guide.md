@@ -1,4 +1,4 @@
-# AtoM Heratio — Accession Management V2: User Manual
+# AHG Extensions for AtoM — Accession Management V2: User Manual
 
 **Version:** 2.0.0
 **Date:** February 2026

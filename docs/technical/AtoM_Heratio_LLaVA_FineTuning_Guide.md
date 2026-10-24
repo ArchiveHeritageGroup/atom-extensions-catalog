@@ -1,4 +1,4 @@
-# AtoM Heratio — LLaVA Conservation Fine-Tuning Technical Guide
+# AHG Extensions for AtoM — LLaVA Conservation Fine-Tuning Technical Guide
 
 **For:** ML Engineers, Model Trainers, DevOps
 **Date:** 16 March 2026
@@ -436,4 +436,4 @@ def evaluate(predictions_file, ground_truth_file):
 
 ---
 
-*AtoM Heratio Framework v2.8.2 — The Archive and Heritage Group (Pty) Ltd*
+*AHG Extensions for AtoM v2.8.2 — The Archive and Heritage Group (Pty) Ltd*

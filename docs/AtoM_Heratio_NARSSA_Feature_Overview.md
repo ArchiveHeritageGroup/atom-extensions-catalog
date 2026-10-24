@@ -1,6 +1,6 @@
-# AtoM Heratio NARSSA Plugin — Feature Overview
+# AHG Extensions for AtoM NARSSA Plugin — Feature Overview
 
-**Product:** AtoM Heratio NARSSA Transfer Plugin (`ahgNARSSAPlugin`)
+**Product:** AHG Extensions for AtoM NARSSA Transfer Plugin (`ahgNARSSAPlugin`)
 **Version:** 0.1.0
 **Vendor:** The Archive and Heritage Group (Pty) Ltd
 **Contact:** johan@theahg.co.za
@@ -12,7 +12,7 @@
 
 `ahgNARSSAPlugin` packages archival records for transfer to the **National Archives and Records Service of South Africa** (NARSSA) per the **National Archives and Records Service of South Africa Act, 1996** and its supporting regulations.
 
-It plugs into the AtoM Heratio disposal workflow (`ahgExtendedRightsPlugin`): when a record reaches its retention disposal-due date with `disposal_action = 'transfer_narssa'` and the multi-stage sign-off chain has approved the transfer, the plugin produces a single tar.gz package containing the digital files plus standards-compliant metadata that NARSSA can ingest.
+It plugs into the AHG Extensions for AtoM disposal workflow (`ahgExtendedRightsPlugin`): when a record reaches its retention disposal-due date with `disposal_action = 'transfer_narssa'` and the multi-stage sign-off chain has approved the transfer, the plugin produces a single tar.gz package containing the digital files plus standards-compliant metadata that NARSSA can ingest.
 
 This addresses the archival-transfer step required by national records-management frameworks: NARSSA (South Africa), NARA Federal Records Act (US), Public Records Act (UK), and equivalents. The plugin produces the standards-compliant package; transmission is operator-driven.
 
@@ -84,7 +84,7 @@ Packages an explicit list of information_object IDs regardless of disposal workf
 
 | Requirement | Specification |
 |---|---|
-| Platform | AtoM 2.10 + AtoM Heratio Framework v2.8.2+ |
+| Platform | AtoM 2.10 + AHG Extensions for AtoM v2.8.2+ |
 | Dependencies | `ahgCorePlugin`, `ahgExtendedRightsPlugin` |
 | Suggests | `ahgAuditTrailPlugin` (dual-write), `ahgSecurityClearancePlugin` (restricted-access flags) |
 | PHP | 8.3+ |

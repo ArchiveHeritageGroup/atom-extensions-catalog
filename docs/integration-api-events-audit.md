@@ -1,10 +1,10 @@
-# AtoM Heratio — Integration API: Events, Audit & Publish
+# AHG Extensions for AtoM — Integration API: Events, Audit & Publish
 
 ## Overview
 
-The **Integration API** extends AtoM Heratio's REST API v2 with endpoints for browsing workflow events, querying the audit trail, and managing publication status programmatically. These endpoints enable external systems to integrate with AtoM's workflow and compliance infrastructure.
+The **Integration API** extends AHG Extensions for AtoM's REST API v2 with endpoints for browsing workflow events, querying the audit trail, and managing publication status programmatically. These endpoints enable external systems to integrate with AtoM's workflow and compliance infrastructure.
 
-This feature is part of the AtoM Heratio framework v2.8.2 by The Archive and Heritage Group (Pty) Ltd.
+This feature is part of the AHG Extensions for AtoM v2.8.2 by The Archive and Heritage Group (Pty) Ltd.
 
 ## Key Features
 
@@ -46,7 +46,7 @@ This feature is part of the AtoM Heratio framework v2.8.2 by The Archive and Her
 
 ## Authentication
 
-All endpoints use AtoM Heratio's existing API key authentication:
+All endpoints use AHG Extensions for AtoM's existing API key authentication:
 - **Header**: `Authorization: Bearer <key>` or `X-API-Key: <key>`
 - **Session**: Authenticated browser sessions also work (all scopes granted)
 - **Rate Limiting**: Hourly windows per API key (configurable)
@@ -112,7 +112,7 @@ All responses follow the standard format:
 
 - PHP 8.1+
 - MySQL 8.0+
-- AtoM Heratio Framework v2.8.2+
+- AHG Extensions for AtoM v2.8.2+
 - ahgAPIPlugin (required)
 - ahgWorkflowPlugin (required for events and publish endpoints)
 - ahgAuditTrailPlugin (required for audit endpoints)

@@ -153,7 +153,7 @@ php bin/atom encryption:status
 Example output:
 ```
 =======================================
-  AtoM Heratio Encryption Dashboard
+  AHG Extensions for AtoM Encryption Dashboard
 =======================================
 
 MASTER KEY

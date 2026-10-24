@@ -1,13 +1,13 @@
 # Password & Login Security — User Guide
 
-**Framework:** AtoM Heratio >= 2.8.0
+**Framework:** AHG Extensions for AtoM >= 2.8.0
 **Services:** PasswordPolicyService, LoginSecurityService, AuthMiddleware
 
 ---
 
 ## Introduction
 
-AtoM Heratio includes built-in password and login security features that protect user accounts from unauthorized access. These features work automatically once the database tables are installed, and can be configured via **Admin > AHG Settings**.
+AHG Extensions for AtoM includes built-in password and login security features that protect user accounts from unauthorized access. These features work automatically once the database tables are installed, and can be configured via **Admin > AHG Settings**.
 
 ---
 

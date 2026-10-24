@@ -1,6 +1,6 @@
-# AtoM Heratio — Accessibility Feature Overview
+# AHG Extensions for AtoM — Accessibility Feature Overview
 
-**Product:** AtoM Heratio Framework v2.8.2
+**Product:** AHG Extensions for AtoM v2.8.2
 **Component:** WCAG 2.1 Level AA Accessibility
 **Date:** 16 March 2026
 **Author:** The Archive and Heritage Group (Pty) Ltd
@@ -9,7 +9,7 @@
 
 ## What It Does
 
-AtoM Heratio provides built-in accessibility features that ensure archival content is usable by people with disabilities, including those who use screen readers, keyboard navigation, voice control, or assistive technologies. The system conforms to the **Web Content Accessibility Guidelines (WCAG) 2.1 at Level AA** — the internationally recognised standard for web accessibility.
+AHG Extensions for AtoM provides built-in accessibility features that ensure archival content is usable by people with disabilities, including those who use screen readers, keyboard navigation, voice control, or assistive technologies. The system conforms to the **Web Content Accessibility Guidelines (WCAG) 2.1 at Level AA** — the internationally recognised standard for web accessibility.
 
 ## Key Features
 

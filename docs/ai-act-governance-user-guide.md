@@ -3,7 +3,7 @@
 ## A Guide for Compliance Officers and Administrators
 
 **Plugin:** `ahgAiCompliancePlugin` v0.1.0
-**Platform:** AtoM Heratio (AtoM 2.10 + AHG Framework)
+**Platform:** AHG Extensions for AtoM (AtoM 2.10 + AHG Framework)
 **Author:** The Archive and Heritage Group (Pty) Ltd
 
 ---

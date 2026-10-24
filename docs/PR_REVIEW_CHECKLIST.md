@@ -1,4 +1,4 @@
-# AtoM Heratio — PR Review Checklist
+# AHG Extensions for AtoM — PR Review Checklist
 
 **Version:** 1.0
 **Date:** 2026-02-28

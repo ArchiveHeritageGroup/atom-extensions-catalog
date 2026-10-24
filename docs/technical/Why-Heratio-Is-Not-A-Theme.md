@@ -1,7 +1,7 @@
 # Why You Can't "Switch Off Heratio" on AtoM by Changing the Theme
 
 **The Archive and Heritage Group (Pty) Ltd** — Technical Note
-*Subject: the architectural relationship between AtoM Heratio and base AtoM 2.10*
+*Subject: the architectural relationship between AHG Extensions for AtoM and base AtoM 2.10*
 
 ---
 
@@ -85,7 +85,7 @@ That is a reinstall of vanilla AtoM beside the data — not a runtime toggle.
 
 ## 5. Two different "Heratio" — don't conflate them
 
-| | **AtoM Heratio (Symfony stack, e.g. PSIS)** | **Heratio Standalone (Laravel)** |
+| | **AHG Extensions for AtoM (Symfony stack, e.g. PSIS)** | **Heratio Standalone (Laravel)** |
 |---|---|---|
 | What it is | base AtoM Symfony + atom-framework + atom-ahg-plugins | full Laravel rewrite (separate codebase) |
 | "Off" switch | **none** — deeply integrated (this document) | `.heratio_enabled` flag toggles Laravel full-page rendering vs Symfony dual-stack fallback |

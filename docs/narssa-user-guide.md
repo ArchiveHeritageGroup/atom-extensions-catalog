@@ -1,7 +1,7 @@
 # NARSSA Transfer Plugin — User Guide
 
 **Plugin:** `ahgNARSSAPlugin` v0.1.0
-**Platform:** AtoM Heratio (AtoM 2.10 + AHG Framework v2.8.2)
+**Platform:** AHG Extensions for AtoM (AtoM 2.10 + AHG Framework v2.8.2)
 **Author:** The Archive and Heritage Group (Pty) Ltd
 **Last updated:** May 2026
 
@@ -9,7 +9,7 @@
 
 ## What this guide covers
 
-How a records officer uses the AtoM Heratio NARSSA Transfer plugin to:
+How a records officer uses the AHG Extensions for AtoM NARSSA Transfer plugin to:
 
 1. Identify which records are due for transfer
 2. Produce a standards-compliant transfer package
@@ -25,7 +25,7 @@ Before you run any transfer:
 - The records must have a **retention assignment** (an entry in `retention_assignment` linking the record to its File-Plan schedule)
 - The schedule's `disposal_action` must be `transfer_narssa`
 - The disposal workflow must have completed: records officer + legal counsel + executive sign-off (per the schedule's required-signoff flags), and the disposal_action status must be `approved`
-- You must have shell access to the AtoM Heratio server (the transfer is a CLI command)
+- You must have shell access to the AHG Extensions for AtoM server (the transfer is a CLI command)
 
 ---
 

@@ -456,4 +456,4 @@ modifies `atom-ahg-plugins/ahgGraphQLPlugin/lib/GraphQL/Schema/SchemaBuilder.php
 ---
 
 *Last updated: May 2026*
-*Part of the AtoM Heratio Framework v2.8.2*
+*Part of the AHG Extensions for AtoM v2.8.2*

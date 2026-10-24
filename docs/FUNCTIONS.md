@@ -1,9 +1,9 @@
-# AtoM Heratio - Complete Function Reference
+# AHG Extensions for AtoM - Complete Function Reference
 
 **Version:** 2.0
 **Last Updated:** February 2026
 
-Complete listing of every function available in the AtoM Heratio framework and plugins.
+Complete listing of every function available in the AHG Extensions for AtoM and plugins.
 
 ---
 
@@ -3856,4 +3856,4 @@ Complete listing of every function available in the AtoM Heratio framework and p
 ---
 
 *Document generated: February 2026*
-*AtoM Heratio Framework v2.0*
+*AHG Extensions for AtoM v2.0*

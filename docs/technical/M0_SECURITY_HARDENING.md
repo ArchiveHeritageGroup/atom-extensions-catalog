@@ -10,7 +10,7 @@
 
 ## 1. Overview
 
-Milestone 0 (M0) addresses three critical security vulnerabilities identified during a security audit of the AtoM Heratio framework:
+Milestone 0 (M0) addresses three critical security vulnerabilities identified during a security audit of the AHG Extensions for AtoM:
 
 1. **Unsafe PHP `unserialize()` calls** — 14 instances across 8 files with no class restriction, enabling potential PHP Object Injection (POI) attacks
 2. **PHP serialization for data storage** — Getty vocabulary cache and semantic search embeddings used `serialize()`/`unserialize()`, exposing stored data to deserialization attacks

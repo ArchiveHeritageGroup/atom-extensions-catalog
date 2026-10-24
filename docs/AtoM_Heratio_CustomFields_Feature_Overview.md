@@ -1,4 +1,4 @@
-# AtoM Heratio — Custom Fields Framework
+# AHG Extensions for AtoM — Custom Fields Framework
 
 ## Feature Overview
 
@@ -66,7 +66,7 @@ Fields can be flagged as searchable for future integration with the search index
 Dropdown-type fields are linked to existing controlled vocabularies managed via the Dropdown Manager (ahg_dropdown). This ensures consistency with institution-wide terminology.
 
 ### Import / Export
-Field definitions can be exported as JSON and imported into another AtoM Heratio instance, enabling easy migration and standardization across deployments.
+Field definitions can be exported as JSON and imported into another AHG Extensions for AtoM instance, enabling easy migration and standardization across deployments.
 
 ### Display Integration
 Custom field values automatically appear on entity view pages via the display panel system. No template modifications required.
@@ -122,7 +122,7 @@ Institutions can extend this vocabulary with their own codes via **Admin > Dropd
 
 | Requirement | Version |
 |-------------|---------|
-| AtoM Heratio Framework | >= 2.8.0 |
+| AHG Extensions for AtoM | >= 2.8.0 |
 | AtoM Base | >= 2.8 |
 | PHP | >= 8.1 |
 | MySQL | 8.0+ |

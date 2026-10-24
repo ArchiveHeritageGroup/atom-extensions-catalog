@@ -96,7 +96,7 @@ workspace receives.
 | Requirement | Detail |
 | --- | --- |
 | Platform | AtoM 2.9 or later, PHP 8 |
-| Component | ahgIiifPlugin, with the AtoM Heratio framework |
+| Component | ahgIiifPlugin, with the AHG Extensions for AtoM |
 | Image service | An IIIF Image API service for tiled delivery |
 | Client | A current web browser; no plugin, extension or installed software |
 | Digitised material | Records with digital objects; manifests are generated from existing holdings |
@@ -106,7 +106,7 @@ workspace receives.
 ## Availability
 
 The comparison workspace is part of ahgIiifPlugin and is available to institutions
-running AtoM Heratio. It requires no additional licence and no third-party service.
+running AHG Extensions for AtoM. It requires no additional licence and no third-party service.
 
 The Archive and Heritage Group (Pty) Ltd
 Dr Johan Pieterse - johan@theahg.co.za

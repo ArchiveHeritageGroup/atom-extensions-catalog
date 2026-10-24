@@ -1,4 +1,4 @@
-# AtoM Heratio — IIIF AI Extraction
+# AHG Extensions for AtoM — IIIF AI Extraction
 
 ## Feature Overview
 
@@ -60,7 +60,7 @@ The IIIF AI Extraction module bridges the IIIF Viewer plugin (ahgIiifPlugin) wit
 
 | Requirement | Details |
 |-------------|---------|
-| AtoM Heratio | v2.8.2+ with atom-framework |
+| AHG Extensions for AtoM | v2.8.2+ with atom-framework |
 | Plugins Required | ahgAIPlugin, ahgIiifPlugin |
 | External AI Server | Python server with spaCy, Argos Translate, Tesseract |
 | AI Server Endpoint | `http://<host>:5004/ai/v1` |
@@ -89,4 +89,4 @@ The IIIF AI Extraction module bridges the IIIF Viewer plugin (ahgIiifPlugin) wit
 
 ---
 
-*AtoM Heratio is developed by The Archive and Heritage Group (Pty) Ltd for GLAM and DAM institutions worldwide.*
+*AHG Extensions for AtoM is developed by The Archive and Heritage Group (Pty) Ltd for GLAM and DAM institutions worldwide.*

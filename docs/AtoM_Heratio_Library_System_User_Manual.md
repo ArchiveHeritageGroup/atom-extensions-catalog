@@ -1,7 +1,7 @@
-# AtoM Heratio Library System User Manual
+# AHG Extensions for AtoM Library System User Manual
 
 **Component:** ahgLibraryPlugin v2.0.0
-**Platform:** AtoM Heratio (Access to Memory)
+**Platform:** AHG Extensions for AtoM (Access to Memory)
 **Publisher:** The Archive and Heritage Group (Pty) Ltd
 **Date:** March 2026
 
@@ -29,7 +29,7 @@
 
 ## 1. Introduction
 
-The AtoM Heratio Library System is a full Integrated Library System (ILS) embedded within the AtoM archival platform. It is delivered through the ahgLibraryPlugin and is designed for institutions that manage lending libraries alongside archival, museum, gallery, or digital asset collections.
+The AHG Extensions for AtoM Library System is a full Integrated Library System (ILS) embedded within the AtoM archival platform. It is delivered through the ahgLibraryPlugin and is designed for institutions that manage lending libraries alongside archival, museum, gallery, or digital asset collections.
 
 The system provides cataloging with MARC-inspired metadata fields, circulation management, patron services, an Online Public Access Catalog, acquisitions, serial control, interlibrary loan, and heritage accounting -- all within a single platform. Institutions no longer need a separate ILS when their library operations are modest to moderate in scale.
 
@@ -899,4 +899,4 @@ The Circulation module provides real-time statistics including:
 
 ---
 
-*AtoM Heratio Library System User Manual -- The Archive and Heritage Group (Pty) Ltd, 2026.*
+*AHG Extensions for AtoM Library System User Manual -- The Archive and Heritage Group (Pty) Ltd, 2026.*

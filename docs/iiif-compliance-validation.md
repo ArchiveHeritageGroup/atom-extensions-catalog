@@ -1,10 +1,10 @@
-# AtoM Heratio — IIIF Compliance Hardening
+# AHG Extensions for AtoM — IIIF Compliance Hardening
 
 ## Overview
 
-The **IIIF Compliance Hardening** enhancement brings AtoM Heratio's IIIF implementation into full alignment with IIIF Presentation API 3.0, which is now the default manifest format (with v2.1 fallback via `?format=2`). It adds manifest validation, quality control dashboards, and integrates IIIF readiness checks into the publish gate system.
+The **IIIF Compliance Hardening** enhancement brings AHG Extensions for AtoM's IIIF implementation into full alignment with IIIF Presentation API 3.0, which is now the default manifest format (with v2.1 fallback via `?format=2`). It adds manifest validation, quality control dashboards, and integrates IIIF readiness checks into the publish gate system.
 
-This feature is part of the AtoM Heratio framework v2.8.2 by The Archive and Heritage Group (Pty) Ltd.
+This feature is part of the AHG Extensions for AtoM v2.8.2 by The Archive and Heritage Group (Pty) Ltd.
 
 ## Key Features
 
@@ -102,7 +102,7 @@ This feature is part of the AtoM Heratio framework v2.8.2 by The Archive and Her
 
 - PHP 8.1+
 - MySQL 8.0+
-- AtoM Heratio Framework v2.8.2+
+- AHG Extensions for AtoM v2.8.2+
 - ahgIiifPlugin (required)
 - Cantaloupe IIIF Image Server (recommended for full functionality)
 - ahgWorkflowPlugin (optional, for publish gate integration)

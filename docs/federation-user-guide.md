@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Federation Module enables AtoM Heratio instances to share data across multiple institutions. It provides three core capabilities:
+The Federation Module enables AHG Extensions for AtoM instances to share data across multiple institutions. It provides three core capabilities:
 
 1. **OAI-PMH Harvesting** - Import records from other repositories using the OAI-PMH protocol
 2. **Federated Search** - Search across multiple institutions simultaneously

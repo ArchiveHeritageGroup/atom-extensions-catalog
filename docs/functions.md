@@ -1,4 +1,4 @@
-# AtoM Heratio (PSIS) - Function Reference & Link Test
+# AHG Extensions for AtoM (PSIS) - Function Reference & Link Test
 
 **Instance:** PSIS / archive - tested authenticated as johan (admin)
 **Tested:** 13 July 2026 15:07 SAST

@@ -2,7 +2,7 @@
 
 **Plugin:** ahgCustomFieldsPlugin
 **Version:** 1.0.0
-**AtoM Heratio Framework:** >= 2.8.0
+**AHG Extensions for AtoM:** >= 2.8.0
 
 ---
 
@@ -153,7 +153,7 @@ To add new dropdown options, go to **Admin > Dropdown Manager**.
 3. Click **Import**
 4. Existing fields (same key + entity type) are automatically skipped
 
-This enables standardization across multiple AtoM Heratio deployments.
+This enables standardization across multiple AHG Extensions for AtoM deployments.
 
 ---
 

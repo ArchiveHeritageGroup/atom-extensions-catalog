@@ -3,7 +3,7 @@
 ## A Guide for Digital Asset Managers and Administrators
 
 **Plugin:** `ahgC2paPlugin` v0.1.0
-**Platform:** AtoM Heratio (AtoM 2.10 + AHG Framework)
+**Platform:** AHG Extensions for AtoM (AtoM 2.10 + AHG Framework)
 **Author:** The Archive and Heritage Group (Pty) Ltd
 
 ---

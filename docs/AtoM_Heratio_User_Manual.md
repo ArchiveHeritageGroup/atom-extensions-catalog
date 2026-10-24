@@ -1,7 +1,7 @@
-# AtoM Heratio — User Manual
+# AHG Extensions for AtoM — User Manual
 
 **For:** Archivists, Librarians, Museum Curators, Gallery Managers, Researchers
-**Product:** AtoM Heratio Framework v2.8.2
+**Product:** AHG Extensions for AtoM v2.8.2
 **Date:** 16 March 2026
 **Author:** The Archive and Heritage Group (Pty) Ltd
 
@@ -9,7 +9,7 @@
 
 ## About This Manual
 
-This manual covers day-to-day use of AtoM Heratio for managing archival, library, museum, gallery, and digital asset collections. For system administration (settings, backup, security), see the **Admin Manual**. For development and technical architecture, see the **Technical Manual**.
+This manual covers day-to-day use of AHG Extensions for AtoM for managing archival, library, museum, gallery, and digital asset collections. For system administration (settings, backup, security), see the **Admin Manual**. For development and technical architecture, see the **Technical Manual**.
 
 ---
 
@@ -473,4 +473,4 @@ If you handle records containing personal information, be aware of privacy compl
 
 ---
 
-*AtoM Heratio Framework v2.8.2 — The Archive and Heritage Group (Pty) Ltd*
+*AHG Extensions for AtoM v2.8.2 — The Archive and Heritage Group (Pty) Ltd*

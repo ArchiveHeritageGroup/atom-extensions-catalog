@@ -1,6 +1,6 @@
-# AtoM Heratio — AI Condition Assessment
+# AHG Extensions for AtoM — AI Condition Assessment
 
-**Product:** AtoM Heratio Framework v2.8.2
+**Product:** AHG Extensions for AtoM v2.8.2
 **Component:** ahgConditionPlugin + ConditionAIService
 **Date:** 16 March 2026
 **Author:** The Archive and Heritage Group (Pty) Ltd
@@ -188,4 +188,4 @@ Response:
 
 ---
 
-*AtoM Heratio Framework v2.8.2 — The Archive and Heritage Group (Pty) Ltd*
+*AHG Extensions for AtoM v2.8.2 — The Archive and Heritage Group (Pty) Ltd*

@@ -1,6 +1,6 @@
-# AtoM Heratio Research Portal — Feature Overview
+# AHG Extensions for AtoM Research Portal — Feature Overview
 
-**Product:** AtoM Heratio Research Portal (ahgResearchPlugin)
+**Product:** AHG Extensions for AtoM Research Portal (ahgResearchPlugin)
 **Version:** 3.3.0 (Research Enhancements release, 2026-05-16)
 **Vendor:** The Archive and Heritage Group (Pty) Ltd
 **Contact:** johan@theahg.co.za
@@ -10,7 +10,7 @@
 
 ## What Is It?
 
-The AtoM Heratio Research Portal is a comprehensive research support module built into the AtoM Heratio archival management platform. It transforms AtoM from a catalogue-only system into a full-service research environment — covering everything from researcher registration and reading room bookings through to material retrieval, chain-of-custody tracking, reproduction requests, and collaborative research tools.
+The AHG Extensions for AtoM Research Portal is a comprehensive research support module built into the AHG Extensions for AtoM archival management platform. It transforms AtoM from a catalogue-only system into a full-service research environment — covering everything from researcher registration and reading room bookings through to material retrieval, chain-of-custody tracking, reproduction requests, and collaborative research tools.
 
 The Research Portal is designed for GLAM institutions (Galleries, Libraries, Archives, Museums) and Digital Asset Management organisations that need to manage researcher access, track physical material movements, and provide self-service research tools to their users.
 
@@ -204,7 +204,7 @@ End-to-end lifecycle management for material and reproduction requests:
 
 This release adds thirteen new researcher-facing features under a single bundled
 update. They were ported from the Laravel Heratio reference implementation
-(`docs/research-enhancements-roadmap.md`) into the Symfony 1.4 AtoM Heratio
+(`docs/research-enhancements-roadmap.md`) into the Symfony 1.4 AHG Extensions for AtoM
 fork to give cross-instance researchers the same workflow on both platforms.
 
 ### Studio — grounded AI artefact generator
@@ -431,7 +431,7 @@ The Research Portal is designed for accessibility compliance across all screens:
 
 | Requirement | Specification |
 |-------------|---------------|
-| Platform | AtoM 2.10 with AtoM Heratio Framework v2.8.2+ |
+| Platform | AtoM 2.10 with AHG Extensions for AtoM v2.8.2+ |
 | PHP | 8.3+ |
 | Database | MySQL 8.0+ |
 | Browser | Chrome 90+, Firefox 90+, Safari 14+, Edge 90+ |
@@ -461,7 +461,7 @@ The Research Portal uses 80+ dedicated database tables (no modifications to core
 
 ## Getting Started
 
-1. **Install** the ahgResearchPlugin via the AtoM Heratio Extension Manager
+1. **Install** the ahgResearchPlugin via the AHG Extensions for AtoM Extension Manager
 2. **Run** the database migration (`database/install.sql` + migration files)
 3. **Configure** reading rooms, researcher types, and SLA policies via Admin > AHG Settings
 4. **Enable** the "Research" menu in Admin > Menus

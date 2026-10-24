@@ -1,6 +1,6 @@
-# AtoM Heratio — Complete User Manual
+# AHG Extensions for AtoM — Complete User Manual
 
-**Product:** AtoM Heratio Framework v2.8.2
+**Product:** AHG Extensions for AtoM v2.8.2
 **Date:** 16 March 2026
 **Author:** The Archive and Heritage Group (Pty) Ltd
 **Document Type:** Complete System User Manual
@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-AtoM Heratio is a comprehensive modernization of Access to Memory (AtoM) 2.10 — the leading open-source archival management system. It transforms AtoM from a single-purpose archival tool into an enterprise-grade GLAM platform (Galleries, Libraries, Archives, Museums) and Digital Asset Management (DAM) system, adding approximately 300% more functionality through 80 modular plugins — without modifying a single core AtoM file.
+AHG Extensions for AtoM is a comprehensive modernization of Access to Memory (AtoM) 2.10 — the leading open-source archival management system. It transforms AtoM from a single-purpose archival tool into an enterprise-grade GLAM platform (Galleries, Libraries, Archives, Museums) and Digital Asset Management (DAM) system, adding approximately 300% more functionality through 80 modular plugins — without modifying a single core AtoM file.
 
 ### What Makes Heratio Different
 
@@ -968,4 +968,4 @@ php symfony cc
 ---
 
 *Document generated 16 March 2026 by The Archive and Heritage Group (Pty) Ltd.*
-*AtoM Heratio Framework v2.8.2 — 80 plugins, 200+ settings, WCAG 2.1 AA compliant.*
+*AHG Extensions for AtoM v2.8.2 — 80 plugins, 200+ settings, WCAG 2.1 AA compliant.*

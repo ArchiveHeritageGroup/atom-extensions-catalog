@@ -1,7 +1,7 @@
-# AtoM Heratio — Technical Manual
+# AHG Extensions for AtoM — Technical Manual
 
 **For:** Developers, DevOps Engineers, System Integrators
-**Product:** AtoM Heratio Framework v2.8.2
+**Product:** AHG Extensions for AtoM v2.8.2
 **Date:** 16 March 2026
 **Author:** The Archive and Heritage Group (Pty) Ltd
 
@@ -412,4 +412,4 @@ Security classification enforced at query level — users cannot read records ab
 
 ---
 
-*AtoM Heratio Framework v2.8.2 — The Archive and Heritage Group (Pty) Ltd*
+*AHG Extensions for AtoM v2.8.2 — The Archive and Heritage Group (Pty) Ltd*

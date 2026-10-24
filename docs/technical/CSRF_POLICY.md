@@ -1,4 +1,4 @@
-# AtoM Heratio — CSRF Protection Policy
+# AHG Extensions for AtoM — CSRF Protection Policy
 
 **Version:** 1.0
 **Date:** 2026-02-28
@@ -8,7 +8,7 @@
 
 ## 1. Overview
 
-Cross-Site Request Forgery (CSRF) attacks trick authenticated users into submitting unintended requests. AtoM Heratio uses a per-session token mechanism via `CsrfService` to protect all mutating (POST/PUT/DELETE/PATCH) endpoints.
+Cross-Site Request Forgery (CSRF) attacks trick authenticated users into submitting unintended requests. AHG Extensions for AtoM uses a per-session token mechanism via `CsrfService` to protect all mutating (POST/PUT/DELETE/PATCH) endpoints.
 
 **Current status:** Rollout in progress. Default mode is `'log'` (warn but don't block).
 
