@@ -99,11 +99,13 @@ Click **Approve & Commit**, then **Start Commit**. The commit runs as a backgrou
 
 | Package | Written to | Holds |
 |---|---|---|
-| SIP (submission) | `uploads/sip/` | A JSON manifest of what was submitted, with checksums |
-| AIP (archival) | `uploads/aip/` | A folder: `objects/`, `metadata/` (per-record metadata and `premis.json`) and `manifest.json` |
-| DIP (dissemination) | `uploads/dip/` | Access URLs and slugs for the new records |
+| SIP (submission) | `sip/` in the ingest work folder | A JSON manifest of what was submitted, with checksums |
+| AIP (archival) | `aip/` in the ingest work folder | A folder: `objects/`, `metadata/` (per-record metadata and `premis.json`) and `manifest.json` |
+| DIP (dissemination) | `dip/` in the ingest work folder | Access URLs and slugs for the new records |
 
 : The OAIS packages
+
+The ingest work folder is `/var/lib/ahg-ingest/<instance>` unless an administrator sets `ingest_work_dir`. It sits outside the web root, so packages, uploaded files and job logs cannot be downloaded from the site. A session with its own output paths, set on the Configure step, writes there instead.
 
 ## 7. The new records
 
