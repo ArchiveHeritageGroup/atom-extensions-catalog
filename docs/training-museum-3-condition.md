@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with part 3 of the museum training videos. The painting from part 1 has a tear. You record a condition check with the full assessment, photograph the damage, mark it on the photograph, and export the condition report. Allow about 15 minutes.
+This guide goes with part 3 of the museum training videos ([watch on YouTube](https://youtu.be/Ishh_UNkvj8)). The painting from part 1 has a tear. You record a condition check with the full assessment, photograph the damage, mark it on the photograph, and export the condition report. Allow about 15 minutes.
 
 ## Before you start
 

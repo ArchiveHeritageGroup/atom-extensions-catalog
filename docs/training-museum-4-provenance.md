@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with part 4 of the museum training videos. You record who has owned the painting since it was made, see the system find a break in the chain, and record that gap so the next researcher knows where to look. Allow about 15 minutes.
+This guide goes with part 4 of the museum training videos ([watch on YouTube](https://youtu.be/pheUlIpq4t4)). You record who has owned the painting since it was made, see the system find a break in the chain, and record that gap so the next researcher knows where to look. Allow about 15 minutes.
 
 ## Before you start
 

@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with part 2 of the discovery training videos. It covers how 3D models of objects are shown and annotated: the viewer on a record, the model page and augmented reality, hotspots, each model's settings, the IIIF 3D manifest and the administration pages. Allow about 15 minutes.
+This guide goes with part 2 of the discovery training videos ([watch on YouTube](https://youtu.be/KTgrhPRPE-8)). It covers how 3D models of objects are shown and annotated: the viewer on a record, the model page and augmented reality, hotspots, each model's settings, the IIIF 3D manifest and the administration pages. Allow about 15 minutes.
 
 ## Before you start
 

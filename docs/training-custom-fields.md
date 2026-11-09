@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with the training video of the same name. Every institution records something the descriptive standards leave out. Custom fields add it without any code: an administrator defines the field once, editors fill it in on the edit form, and the field appears on the record and in every export.
+This guide goes with the training video of the same name ([watch on YouTube](https://youtu.be/E4Rifwndy30)). Every institution records something the descriptive standards leave out. Custom fields add it without any code: an administrator defines the field once, editors fill it in on the edit form, and the field appears on the record and in every export.
 
 You will define two fields, one public and one for staff only, fill them in on a fonds, and meet the warning AtoM gives when a required field is left empty. Allow about 15 minutes.
 

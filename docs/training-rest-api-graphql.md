@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with the training video of the same name. It is for developers. You will issue an API key, read records, try a write with a read-only key and see it refused, issue a second key with the right scopes, create, update and delete a record, run a GraphQL query, and revoke both keys. Allow about 20 minutes.
+This guide goes with the training video of the same name ([watch on YouTube](https://youtu.be/7DxzoBgzFfI)). It is for developers. You will issue an API key, read records, try a write with a read-only key and see it refused, issue a second key with the right scopes, create, update and delete a record, run a GraphQL query, and revoke both keys. Allow about 20 minutes.
 
 ## Before you start
 

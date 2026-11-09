@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with the training video of the same name. A term catalogued in the wrong taxonomy, such as a farm entered as a subject, used to mean creating the right term and re-linking every description by hand. **Move to another taxonomy** moves the term itself, with any terms below it. Every description keeps its link.
+This guide goes with the training video of the same name ([watch on YouTube](https://youtu.be/fToBdHKfrjQ)). A term catalogued in the wrong taxonomy, such as a farm entered as a subject, used to mean creating the right term and re-linking every description by hand. **Move to another taxonomy** moves the term itself, with any terms below it. Every description keeps its link.
 
 You will move a farm from Subjects to Places, by way of one deliberate wrong choice. Allow about 10 minutes.
 

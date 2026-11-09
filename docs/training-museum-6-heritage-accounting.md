@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with part 6, the last part of the museum training videos. You recognise the painting from part 1 as a heritage asset under GRAP 103, revalue it, record an impairment, check the record against the standard, and produce the reports that auditors and National Treasury ask for. Allow about 20 minutes.
+This guide goes with part 6, the last part of the museum training videos ([watch on YouTube](https://youtu.be/l1BLVvejbg8)). You recognise the painting from part 1 as a heritage asset under GRAP 103, revalue it, record an impairment, check the record against the standard, and produce the reports that auditors and National Treasury ask for. Allow about 20 minutes.
 
 ## Before you start
 

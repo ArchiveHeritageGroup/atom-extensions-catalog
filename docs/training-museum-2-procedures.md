@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with part 2 of the museum training videos. The painting catalogued in part 1 enters the museum as an offered gift: its object entry is recorded, and its acquisition is taken through review and approval as a workflow, with the review step assigned to a colleague. Allow about 15 minutes.
+This guide goes with part 2 of the museum training videos ([watch on YouTube](https://youtu.be/5kH4s5x-5QE)). The painting catalogued in part 1 enters the museum as an offered gift: its object entry is recorded, and its acquisition is taken through review and approval as a workflow, with the review step assigned to a colleague. Allow about 15 minutes.
 
 ## Before you start
 

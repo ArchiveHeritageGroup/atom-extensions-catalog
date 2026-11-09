@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with part 5 of the museum training videos. You plan an exhibition and add the painting to it, then lend the painting to another gallery, take the loan through approval and the signed agreement, and record its return. Allow about 20 minutes.
+This guide goes with part 5 of the museum training videos ([watch on YouTube](https://youtu.be/9GvmXEE07UI)). You plan an exhibition and add the painting to it, then lend the painting to another gallery, take the loan through approval and the signed agreement, and record its return. Allow about 20 minutes.
 
 ## Before you start
 

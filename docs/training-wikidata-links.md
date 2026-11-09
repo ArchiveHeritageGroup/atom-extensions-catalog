@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with the training video of the same name. Wikidata is the open, linked database of people, places and organisations. Linking an authority record to its Wikidata item shows visitors the outside world's description of the same person, on the authority record and on every description that names them. VIAF, the Getty Union List of Artist Names (ULAN) and the Library of Congress Name Authority File (LCNAF) are linked the same way.
+This guide goes with the training video of the same name ([watch on YouTube](https://youtu.be/S884qd1kcD0)). Wikidata is the open, linked database of people, places and organisations. Linking an authority record to its Wikidata item shows visitors the outside world's description of the same person, on the authority record and on every description that names them. VIAF, the Getty Union List of Artist Names (ULAN) and the Library of Congress Name Authority File (LCNAF) are linked the same way.
 
 You will link Nelson Mandela's authority record to Wikidata, by way of one deliberate wrong link that you delete. Allow about 10 minutes.
 

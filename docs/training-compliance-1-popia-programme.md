@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with part 1 of the compliance training videos. It walks through a POPIA programme in Access to Memory: setting the privacy settings, recording a processing activity, taking a data subject's request from receipt to completion, and reporting a breach. Allow about 15 minutes.
+This guide goes with part 1 of the compliance training videos ([watch on YouTube](https://youtu.be/kiK75zPhX3s)). It walks through a POPIA programme in Access to Memory: setting the privacy settings, recording a processing activity, taking a data subject's request from receipt to completion, and reporting a breach. Allow about 15 minutes.
 
 ## Before you start
 

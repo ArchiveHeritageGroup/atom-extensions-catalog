@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with the Library Services walkthrough video. The library runs on the same platform as the archive: a book is a catalogue record like any other description, with library details, copies and loans added. You catalogue a book from its ISBN, register a reader, lend the book and take it back, and see the public catalogue follow. Allow about 15 minutes.
+This guide goes with the Library Services walkthrough video ([watch on YouTube](https://youtu.be/kz7fKVdQC4s)). The library runs on the same platform as the archive: a book is a catalogue record like any other description, with library details, copies and loans added. You catalogue a book from its ISBN, register a reader, lend the book and take it back, and see the public catalogue follow. Allow about 15 minutes.
 
 ## Before you start
 

@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with the training video of the same name. **Preservation triage** ranks every record that has condition data or digital files by how much conservation and digital-preservation attention it needs. It works from data AtoM already holds: condition assessments, fixity checks, format risk, virus scans and the age of the last assessment or check. It only reads; it changes nothing.
+This guide goes with the training video of the same name ([watch on YouTube](https://youtu.be/ZTZNwKV1BB0)). **Preservation triage** ranks every record that has condition data or digital files by how much conservation and digital-preservation attention it needs. It works from data AtoM already holds: condition assessments, fixity checks, format risk, virus scans and the age of the last assessment or check. It only reads; it changes nothing.
 
 You will read the summary and the ranked list, narrow it, meet one deliberate mistake (a filter that returns nothing) and export the list. Allow about 10 minutes.
 

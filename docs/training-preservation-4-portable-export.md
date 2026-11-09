@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with part 4, the last part of the preservation training videos. You package the farm diaries from part 1 as a self-contained viewer that opens in any web browser from a USB stick, a CD or a downloaded ZIP, with no server and no internet connection. Allow about 15 minutes.
+This guide goes with part 4, the last part of the preservation training videos ([watch on YouTube](https://youtu.be/Xy7LOcwzC00)). You package the farm diaries from part 1 as a self-contained viewer that opens in any web browser from a USB stick, a CD or a downloaded ZIP, with no server and no internet connection. Allow about 15 minutes.
 
 ## Before you start
 

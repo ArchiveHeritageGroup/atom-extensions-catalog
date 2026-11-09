@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with part 5, the last of the compliance training videos. It shows how to find who did what and when, read a single entry, see a record's history, check logins and activity, prove that the log has not been altered, and export it for an auditor. Allow about 15 minutes.
+This guide goes with part 5, the last of the compliance training videos ([watch on YouTube](https://youtu.be/lkf6nGjjJRY)). It shows how to find who did what and when, read a single entry, see a record's history, check logins and activity, prove that the log has not been altered, and export it for an auditor. Allow about 15 minutes.
 
 ## Before you start
 

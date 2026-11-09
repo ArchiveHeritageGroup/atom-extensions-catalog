@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with part 3 of the compliance training videos. You classify a record as Confidential, see what a researcher without clearance gets, and take her request for access from submission to approval. Allow about 15 minutes.
+This guide goes with part 3 of the compliance training videos ([watch on YouTube](https://youtu.be/Bzd4Qxf0vPA)). You classify a record as Confidential, see what a researcher without clearance gets, and take her request for access from submission to approval. Allow about 15 minutes.
 
 ## Before you start
 

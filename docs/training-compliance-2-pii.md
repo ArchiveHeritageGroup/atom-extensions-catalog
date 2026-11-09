@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with part 2 of the compliance training videos. A cataloguer typed a researcher's details into a description, and the scanned form attached to the record shows them too. You find them, decide what each one is, and redact them so visitors cannot see them. Allow about 15 minutes.
+This guide goes with part 2 of the compliance training videos ([watch on YouTube](https://youtu.be/6liusGhoelk)). A cataloguer typed a researcher's details into a description, and the scanned form attached to the record shows them too. You find them, decide what each one is, and redact them so visitors cannot see them. Allow about 15 minutes.
 
 ## Before you start
 

@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with part 1 of the museum training videos. It describes a painting to the CCO standard (Cataloging Cultural Objects), using a Getty Art & Architecture Thesaurus term for the work type and linking the artist to an authority record. Allow about 15 minutes.
+This guide goes with part 1 of the museum training videos ([watch on YouTube](https://youtu.be/w0eF1tRCjkw)). It describes a painting to the CCO standard (Cataloging Cultural Objects), using a Getty Art & Architecture Thesaurus term for the work type and linking the artist to an authority record. Allow about 15 minutes.
 
 ## Before you start
 

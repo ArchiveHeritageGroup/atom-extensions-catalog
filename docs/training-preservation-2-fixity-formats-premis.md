@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with part 2 of the preservation training videos. Using the farm diaries ingested in part 1, you look at how the archive proves a file is unchanged, says what format it is and how much at risk, scans it for viruses, and records every one of those actions as a PREMIS event. Allow about 20 minutes.
+This guide goes with part 2 of the preservation training videos ([watch on YouTube](https://youtu.be/QFSy0HSo1BY)). Using the farm diaries ingested in part 1, you look at how the archive proves a file is unchanged, says what format it is and how much at risk, scans it for viruses, and records every one of those actions as a PREMIS event. Allow about 20 minutes.
 
 ## Before you start
 

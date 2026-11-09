@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with part 1 of the discovery training videos. It covers how images are shown and shared through IIIF, the International Image Interoperability Framework: the viewers on a record, shared views of a detail, the IIIF manifest, comparing images, IIIF collections, the viewer settings and the validation dashboard. Allow about 20 minutes.
+This guide goes with part 1 of the discovery training videos ([watch on YouTube](https://youtu.be/liNqeZHNvfU)). It covers how images are shown and shared through IIIF, the International Image Interoperability Framework: the viewers on a record, shared views of a detail, the IIIF manifest, comparing images, IIIF collections, the viewer settings and the validation dashboard. Allow about 20 minutes.
 
 ## Before you start
 

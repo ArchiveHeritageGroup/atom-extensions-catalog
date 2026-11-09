@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with part 3 of the preservation training videos. You set where backups are kept, make a database backup, see it listed and verified, and look at how a backup is restored. Allow about 15 minutes.
+This guide goes with part 3 of the preservation training videos ([watch on YouTube](https://youtu.be/1n3o1xT9q-A)). You set where backups are kept, make a database backup, see it listed and verified, and look at how a backup is restored. Allow about 15 minutes.
 
 ## Before you start
 

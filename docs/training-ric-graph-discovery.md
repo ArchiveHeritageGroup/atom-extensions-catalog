@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with the Records in Contexts walkthrough video. You search the catalogue in plain words, open a record's knowledge graph, follow a painting's chain of custody in the provenance graph, and check the dashboard that keeps the graph in step with the catalogue. Allow about 10 minutes.
+This guide goes with the Records in Contexts walkthrough video ([watch on YouTube](https://youtu.be/sidRNbECBKQ)). You search the catalogue in plain words, open a record's knowledge graph, follow a painting's chain of custody in the provenance graph, and check the dashboard that keeps the graph in step with the catalogue. Allow about 10 minutes.
 
 ## Before you start
 

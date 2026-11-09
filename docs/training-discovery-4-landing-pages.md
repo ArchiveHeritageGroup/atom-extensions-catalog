@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with part 4 of the discovery training videos. A landing page is a public page built from blocks, to introduce a collection or welcome visitors. The guide covers creating a page, adding blocks, setting each one up, publishing, and restoring an earlier version. Allow about 15 minutes.
+This guide goes with part 4 of the discovery training videos ([watch on YouTube](https://youtu.be/Ii_n2HxTxHI)). A landing page is a public page built from blocks, to introduce a collection or welcome visitors. The guide covers creating a page, adding blocks, setting each one up, publishing, and restoring an earlier version. Allow about 15 minutes.
 
 ## Before you start
 

@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with the training video of the same name. Batch edit applies one set of changes to every description on the clipboard: level of description, repository, publication status, access and reproduction conditions, languages, access points and creators, a date, and title renaming. A preview shows every change before anything is saved.
+This guide goes with the training video of the same name ([watch on YouTube](https://youtu.be/EDY8W2qkO3E)). Batch edit applies one set of changes to every description on the clipboard: level of description, repository, publication status, access and reproduction conditions, languages, access points and creators, a date, and title renaming. A preview shows every change before anything is saved.
 
 You will put four draft letters on the clipboard, set their level, publish them, add a place, rename their titles, and fix one deliberate mistake. Allow about 15 minutes.
 

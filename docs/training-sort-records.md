@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with the training video of the same name. AtoM keeps the records below a description in the order they were entered, until someone moves each one by hand. **Sort the records below** puts every level below a description into order in one step: by identifier, title or earliest date. A preview shows the new order before anything moves.
+This guide goes with the training video of the same name ([watch on YouTube](https://youtu.be/b8BLKU32rjQ)). AtoM keeps the records below a description in the order they were entered, until someone moves each one by hand. **Sort the records below** puts every level below a description into order in one step: by identifier, title or earliest date. A preview shows the new order before anything moves.
 
 You will sort six farm diaries that were entered out of order, catch one deliberate mistake in the preview, and check the result. Allow about 10 minutes.
 

@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with the training video of the same name. You will build one practical report from scratch: **published descriptions that have no digital object yet**, a ready-made digitisation list. On the way you add a filter that answers only half of the question, notice it from the count, and add the missing half. Allow about 15 minutes.
+This guide goes with the training video of the same name ([watch on YouTube](https://youtu.be/8CylHruCqS0)). You will build one practical report from scratch: **published descriptions that have no digital object yet**, a ready-made digitisation list. On the way you add a filter that answers only half of the question, notice it from the count, and add the missing half. Allow about 15 minutes.
 
 ## Before you start
 

@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with part 4 of the compliance training videos. It covers four tasks on an oral history recording: recording its copyright status and licence, attaching the community's traditional knowledge (TK) label and cultural notice, embargoing it while the community is consulted, and lifting the embargo. Allow about 15 minutes.
+This guide goes with part 4 of the compliance training videos ([watch on YouTube](https://youtu.be/EIe4ajDu3xQ)). It covers four tasks on an oral history recording: recording its copyright status and licence, attaching the community's traditional knowledge (TK) label and cultural notice, embargoing it while the community is consulted, and lifting the embargo. Allow about 15 minutes.
 
 ## Before you start
 

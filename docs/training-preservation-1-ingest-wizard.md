@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with part 1 of the preservation training videos. You bring three digitised farm diaries into the archive through the ingest wizard: a ZIP file holding a CSV that describes them and the three scanned pages. The wizard maps and checks the data, shows you the result before anything is written, and then creates the records and writes the OAIS packages. Allow about 20 minutes.
+This guide goes with part 1 of the preservation training videos ([watch on YouTube](https://youtu.be/w2NPyp35rLw)). You bring three digitised farm diaries into the archive through the ingest wizard: a ZIP file holding a CSV that describes them and the three scanned pages. The wizard maps and checks the data, shows you the result before anything is written, and then creates the records and writes the OAIS packages. Allow about 20 minutes.
 
 ## Before you start
 

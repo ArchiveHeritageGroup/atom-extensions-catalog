@@ -18,7 +18,7 @@ author: "Dr Johan Pieterse"
 
 : Document control
 
-This guide goes with part 3 of the discovery training videos. It covers Discover, the plain-language search: asking a question, reading why each result was found, using names in the question with Semantic mode, switching views, and keeping searches with saved searches, history and templates. Allow about 15 minutes.
+This guide goes with part 3 of the discovery training videos ([watch on YouTube](https://youtu.be/vzO8z6As2Ps)). It covers Discover, the plain-language search: asking a question, reading why each result was found, using names in the question with Semantic mode, switching views, and keeping searches with saved searches, history and templates. Allow about 15 minutes.
 
 ## Before you start
 
