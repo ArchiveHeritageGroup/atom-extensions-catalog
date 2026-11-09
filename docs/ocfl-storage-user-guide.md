@@ -7,8 +7,7 @@
 ## What is it?
 
 The OCFL Preservation Storage plugin (`ahgOcflPlugin`) adds an
-**OCFL v1.1 (Oxford Common File Layout)** preservation storage layer to AtoM
-Heratio. It snapshots the digital files attached to your archival descriptions
+**OCFL v1.1 (Oxford Common File Layout)** preservation storage layer to AtoM. It snapshots the digital files attached to your archival descriptions
 into a content-addressed, versioned storage root with deterministic
 `inventory.json` manifests and SHA-512 digests, so masters can be preserved,
 verified for fixity and exported independently of the live AtoM uploads tree.
