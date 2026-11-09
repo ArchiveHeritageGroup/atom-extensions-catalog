@@ -6,7 +6,7 @@
 
 ## What is it?
 
-The AHG Accession Manage plugin provides first-class accession management for AtoM/Heratio. On top of the standard AtoM accession record it adds an **intake queue with a status workflow**, **configurable intake checklists**, a **chain-of-custody timeline**, **file attachments**, a **formal appraisal workflow** with weighted scoring, **heritage asset valuation history** (aligned with GRAP 103 / IPSAS 45), **physical container and item tracking** with barcode support, and **PREMIS-aligned rights management** with inheritance to child information objects. Access to all screens requires you to be logged in; most editing actions additionally require the `editor` credential or administrator rights.
+The AHG Accession Manage plugin provides first-class accession management for AtoM with the AHG Extensions. On top of the standard AtoM accession record it adds an **intake queue with a status workflow**, **configurable intake checklists**, a **chain-of-custody timeline**, **file attachments**, a **formal appraisal workflow** with weighted scoring, **heritage asset valuation history** (aligned with GRAP 103 / IPSAS 45), **physical container and item tracking** with barcode support, and **PREMIS-aligned rights management** with inheritance to child information objects. Access to all screens requires you to be logged in; most editing actions additionally require the `editor` credential or administrator rights.
 
 ## Key features
 

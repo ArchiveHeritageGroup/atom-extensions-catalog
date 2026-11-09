@@ -9,7 +9,7 @@
 
 ## 1. Overview
 
-The ahgRegistryPlugin implements a complete GLAM Community Hub and Registry -- a standalone or AtoM-integrated directory for institutions, vendors, software products, user groups, threaded discussions, blog, newsletters, reviews, and a sync API. It serves as the central community platform for the AtoM/Heratio ecosystem.
+The ahgRegistryPlugin implements a complete GLAM Community Hub and Registry -- a standalone or AtoM-integrated directory for institutions, vendors, software products, user groups, threaded discussions, blog, newsletters, reviews, and a sync API. It serves as the central community platform for the AtoM and AHG Extensions ecosystem.
 
 ### Purpose
 

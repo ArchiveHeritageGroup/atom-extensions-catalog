@@ -6,7 +6,7 @@
 
 ## What is it?
 
-The AHG Menu Configuration Manage plugin (`ahgMenuManagePlugin`) lets administrators **list, create, edit, reorder and delete the navigation menus** of AtoM/Heratio. It manages the site's menu hierarchy directly through the Laravel Query Builder, maintaining the underlying nested-set (lft/rgt) tree so menu items stay correctly ordered and nested.
+The AHG Menu Configuration Manage plugin (`ahgMenuManagePlugin`) lets administrators **list, create, edit, reorder and delete the navigation menus** of AtoM with the AHG Extensions. It manages the site's menu hierarchy directly through the Laravel Query Builder, maintaining the underlying nested-set (lft/rgt) tree so menu items stay correctly ordered and nested.
 
 It is an **administrator-only** tool: every screen requires the administrator role.
 

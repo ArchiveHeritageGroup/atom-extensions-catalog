@@ -23,7 +23,7 @@ The Registry provides:
 | **Archivists & Librarians** | Discover peer institutions, find compatible software, join user groups, participate in discussions |
 | **Museum & Gallery Staff** | Register their institution, document their archival setup, connect with service providers |
 | **Vendors & Developers** | List their services and products, manage client relationships, publish software releases |
-| **System Administrators** | Register AtoM/Heratio instances, enable sync monitoring, track software versions |
+| **System Administrators** | Register AtoM instances, enable sync monitoring, track software versions |
 | **Community Organizers** | Create and manage user groups, moderate discussions, publish blog posts |
 | **Registry Administrators** | Verify registrations, moderate content, manage settings, monitor sync health |
 
@@ -211,7 +211,7 @@ The institution detail page shows:
 - **GLAM sectors** -- Which sectors the institution operates in
 - **Tags** -- Searchable keyword tags
 - **Contacts** -- Public contact persons (name, role, email, phone)
-- **Instances** -- Registered AtoM/Heratio instances with status indicators
+- **Instances** -- Registered AtoM instances with status indicators
 - **Software in use** -- Which software products the institution uses
 - **Vendor relationships** -- Which vendors provide services to this institution
 - **Reviews** -- Reviews left for associated vendors/software
@@ -341,7 +341,7 @@ After registration, the My Institution Dashboard provides a centralized manageme
 
 - **Institution overview** -- Name, type, verification status
 - **Contacts** -- List of registered contact persons
-- **Instances** -- Registered AtoM/Heratio instances
+- **Instances** -- Registered AtoM instances
 - **Vendors** -- Vendor relationships
 - **Software** -- Software products in use
 
@@ -1581,7 +1581,7 @@ Tags provide cross-cutting keyword categorization for institutions, vendors, and
 
 2. **Add coordinates** -- Set latitude and longitude so your institution appears on the interactive map. This helps other institutions and vendors find you geographically.
 
-3. **Register your instances** -- Document your AtoM/Heratio installations. This helps the community understand deployment patterns and helps vendors identify potential clients.
+3. **Register your instances** -- Document your AtoM installations. This helps the community understand deployment patterns and helps vendors identify potential clients.
 
 4. **Enable sync** -- If you run Heratio, enable the sync API on your instances. This provides automated monitoring and keeps your version information up to date.
 
@@ -1642,7 +1642,7 @@ For technical reference, the Registry uses the following database tables:
 | `registry_institution` | Institution profiles (name, type, address, collection info, verification) |
 | `registry_vendor` | Vendor profiles (name, type, services, ratings) |
 | `registry_contact` | Contact persons for institutions and vendors |
-| `registry_instance` | AtoM/Heratio instances (URL, version, hosting, sync) |
+| `registry_instance` | AtoM instances (URL, version, hosting, sync) |
 | `registry_software` | Software products (name, category, license, git, pricing) |
 | `registry_software_release` | Version history for software products |
 | `registry_software_component` | Plugins/modules within a software product |

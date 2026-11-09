@@ -352,7 +352,7 @@ A 50,000-record corpus backfills in roughly 7 minutes on the same hardware.
 
 ## Operational procedures
 
-### Initial install on a populated AtoM/Heratio
+### Initial install on a populated AtoM instance
 
 1. Apply schema. AtoM: `mysql < database/install.sql`. Heratio: `php artisan migrate`.
 2. Enable plugin (AtoM only): `INSERT INTO atom_plugin (name, ..., is_enabled) VALUES ('ahgVersionControlPlugin', ..., 1)`.
@@ -404,7 +404,7 @@ These decisions are LOCKED for v1.0. Revisit only with strong reason.
 | 1 | Entity scope: information_object + actor only | the institution clauses 4.1.1.3 / 4.6.2 reference these; the two most-edited entity types in any archive. |
 | 2 | Snapshot includes ALL i18n cultures | Restore must be deterministic; culture-only snapshots can't restore other cultures' content. |
 | 3 | Storage: JSON column per entity type, not normalised | Mirrors existing AHG `report_version` pattern; single row read for diff or restore. |
-| 4 | Concurrency: last-write-wins with parent-row lock | No record-level optimistic lock in AtoM/Heratio; introducing one is out of scope. |
+| 4 | Concurrency: last-write-wins with parent-row lock | No record-level optimistic lock in AtoM; introducing one is out of scope. |
 | 5 | Multi-tenant: no tenant_id on version tables | Tenant scope inherited via entity_id → repository → tenant chain. |
 | 6 | Retention: opt-in pruning, both rules default 0 | Conservative default — clients explicitly opt in. |
 | 7 | Bulk import: VersionContext::skip during in-loop saves | Avoid version-table inflation. One v1 per imported record after the loop. |

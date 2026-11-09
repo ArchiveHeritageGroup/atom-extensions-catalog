@@ -6,7 +6,7 @@
 
 ## What is it?
 
-The AHG Storage Manage plugin (`ahgStorageManagePlugin`) provides a fast, high-performance way to browse, search and manage **physical storage locations** (physical objects) in AtoM/Heratio, built on the Laravel Query Builder. It also adds an optional **Strongroom** feature for tracking storage spaces, their capacity, and which physical objects are assigned to them.
+The AHG Storage Manage plugin (`ahgStorageManagePlugin`) provides a fast, high-performance way to browse, search and manage **physical storage locations** (physical objects) in AtoM with the AHG Extensions, built on the Laravel Query Builder. It also adds an optional **Strongroom** feature for tracking storage spaces, their capacity, and which physical objects are assigned to them.
 
 It works alongside the standard AtoM physical-storage screens, replacing the browse, autocomplete, box-list and holdings-report-export behaviour with a faster implementation.
 

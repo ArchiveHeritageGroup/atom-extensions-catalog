@@ -6,7 +6,7 @@
 
 ## What is it?
 
-The AHG Donor Manage plugin is a high-performance browse and management interface for **donor** authority records in AtoM/Heratio. It replaces the legacy donor browse with a Laravel Query Builder–backed listing and provides theme-compatible view, create, edit, and delete screens, along with a donor autocomplete service used by other parts of the system. Donor records are treated as sensitive: viewing, creating, editing, and deleting all require an authenticated user, and create/edit/delete require the administrator or editor group.
+The AHG Donor Manage plugin is a high-performance browse and management interface for **donor** authority records in AtoM with the AHG Extensions. It replaces the legacy donor browse with a Laravel Query Builder–backed listing and provides theme-compatible view, create, edit, and delete screens, along with a donor autocomplete service used by other parts of the system. Donor records are treated as sensitive: viewing, creating, editing, and deleting all require an authenticated user, and create/edit/delete require the administrator or editor group.
 
 ## Key features
 

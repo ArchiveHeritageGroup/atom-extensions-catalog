@@ -7,7 +7,7 @@
 ## What is it?
 
 The User Management module (`ahgUserManagePlugin`) is an administrator-only screen for
-browsing and managing the user accounts in your AtoM/Heratio installation. It replaces the
+browsing and managing the user accounts in your AtoM installation. It replaces the
 standard user list with a faster, Laravel Query Builder–driven browse, and provides full
 create, view, edit, and delete workflows for individual accounts. Every screen in this module
 requires the administrator role — non-administrators are redirected to a secure-access page.

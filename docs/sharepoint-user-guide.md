@@ -178,7 +178,7 @@ Both entries are also documented under **Admin > AHG Settings > Cron Jobs > Exte
 1. Open a SharePoint document library, select one or more files.
 2. Click **Send to Archive** in the command bar.
 3. Review the metadata (prefilled by the column mapping), pick the target repository and parent description, edit any fields that need correction, and submit.
-4. The dialog shows the ingest job ID and polls until completion. The new descriptions appear in AtoM/Heratio with the digital objects attached.
+4. The dialog shows the ingest job ID and polls until completion. The new descriptions appear in AtoM, with the digital objects attached.
 
 ### Mode B — automatic on label
 

@@ -896,7 +896,7 @@ RAD information object CRUD management
 ## Registry (ahgRegistryPlugin)
 *Category: community - enabled*
 
-AtoM/Heratio Community Hub & Registry - Directory of institutions, vendors, software, user groups, discussions, blog, and sync API.
+AtoM Community Hub & Registry - Directory of institutions, vendors, software, user groups, discussions, blog, and sync API.
 
 ## Report Builder (ahgReportBuilderPlugin)
 *Category: ahg - enabled*
