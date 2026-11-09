@@ -92,4 +92,4 @@ Open the page at its address (`/landing/discovery-practice` in the video) to see
 3. Set up each block.
 4. Publish, and check the page as a visitor sees it.
 
-Part 5 covers DOIs for records and the public chatbot.
+Part 5 covers the public chatbot, Ask the Archive; part 6 covers DOIs for records.

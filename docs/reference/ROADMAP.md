@@ -95,6 +95,8 @@ What follows is open, with no committed dates. Items move into a release when th
 
 **Still wanted, not yet built.** A self-service hosted platform (today each client is hosted and installed by hand, with the Docker and Ansible installers), a mobile app, named-entity recognition in Afrikaans, isiZulu and Sesotho, and discussion threads on records.
 
+**The archivist's working surface.** Three things added on 9 November 2026, after a comparison with other RiC-based archival systems. First, grid editing: a configurable table of many descriptions, with cells edited from the keyboard. Batch edit with preview exists today, but not a grid. Second, drag and drop in the archival tree to move units between parents, not just reorder them. Base AtoM's treeview only reorders siblings, and a move to a new parent goes through the Move form. Under WCAG 2.2 AA (SC 2.5.7) a drag move also needs a non-drag way to do the same thing, so the Move form stays. Third, fuller search syntax. The framework's search already uses Elasticsearch fuzzy matching, and base search takes Boolean operators and wildcards, but regular expressions are not supported.
+
 **Platform hardening.** Issue #198 (public portal, multi-tenancy and hardening) is closed, and much of it shipped: upload validation, unserialize and path hardening, batch edit with preview and audit, tenant branding and tenant isolation for descriptions. What it asked for and has not been built: isolation of uploads, search indices and caches per tenant; an explainable ranking panel; rollback of bulk edits; an outbound-HTTP (SSRF) policy; and automated tests for cross-tenant leakage.
 
 **Deferred ports from Heratio.** These were deferred on 8 October 2026 and stay on the list:
