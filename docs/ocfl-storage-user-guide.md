@@ -77,10 +77,10 @@ Configuration is resolved at runtime from the `ahg_settings` table
 
 | Setting | Default | Meaning |
 |---------|---------|---------|
-| `ocfl_storage_root` | `<sf_root_dir>/ocfl` | Absolute path to the OCFL root |
+| `ocfl_storage_root` | `/var/lib/ahg-ocfl/<instance>/root` | Absolute path to the OCFL root. Keep it outside the AtoM folder, which is the web root. |
 | `ocfl_storage_layout` | `flat-id` | `flat-id`, `pairtree`, or `hashed-n-tuple` |
 | `ocfl_digest_algorithm` | `sha512` | `sha512` (recommended) or `sha256` |
-| `ocfl_export_path` | `<sf_root_dir>/cache/ocfl-exports` | Where `ocfl:export` writes tarballs |
+| `ocfl_export_path` | `/var/lib/ahg-ocfl/<instance>/exports` | Where `ocfl:export` writes tarballs |
 
 In production, point the storage root at resilient, backed-up storage
 (for example NAS-backed `/mnt/nas/heratio/ocfl`). Run `ocfl:init` once before
