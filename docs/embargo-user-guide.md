@@ -97,6 +97,8 @@ Lifting an embargo on a parent opens its children only if they have no restricti
 
 **Original (master) files:** signed-out visitors can no longer download masters through the media download link or the IIIF download link. Published audio and video can still be played. Users need master-file permission to download an original.
 
+**Public PDFs:** a site can choose to publish its document masters with the `allow_public_text_masters` setting. With it on, signed-out visitors can open and download PDFs on published, unrestricted records. With it off, they must sign in. Draft and restricted records stay refused either way.
+
 **Start dates** follow the site's configured timezone. If that differs from your local time, an embargo starting today can take effect some hours later, so set the start date a day early when timing matters.
 
 ---
