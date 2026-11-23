@@ -159,6 +159,7 @@ On individual record view pages, Discovery can show a **Related Content** sideba
 | Entity tags never appear | Run `php symfony ai:ner-extract` to extract NER entities |
 | Synonyms not expanding | Populate the thesaurus in ahgSemanticSearchPlugin |
 | Search is slow | Results are cached for 1 hour — first search may be slower |
+| Fewer results than usual, or no meaning-based matches | Semantic matching needs the AI gateway to embed the query. If the gateway cannot, search still returns keyword and entity matches. Ask an administrator to check the embedding model on the gateway |
 | Popular searches empty | Needs at least 2 searches for the same query in the last 30 days |
 
 ## Configurable boosts & personalised re-ranking (v3.46.0)
