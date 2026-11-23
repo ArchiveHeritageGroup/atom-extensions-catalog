@@ -122,17 +122,21 @@ Choose which record to keep as the primary:
 
 The system will show what will happen:
 - MERGE ACTIONS
-- - Transfer 3 digital objects from Record B to Record A
-- - Move 5 child records from Record B to Record A
-- - Redirect slug 'minutes-85' to 'meeting-minutes-1985'
+- - Move Record B's digital object to Record A
+- - Fill description fields that are empty on Record A; filled fields are never overwritten
+- - Move subject, place and genre access points that Record A lacks
+- - Move Record B's child records under Record A, as a background move job
+- - Add a note to Record B with Record A's address
+- - Set Record B to draft (not deleted), so visitors no longer see it
 - - Create merge log entry for audit trail
-- - Archive Record B (not deleted)
+
+If both records have a master file the merge is refused, because a record can hold only one. Remove one first.
 
 ### Step 3: Confirm and Merge
 
 Check the confirmation box and click **Merge Records**.
 
-**Warning**: Merging is permanent. The secondary record will be archived but cannot be easily restored.
+**Warning**: A merge cannot be undone from the screen. The secondary record stays as a draft. Anything not moved, such as name access points and events, remains on it, so copy what you need before deleting it.
 
 ---
 
@@ -152,8 +156,8 @@ If two records are not actually duplicates:
 
 1. Go to **Admin** > **Duplicate Detection** > **New Scan**
 2. Select a repository (or scan all)
-3. Click **Start Scan**
-4. The scan job is queued for background processing
+3. Click **Start Scan Job**
+4. The scan runs in the background; its results appear under **Browse** when it finishes
 
 ### From the Command Line
 

@@ -4,6 +4,8 @@
 
 Combine multiple images (TIFF, JPEG, PNG) into a single PDF document for archival records.
 
+**Access and attachment:** merging and downloading a merged PDF need a contributor, editor or administrator account. A record holds one master, so a PDF is not attached to a record that already has a digital object; it is kept and can be linked elsewhere. Deleting a job removes its own uploads and output, and never the FTP originals of a folder combine.
+
 ---
 
 ## When to Use

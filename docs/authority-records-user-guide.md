@@ -30,7 +30,7 @@ enriched EAC-CPF export — all surfacing through an **Authority Records** admin
 - **ISDF functions** — link actors to ISDF functions and browse functions (`ahg_actor_function_link`).
 - **EAC-CPF export enrichment** — export richer EAC-CPF for an actor, including the linked
   identifiers and structured data.
-- **Contact panel** — surface extended contact information for an actor.
+- **Contact panel** - surface extended contact information for an actor. On the authority page, contact details are shown to everyone only for corporate bodies. For persons, families and records with no entity type, only editors and administrators see them.
 
 ## How to use it
 

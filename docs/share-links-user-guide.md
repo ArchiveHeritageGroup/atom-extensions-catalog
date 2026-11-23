@@ -39,8 +39,10 @@ auditing.
 3. Submit. The plugin generates the token and returns the shareable URL of the form
    `/share/<token>`. (The issue endpoint can return JSON for AJAX callers or HTML for browser use.)
 4. Send the URL to your recipient. When they open it, the plugin validates the token (expiry, access
-   count, revocation, clearance), records the access, and shows the record's title, identifier, and
-   scope/content. If the link is invalid or exhausted, they see a denied page instead.
+   count, revocation, clearance), records the access, and shows the record's title, identifier, level,
+   repository, dates, creators, extent, and scope/content, with the reference image unless the
+   record's rights disallow display. If the link is invalid or exhausted, they see a denied page
+   instead.
 
 ## Administration / settings
 
@@ -48,7 +50,7 @@ auditing.
 - **Inspect a link:** `/admin/share-links/:id` shows its details and access history.
 - **Revoke a link:** `/admin/share-links/:id/revoke` disables it immediately.
 - **Permissions:** issuing requires an authenticated user; issuing for classified records additionally
-  requires sufficient clearance.
+  requires sufficient clearance. Only an editor or administrator can share a draft record.
 - **Storage:** links and access events are kept in `information_object_share_token` and
   `information_object_share_access`. Base AtoM tables are referenced read-only and never modified.
 - **Maintenance:** a prune task removes expired tokens on a schedule.

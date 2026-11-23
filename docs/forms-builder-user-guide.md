@@ -97,6 +97,8 @@ The drag-and-drop interface for designing forms.
 2. Drop it onto the form canvas
 3. The field appears in the form
 
+You can also click a palette item, or focus it and press Enter, to add the field at the end of the form.
+
 **Method 2: AtoM Fields**
 1. Use pre-configured AtoM fields from the bottom palette
 2. These automatically map to the correct database fields
@@ -153,6 +155,10 @@ The drag-and-drop interface for designing forms.
 1. Click the trash icon on a field
 2. Confirm deletion
 3. Field is removed from the form
+
+### Cloning and Deleting Templates
+
+**Clone** opens a page that asks for the name of the copy. **Delete**, on a template or an assignment, opens a confirmation page first. Deleting a template also deletes its fields, field mappings, drafts and assignments. Records already described with the form are not changed.
 
 ---
 
@@ -278,6 +284,10 @@ php symfony forms:import --input=template.json --dry-run
 ```
 
 ---
+
+## Records Created Through a Form
+
+A new record saved through a form starts as a draft, takes its place in the hierarchy and is indexed for search. Opening an existing record in a form loads its level, dates, creator and subjects. Saving updates the existing date event instead of adding another.
 
 ## Auto-Save and Drafts
 
@@ -418,8 +428,9 @@ php symfony forms:list --assignments
 - **Options**: Format, min/max date
 
 ### Date Range
-- **Use for**: Date spans (1990-2000)
+- **Use for**: Date spans (1990 - 2000)
 - **Options**: Format, labels for start/end
+- **Saved as**: Separate start and end dates when entered as `start - end` with spaces around the hyphen, each as YYYY, YYYY-MM or YYYY-MM-DD
 
 ### Select (Dropdown)
 - **Use for**: Choose one from list

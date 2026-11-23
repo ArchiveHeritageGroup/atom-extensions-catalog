@@ -17,6 +17,8 @@
 
 The administrator group (100) bypasses every check in code; the other roles get explicit grants seeded at install time (see the `share_link.*` rows in `acl_permission`).
 
+A draft record can be shared only by an editor or administrator, whatever other permissions the user holds. A share link shows the record to anyone with the URL, so for a draft it is a limited publication.
+
 To grant a non-default permission such as `share_link.create_classified` to a specific user or group, an administrator opens **Admin > Users (or Groups) > Permissions** and adds the action to that grant scope.
 
 ---
@@ -59,6 +61,7 @@ Share that URL via whatever channel you trust (email, secure messaging, signed l
 | **You do not have permission to issue share links** | Your role lacks `share_link.create`. Ask an admin.                  |
 | **You do not have permission to issue share links for classified records** | The record is classified and you lack `share_link.create_classified`. |
 | **Insufficient clearance**             | The record is classified above your clearance level under `ahgSecurityClearancePlugin`. |
+| **Only an editor or administrator can share a draft record** | The record is a draft and you are in neither group. Ask an editor, or publish the record first. |
 | **Expiry is capped at 90 days**        | Your account doesn't have `share_link.create_unlimited_expiry`.                   |
 | **expires_at must be in the future**   | You picked today or earlier. Pick a future date.                                  |
 | **recipient_email is not a valid email address** | Fix the typo or leave the field blank.                                  |
@@ -171,7 +174,7 @@ When the recipient opens the URL:
 
 | Token state                                       | What they see                                              | HTTP |
 |---------------------------------------------------|-------------------------------------------------------------|------|
-| Valid, not revoked, not expired, quota not reached | The record's title, scope and content, identifier; banner "Shared by *issuer* · expires *date*" | 200  |
+| Valid, not revoked, not expired, quota not reached | The record's title, identifier, level, repository, dates, creators, extent, scope and content, and the reference image (replaced by a notice when the record's rights disallow display); banner "Shared by *issuer* · Link expires *date*" | 200  |
 | Expired                                           | A clean "This share link has expired" page                  | 410  |
 | Revoked                                           | A clean "This share link has been revoked" page             | 410  |
 | Quota exhausted                                   | A clean "This share link has reached its maximum access count" page | 410  |

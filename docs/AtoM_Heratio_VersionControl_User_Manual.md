@@ -103,7 +103,7 @@ A confirmation modal explains what will happen:
 
 - The current state of the record will be **overwritten** with the snapshot from vN.
 - A **new version row** will be created marking the restore. Your action is auditable.
-- Scope: base record + descriptive metadata (titles, scope, notes, all cultures) + custom fields **are** restored. Access points, events, relationships, and physical-object links **stay as they are now** (planned enhancement for the next release).
+- Scope: base record + descriptive metadata (titles, scope, notes, all cultures) + custom fields **are** restored. Access points, events, relationships, and physical-object links **stay as they are now**. The search index is updated with the restored text.
 
 After confirming, you're redirected to the version list with a success message:
 
@@ -112,7 +112,7 @@ After confirming, you're redirected to the version list with a success message:
 ### What can stop a restore
 
 - **You don't have the `version.restore` permission.** By default, Editors and Administrators do; Contributors and Translators don't. You'll see a 403 page.
-- **The record is classified** and you don't have matching clearance. You'll see a 403 with a clear message like *"This record is classified Confidential (level 3); your clearance level is 0. Restore is not permitted."* — contact your records officer to be granted the clearance.
+- **The record is classified** and you don't have matching clearance. You're returned to the version list with a message like *"This record is classified Confidential (level 3); your clearance level is 0. Restore is not permitted."* Contact your records officer to be granted the clearance.
 - **Both checks combine.** Even an Editor needs `version.restore_classified` AND a sufficient clearance level to restore a classified record.
 
 ## What gets versioned

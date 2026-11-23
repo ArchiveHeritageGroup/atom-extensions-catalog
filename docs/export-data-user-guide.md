@@ -56,23 +56,29 @@ Navigate to `/export` to access the export dashboard with format options.
 
 ### CSV Export
 
-Export archival descriptions as ISAD-G compliant CSV:
+Export archival descriptions in bulk as CSV from `/export/archival`:
 
-1. Go to **Export** → **CSV Export**
+1. Set **Export Format** to **CSV (Bulk Export)**
 2. Select **Repository** (optional) to filter records
-3. Choose **Level of Description** (optional)
-4. Enter **Parent Record Slug** to export a specific branch
-5. Check **Include descendants** for hierarchical export
-6. Click **Export CSV**
+3. Choose one or more **Levels of Description** (optional)
+4. Choose a **Limit** (optional)
+5. Click **Export**
+
+The file carries dates and creators in AtoM's event columns: `eventActors`, `eventTypes`, `eventDates`, `eventStartDates` and `eventEndDates`. A record with several events has its values joined with `|`.
 
 ### EAD Export
 
-Export finding aids in EAD 2002 XML format:
+Export one finding aid in EAD 2002 XML, or one record in Dublin Core, from `/export/archival`:
 
-1. Go to **Export** → **EAD Export**
-2. Select a **top-level record** (fonds or collection)
-3. Check **Include all descendants** for complete hierarchy
-4. Click **Export EAD XML**
+1. Set **Export Format** to **EAD 2002 (Single Record)** or **Dublin Core (Single Record)**
+2. Enter the record's identifier or slug under **Record (EAD and Dublin Core)**
+3. Click **Export**
+
+An EAD export includes the records below the one you name.
+
+### Authority Record Export
+
+`/export/authority` exports authority records only. User accounts, repositories, donors and rights holders are left out.
 
 ---
 

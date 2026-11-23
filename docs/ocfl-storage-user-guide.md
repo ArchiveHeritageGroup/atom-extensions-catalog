@@ -35,7 +35,9 @@ original software.
 ### Admin dashboard
 
 Open **`/admin/ocfl`** to review the storage root, configured layout, digest
-algorithm, export path, and per-object verification status.
+algorithm, export path, and per-object verification status. From the dashboard
+you can also find a record by title or identifier and ingest it with an optional
+version note, and verify, add a new version of, or export each stored object.
 
 ### CLI commands (`php bin/atom`)
 

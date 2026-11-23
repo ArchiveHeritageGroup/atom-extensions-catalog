@@ -21,7 +21,7 @@ A "Versions" panel appears directly on the record's view page, so staff can see 
 - **Automatic snapshots on save** — captures the base row, all language (i18n) rows, access points, events, relations, physical-object links and custom fields.
 - **Changed-field tracking** — each version lists exactly which fields differ from the prior version (e.g. `base.identifier`, `i18n.en.title`, `access_points`).
 - **Side-by-side diff** — structured comparison of any two versions, with inline word-level highlighting for long text fields.
-- **One-click restore** — apply a previous version back to the live record; the restore itself is recorded as a new version flagged as a restore.
+- **One-click restore** - apply a previous version's description fields back to the live record: the base record, all language versions and custom fields. Access points, dates and events, relations and physical-object links stay as they are now. The search index is updated, and the restore is recorded as a new version flagged as a restore.
 - **Versions panel** — shown below the content on information-object and actor view pages, listing the most recent versions with timestamps, the user who made the change, and a change summary.
 - **Audit dual-write** — every version create/restore is also written to the central audit log (`version_created` / `version_restored`).
 - **Clearance-gated restore** — restoring a classified record requires the appropriate ACL permission and security clearance.
@@ -59,7 +59,7 @@ After installing on an existing catalogue, run `version:backfill` to create a v1
 ## Compliance notes
 
 - Snapshots are **deterministic JSON**, compared with canonical (key-order-independent) JSON, so the changed-field list is accurate and not polluted by storage noise. Tree-position fields (`lft`, `rgt`) and OAI identifiers are deliberately ignored.
-- **Restore is auditable**: it applies the chosen snapshot in place, then re-snapshots the record and writes a new version marked `is_restore` with the version it was restored from — leaving a clear trail.
+- **Restore is auditable**: it applies the chosen snapshot's description fields in place, then re-snapshots the record and writes a new version marked `is_restore` with the version it was restored from, leaving a clear trail.
 - **Classified records** are protected: restoring a record with an active security classification requires the `version.restore_classified` permission plus a security clearance at least equal to the record's classification level (via `ahgSecurityClearancePlugin`). A user without sufficient clearance is denied.
 - **Permissions**: `version.list`, `version.diff` and `version.restore` gate the respective actions; administrators are always allowed, and CLI runs are treated as system-level.
 
@@ -68,7 +68,7 @@ After installing on an existing catalogue, run `version:backfill` to create a v1
 ## Tips & FAQ
 
 **Q: Which records get versioned?**
-Information objects (archival descriptions) and actors (authority records). Both show a Versions panel and have full history pages.
+Information objects (archival descriptions) and actors (authority records). Both show a Versions panel and have full history pages. Saves are captured from the AHG editors and from base AtoM's own ISAD, DC, MODS, RAD and DACS edit forms.
 
 **Q: Does restore lose the current state?**
 No — restoring creates a new version, so the pre-restore state remains in history and the restore is itself a version you can compare or revert.

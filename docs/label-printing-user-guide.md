@@ -30,8 +30,14 @@ The Label Generator automatically detects your record type and provides sector-a
 
 ### From a Record
 
-1. Navigate to any record in the system
-2. Access the label generator via URL: `/label/[record-slug]`
+1. Navigate to any description
+2. Choose **Print label** under Collections Management, or go to `/label/[record-slug]`
+
+Printing labels needs a contributor, editor or administrator account. Label templates (`/label/templates`) are managed by editors and administrators.
+
+### Batch Printing
+
+Open `/label/batch` and choose a template. Enter identifiers, slugs or ids separated by commas or spaces, and tick **Include the records below each one** if needed, or pick a whole repository. Click **Generate**, then **Print**. Only the labels print, with each sheet on its own page.
 
 <div style="overflow-x:auto;margin:1rem 0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 423 228" style="max-width:100%;height:auto;font-family:ui-monospace,Menlo,Consolas,monospace"><rect x="0.5" y="0.5" width="422" height="227" rx="8" fill="#f7faf9" stroke="#d8e6e3"/><line x1="56.8" y1="26.0" x2="56.8" y2="42.0" stroke="#10373E" stroke-width="1.3"/><line x1="56.8" y1="74.0" x2="56.8" y2="90.0" stroke="#10373E" stroke-width="1.3"/><line x1="175.6" y1="114.0" x2="182.8" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="182.8" y1="114.0" x2="190.0" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="190.0" y1="114.0" x2="197.2" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="197.2" y1="114.0" x2="204.4" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="204.4" y1="114.0" x2="211.6" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="211.6" y1="114.0" x2="218.8" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="218.8" y1="114.0" x2="226.0" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="226.0" y1="114.0" x2="233.2" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="233.2" y1="114.0" x2="240.4" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="240.4" y1="114.0" x2="247.6" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="247.6" y1="114.0" x2="254.8" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="254.8" y1="114.0" x2="262.0" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="262.0" y1="114.0" x2="269.2" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="269.2" y1="114.0" x2="276.4" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="276.4" y1="114.0" x2="283.6" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="283.6" y1="114.0" x2="290.8" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="290.8" y1="114.0" x2="298.0" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="298.0" y1="114.0" x2="305.2" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="305.2" y1="114.0" x2="312.4" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="312.4" y1="114.0" x2="319.6" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="319.6" y1="114.0" x2="326.8" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="326.8" y1="114.0" x2="334.0" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="334.0" y1="114.0" x2="341.2" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="341.2" y1="114.0" x2="348.4" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="348.4" y1="114.0" x2="355.6" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="355.6" y1="114.0" x2="362.8" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="362.8" y1="114.0" x2="370.0" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="370.0" y1="114.0" x2="377.2" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="377.2" y1="114.0" x2="384.4" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="384.4" y1="114.0" x2="391.6" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="391.6" y1="114.0" x2="398.8" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="398.8" y1="114.0" x2="406.0" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="406.0" y1="114.0" x2="409.6" y2="114.0" stroke="#10373E" stroke-width="1.3"/><line x1="409.6" y1="114.0" x2="409.6" y2="122.0" stroke="#10373E" stroke-width="1.3"/><line x1="56.8" y1="122.0" x2="56.8" y2="138.0" stroke="#10373E" stroke-width="1.3"/><line x1="409.6" y1="122.0" x2="409.6" y2="138.0" stroke="#10373E" stroke-width="1.3"/><line x1="56.8" y1="146.0" x2="60.4" y2="146.0" stroke="#10373E" stroke-width="1.3"/><line x1="56.8" y1="138.0" x2="56.8" y2="146.0" stroke="#10373E" stroke-width="1.3"/><line x1="56.8" y1="146.0" x2="56.8" y2="154.0" stroke="#10373E" stroke-width="1.3"/><line x1="60.4" y1="146.0" x2="67.6" y2="146.0" stroke="#10373E" stroke-width="1.3"/><line x1="67.6" y1="146.0" x2="74.8" y2="146.0" stroke="#10373E" stroke-width="1.3"/><line x1="74.8" y1="146.0" x2="82.0" y2="146.0" stroke="#10373E" stroke-width="1.3"/><line x1="409.6" y1="138.0" x2="409.6" y2="154.0" stroke="#10373E" stroke-width="1.3"/><line x1="56.8" y1="154.0" x2="56.8" y2="170.0" stroke="#10373E" stroke-width="1.3"/><line x1="409.6" y1="154.0" x2="409.6" y2="170.0" stroke="#10373E" stroke-width="1.3"/><line x1="56.8" y1="178.0" x2="60.4" y2="178.0" stroke="#10373E" stroke-width="1.3"/><line x1="56.8" y1="170.0" x2="56.8" y2="178.0" stroke="#10373E" stroke-width="1.3"/><line x1="56.8" y1="178.0" x2="56.8" y2="186.0" stroke="#10373E" stroke-width="1.3"/><line x1="60.4" y1="178.0" x2="67.6" y2="178.0" stroke="#10373E" stroke-width="1.3"/><line x1="67.6" y1="178.0" x2="74.8" y2="178.0" stroke="#10373E" stroke-width="1.3"/><line x1="74.8" y1="178.0" x2="82.0" y2="178.0" stroke="#10373E" stroke-width="1.3"/><line x1="409.6" y1="170.0" x2="409.6" y2="186.0" stroke="#10373E" stroke-width="1.3"/><line x1="56.8" y1="186.0" x2="56.8" y2="202.0" stroke="#10373E" stroke-width="1.3"/><line x1="409.6" y1="186.0" x2="409.6" y2="202.0" stroke="#10373E" stroke-width="1.3"/><line x1="56.8" y1="210.0" x2="60.4" y2="210.0" stroke="#10373E" stroke-width="1.3"/><line x1="56.8" y1="202.0" x2="56.8" y2="210.0" stroke="#10373E" stroke-width="1.3"/><line x1="60.4" y1="210.0" x2="67.6" y2="210.0" stroke="#10373E" stroke-width="1.3"/><line x1="67.6" y1="210.0" x2="74.8" y2="210.0" stroke="#10373E" stroke-width="1.3"/><line x1="74.8" y1="210.0" x2="82.0" y2="210.0" stroke="#10373E" stroke-width="1.3"/><line x1="409.6" y1="202.0" x2="409.6" y2="218.0" stroke="#10373E" stroke-width="1.3"/><path d="M77.0 142.0 L84.0 146.0 L77.0 150.0 Z" fill="#10373E"/><path d="M77.0 174.0 L84.0 178.0 L77.0 182.0 Z" fill="#10373E"/><path d="M77.0 206.0 L84.0 210.0 L77.0 214.0 Z" fill="#10373E"/><text x="24.4" y="22.0" font-size="9.5" fill="#10373E">Record</text><text x="74.8" y="22.0" font-size="9.5" fill="#10373E">View</text><text x="53.2" y="54.0" font-size="9.5" fill="#10373E">v</text><text x="31.6" y="70.0" font-size="9.5" fill="#10373E">/label/[slug]</text><text x="53.2" y="102.0" font-size="9.5" fill="#10373E">v</text><text x="31.6" y="118.0" font-size="9.5" fill="#10373E">Label</text><text x="74.8" y="118.0" font-size="9.5" fill="#10373E">Configuration</text><text x="96.4" y="150.0" font-size="9.5" fill="#10373E">Configure</text><text x="168.4" y="150.0" font-size="9.5" fill="#10373E">Options</text><text x="96.4" y="182.0" font-size="9.5" fill="#10373E">Preview</text><text x="154.0" y="182.0" font-size="9.5" fill="#10373E">Label</text><text x="96.4" y="214.0" font-size="9.5" fill="#10373E">Print</text><text x="139.6" y="214.0" font-size="9.5" fill="#10373E">or</text><text x="161.2" y="214.0" font-size="9.5" fill="#10373E">Download</text></svg></div>
 
@@ -46,7 +52,7 @@ The Label Generator automatically detects your record type and provides sector-a
 | Item | Description |
 |---|---|
 | **TITLE** | Record title (toggleable) |
-| **REPOSITORY** | Institution name (toggleable) |
+| **REPOSITORY** | Institution name, inherited from the level above when the record has none (toggleable) |
 | **LINEAR BARCODE** | Code 128 barcode (toggleable) |
 | **QR CODE** | Links to record URL (toggleable) |
 
@@ -129,21 +135,15 @@ Click **Print Label** to open the browser print dialog:
 - Labels are optimized for print with hidden navigation elements
 - Works with standard label printers and sheet printers
 
-### Download PNG
-
-Click **Download PNG** to save the label as an image file:
-- Requires html2canvas library
-- File named: `label-[record-slug].png`
-
 ---
 
 ## Label Sizes Reference
 
 | Size | Width | Best For |
 |------|-------|----------|
-| Small | 50mm (200px) | Small items, folders, CDs |
-| Medium | 75mm (300px) | Standard boxes, books |
-| Large | 100mm (400px) | Large boxes, oversized items |
+| Small | 50 mm | Small items, folders, CDs |
+| Medium | 75 mm | Standard boxes, books |
+| Large | 100 mm | Large boxes, oversized items |
 
 ---
 
@@ -225,7 +225,6 @@ Default behavior for standard archival descriptions:
 |-------|----------|
 | Barcode not scanning | Ensure adequate print resolution and contrast |
 | QR code not working | Verify record URL is accessible |
-| Download not working | Browser may need html2canvas library loaded |
 | Wrong identifier shown | Select correct source from dropdown |
 | Label too large/small | Adjust label size setting |
 

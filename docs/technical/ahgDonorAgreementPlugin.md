@@ -173,7 +173,7 @@ DB::table('donor_agreement')->insert($agreementData);
 | view | /donorAgreement/view/:id | GET | View agreement details |
 | add | /donorAgreement/add | GET/POST | Create new agreement |
 | edit | /donorAgreement/edit/:id | GET/POST | Edit existing agreement |
-| delete | /donorAgreement/delete/:id | POST | Delete agreement |
+| delete | /donorAgreement/delete/:id | POST | Delete agreement. Needs a signed-in editor or administrator and a valid `_ahg_csrf_token`, enforced whatever the site's CSRF mode. Other methods answer 404. |
 | reminders | /donorAgreement/reminders | GET | View upcoming reminders |
 
 ### Form Processing

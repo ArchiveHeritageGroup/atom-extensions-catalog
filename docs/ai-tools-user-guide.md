@@ -201,6 +201,19 @@ php symfony ai:summarize --all-empty --dry-run
 
 ---
 
+## Pages: Type and Privacy
+
+For a description whose master file is a PDF, **Pages: type and privacy** in the AI Tools list (`/ai/pages/[record-slug]`) reads the file page by page. Each page gets a document type and a privacy result, shown on a page strip and rolled up to the record. Editors and administrators only, because the results hold privacy findings. They can correct a page's type or privacy result and save it.
+
+The settings on the same screen are the **Document type model** (an AI gateway model, default `qwen3:8b`), **Words per unit** (0 reads page by page), **Collections read on ingest** (empty means every collection) and the option to run after ingest.
+
+```bash
+php symfony ai:classify-pages --slug=my-record
+php symfony ai:classify-pages --collection=123 --privacy-only
+```
+
+Document types use the GPU, so the command leaves them out between 18:00 and 06:00 SAST. The privacy screen always runs.
+
 ## LLM Description Suggestions
 
 ### About Description Suggestions

@@ -65,7 +65,11 @@ Deactivated peers are not included in harvesting, search, or sync operations.
    - **From Date**: Only harvest records modified after this date
    - **Until Date**: Only harvest records modified before this date
    - **Set**: Specific set to harvest
+   - **Metadata Format**: The OAI-PMH format to request
+   - **Full harvest**: Ignore the last harvest date. Without it, only records updated since the last harvest are fetched
 4. Click **Start Harvest**
+
+A harvest runs only from this button (a POST request), so opening a harvest link cannot start one. If a harvested Dublin Core type names a level of description that exists on your site, such as Collection or Item, the record takes that level. Other types leave the level empty; no new level is created.
 
 ### Viewing Harvest History
 
@@ -75,6 +79,7 @@ Deactivated peers are not included in harvesting, search, or sync operations.
    - Records created, updated, deleted
    - Errors encountered
    - Duration
+4. Use a record's link in the log to open the harvested record
 
 ### Harvest Status Values
 
@@ -82,7 +87,7 @@ Deactivated peers are not included in harvesting, search, or sync operations.
 |--------|-------------|
 | Running | Harvest is in progress |
 | Completed | Harvest finished successfully |
-| Failed | Harvest encountered an error |
+| Failed | Harvest encountered an error and the session was closed |
 | Cancelled | Harvest was manually stopped |
 
 ## Federated Search

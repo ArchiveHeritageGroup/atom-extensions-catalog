@@ -490,6 +490,8 @@ The Workflow Scheduler allows you to configure and monitor automated preservatio
 
 #### Accessing the Scheduler
 
+On a site with a stock ProjectConfiguration, `php symfony` has no preservation tasks. Use the cron line shown on the Scheduler page, and run it as the web server user.
+
 1. Navigate to **Preservation** -> **Scheduler**
 2. Or go directly to: `/preservation/scheduler`
 

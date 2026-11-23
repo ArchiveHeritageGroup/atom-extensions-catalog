@@ -258,6 +258,12 @@ Users can customize their view settings (if allowed by administrator):
 
 ---
 
+## Counts and Slow Searches
+
+Where the server has APCu, signed-out visitors browsing without a text search share facet counts and the result total for 10 minutes per filter combination, so a count can lag a recent change by up to that long. Signed-in users always get live counts. If the list query runs past 60 seconds it is stopped and the page shows no results instead of an error; narrow the filters and try again.
+
+---
+
 ## Tips for Best Results
 
 ### DO:

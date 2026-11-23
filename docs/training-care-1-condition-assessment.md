@@ -88,7 +88,7 @@ Choose the category (for example damage) before you draw; it sets the label and 
 
 ## 7. The condition report
 
-Choose **Export report** on the check. The report lists every field, the care advice and the photographs, with the number of photographs and annotations. Print it or save it as PDF from the browser to file it or to send it with a loan.
+Choose **Export report** on the check. The report lists every field, the care advice and the photographs, with the number of photographs and annotations. Each photograph's annotations are drawn on it and their notes listed. Print it or save it as PDF from the browser to file it or to send it with a loan.
 
 ## 8. History and overview
 
