@@ -85,6 +85,22 @@ Shows:
 
 ---
 
+## How Restrictions Reach Child Records and Files
+
+A **full embargo** on a record now also covers every record below it, even if a child has no embargo of its own. Donor restrictions and security classifications work the same way.
+
+Records hidden this way are left out of search, autocomplete, discovery suggestions, the record tree and the Library Holdings sidebar. Their pages and files are refused.
+
+Lifting an embargo on a parent opens its children only if they have no restriction of their own. If you used **Apply to all descendants**, each child has its own embargo and must be lifted as well.
+
+**Metadata-only and digital object embargoes** keep the record listed, but its files are withheld on the media download and stream routes. An embargo exception does not open files on those routes for these two types. Ask an administrator to supply the file.
+
+**Original (master) files:** signed-out visitors can no longer download masters through the media download link or the IIIF download link. Published audio and video can still be played. Users need master-file permission to download an original.
+
+**Start dates** follow the site's configured timezone. If that differs from your local time, an embargo starting today can take effect some hours later, so set the start date a day early when timing matters.
+
+---
+
 ## Who Can See Embargoed Records?
 
 | User Type | Full | Metadata Only | Digital Object |

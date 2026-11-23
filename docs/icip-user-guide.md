@@ -324,6 +324,12 @@ When **Override Security Clearance** is enabled:
 - Even users with high security clearance cannot bypass ICIP restrictions
 - Ensures cultural protocols are respected
 
+### Community Stewards
+
+A steward is exempt only from restrictions and blocking notices entered for **their own community**. They can find the record in search and the record tree and open its reference image. A record that also carries a restriction from another community stays hidden from them. Stewards of other communities are refused.
+
+A steward still needs master-file permission to download the original file.
+
 ---
 
 ## Consultation Log
