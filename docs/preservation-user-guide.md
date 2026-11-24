@@ -163,6 +163,10 @@ Add to crontab for automatic daily checks with self-healing:
 
 ---
 
+#### When a Fixity Check Fails
+
+A file that fails its check, because it has changed or gone missing, raises an alert at the top of the **Packages** page, where the preservation dashboard opens. Editors and administrators see it, and the alert links to the list of failed files. If an email address is set on the fixity schedule, the same alert is also emailed.
+
 ### 3. Virus Scanning
 
 The plugin integrates with ClamAV to scan digital objects for malware.

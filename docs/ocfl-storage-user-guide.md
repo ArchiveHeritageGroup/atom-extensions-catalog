@@ -44,7 +44,7 @@ version note, and verify, add a new version of, or export each stored object.
 ```bash
 # Initialise the storage root (optionally at a specific path)
 php bin/atom ocfl:init
-php bin/atom ocfl:init /mnt/nas/heratio/ocfl
+php bin/atom ocfl:init /mnt/storage/ocfl
 
 # Snapshot an information object's digital files into OCFL (new object or version)
 php bin/atom ocfl:ingest 1234
@@ -85,7 +85,7 @@ Configuration is resolved at runtime from the `ahg_settings` table
 | `ocfl_export_path` | `/var/lib/ahg-ocfl/<instance>/exports` | Where `ocfl:export` writes tarballs |
 
 In production, point the storage root at resilient, backed-up storage
-(for example NAS-backed `/mnt/nas/heratio/ocfl`). Run `ocfl:init` once before
+(for example NAS-backed `/mnt/storage/ocfl`). Run `ocfl:init` once before
 the first ingest.
 
 ## Tips & FAQ

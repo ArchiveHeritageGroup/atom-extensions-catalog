@@ -104,6 +104,14 @@ Track Aboriginal and Torres Strait Islander communities linked to your collectio
 
 ---
 
+### Community Stewards
+
+A steward is a user who looks after a community's records, for example a community liaison officer. Stewards can see that community's restricted records, while other users still cannot.
+
+Only administrators can assign stewards. Open a community and choose **Stewards**, at `/icip/community/<id>/stewards`.
+
+A record that a user may not see answers exactly like a missing page, so its existence is not revealed.
+
 ## Consent Management
 
 Track consent status for records containing Indigenous cultural materials.

@@ -82,6 +82,14 @@ Generate printable object lists for exhibitions:
 
 ---
 
+## Object Entry
+
+Editors and administrators see an **Object entry** link in the sidebar of a museum record when the collection procedures plugin is enabled. It opens the object entry form for that record.
+
+## Deleting a Museum Object
+
+Deleting a museum record also removes what other modules hold for it: its loan and exhibition links, open workflow tasks, procedure workflow state, watermark settings, custom field values and location. Workflow history, loan condition reports and logs are kept as records. An entry in the heritage asset register is kept for its financial history, with its link to the deleted record cleared.
+
 ## Adding a Museum Object
 
 ### Step 1: Click Add Object

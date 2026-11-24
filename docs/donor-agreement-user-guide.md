@@ -16,6 +16,10 @@ When someone **donates materials** to your archive, you need a formal agreement.
 
 ---
 
+## Who Can Use This
+
+Donor agreements are confidential. Only editors and administrators can open the agreement list, an agreement, the dashboard and reminders, or add and edit agreements. A visitor is sent to the login page, and any other signed-in user, such as a researcher or contributor, is refused.
+
 ## The Dashboard
 
 Find it at: **Admin > Donor Management**
@@ -219,6 +223,14 @@ Some donations come with conditions. Record these carefully:
 These restrictions automatically apply to all linked records.
 
 ---
+
+## Deleting an Agreement
+
+1. Open the agreement.
+2. Click **Delete** next to **Edit**. Only editors and administrators see this button.
+3. Check the agreement named in the confirmation box, then click **Delete agreement**.
+
+Deleting is permanent. It removes the agreement with its rights, restrictions, documents, reminders and record links, and it cannot be undone. If you only need to end an agreement, change its status instead.
 
 ## Quick Reference
 

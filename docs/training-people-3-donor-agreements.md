@@ -26,8 +26,8 @@ This guide goes with part 3 of the authorities and people training videos. Every
 |---|---|
 | Account | An editor or administrator. |
 | Plugins | Donor management (ahgDonorManagePlugin) and donor agreements (ahgDonorAgreementPlugin), enabled. |
-| Visibility | Donor records and agreements are for signed-in staff only. A visitor who opens a donor page is sent to the login page. |
-| Version | Plugins v3.121.160 or later. Earlier versions could not save a new agreement, dropped most of its fields, or could not delete one. |
+| Visibility | Donor records are for signed-in staff only. Donor agreements are for editors and administrators only: a visitor is sent to the login page, and any other signed-in user, such as a researcher or contributor, is refused. |
+| Version | Plugins v3.121.238 or later, which limits agreements to editors and administrators and adds a Delete button to the agreement page. Versions before v3.121.160 could not save a new agreement, dropped most of its fields, or could not delete one. |
 
 : What you need before you start
 
