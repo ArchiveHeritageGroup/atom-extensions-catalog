@@ -53,15 +53,15 @@ So you can see how the description maps into the ontology, each archival field c
 
 | Archival field | RiC-O |
 |---|---|
-| Identifier | `rico:hasOrHadIdentifier` |
-| Title | `rico:name` |
-| Date(s) | `rico:hasBeginningDate` / `rico:hasEndDate` (via Activity) |
-| Level of description | `rico:hasRecordSetType` |
-| Extent and medium | `rico:hasExtent` (via Instantiation) |
+| Identifier | `rico:identifier` |
+| Title | `rico:title` |
+| Date(s) | `rico:hasCreationDate`, a `rico:Date` with the date as written |
+| Level of description | the RiC class, and `rico:hasRecordSetType` for a fonds, collection, series or file |
+| Extent and medium | `rico:hasExtent`, a `rico:RecordResourceExtent` |
 | Name of creator(s) | `rico:hasCreator` |
 | Repository | `rico:hasOrHadHolder` |
 | Archival history | `rico:history` |
-| Scope and content | `rico:scope` |
+| Scope and content | `rico:scopeAndContent` |
 | Conditions governing access | `rico:conditionsOfAccess` |
 | Conditions governing reproduction | `rico:conditionsOfUse` |
 | Language(s) of material | `rico:hasOrHadLanguage` |
@@ -76,7 +76,7 @@ You do not have to do anything with the badges - they are guidance. Identifier, 
 Open a RiC record and a **Records in Context (RiC)** panel appears on the page. It shows, in read-only form for the public and with editing controls for staff:
 
 - the RiC-O entity type and the RiC-specific notes;
-- RiC-O relations derived automatically from the description - subjects become `rico:hasOrHadSubject`, places `rico:hasOrHadSpatialCoverage`, genres `rico:hasDocumentaryFormType`, the repository `rico:hasOrHadHolder`, name access points `rico:isAssociatedWith`;
+- RiC-O relations derived automatically from the description - subjects become `rico:hasOrHadSubject`, places `rico:hasOrHadSubject` (as a `rico:Place`), genres `rico:hasDocumentaryFormType`, the repository `rico:hasOrHadHolder`, name access points `rico:isAssociatedWith`;
 - any **typed RiC relations** you have added by hand (see below);
 - an **Export RiC-O (JSON-LD)** button and, where the Explorer is enabled, a **View in graph** link.
 
@@ -109,7 +109,18 @@ Each relation is stored as a proper archival relationship with a RiC-O predicate
 
 ## Exporting RiC-O
 
-The **Export RiC-O (JSON-LD)** button (also reachable at `/ricManage/export/<record>`) returns the record as RiC-O JSON-LD: the entity type, the RiC-specific notes, the identifier/scope/history read from the archival fields, the derived subject/place/holder/genre/name relations, and your typed relations. It is a standards-clean serialisation you can hand to any RiC-O consumer.
+The **Export RiC-O (JSON-LD)** button, also at `/ricManage/export/<record>`, returns the record as RiC-O 1.1 JSON-LD. Any linked-data tool can read it, and it passes the OpenRiC conformance shapes.
+
+The export is a graph: the record plus a node for everything it points to. It carries:
+
+- **Class from the level.** A fonds, collection, series or file is a `rico:RecordSet` with its record set type. An item is a `rico:Record`, and an item inside another item is a `rico:RecordPart` of it. A RiC entity type you chose on the form takes precedence.
+- **Hierarchy.** The parent is linked with `rico:isOrWasIncludedIn`, or `rico:isOrWasConstituentOf` inside a record. A parent the viewer may not see, such as a draft, is left out.
+- **Dates and creators** from the creation event. The date as written is always kept, and a normalised value is added only when it agrees with it. A creator is typed Person, Family or Corporate body from its authority record, so set the entity type on authority records.
+- **Extent, holder, subjects, places, genres and name access points.** The holder is inherited from the nearest higher level when the record does not name one.
+- Your **typed relations**, as RiC-O predicates.
+- **The rules the record is under.** The access and reproduction conditions come as text. The security classification and any ICIP access restriction appear as `rico:Rule` nodes on `rico:isOrWasRegulatedBy`, and a record with personal data (a redaction or a PII scan hit) is flagged. Only someone allowed to read the record ever receives its export, so this tells them the rules without revealing anything new.
+
+A record the viewer may not see answers "not found".
 
 ---
 
