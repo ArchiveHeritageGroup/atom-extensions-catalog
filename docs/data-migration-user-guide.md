@@ -94,7 +94,7 @@ Or: **Admin → Import/Export → Data Migration**
 
 1. Go to `/dataMigration`
 2. Click **"Choose File"** or drag-and-drop
-3. Supported: `.csv`, `.xlsx`, `.xls`, `.xml`, `.opex`, `.pax`, `.zip`
+3. Supported: `.csv`, `.tsv`, `.txt`, `.xlsx`, `.xls`, `.xml`, `.json`, `.jsonl`, `.opex`, `.pax`, `.mrc`, `.marc`, `.zip`. Any other file type is refused with "This file type cannot be imported" and is not saved.
 4. Click **"Upload"**
 
 The system auto-detects:

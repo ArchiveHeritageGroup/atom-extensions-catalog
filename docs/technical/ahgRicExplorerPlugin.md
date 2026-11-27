@@ -283,6 +283,22 @@ Operations are queued with priority levels:
 
 ## Python Tools
 
+### Database login
+
+From plugins v3.121.244 the tools have no built-in database password. Supply the AtoM database login in the environment, or `ric_sync.sh` stops with "set ATOM_DB_PASSWORD" and the Python tools stop with a missing-key error:
+
+```bash
+export ATOM_DB_USER=atom_user          # defaults to root
+export ATOM_DB_PASSWORD='the AtoM database password'
+export ATOM_DB_NAME=archive            # defaults to archive
+```
+
+To read the password from the site's own configuration instead of typing it:
+
+```bash
+export ATOM_DB_PASSWORD=$(php -r '$c=include "/usr/share/nginx/archive/config/config.php"; echo $c["all"]["propel"]["param"]["password"];')
+```
+
 ### ric_extractor_v5.py
 
 The main extraction tool converts AtoM MySQL data to RiC-O JSON-LD:

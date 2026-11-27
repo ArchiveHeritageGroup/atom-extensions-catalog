@@ -341,8 +341,10 @@ Add the following entries (adjust `/usr/share/nginx/atom` to your AtoM path):
 # RIC cleanup - monthly on the 1st at 3am
 0 3 1 * * cd /usr/share/nginx/atom && php symfony ric:cleanup
 
-# RIC sync (if using remote integration) - every 5 minutes
-*/5 * * * * /usr/share/nginx/atom/ric_sync.sh --cron
+# RIC sync (if using remote integration) - every 5 minutes.
+# Needs ATOM_DB_PASSWORD (and ATOM_DB_USER if not root) in the cron environment,
+# for example from a root-only file: . /etc/atom/ric-sync.env && ...
+*/5 * * * * . /etc/atom/ric-sync.env && /usr/share/nginx/atom/ric_sync.sh --cron
 
 # Donor agreement reminders - daily at 8am
 0 8 * * * cd /usr/share/nginx/atom && php symfony agreement:process-reminders
